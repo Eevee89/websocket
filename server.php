@@ -12,7 +12,7 @@ use React\Socket\TcpServer;
 
 $loop = Factory::create();
 
-$tcp = new TcpServer('0.0.0.0:8080', $loop);
+$tcp = new TcpServer('0.0.0.0:8000', $loop);
 
 $secureTcp = new SecureServer($tcp, $loop, [
     'local_cert' => '/etc/ssl/certs/jorismartin.fr_ssl_certificate.cer',
@@ -51,16 +51,6 @@ class ServerImpl implements MessageComponentInterface {
         $conn->close();
     }
 }
-
-
-$loop = Factory::create();
-
-$tcp = new TcpServer('0.0.0.0:8080', $loop);
-
-$secureTcp = new SecureServer($tcp, $loop, [
-    'local_cert' => '/etc/ssl/certs/jorismartin.fr_ssl_certificate.cer',
-    'local_pk' => '/etc/ssl/certs/_.jorismartin.fr_private_key.key',
-]);
 
 $server = new IoServer(
     new HttpServer(
