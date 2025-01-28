@@ -10,15 +10,19 @@ use React\EventLoop\Factory;
 use React\Socket\SecureServer;
 use React\Socket\TcpServer;
 
+$env = parse_ini_file(".env");
+
 $loop = Factory::create();
 
 $port = '8000';
 
 $tcp = new TcpServer('0.0.0.0:'.$port, $loop);
 
+$pseudos = [];
+
 $secureTcp = new SecureServer($tcp, $loop, [
-    'local_cert' => '/etc/ssl/certs/combined.pem',
-    'local_pk' => '/etc/ssl/certs/_.jorismartin.fr_private_key.key',
+    'local_cert' => $env["SSL_CERT"],
+    'local_pk' => $env["SSL_KEY"],
     'verify_peer' => false,
     'verify_peer_name' => false,
     'allow_self_signed' => false
@@ -48,7 +52,13 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onMessage(ConnectionInterface $conn, $msg) {
         logMessage(sprintf("New message from '%s': %s\n\n\n", $conn->resourceId, $msg));
-        foreach ($this->clients as $client) { // BROADCAST
+        
+        if (strpos($msg, "NEWPLAYER")) {
+            $pseudo = explode(" ", $msg)[1];
+            $pseudos[$pseudo] = $conn->resourceId;
+        }
+
+        foreach ($this->clients as $client) {
             $message = json_decode($msg, true);
             if ($conn !== $client) {
                 $client->send($msg);

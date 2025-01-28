@@ -8,5 +8,10 @@ conn.onmessage = function(e) {
     if (msg.includes("You are")) {
         spl = msg.split(" ");
         connId = parseInt(spl[spl.length -1]);
+    } else if (msg.includes("NEWPLAYER")) {
+        pseudo = msg.split(" ");
+        item = {"pseudo": pseudo, "color": "#AA0000"};
+        createPlayerItem(item, players.length);
+        players.push(item);
     }
 };

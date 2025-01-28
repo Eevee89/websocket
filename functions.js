@@ -3,10 +3,7 @@ let rejectedIds = [];
 let selectedItem = null;
 let hideTime = 0;
 let showTime = 0;
-let players = [
-    {"pseudo": "Player 1", "color": "#AA0000"},
-    {"pseudo": "Player 2", "color": "#00AA00"},
-];
+let players = [];
 
 let connId = 0;
 
