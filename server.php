@@ -7,7 +7,14 @@ use Ratchet\WebSocket\WsServer;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
-define('APP_PORT', 8080);
+$loop = React\EventLoop\Factory::create();
+
+$tcp = new TcpServer('0.0.0.0:8080', $loop);
+
+$secureTcp = new SecureServer($tcp, $loop, [
+    'local_cert' => '/etc/ssl/certs/jorismartin.fr_ssl_certificate.cer',
+    'local_pk' => '/etc/ssl/certs/_.jorismartin.fr_private_key.key',
+]);
 
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
@@ -48,7 +55,8 @@ $server = IoServer::factory(
             new ServerImpl()
         )
     ),
-    APP_PORT
+    $secureTcp,
+    $loop
 );
-echo "Server created on port " . APP_PORT . "\n\n";
+echo "Server created on port 8080\n\n";
 $server->run();
