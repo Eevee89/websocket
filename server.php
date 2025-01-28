@@ -17,7 +17,7 @@ $port = '8000';
 $tcp = new TcpServer('0.0.0.0:'.$port, $loop);
 
 $secureTcp = new SecureServer($tcp, $loop, [
-    'local_cert' => '/etc/ssl/certs/jorismartin.fr_ssl_certificate.cer',
+    'local_cert' => '/etc/ssl/certs/combined.pem',
     'local_pk' => '/etc/ssl/certs/_.jorismartin.fr_private_key.key',
     'verify_peer' => false,
     'verify_peer_name' => false,
