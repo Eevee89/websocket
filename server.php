@@ -6,8 +6,11 @@ use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use React\EventLoop\Factory;
+use React\Socket\SecureServer;
+use React\Socket\TcpServer;
 
-$loop = React\EventLoop\Factory::create();
+$loop = Factory::create();
 
 $tcp = new TcpServer('0.0.0.0:8080', $loop);
 
