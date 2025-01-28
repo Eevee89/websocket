@@ -8,6 +8,8 @@ let players = [
     {"pseudo": "Player 2", "color": "#00AA00"},
 ];
 
+let connId = 0;
+
 let customInfos = { };
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
