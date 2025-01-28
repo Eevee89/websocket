@@ -46,12 +46,12 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onOpen(ConnectionInterface $conn) {
         $this->clients->attach($conn);
-        logMessage("New connection! ({$conn->resourceId}).\n");
+        logMessage("New connection! ({$conn->resourceId})");
         $conn->send("You are conn $conn->resourceId");
     }
 
     public function onMessage(ConnectionInterface $conn, $msg) {
-        logMessage(sprintf("New message from '%s': %s\n\n\n", $conn->resourceId, $msg));
+        logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $msg));
         
         if (strpos($msg, "NEWPLAYER")) {
             $pseudo = explode(" ", $msg)[1];
@@ -68,11 +68,11 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
-        logMessage("Connection {$conn->resourceId} is gone.\n");
+        logMessage("Connection {$conn->resourceId} is gone");
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        logMessage("An error occured on connection {$conn->resourceId}: {$e->getMessage()}\n\n\n");
+        logMessage("An error occured on connection {$conn->resourceId}: {$e->getMessage()}");
         $conn->close();
     }
 }
