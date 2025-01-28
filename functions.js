@@ -163,6 +163,15 @@ function gradientColorsCompute(n) {
     return gradientColors;
 }
 
+function addPlayer(item) {
+    const playerTile = $('<div>').addClass('playerTile');
+    const playerPseudo = $('<h3>').text(item["pseudo"]);
+
+    playerTile.append(playerPseudo);
+
+    $('#playerTiles').append(playerTile);
+}
+
 function createPlayerItem(item, index) {
     const playerListItem = $('<li>').attr({id: index});
     const playerInfo = $('<div>').addClass('playerInfo');

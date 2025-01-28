@@ -40,42 +40,7 @@
                         <h2>Liste des joueurs</h2>
                     </div>
                     <div id="playerTiles">
-                        <div class="playerTile">
-                            <h3>Pseudo 1</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 2</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 3</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 4</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 5</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 6</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 7</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 8</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 9</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 10</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 11</h3>
-                        </div>
-                        <div class="playerTile">
-                            <h3>Pseudo 12</h3>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
