@@ -8,9 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/pnotify/dist/pnotify.min.js"></script>
-    <script src="client.js"></script>
     <script src="functions.js"></script>
     <script src="script.js"></script>
+    <script src="client.js"></script>
 </head>
 </html>
 

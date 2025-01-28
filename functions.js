@@ -30,7 +30,7 @@ function getYoutubeId(url) {
 }
 
 function getVideoTitle(id) {
-    const apiKey = 'AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA'; // Replace with your actual API key
+    const apiKey = 'AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA';
   
     const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${apiKey}&part=snippet`;
   
