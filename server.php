@@ -16,7 +16,7 @@ $loop = Factory::create();
 
 $port = '8000';
 
-$tcp = new TcpServer('0.0.0.0:'.$port, $loop);
+$tcp = new TcpServer('127.0.0.1:'.$port, $loop);
 
 $pseudos = [];
 
