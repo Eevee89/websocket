@@ -9,7 +9,7 @@ conn.onmessage = function(e) {
     if (msg["type"] == "YOU ARE") {
         id = msg["payload"];
         connId = parseInt(id);
-    } else if (msg["type"] == "NEWPLAYER") {
+    } else if (msg["type"] == "NEW PLAYER") {
         pseudo = msg["payload"];
         item = {"pseudo": pseudo, "color": "#AA0000"};
         addPlayer(item);
