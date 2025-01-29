@@ -39,7 +39,7 @@ function logMessage($message) {
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
-function createRoom() {
+function createRoom($rooms) {
     $i = random_int(10000, 99999);
     while (in_array($i, array_keys($rooms))) {
         $i = random_int(10000, 99999);
@@ -71,7 +71,7 @@ class ServerImpl implements MessageComponentInterface {
         $msg = json_decode($raw, true);
 
         if ($msg["type"] == "CREATEROOM") {
-            $room = createRoom();
+            $room = createRoom($rooms);
             $rooms[$room] = [$conn->resourceId];
 
             logMessage(sprintf("Created room %s", $room));
@@ -90,12 +90,12 @@ class ServerImpl implements MessageComponentInterface {
         if ($msg["type"] == "NEW PLAYER") {
             $pseudo = $msg["payload"];
             $pseudos[$pseudo] = $conn->resourceId;
-        }
 
-        foreach ($this->clients as $client) {
-            if ($conn !== $client) {
-                logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $raw));
-                $client->send($raw);
+            foreach ($this->clients as $client) {
+                if ($conn !== $client) {
+                    logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $raw));
+                    $client->send($raw);
+                }
             }
         }
     }
