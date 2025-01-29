@@ -42,6 +42,7 @@ function logMessage($message) {
 function createRoom($rooms) {
     $i = random_int(10000, 99999);
     while (in_array($i, array_keys($rooms))) {
+        logMessage(sprintf("Creating room %s", $i));
         $i = random_int(10000, 99999);
     }
     return $i;
