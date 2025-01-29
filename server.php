@@ -40,11 +40,12 @@ function logMessage($message) {
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
     protected $rooms = [15 => "Test"];
-    protected $roomsIds = [];
     protected $pseudos = [];
+    private $mutex;
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
+        $this->mutex = new \Mutex;
     }
 
     public function onOpen(ConnectionInterface $conn) {
@@ -81,9 +82,18 @@ class ServerImpl implements MessageComponentInterface {
         }
         
         if ($msg["type"] == "NEW PLAYER") {
-            logMessage(sprintf("Checking if room %s exists", $msg["room"]));
-            $exist = in_array($msg["room"], $this->$roomsIds);
-            logMessage(sprintf("Room exists ? %s", $exist));
+            $mutex_acquired = \Mutex::lock($this->mutex);
+            $exists = false;
+            try {
+                logMessage(sprintf("Checking if room %s exists", $room));
+                $exists = array_key_exists($room, $this->rooms);
+                logMessage(sprintf("Room exists ? %s", $exists));
+            } finally {
+                if($mutex_acquired) {
+                  \Mutex::unlock($this->mutex);
+                }
+            }
+
             if ($exist) {
                 logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
                 $pseudo = $msg["payload"];
