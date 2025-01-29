@@ -49,13 +49,13 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onOpen(ConnectionInterface $conn) {
         $this->clients->attach($conn);
-        logMessage("New connection! ({$conn->resourceId})");
         $res = [
             "room" => 0,
             "type" => "YOU ARE",
             "payload" => $conn->resourceId
         ];
         $conn->send(json_encode($res));
+        logMessage("New connection! ({$conn->resourceId})");
     }
 
     public function onMessage(ConnectionInterface $conn, $raw) {
