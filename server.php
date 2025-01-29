@@ -76,9 +76,8 @@ class ServerImpl implements MessageComponentInterface {
         }
 
         foreach ($this->clients as $client) {
-            $message = json_decode($msg, true);
             if ($conn !== $client) {
-                $client->send($msg);
+                $client->send($raw);
             }
         }
     }
