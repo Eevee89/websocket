@@ -39,15 +39,6 @@ function logMessage($message) {
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
-function createRoom($rooms) {
-    $i = random_int(10000, 99999);
-    while (in_array($i, array_keys($rooms))) {
-        logMessage(sprintf("Creating room %s", $i));
-        $i = random_int(10000, 99999);
-    }
-    return $i;
-}
-
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
 
@@ -73,12 +64,13 @@ class ServerImpl implements MessageComponentInterface {
 
         if ($msg["type"] == "CREATEROOM") {
             logMessage(sprintf("Creating room"));
-            try {
-                $room = createRoom($rooms);
-                $rooms[$room] = [$conn->resourceId];
-            } catch (Exception $e) {
-                logMessage("An error occured on room creation : {$e->getMessage()}");
+
+            $room = random_int(10000, 99999);
+            while (in_array($room, array_keys($rooms))) {
+                logMessage(sprintf("Creating room %s", $room));
+                $room = random_int(10000, 99999);
             }
+            $rooms[$room] = [$conn->resourceId];
 
             logMessage(sprintf("Created room %s", $room));
 
