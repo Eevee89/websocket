@@ -4,11 +4,11 @@ conn.onopen = function(e) {
 };
 
 conn.onmessage = function(e) {
-    msg = e.data;
-    if (msg.includes("You are")) {
+    msg = JSON.parse(e.data);
+    if (msg["type"] == "YOU ARE") {
         spl = msg.split(" ");
         connId = parseInt(spl[spl.length -1]);
-    } else if (msg.includes("NEWPLAYER")) {
+    } else if (msg["type"] == "NEWPLAYER") {
         pseudo = msg.split(" ")[1];
         item = {"pseudo": pseudo, "color": "#AA0000"};
         addPlayer(item);

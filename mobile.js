@@ -1,7 +1,12 @@
 $(document).ready(async () => {
     $("#submit").click(() => {
         let pseudo = $("#name").val();
-        conn.send("NEWPLAYER "+pseudo);
+        msg = {
+            "room": 10000,
+            "type": "NEWPLAYER",
+            "payload": pseudo
+        };
+        conn.send(JSON.stringify(msg));
         $("#submit").hide();
     })
 });

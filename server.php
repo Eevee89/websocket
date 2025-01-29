@@ -20,6 +20,8 @@ $tcp = new TcpServer('127.0.0.1:'.$port, $loop);
 
 $pseudos = [];
 
+$rooms = [];
+
 $secureTcp = new SecureServer($tcp, $loop, [
     'local_cert' => $env["SSL_CERT"],
     'local_pk' => $env["SSL_KEY"],
@@ -37,6 +39,14 @@ function logMessage($message) {
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
+function createRoom() {
+    $i = random_int(10000, 99999);
+    while (in_array($i, array_keys($rooms))) {
+        $i = random_int(10000, 99999);
+    }
+    $rooms[$i] = [];
+}
+
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
 
@@ -47,13 +57,20 @@ class ServerImpl implements MessageComponentInterface {
     public function onOpen(ConnectionInterface $conn) {
         $this->clients->attach($conn);
         logMessage("New connection! ({$conn->resourceId})");
-        $conn->send("You are conn $conn->resourceId");
+        $res = [
+            "room" => 0,
+            "type" => "YOU ARE",
+            "payload" => $conn->resourceId
+        ];
+        $conn->send(json_encode($res));
     }
 
-    public function onMessage(ConnectionInterface $conn, $msg) {
-        logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $msg));
+    public function onMessage(ConnectionInterface $conn, $raw) {
+        logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $raw));
+
+        $msg = json_decode($raw);
         
-        if (strpos($msg, "NEWPLAYER")) {
+        if ($msg["type"] == "NEWPLAYER") {
             $pseudo = explode(" ", $msg)[1];
             $pseudos[$pseudo] = $conn->resourceId;
         }
