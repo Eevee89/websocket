@@ -70,7 +70,7 @@ class ServerImpl implements MessageComponentInterface {
 
         $msg = json_decode($raw, true);
 
-        if ($msg["type"] == "CREATE ROOM") {
+        if ($msg["type"] == "CREATEROOM") {
             $room = createRoom();
             $rooms[$room] = [$conn->resourceId];
 

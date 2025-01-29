@@ -19,7 +19,7 @@ $(document).ready(async () => {
         let pseudo = $("#pseudoInput").val();
         msg = {
             "room": 0,
-            "type": "CREATE ROOM",
+            "type": "CREATEROOM",
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));
