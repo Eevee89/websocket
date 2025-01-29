@@ -45,7 +45,6 @@ class ServerImpl implements MessageComponentInterface {
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
-        $this->mutex = new \Mutex;
     }
 
     public function onOpen(ConnectionInterface $conn) {
@@ -82,17 +81,10 @@ class ServerImpl implements MessageComponentInterface {
         }
         
         if ($msg["type"] == "NEW PLAYER") {
-            $mutex_acquired = \Mutex::lock($this->mutex);
-            $exists = false;
-            try {
-                logMessage(sprintf("Checking if room %s exists", $room));
-                $exists = array_key_exists($room, $this->rooms);
-                logMessage(sprintf("Room exists ? %s", $exists));
-            } finally {
-                if($mutex_acquired) {
-                  \Mutex::unlock($this->mutex);
-                }
-            }
+            logMessage(sprintf("Checking if room %s exists", $room));
+            $tmp = $this->rooms;
+            $exists = array_key_exists($room, $tmp);
+            logMessage(sprintf("Room exists ? %s", $exists));
 
             if ($exist) {
                 logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
