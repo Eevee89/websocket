@@ -106,6 +106,7 @@ class ServerImpl implements MessageComponentInterface {
                     "payload" => ""
                 ];
                 $conn->send(json_encode($res));
+                logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
             }
         }
     }
