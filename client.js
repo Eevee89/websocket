@@ -5,6 +5,7 @@ conn.onopen = function(e) {
 
 conn.onmessage = function(e) {
     msg = JSON.parse(e.data);
+    console.table(msg);
     if (msg["type"] == "YOU ARE") {
         id = msg["payload"];
         connId = parseInt(id);
