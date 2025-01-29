@@ -66,10 +66,6 @@ class ServerImpl implements MessageComponentInterface {
             logMessage(sprintf("Creating room"));
 
             $room = random_int(10000, 99999);
-            while (in_array($room, array_keys($rooms))) {
-                logMessage(sprintf("Creating room %s", $room));
-                $room = random_int(10000, 99999);
-            }
             $rooms[$room] = [$conn->resourceId];
 
             logMessage(sprintf("Created room %s", $room));
