@@ -1,7 +1,7 @@
 <body>
     <div id="connBody" class="fakeBody">
         <div id="connBox" class="box">
-            <input type="text" id="pseudoInput" name="name"/>
+            <input type="text" id="pseudoInput" name="name"placeholder="Entrez votre pseudo"/>
             <button id="pseudoSubmit">Créer</button>
         </div>
     </div>

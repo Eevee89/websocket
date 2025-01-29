@@ -39,6 +39,15 @@ function logMessage($message) {
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
+function isMaster($connId) {
+    foreach ($rooms as $roomId => $room) {
+        if ($connId === $room[0]) {
+            return $roomId;
+        }
+    }
+    return -1;
+}
+
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
 
@@ -63,15 +72,13 @@ class ServerImpl implements MessageComponentInterface {
         $msg = json_decode($raw, true);
 
         if ($msg["type"] == "CREATEROOM") {
-            logMessage(sprintf("Creating room"));
-
             $room = random_int(10000, 99999);
             $rooms[$room] = [$conn->resourceId];
 
             logMessage(sprintf("Created room %s", $room));
 
             $pseudo = $msg["payload"];
-            $pseudos[$pseudo] = $conn->resourceId;
+            $pseudos[$conn->resourceId] = $pseudo;
 
             $res = [
                 "room" => $room,
@@ -87,7 +94,7 @@ class ServerImpl implements MessageComponentInterface {
 
             foreach ($this->clients as $client) {
                 if ($conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $raw));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
                     $client->send($raw);
                 }
             }
@@ -95,6 +102,32 @@ class ServerImpl implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
+        $room = isMaster($conn->resourceId);
+        if ($room !== -1) {
+            foreach ($this->clients as $client) {
+                if ($conn !== $client && in_array($client->resourceId, $rooms[$room])) {
+                    $res = [
+                        "room" => $room,
+                        "type" => "DELETED",
+                        "payload" => ""
+                    ];
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $res));
+                    $client->send($raw);
+                }
+            }
+            unset($rooms[$room]);
+        } else {
+            foreach (array_keys($rooms) as $key) {
+                $rooms[$key] = array_diff($rooms[$key], [$conn->resourceId]);
+            }
+            $res = [
+                "room" => $room,
+                "type" => "CLIENT GONE",
+                "payload" => $conn->resourceId
+            ];
+            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $res));
+            $conn->send($raw);
+        }
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");
     }
