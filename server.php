@@ -74,6 +74,8 @@ class ServerImpl implements MessageComponentInterface {
             $room = createRoom();
             $rooms[$room] = [$conn->resourceId];
 
+            logMessage(sprintf("Created room %s", $room));
+
             $pseudo = $msg["payload"];
             $pseudos[$pseudo] = $conn->resourceId;
 
