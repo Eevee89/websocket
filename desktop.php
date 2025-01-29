@@ -1,4 +1,11 @@
 <body>
+    <div id="connBody" class="fakeBody">
+        <div id="connBox" class="box">
+            <input type="text" id="pseudoInput" name="name"/>
+            <button id="pseudoSubmit">Créer</button>
+        </div>
+    </div>
+
     <div id="mainBody" class="fakeBody">
         <div id="header">
             <h1 id="roomId">Room 00000</h1>

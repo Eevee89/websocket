@@ -7,12 +7,26 @@ let index = 0;
 var player;
 
 $(document).ready(async () => {
-    $("#mainBody").show();
+    $("#connBody").show();
+    $("#mainBody").hide();
     $("#gameBody").hide();
 
     for(const item of videosIds) {
         await createVideoItem(item, videosIds.indexOf(item));
     }
+
+    $("#pseudoSubmit").click(() => {
+        let pseudo = $("#pseudoInput").val();
+        msg = {
+            "room": 0,
+            "type": "CREATE ROOM",
+            "payload": pseudo
+        };
+        conn.send(JSON.stringify(msg));
+        $("#submit").hide();
+        $("#connBody").hide();
+        $("#mainBody").show();
+    })
 
     $("#firstBtn").hide();
     $("#prevBtn").hide();
@@ -242,7 +256,7 @@ $(document).on("click", "img", function(event) {
 
 $(document).on("change", "input", function(event) {
     const id = event.target.id;
-    if(id !== "urlInput" && id !== "catInput") {
+    if(id !== "urlInput" && id !== "catInput" && id !== "pseudoInput") {
         customInfos[id]["title"] = event.target.value;
     }
 });

@@ -3,7 +3,7 @@ $(document).ready(async () => {
         let pseudo = $("#name").val();
         msg = {
             "room": 10000,
-            "type": "NEWPLAYER",
+            "type": "NEW PLAYER",
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));

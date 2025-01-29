@@ -14,5 +14,8 @@ conn.onmessage = function(e) {
         item = {"pseudo": pseudo, "color": "#AA0000"};
         addPlayer(item);
         players.push(item);
+    } else if (msg["type"] == "CREATED") {
+        room = msg["room"];
+        $("#roomId").text("Room "+room);
     }
 };

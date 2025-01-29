@@ -44,7 +44,7 @@ function createRoom() {
     while (in_array($i, array_keys($rooms))) {
         $i = random_int(10000, 99999);
     }
-    $rooms[$i] = [];
+    return $i;
 }
 
 class ServerImpl implements MessageComponentInterface {
@@ -69,8 +69,23 @@ class ServerImpl implements MessageComponentInterface {
         logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $raw));
 
         $msg = json_decode($raw, true);
+
+        if ($msg["type"] == "CREATE ROOM") {
+            $room = createRoom();
+            $rooms[$room] = [$conn->resourceId];
+
+            $pseudo = $msg["payload"];
+            $pseudos[$pseudo] = $conn->resourceId;
+
+            $res = [
+                "room" => $room,
+                "type" => "CREATED",
+                "payload" => ""
+            ];
+            $conn->send(json_encode($res));
+        }
         
-        if ($msg["type"] == "NEWPLAYER") {
+        if ($msg["type"] == "NEW PLAYER") {
             $pseudo = $msg["payload"];
             $pseudos[$pseudo] = $conn->resourceId;
         }

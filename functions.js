@@ -6,6 +6,7 @@ let showTime = 0;
 let players = [];
 
 let connId = 0;
+let room = 0;
 
 let customInfos = { };
 
