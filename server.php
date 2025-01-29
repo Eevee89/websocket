@@ -39,7 +39,7 @@ function logMessage($message) {
 
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
-    protected $rooms = [];
+    protected $rooms = [15 => "Test"];
     protected $pseudos = [];
 
     public function __construct() {
