@@ -116,8 +116,8 @@ class ServerImpl implements MessageComponentInterface {
                         "type" => "DELETED",
                         "payload" => ""
                     ];
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $res));
-                    $client->send($raw);
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    $client->send(json_encode($res));
                 }
             }
             unset($this->$rooms[$room]);
@@ -130,8 +130,8 @@ class ServerImpl implements MessageComponentInterface {
                 "type" => "CLIENT GONE",
                 "payload" => $conn->resourceId
             ];
-            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $res));
-            $conn->send($raw);
+            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
+            $conn->send(json_encode($res));
         }
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");

@@ -21,3 +21,7 @@ conn.onmessage = function(e) {
         $("#notroom").show();
     }
 };
+
+conn.onclose = function(e) {
+    console.log("Bye bye!");
+}
