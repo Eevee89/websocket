@@ -17,5 +17,7 @@ conn.onmessage = function(e) {
     } else if (msg["type"] == "CREATED") {
         room = msg["room"];
         $("#roomId").text("Room "+room);
+    } else if (msg["type"] == "NOT ROOM") {
+        $("#notroom").show();
     }
 };

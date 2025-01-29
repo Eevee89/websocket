@@ -1,12 +1,12 @@
 $(document).ready(async () => {
     $("#pseudoSubmit").click(() => {
         let pseudo = $("#pseudoInput").val();
+        let roomInput = parseInt($("#roomInput").val());
         msg = {
-            "room": 10000,
+            "room": roomInput,
             "type": "NEW PLAYER",
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));
-        $("#pseudoSubmit").hide();
     })
 });

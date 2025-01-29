@@ -89,14 +89,23 @@ class ServerImpl implements MessageComponentInterface {
         }
         
         if ($msg["type"] == "NEW PLAYER") {
-            $pseudo = $msg["payload"];
-            $pseudos[$pseudo] = $conn->resourceId;
+            if (in_array($msg["room"], array_keys($rooms))) {
+                $pseudo = $msg["payload"];
+                $pseudos[$pseudo] = $conn->resourceId;
 
-            foreach ($this->clients as $client) {
-                if ($conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
-                    $client->send($raw);
+                foreach ($this->clients as $client) {
+                    if ($conn !== $client) {
+                        logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                        $client->send($raw);
+                    }
                 }
+            } else {
+                $res = [
+                    "room" => $msg["room"],
+                    "type" => "NOT ROOM",
+                    "payload" => ""
+                ];
+                $conn->send(json_encode($res));
             }
         }
     }
