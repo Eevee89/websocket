@@ -82,7 +82,7 @@ class ServerImpl implements MessageComponentInterface {
         
         if ($msg["type"] == "NEW PLAYER") {
             $tmp = $this->rooms;
-            $roomExists = array_key_exists($room, $tmp);
+            $roomExists = array_key_exists($msg["room"], $tmp);
 
             if ($roomExists) {
                 $pseudo = $msg["payload"];
