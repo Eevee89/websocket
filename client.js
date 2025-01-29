@@ -6,10 +6,10 @@ conn.onopen = function(e) {
 conn.onmessage = function(e) {
     msg = JSON.parse(e.data);
     if (msg["type"] == "YOU ARE") {
-        spl = msg.split(" ");
-        connId = parseInt(spl[spl.length -1]);
+        id = msg["payload"];
+        connId = parseInt(id);
     } else if (msg["type"] == "NEWPLAYER") {
-        pseudo = msg.split(" ")[1];
+        pseudo = msg["payload"];
         item = {"pseudo": pseudo, "color": "#AA0000"};
         addPlayer(item);
         players.push(item);
