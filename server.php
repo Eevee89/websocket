@@ -89,7 +89,12 @@ class ServerImpl implements MessageComponentInterface {
         }
         
         if ($msg["type"] == "NEW PLAYER") {
-            if (in_array($msg["room"], array_keys($rooms))) {
+            logMessage("Fetching rooms");
+            $keys = array_keys($rooms);
+            logMessage(sprintf("Checking if room %s exists", $msg["room"]));
+            $exist = in_array($msg["room"], $keys);
+            logMessage(sprintf("Room exists ? %s", $exist));
+            if ($exist) {
                 logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
                 $pseudo = $msg["payload"];
                 $pseudos[$pseudo] = $conn->resourceId;
