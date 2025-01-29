@@ -69,6 +69,7 @@ class ServerImpl implements MessageComponentInterface {
         logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $raw));
 
         $msg = json_decode($raw);
+        var_dump($msg);
         
         if ($msg["type"] == "NEWPLAYER") {
             $pseudo = $msg["payload"];
