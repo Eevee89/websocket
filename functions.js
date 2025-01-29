@@ -189,10 +189,8 @@ function createPlayerItem(item, index) {
 
 function createColorItem(name, hex) {
     const color = $('<div>').attr({id: name});
+    $(color).addClass("colorTile");
     $(color).css("background-color", hex);
-    $(color).css("border-radius", "10px");
-    $(color).css("width", "10%");
-    $(color).css("aspect-ratio", 1);
 
     $('#colorList').append(color);
 }
