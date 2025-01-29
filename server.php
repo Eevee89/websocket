@@ -71,7 +71,7 @@ class ServerImpl implements MessageComponentInterface {
         $msg = json_decode($raw);
         
         if ($msg["type"] == "NEWPLAYER") {
-            $pseudo = explode(" ", $msg)[1];
+            $pseudo = $msg["pseudo"];
             $pseudos[$pseudo] = $conn->resourceId;
         }
 
