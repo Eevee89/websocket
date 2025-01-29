@@ -8,5 +8,7 @@ $(document).ready(async () => {
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));
-    })
+    });
+
+    $("#notroom").hide();
 });

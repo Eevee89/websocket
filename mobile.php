@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <p id="notroom" hidden>La partie n'existe pas</p>
+    <p id="notroom">La partie n'existe pas</p>
 </body>
 
 <script src="mobile.js"></script>
