@@ -77,6 +77,7 @@ class ServerImpl implements MessageComponentInterface {
 
         foreach ($this->clients as $client) {
             if ($conn !== $client) {
+                logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $raw));
                 $client->send($raw);
             }
         }
