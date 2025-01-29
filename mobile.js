@@ -16,9 +16,9 @@ $(document).ready(async () => {
         { name: "yellow", hex: "#f3f354"}
     ];
 
-    colors.array.forEach(element => {
+    for(const element of colors) {
         createColorItem(element.name, element.hex)
-    });
+    }
 
     $("#pseudoSubmit").click(() => {
         let pseudo = $("#pseudoInput").val();
