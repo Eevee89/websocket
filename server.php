@@ -65,7 +65,7 @@ class ServerImpl implements MessageComponentInterface {
 
         if ($msg["type"] == "CREATEROOM") {
             $room = random_int(10000, 99999);
-            $this->$rooms[$room] = [$conn->resourceId];
+            $this->rooms[$room] = [$conn->resourceId];
 
             logMessage(sprintf("Created room %s", $room));
 
@@ -110,7 +110,7 @@ class ServerImpl implements MessageComponentInterface {
         $room = $this->isMaster($conn->resourceId);
         if ($room !== -1) {
             foreach ($this->clients as $client) {
-                if ($conn !== $client && in_array($client->resourceId, $this->$rooms[$room])) {
+                if ($conn !== $client && in_array($client->resourceId, $this->rooms[$room])) {
                     $res = [
                         "room" => $room,
                         "type" => "DELETED",
@@ -120,10 +120,10 @@ class ServerImpl implements MessageComponentInterface {
                     $client->send(json_encode($res));
                 }
             }
-            unset($this->$rooms[$room]);
+            unset($this->rooms[$room]);
         } else {
-            foreach (array_keys($this->$rooms) as $key) {
-                $this->$rooms[$key] = array_diff($this->$rooms[$key], [$conn->resourceId]);
+            foreach (array_keys($this->rooms) as $key) {
+                $this->rooms[$key] = array_diff($this->rooms[$key], [$conn->resourceId]);
             }
             $res = [
                 "room" => $room,
@@ -143,7 +143,7 @@ class ServerImpl implements MessageComponentInterface {
     }
 
     public function isMaster($connId) {
-        foreach ($this->$rooms as $roomId => $room) {
+        foreach ($this->rooms as $roomId => $room) {
             if ($connId === $room[0]) {
                 return $roomId;
             }
