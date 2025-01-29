@@ -110,7 +110,8 @@ class ServerImpl implements MessageComponentInterface {
         $room = $this->isMaster($conn->resourceId);
         if ($room !== -1) {
             foreach ($this->clients as $client) {
-                if ($conn !== $client && in_array($client->resourceId, $this->rooms[$room])) {
+                $tmp = $this->rooms[$room];
+                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
                     $res = [
                         "room" => $room,
                         "type" => "DELETED",
@@ -143,7 +144,8 @@ class ServerImpl implements MessageComponentInterface {
     }
 
     public function isMaster($connId) {
-        foreach ($this->rooms as $roomId => $room) {
+        $tmp = $this->rooms;
+        foreach ($tmp as $roomId => $room) {
             if ($connId === $room[0]) {
                 return $roomId;
             }

@@ -18,6 +18,7 @@ conn.onmessage = function(e) {
         room = msg["room"];
         $("#roomId").text("Room "+room);
     } else if (msg["type"] == "NOT ROOM") {
+        $("#sepconn").show();
         $("#notroom").show();
     }
 };
