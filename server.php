@@ -84,7 +84,8 @@ class ServerImpl implements MessageComponentInterface {
             logMessage(sprintf("Checking if room %s exists", $room));
             $tmp = $this->rooms;
             $exists = array_key_exists($room, $tmp);
-            logMessage(sprintf("Room exists ? %s", $exists));
+            logMessage(sprintf("Room exists ? %s", $exists ? "Yes" : "No"));
+            logMessage(sprintf("Rooms", json_encode(array_keys($tmp))));
 
             if ($exist) {
                 logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
