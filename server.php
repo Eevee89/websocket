@@ -40,6 +40,7 @@ function logMessage($message) {
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
     protected $rooms = [15 => "Test"];
+    protected $roomsIds = [];
     protected $pseudos = [];
 
     public function __construct() {
@@ -81,7 +82,7 @@ class ServerImpl implements MessageComponentInterface {
         
         if ($msg["type"] == "NEW PLAYER") {
             logMessage(sprintf("Checking if room %s exists", $msg["room"]));
-            $exist = array_key_exists($msg["room"], $this->$rooms);
+            $exist = in_array($msg["room"], $this->$roomsIds);
             logMessage(sprintf("Room exists ? %s", $exist));
             if ($exist) {
                 logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
