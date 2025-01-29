@@ -84,26 +84,51 @@ h1, h2, h3, h4, h5, h6, p {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 40%;
-    height: auto;
+    width: 90%;
+    height: 50%;
     padding: 10px;
-}
-
-@media (min-width: 768px) {
-    #connBox {
-        width: 90%;
-        height: auto;
-        padding: 10px;
-    }
 }
 
 #pseudoInput {
     width: 95%;
-    height: 50px;
+    height: 25%;
     border-radius: 10px;
     border: none;
     padding-left: 5px;
     border-right: 1px var(--bgc) solid;
+}
+
+#pseudoSubmit {
+    width: 25%;
+    height: 20%;
+    border-radius: 10px;
+    border: none;
+    border-left: 1px var(--bgc) solid;
+}
+
+@media (min-width: 768px) {
+    #connBox {
+        width: 40%;
+        height: auto;
+        padding: 10px;
+    }
+
+    #pseudoInput {
+        width: 95%;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        padding-left: 5px;
+        border-right: 1px var(--bgc) solid;
+    }
+    
+    #pseudoSubmit {
+        width: 25%;
+        height: 30px;
+        border-radius: 10px;
+        border: none;
+        border-left: 1px var(--bgc) solid;
+    }
 }
 
 #header {
