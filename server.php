@@ -72,8 +72,12 @@ class ServerImpl implements MessageComponentInterface {
 
         if ($msg["type"] == "CREATEROOM") {
             logMessage(sprintf("Creating room"));
-            $room = createRoom($rooms);
-            $rooms[$room] = [$conn->resourceId];
+            try {
+                $room = createRoom($rooms);
+                $rooms[$room] = [$conn->resourceId];
+            } catch (Exception $e) {
+                logMessage("An error occured on room creation : {$e->getMessage()}");
+            }
 
             logMessage(sprintf("Created room %s", $room));
 
