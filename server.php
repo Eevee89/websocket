@@ -81,14 +81,10 @@ class ServerImpl implements MessageComponentInterface {
         }
         
         if ($msg["type"] == "NEW PLAYER") {
-            logMessage(sprintf("Checking if room %s exists", $room));
             $tmp = $this->rooms;
-            $exists = array_key_exists($room, $tmp);
-            logMessage(sprintf("Room exists ? %s", $exists ? "Yes" : "No"));
-            logMessage(sprintf("Rooms", json_encode(array_keys($tmp))));
+            $roomExists = array_key_exists($room, $tmp);
 
-            if ($exist) {
-                logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+            if ($roomExists) {
                 $pseudo = $msg["payload"];
                 $pseudos[$pseudo] = $conn->resourceId;
 
@@ -105,7 +101,7 @@ class ServerImpl implements MessageComponentInterface {
                     "payload" => ""
                 ];
                 $conn->send(json_encode($res));
-                logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, $res));
             }
         }
     }
