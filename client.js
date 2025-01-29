@@ -21,6 +21,7 @@ conn.onmessage = function(e) {
         $("#sepconn").show();
         $("#notroom").show();
     }
+    return false;
 };
 
 conn.onclose = function(e) {

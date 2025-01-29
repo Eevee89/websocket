@@ -136,6 +136,7 @@ h1, h2, h3, h4, h5, h6, p {
 #colorList {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     width: 80%;
@@ -144,7 +145,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .colorTile {
-    width: 10%;
+    width: 20%;
     border-radius: 10px;
     aspect-ratio: 1;
 }
