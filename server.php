@@ -141,7 +141,7 @@ class ServerImpl implements MessageComponentInterface {
         //logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");
-        /*
+        
         if ($room !== -1) { // The leaving connection is the master of a room
             logMessage("Connection {$conn->resourceId} was master");
             foreach ($this->clients as $client) {
@@ -158,12 +158,12 @@ class ServerImpl implements MessageComponentInterface {
             }
             unset($this->rooms[$room]);
         } else { // The leaving connection is a player
-            logMessage("Connection {$conn->resourceId} was player");
             $tmp = $this->rooms;
             foreach (array_keys($tmp) as $key) {
                 $tmpKey = $tmp[$key];
                 $tmp[$key] = array_diff($tmpKey, [$conn->resourceId]);
             }
+            logMessage("Connection {$conn->resourceId} was player");
             $this->rooms = $tmp;
             $players = $this->pseudos;
             $res = [
@@ -178,8 +178,8 @@ class ServerImpl implements MessageComponentInterface {
                     $client->send(json_encode($res));
                 }
             }
-        }*/
-        //logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
+        }
+        logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
