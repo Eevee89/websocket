@@ -70,6 +70,7 @@ conn.onmessage = function(e) {
 };
 
 conn.onclose = function(e) {
+    console.log(e);
     console.log("Bye bye!");
 }
 
