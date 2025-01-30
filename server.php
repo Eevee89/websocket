@@ -138,9 +138,10 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         $room = $this->isMaster($conn->resourceId);
+        logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");
-        if ($room !== -1) {
+        if ($room !== -1) { // The leaving connection is the master of a room
             foreach ($this->clients as $client) {
                 $tmp = $this->rooms[$room];
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
@@ -154,7 +155,7 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
             unset($this->rooms[$room]);
-        } else {
+        } else { // The leaving connection is a player
             foreach (array_keys($this->rooms) as $key) {
                 $this->rooms[$key] = array_diff($this->rooms[$key], [$conn->resourceId]);
             }
@@ -166,6 +167,7 @@ class ServerImpl implements MessageComponentInterface {
             logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
             $conn->send(json_encode($res));
         }
+        logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {

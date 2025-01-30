@@ -10,22 +10,27 @@ conn.onmessage = function(e) {
     if (msg["type"] == "YOU ARE") {
         id = msg["payload"];
         connId = parseInt(id);
-    } else if (msg["type"] == "NEW PLAYER") {
+    } 
+    else if (msg["type"] == "NEW PLAYER") {
         pseudo = msg["payload"];
         item = {"pseudo": pseudo, "color": "#FFF"};
         players.push(item);
-    } else if (msg["type"] == "CREATED") {
+    } 
+    else if (msg["type"] == "CREATED") {
         room = msg["room"];
         $("#roomId").text("Room "+room);
-    } else if (msg["type"] == "NOT ROOM") {
+    } 
+    else if (msg["type"] == "NOT ROOM") {
         $("#sepconn").show();
         $("#notroom").show();
-    } else if (msg["type"] == "WELCOM PLAYER") {
+    } 
+    else if (msg["type"] == "WELCOM PLAYER") {
         $("#waitBody").show();
         $("#connBody").hide();
         room = msg["room"];
         $("#roomId").text("Room "+room);
-    } else if (msg["type"] == "PLAYER READY") {
+    } 
+    else if (msg["type"] == "PLAYER READY") {
         spl = msg["payload"].split(';');
         pseudo = spl[1];
         hex = spl[0];
@@ -44,6 +49,11 @@ conn.onmessage = function(e) {
             $("#beginBtn").hide();
         }
     }
+    else if (msg["type"] == "DELETED") {
+        alert("Le maître de jeu est parti. Partie supprimée.");
+        $("#waitBody").hide();
+        $("#connBody").show();
+    }
     return false;
 };
 
@@ -51,9 +61,13 @@ conn.onclose = function(e) {
     console.log(e);
     msg = {
         "room": room,
-        "type": "READY",
-        "payload": hex
+        "type": "CLOSE",
+        "payload": ""
     };
     conn.send(JSON.stringify(msg));
     console.log("Bye bye!");
+}
+
+function reconnect() {
+    conn = new WebSocket('wss://blindtest.jorismartin.fr/websocket');
 }
