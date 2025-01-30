@@ -138,6 +138,8 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         $room = $this->isMaster($conn->resourceId);
+        $this->clients->detach($conn);
+        logMessage("Connection {$conn->resourceId} is gone");
         if ($room !== -1) {
             foreach ($this->clients as $client) {
                 $tmp = $this->rooms[$room];
@@ -164,8 +166,6 @@ class ServerImpl implements MessageComponentInterface {
             logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
             $conn->send(json_encode($res));
         }
-        $this->clients->detach($conn);
-        logMessage("Connection {$conn->resourceId} is gone");
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
