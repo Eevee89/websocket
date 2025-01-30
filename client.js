@@ -72,7 +72,7 @@ conn.onmessage = function(e) {
         }
     }
     else if (msg["type"] == "BEGIN GAME") {
-        spl = msg["payload"].split(";");
+        spl = msg["payload"].split(';');
         nbVids = parseInt(spl[0]);
         hideTime = parseInt(spl[1]);
         showTime = parseInt(spl[2]);
