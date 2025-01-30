@@ -564,13 +564,6 @@ iframe {
 
 /*#endregion */
 
-@media (max-width: 767px) {
-    #main {
-        justify-content: center;
-        align-items: center;
-    }
-}
-
 @media (min-width: 768px) {
     #connBox {
         width: 40%;
