@@ -139,14 +139,14 @@ h1, h2, h3, h4, h5, h6, p {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: 80%;
+    width: 90%;
     height: 80%;
     padding: 10px;
 }
 
 .colorTile {
-    width: 20%;
-    border-radius: 10px;
+    width: 17%;
+    border-radius: 50%;
     aspect-ratio: 1;
 }
 
