@@ -87,9 +87,9 @@ class ServerImpl implements MessageComponentInterface {
             if ($roomExists) {
                 $this->rooms[$msg["room"]][] = $conn->resourceId;
                 $targets = $this->rooms[$msg["room"]];
-                logMessage(sprintf("Targets : %s", json_encode($targets)));
+                logMessage(sprintf("Targets : %s", json_encode($targets))); /*TODO: DELETE THIS LOG*/
                 $pseudo = $msg["payload"];
-                $this->pseudos[$pseudo] = $conn->resourceId;
+                $this->pseudos[$conn->resourceId] = $pseudo;
 
                 foreach ($this->clients as $client) {
                     if (in_array($client->resourceId, $targets)) {
@@ -121,6 +121,7 @@ class ServerImpl implements MessageComponentInterface {
         if ($msg["type"] == "READY") {
             $targets = $this->rooms[$msg["room"]];
             $players = $this->pseudos;
+            logMessage(sprintf("Pseudos : %s", json_encode($players))); /*TODO: DELETE THIS LOG*/
             $res = [
                 "room" => $msg["room"],
                 "type" => "PLAYER READY",
