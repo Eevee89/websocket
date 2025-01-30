@@ -25,7 +25,7 @@ conn.onmessage = function(e) {
         room = msg["room"];
         $("#roomId").text("Room "+room);
     } else if (msg["type"] == "PLAYER READY") {
-        spl = $msg["payload"].split(';');
+        spl = msg["payload"].split(';');
         pseudo = spl[1];
         hex = spl[0];
         for (var i in players) {
