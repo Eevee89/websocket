@@ -147,6 +147,7 @@ class ServerImpl implements MessageComponentInterface {
                 "payload" => $players[$conn->resourceId]
             ];
             $targets = $this->clients;
+            logMessage('Cloned $this->clients');
             foreach ($targets as $client) {
                 $tmp = $this->rooms[$room];
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
