@@ -47,4 +47,8 @@ $(document).ready(async () => {
         };
         conn.send(JSON.stringify(msg));
     });
+
+    $("#quitBtn").click(() => {
+        conn.close();
+    });
 });

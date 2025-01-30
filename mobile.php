@@ -26,6 +26,8 @@
         <button id="readyBtn">Prêt ?</button>
         <div style="width: 1px; height: 20px;"></div>
         <p> Note: Se mettre 'prêt' est définitif </p>
+        <div style="width: 1px; height: 20px;"></div>
+        <button id="quitBtn">Quitter</button>
     </div>
 </body>
 
