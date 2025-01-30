@@ -35,7 +35,7 @@ conn.onmessage = function(e) {
         spl = msg["payload"].split(';');
         pseudo = spl[1];
         hex = spl[0];
-        for (var i in players) {
+        for (const i of players) {
             console.log(i["pseudo"], pseudo);
             if (i["pseudo"] == pseudo) {
                 i["color"] = hex;
