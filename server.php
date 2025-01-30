@@ -140,7 +140,8 @@ class ServerImpl implements MessageComponentInterface {
             $tmp = $this->rooms;
             logMessage(sprintf("Room to delete from : %s", json_encode($tmp[$msg["room"]]))); /*TODO: DELETE THIS LOG*/
             logMessage(sprintf("Conn to delete : %s", $conn->resourceId)); /*TODO: DELETE THIS LOG*/
-            $tmp[$msg["room"]]->detach($conn->resourceId);
+            $id = array_search($conn->resourceId, $tmp[$msg["room"]]);
+            unset($tmp[$msg["room"]][$id]);
             logMessage(sprintf("Rooms after : %s", json_encode($tmp[$msg["room"]]))); /*TODO: DELETE THIS LOG*/
             $this->rooms;
             logMessage(sprintf("Rooms after2 : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
