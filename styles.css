@@ -102,8 +102,7 @@ h1, h2, h3, h4, h5, h6, p {
     width: 33%;
     height: 20%;
     border-radius: 10px;
-    border: none;
-    border-left: 1px var(--bgc) solid;
+    border: 1px var(--bgc) solid;
 }
 
 #roomInput {
@@ -140,6 +139,13 @@ h1, h2, h3, h4, h5, h6, p {
     width: 17%;
     border-radius: 50%;
     aspect-ratio: 1;
+}
+
+#readySubmit {
+    width: 33%;
+    height: 5%;
+    border-radius: 10px;
+    border: 1px var(--bgc) solid;
 }
 
 #header {

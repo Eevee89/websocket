@@ -32,4 +32,9 @@ $(document).ready(async () => {
         $("#waitBody").show();
         $("#connBody").hide();
     });
+
+    $(".colorTile").click((event) => {
+        hex = $(event.target).css("background-color")
+        $("#readySubmit").css("border-color", hex);
+    })
 });

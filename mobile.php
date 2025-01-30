@@ -22,6 +22,8 @@
 
             </div>
         </div>
+        <div style="width: 1px; height: 20px;"></div>
+        <button id="readyBtn">Prêt ?</button>
     </div>
 </body>
 
