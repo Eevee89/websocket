@@ -87,7 +87,6 @@ class ServerImpl implements MessageComponentInterface {
             if ($roomExists) {
                 $this->rooms[$msg["room"]][] = $conn->resourceId;
                 $targets = $this->rooms[$msg["room"]];
-                logMessage(sprintf("Targets : %s", json_encode($targets))); /*TODO: DELETE THIS LOG*/
                 $pseudo = $msg["payload"];
                 $this->pseudos[$conn->resourceId] = $pseudo;
 
@@ -121,7 +120,6 @@ class ServerImpl implements MessageComponentInterface {
         if ($msg["type"] == "READY") {
             $targets = $this->rooms[$msg["room"]];
             $players = $this->pseudos;
-            logMessage(sprintf("Pseudos : %s", json_encode($players))); /*TODO: DELETE THIS LOG*/
             $res = [
                 "room" => $msg["room"],
                 "type" => "PLAYER READY",
@@ -152,6 +150,16 @@ class ServerImpl implements MessageComponentInterface {
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
                     logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
                     $client->send(json_encode($res));
+                }
+            }
+        }
+
+        if ($msg["type"] == "BEGIN GAME") {
+            $targets = $this->rooms[$msg["room"]];
+            foreach ($this->clients as $client) {
+                if (in_array($client->resourceId, $targets) && $conn !== $client) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                    $client->send($raw);
                 }
             }
         }
