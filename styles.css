@@ -457,7 +457,7 @@ iframe {
 }
 
 #timer {
-    height: 50%;
+    height: 70%;
     aspect-ratio: 1;
     border-radius: 50%;
     border: 3px #F00 solid;
@@ -491,7 +491,8 @@ iframe {
 #nextVidCont {
     height: 90%;
     aspect-ratio: 1;
-    align-self: flex-end;
+    justify-self: end;
+    align-self: flex-start;
 }
 
 #nextVidBtn {
