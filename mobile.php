@@ -10,6 +10,10 @@
     </div>
 
     <div id="waitBody" class="fakeBody">
+        <div id="header">
+            <h1 id="roomId">Room 00000</h1>
+        </div>
+        
         <p> La partie va bientôt commencer... </p>
         <div style="width: 1px; height: 20px;"></div>
         <div id="colorBox" class="box">
