@@ -457,7 +457,7 @@ iframe {
 }
 
 #timer {
-    height: 70%;
+    height: 50%;
     aspect-ratio: 1;
     border-radius: 50%;
     border: 3px #F00 solid;

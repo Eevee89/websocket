@@ -236,6 +236,41 @@ $(document).ready(async () => {
         $("#catInfo").show();
     });
 
+    $("#nextVidBtn").click(async () => {
+        $("#player").hide();
+
+        if (player) {
+            player.stopVideo();
+            player.destroy();
+        }
+    
+        if (index < videosIds.length) {
+            var opt = {
+                height: '360',
+                width: '640',
+                videoId: videosIds[index++],
+                events: {
+                'onError': onPlayerError
+                }
+            }
+        
+            player = new YT.Player('player', opt);
+            $("#player").hide();
+            $("#customVideoTitle").hide();
+            $("#fakeIframe").show();
+            $("#playBtn").hide();
+            $("#countdown").text(hideTime);
+            await delay(1000);
+            $("#timer").click();
+            $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
+            $("#catInfo").show();
+            $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
+        }
+        else {
+            $("#player").hide();
+        }
+    });
+
     $('#fakeIframe').css("width", $('iframe').width() + 'px');
     $('#fakeIframe').css("height", $('iframe').height() + 'px');
 
@@ -344,39 +379,4 @@ $(document).on("click", "#timer", async () => {
             $("#catInfo").hide();
         }
     }, 1000);
-});
-
-$(document).on("animationend", ".loader", async () => {
-    $("#player").hide();
-
-    if (player) {
-        player.stopVideo();
-        player.destroy();
-    }
-
-    if (index < videosIds.length) {
-        var opt = {
-            height: '360',
-            width: '640',
-            videoId: videosIds[index++],
-            events: {
-            'onError': onPlayerError
-            }
-        }
-    
-        player = new YT.Player('player', opt);
-        $("#player").hide();
-        $("#customVideoTitle").hide();
-        $("#fakeIframe").show();
-        $("#playBtn").hide();
-        $("#countdown").text(hideTime);
-        await delay(1000);
-        $("#timer").click();
-        $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
-        $("#catInfo").show();
-        $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
-    }
-    else {
-        $("#player").hide();
-    }
 });
