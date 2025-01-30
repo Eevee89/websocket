@@ -22,6 +22,7 @@ $(document).ready(async () => {
 
     $("#pseudoSubmit").click(() => {
         let pseudo = $("#pseudoInput").val();
+        myPseudo = pseudo;
         let roomInput = parseInt($("#roomInput").val());
         msg = {
             "room": roomInput,
@@ -29,12 +30,21 @@ $(document).ready(async () => {
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));
-        $("#waitBody").show();
-        $("#connBody").hide();
     });
 
     $(".colorTile").click((event) => {
         hex = $(event.target).css("background-color")
         $("#readyBtn").css("border-color", hex);
-    })
+    });
+
+    $("#readyBtn").click(() => {
+        $("#readyBtn").hide();
+        hex = $("#readyBtn").css("border-color");
+        msg = {
+            "room": room,
+            "type": "READY",
+            "payload": hex
+        };
+        conn.send(JSON.stringify(msg));
+    });
 });

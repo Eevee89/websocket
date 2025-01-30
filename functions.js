@@ -4,6 +4,8 @@ let selectedItem = null;
 let hideTime = 0;
 let showTime = 0;
 let players = [];
+let readies = 0;
+let myPseudo = "";
 
 let connId = 0;
 let room = 0;
@@ -167,6 +169,7 @@ function gradientColorsCompute(n) {
 function addPlayer(item) {
     const playerTile = $('<div>').addClass('playerTile');
     const playerPseudo = $('<h3>').text(item["pseudo"]);
+    $(playerPseudo).css("color", item["color"]);
 
     playerTile.append(playerPseudo);
 

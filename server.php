@@ -85,13 +85,24 @@ class ServerImpl implements MessageComponentInterface {
             $roomExists = array_key_exists($msg["room"], $tmp);
 
             if ($roomExists) {
+                $targets = $this->rooms[$msg["room"]];
                 $pseudo = $msg["payload"];
                 $pseudos[$pseudo] = $conn->resourceId;
 
                 foreach ($this->clients as $client) {
-                    if ($conn !== $client) {
-                        logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
-                        $client->send($raw);
+                    if (in_array($client->resourceId, $targets)) {
+                        if ($conn !== $client) {
+                            logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                            $client->send($raw);
+                        } else {
+                            $res = [
+                                "room" => $msg["room"],
+                                "type" => "WELCOM PLAYER",
+                                "payload" => ""
+                            ];
+                            $conn->send(json_encode($res));
+                            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
+                        }
                     }
                 }
             } else {
@@ -102,6 +113,21 @@ class ServerImpl implements MessageComponentInterface {
                 ];
                 $conn->send(json_encode($res));
                 logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
+            }
+        }
+
+        if ($msg["type"] == "READY") {
+            $targets = $this->rooms[$msg["room"]];
+            $res = [
+                "room" => $msg["room"],
+                "type" => "PLAYER READY",
+                "payload" => sprintf("%s;%s", $msg["payload"], $players[$conn->resourceId])
+            ];
+            foreach ($this->clients as $client) {
+                if (in_array($client->resourceId, $targets) && $conn !== $client) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    $client->send(json_encode($res));
+                }
             }
         }
     }

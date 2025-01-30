@@ -569,6 +569,7 @@ iframe {
     #header {
         width: calc(100% - 20px);
         height: 10%;
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;

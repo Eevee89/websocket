@@ -36,6 +36,7 @@ $(document).ready(async () => {
     $("#urlForm").show();
     $("#player").hide();
     $("#testplayer").hide();
+    $("#beginBtn").hide();
 
     $("#ttltlabel").text("Temps total : "+formatTime());
     $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);

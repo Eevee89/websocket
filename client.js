@@ -11,8 +11,6 @@ conn.onmessage = function(e) {
         connId = parseInt(id);
     } else if (msg["type"] == "NEW PLAYER") {
         pseudo = msg["payload"];
-        item = {"pseudo": pseudo, "color": "#AA0000"};
-        addPlayer(item);
         players.push(item);
     } else if (msg["type"] == "CREATED") {
         room = msg["room"];
@@ -20,6 +18,22 @@ conn.onmessage = function(e) {
     } else if (msg["type"] == "NOT ROOM") {
         $("#sepconn").show();
         $("#notroom").show();
+    } else if (msg["type"] == "WELCOM PLAYER") {
+        $("#waitBody").show();
+        $("#connBody").hide();
+        room = msg["room"];
+        $("#roomId").text("Room "+room);
+    } else if (msg["type"] == "PLAYER READY") {
+        spl = $msg["payload"].split(';');
+        pseudo = spl[1];
+        hex = spl[0];
+        item = {"pseudo": pseudo, "color": hex};
+        addPlayer(item);
+        readies += 1;
+
+        if (readies == players.length) {
+            $("#beginBtn").show();
+        }
     }
     return false;
 };
