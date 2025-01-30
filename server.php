@@ -160,9 +160,11 @@ class ServerImpl implements MessageComponentInterface {
             logMessage("Connection {$conn->resourceId} was player");
             $tmp = $this->rooms;
             foreach (array_keys($tmp) as $key) {
-                $tmpKey = $this->rooms[$key];
-                $this->rooms[$key] = array_diff($tmpKey, [$conn->resourceId]);
+                $tmpKey = $tmp[$key];
+                $tmp[$key] = array_diff($tmpKey, [$conn->resourceId]);
             }
+            $this->rooms = $tmp;
+            $players = $this->pseudos;
             $res = [
                 "room" => $room,
                 "type" => "CLIENT GONE",
