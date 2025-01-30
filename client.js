@@ -39,6 +39,8 @@ conn.onmessage = function(e) {
 
         if (readies == players.length) {
             $("#beginBtn").show();
+        } else {
+            $("#beginBtn").hide();
         }
     }
     return false;
