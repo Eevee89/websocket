@@ -487,7 +487,6 @@ iframe {
 #nextVidCont {
     height: 100%;
     aspect-ratio: 1;
-    align-self: flex-end;
 }
 
 #nextVidBtn {
