@@ -142,6 +142,7 @@ class ServerImpl implements MessageComponentInterface {
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");
         if ($room !== -1) { // The leaving connection is the master of a room
+            logMessage("Connection {$conn->resourceId} was master");
             foreach ($this->clients as $client) {
                 $tmp = $this->rooms[$room];
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
@@ -156,8 +157,11 @@ class ServerImpl implements MessageComponentInterface {
             }
             unset($this->rooms[$room]);
         } else { // The leaving connection is a player
-            foreach (array_keys($this->rooms) as $key) {
-                $this->rooms[$key] = array_diff($this->rooms[$key], [$conn->resourceId]);
+            logMessage("Connection {$conn->resourceId} was player");
+            $tmp = $this->rooms;
+            foreach (array_keys($tmp) as $key) {
+                $tmpKey = $this->rooms[$key];
+                $this->rooms[$key] = array_diff($tmpKey, [$conn->resourceId]);
             }
             $res = [
                 "room" => $room,
