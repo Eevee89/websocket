@@ -11,6 +11,7 @@ conn.onmessage = function(e) {
         connId = parseInt(id);
     } else if (msg["type"] == "NEW PLAYER") {
         pseudo = msg["payload"];
+        item = {"pseudo": pseudo, "color": "#FFF"};
         players.push(item);
     } else if (msg["type"] == "CREATED") {
         room = msg["room"];
@@ -27,6 +28,11 @@ conn.onmessage = function(e) {
         spl = $msg["payload"].split(';');
         pseudo = spl[1];
         hex = spl[0];
+        for (var i in players) {
+            if (i["pseudo"] == pseudo) {
+                i["color"] = hex;
+            }
+        }
         item = {"pseudo": pseudo, "color": hex};
         addPlayer(item);
         readies += 1;

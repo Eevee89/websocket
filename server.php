@@ -85,6 +85,7 @@ class ServerImpl implements MessageComponentInterface {
             $roomExists = array_key_exists($msg["room"], $tmp);
 
             if ($roomExists) {
+                $this->rooms[$room][] = $conn->resourceId;
                 $targets = $this->rooms[$msg["room"]];
                 $pseudo = $msg["payload"];
                 $pseudos[$pseudo] = $conn->resourceId;
