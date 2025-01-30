@@ -1,4 +1,4 @@
-let videosIds = ['srhni4w2TbI', 'i8wghCdMncU']
+let videosIds = []; // 'srhni4w2TbI', 'i8wghCdMncU'
 let rejectedIds = [];
 let selectedItem = null;
 let hideTime = 0;
@@ -10,6 +10,7 @@ let myPseudo = "";
 let connId = 0;
 let room = 0;
 let nbVids = 0;
+let timerPaused = false;
 
 let customInfos = { };
 

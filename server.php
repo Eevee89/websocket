@@ -163,6 +163,22 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
         }
+
+        if ($msg["type"] == "BUZZER") {
+            $targets = $this->rooms[$msg["room"]];
+            $players = $this->pseudos;
+            $res = [
+                "room" => $msg["room"],
+                "type" => "BUZZER",
+                "payload" => $players[$conn->resourceId]
+            ];
+            foreach ($this->clients as $client) {
+                if (in_array($client->resourceId, $targets) && $conn !== $client) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    $client->send(json_encode($res));
+                }
+            }
+        }
     }
 
     public function onClose(ConnectionInterface $conn) {

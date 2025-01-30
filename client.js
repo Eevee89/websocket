@@ -86,8 +86,15 @@ conn.onmessage = function(e) {
     } else if (msg["type"] == "CONTINUE GAME") {
         $("#countdown").text(hideTime);
         $("#timer").show();
+        $("#buzBtn").show();
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(msg["payload"]), 2)+ "/" + zeroPad(nbVids, 2));
+    } else if (msg["type"] == "BUZZER") {
+        timerPaused = true;
+        $("#buzBtn").hide();
+        if (videosIds.length != 0) { // Master of the game
+            alert("Le joueur "+ msg["payload"] +" a buzzé !");
+        }
     }
 
     return false;

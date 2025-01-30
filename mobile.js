@@ -1,5 +1,3 @@
-let index = 0;
-
 $(document).ready(async () => {
     $("#sepconn").hide();
     $("#notroom").hide();
@@ -63,19 +61,33 @@ $(document).ready(async () => {
         $("#waitBody").hide();
         $("#connBody").show();
     });
+
+    $("#buzBtn").click(() => {
+        timerPaused = true;
+        $("#buzBtn").hide();
+        msg = {
+            "room": room,
+            "type": "BUZZER",
+            "payload": ""
+        };
+        conn.send(JSON.stringify(msg));
+    });
 });
 
 $(document).on("click", "#timer", async () => {
     seconds = hideTime;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
-        $("#countdown").css("color", colors[hideTime-seconds]);
-        $("#timer").css("border-color", colors[hideTime-seconds]);
-        $("#countdown").text(seconds--);
-  
-        if (seconds === -1) {
-            clearInterval(intervalId);
-            $("#timer").hide();
+        if (!timerPaused) {
+            $("#countdown").css("color", colors[hideTime-seconds]);
+            $("#timer").css("border-color", colors[hideTime-seconds]);
+            $("#countdown").text(seconds--);
+    
+            if (seconds === -1) {
+                clearInterval(intervalId);
+                $("#timer").hide();
+                $("#buzBtn").hide();
+            }
         }
     }, 1000);
 });

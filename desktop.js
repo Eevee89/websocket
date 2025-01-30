@@ -217,7 +217,7 @@ $(document).ready(async () => {
     $("#beginBtn").click(() => {
         hideTime = parseInt($("#btcvalue").text());
         showtime = parseInt($("#rtcvalue").text());
-        
+
         msg = {
             "room": room,
             "type": "BEGIN GAME",
@@ -373,17 +373,19 @@ $(document).on("click", "#timer", async () => {
     seconds = hideTime;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
-        $("#countdown").css("color", colors[hideTime-seconds]);
-        $("#timer").css("border-color", colors[hideTime-seconds]);
-        $("#countdown").text(seconds--);
-  
-        if (seconds === -1) {
-            clearInterval(intervalId);
-            $("#fakeIframe").hide();
-            $("#player").show();
-            $("#customVideoTitleInnerText").text(customInfos[videosIds[index-1]]["title"]);
-            $("#customVideoTitle").show();
-            $("#catInfo").hide();
+        if (!timerPaused) {
+            $("#countdown").css("color", colors[hideTime-seconds]);
+            $("#timer").css("border-color", colors[hideTime-seconds]);
+            $("#countdown").text(seconds--);
+    
+            if (seconds === -1) {
+                clearInterval(intervalId);
+                $("#fakeIframe").hide();
+                $("#player").show();
+                $("#customVideoTitleInnerText").text(customInfos[videosIds[index-1]]["title"]);
+                $("#customVideoTitle").show();
+                $("#catInfo").hide();
+            }
         }
     }, 1000);
 });
