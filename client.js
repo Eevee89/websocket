@@ -1,6 +1,7 @@
 var conn = new WebSocket('wss://blindtest.jorismartin.fr/websocket');
 conn.onopen = function(e) {
     console.log("Connection established!");
+    $("#notconnected").hide();
 };
 
 conn.onmessage = function(e) {
@@ -37,7 +38,6 @@ conn.onmessage = function(e) {
         pseudo = spl[1];
         hex = spl[0];
         for (const i of players) {
-            console.log(i["pseudo"], pseudo);
             if (i["pseudo"] == pseudo) {
                 i["color"] = hex;
             }
@@ -84,9 +84,7 @@ conn.onmessage = function(e) {
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "CONTINUE GAME") {
-        $("#waitBody").hide();
-        $("#connBody").hide();
-        $("#gameBody").show();
+        $("#countdown").text(hideTime);
         $("#timer").show();
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(msg["payload"]), 2)+ "/" + zeroPad(nbVids, 2));

@@ -1,5 +1,6 @@
 <body>
     <div id="connBody" class="fakeBody">
+    <   <p id="notconnected" style="color: red;"> Erreur de connnexion au serveur </p>
         <div id="connBox" class="box">
             <input type="text" id="pseudoInput" name="pseudo" placeholder="Entrez votre pseudo"/>
             <input type="number" id="roomInput" name="room" placeholder="ID de la partie" min="10000" max="99999"/>
