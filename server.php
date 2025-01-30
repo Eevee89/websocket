@@ -136,7 +136,9 @@ class ServerImpl implements MessageComponentInterface {
         }
 
         if ($msg["type"] == "CLIENT GONE") {
+            logMessage(sprintf("Rooms before : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
             $this->rooms[$msg["room"]]->detach($conn->resourceId);
+            logMessage(sprintf("Rooms after : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
             $players = $this->pseudos;
             $res = [
                 "room" => $msg["room"],
