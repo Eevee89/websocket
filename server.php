@@ -70,7 +70,7 @@ class ServerImpl implements MessageComponentInterface {
             logMessage(sprintf("Created room %s", $room));
 
             $pseudo = $msg["payload"];
-            $pseudos[$conn->resourceId] = $pseudo;
+            $this->pseudos[$conn->resourceId] = $pseudo;
 
             $res = [
                 "room" => $room,
@@ -89,7 +89,7 @@ class ServerImpl implements MessageComponentInterface {
                 $targets = $this->rooms[$msg["room"]];
                 logMessage(sprintf("Targets : %s", json_encode($targets)));
                 $pseudo = $msg["payload"];
-                $pseudos[$pseudo] = $conn->resourceId;
+                $this->pseudos[$pseudo] = $conn->resourceId;
 
                 foreach ($this->clients as $client) {
                     if (in_array($client->resourceId, $targets)) {
@@ -120,6 +120,7 @@ class ServerImpl implements MessageComponentInterface {
 
         if ($msg["type"] == "READY") {
             $targets = $this->rooms[$msg["room"]];
+            $players = $this->pseudos;
             $res = [
                 "room" => $msg["room"],
                 "type" => "PLAYER READY",
