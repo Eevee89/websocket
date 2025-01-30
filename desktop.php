@@ -103,9 +103,9 @@
                     <div id="player"></div>
                 </div>
                 <div id="optCont">
-                  <div class="loader"></div>
-                  <div id="customVideoTitle"><h3 id="customVideoTitleInnerText">TEST</h3></div>
-                  <div id="catInfo"><h3 id="catInfoInnerText">TEST</h3></div>
+                    <div id="nextVidCont"><button id="nextVidBtn"><img src="next.png" srcset="next.svg"></button></div>
+                    <div id="customVideoTitle"><h3 id="customVideoTitleInnerText">TEST</h3></div>
+                    <div id="catInfo"><h3 id="catInfoInnerText">TEST</h3></div>
                 </div>
             </div>
         

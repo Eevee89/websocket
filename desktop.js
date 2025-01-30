@@ -251,7 +251,6 @@ $(document).ready(async () => {
     player = new YT.Player('player', opt);
 
     $("#player").hide();
-    $(".loader").hide();
     $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
 });
 
@@ -340,17 +339,14 @@ $(document).on("click", "#timer", async () => {
             clearInterval(intervalId);
             $("#fakeIframe").hide();
             $("#player").show();
-            $(".loader").show();
             $("#customVideoTitleInnerText").text(customInfos[videosIds[index-1]]["title"]);
             $("#customVideoTitle").show();
             $("#catInfo").hide();
-            $(".loader").css("animation", "l6 "+showTime+"s 1");
         }
     }, 1000);
 });
 
 $(document).on("animationend", ".loader", async () => {
-    $(".loader").css("animation", "");
     $("#player").hide();
 
     if (player) {
@@ -370,7 +366,6 @@ $(document).on("animationend", ".loader", async () => {
     
         player = new YT.Player('player', opt);
         $("#player").hide();
-        $(".loader").hide();
         $("#customVideoTitle").hide();
         $("#fakeIframe").show();
         $("#playBtn").hide();
@@ -383,6 +378,5 @@ $(document).on("animationend", ".loader", async () => {
     }
     else {
         $("#player").hide();
-        $(".loader").hide();
     }
 });

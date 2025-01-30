@@ -484,30 +484,16 @@ iframe {
     position: relative;
 }
 
-.loader {
-    top: 25%;
-    left: 50%;
-    z-index: 0;
-    width: 80%;
-    height: 50%;
-    border-radius: 50px;
-    color: #eed202;
-    border: 2px solid;
-    position: absolute;
-    transform: translate(-50%);
+#nextVidCont {
+    height: 100%;
+    aspect-ratio: 1;
+    align-self: flex-end;
 }
 
-.loader::before {
-    content: "";
-    position: absolute;
-    margin: 2px;
-    inset: 0 100% 0 0;
-    border-radius: inherit;
-    background: currentColor;
-    animation: l6 15s 1;
-}
-@keyframes l6 {
-    100% {inset:0}
+#nextVidBtn {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
 }
 
 #customVideoTitle {

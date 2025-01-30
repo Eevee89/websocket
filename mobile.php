@@ -40,7 +40,6 @@
             <div id="timer">
                 <div id="countdown">10</div>
             </div>
-            <div class="loader"></div>
         </div>
     </div>
 </body>

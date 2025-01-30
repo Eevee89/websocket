@@ -75,8 +75,6 @@ $(document).on("click", "#timer", async () => {
         if (seconds === -1) {
             clearInterval(intervalId);
             $("#timer").hide();
-            $(".loader").show();
-            $(".loader").css("animation", "l6 "+showTime+"s 1");
         }
     }, 1000);
 });
