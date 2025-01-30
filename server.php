@@ -134,16 +134,31 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
         }
+
+        if ($msg["type"] == "CLIENT GONE") {
+            $this->rooms[$msg["room"]]->detach($conn->resourceId);
+            $players = $this->pseudos;
+            $res = [
+                "room" => $msg["room"],
+                "type" => "CLIENT GONE",
+                "payload" => $players[$conn->resourceId]
+            ];
+            foreach ($this->clients as $client) {
+                $tmp = $this->rooms[$room];
+                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    $client->send(json_encode($res));
+                }
+            }
+        }
     }
 
     public function onClose(ConnectionInterface $conn) {
         $room = $this->isMaster($conn->resourceId);
-        //logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");
         
         if ($room !== -1) { // The leaving connection is the master of a room
-            logMessage("Connection {$conn->resourceId} was master");
             foreach ($this->clients as $client) {
                 $tmp = $this->rooms[$room];
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
@@ -157,27 +172,6 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
             unset($this->rooms[$room]);
-        } else { // The leaving connection is a player
-            $tmp = $this->rooms;
-            foreach (array_keys($tmp) as $key) {
-                $tmpKey = $tmp[$key];
-                $tmp[$key] = array_diff($tmpKey, [$conn->resourceId]);
-            }
-            logMessage("Connection {$conn->resourceId} was player");
-            $this->rooms = $tmp;
-            $players = $this->pseudos;
-            $res = [
-                "room" => $room,
-                "type" => "CLIENT GONE",
-                "payload" => $players[$conn->resourceId]
-            ];
-            foreach ($this->clients as $client) {
-                $tmp = $this->rooms[$room];
-                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
-                    $client->send(json_encode($res));
-                }
-            }
         }
         logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
     }

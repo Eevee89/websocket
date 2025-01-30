@@ -49,6 +49,12 @@ $(document).ready(async () => {
     });
 
     $("#quitBtn").click(() => {
+        msg = {
+            "room": room,
+            "type": "CLIENT GONE",
+            "payload": ""
+        };
+        conn.send(JSON.stringify(msg));
         conn.close();
     });
 });
