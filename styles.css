@@ -157,6 +157,8 @@ h1, h2, h3, h4, h5, h6, p {
 
 #header {
     width: calc(100% - 20px);
+    height: 10%;
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -581,10 +583,5 @@ iframe {
         width: 40%;
         height: 20%;
         padding: 10px;
-    }
-
-    #header {
-        height: 10%;
-        position: relative;
     }
 }
