@@ -55,6 +55,7 @@ $(document).ready(async () => {
             "payload": ""
         };
         conn.send(JSON.stringify(msg));
-        conn.close();
+        $("#waitBody").hide();
+        $("#connBody").show();
     });
 });

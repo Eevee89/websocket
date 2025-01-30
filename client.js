@@ -18,6 +18,7 @@ conn.onmessage = function(e) {
     else if (msg["type"] == "CREATED") {
         room = msg["room"];
         $("#roomId").text("Room "+room);
+        $("#roomId2").text("Room "+room);
     } 
     else if (msg["type"] == "NOT ROOM") {
         $("#sepconn").show();
@@ -28,12 +29,14 @@ conn.onmessage = function(e) {
         $("#connBody").hide();
         room = msg["room"];
         $("#roomId").text("Room "+room);
+        $("#roomId2").text("Room "+room);
     } 
     else if (msg["type"] == "PLAYER READY") {
         spl = msg["payload"].split(';');
         pseudo = spl[1];
         hex = spl[0];
         for (var i in players) {
+            console.log(i["pseudo"], pseudo);
             if (i["pseudo"] == pseudo) {
                 i["color"] = hex;
             }
