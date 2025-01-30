@@ -39,6 +39,7 @@ $(document).ready(async () => {
     $(".colorTile").click((event) => {
         hex = $(event.target).css("background-color")
         $("#readyBtn").css("border-color", hex);
+        $("#buzBtn").css("border-color", hex);
     });
 
     $("#readyBtn").click(() => {

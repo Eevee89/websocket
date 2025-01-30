@@ -105,7 +105,7 @@
                 <div id="optCont">
                     <div id="customVideoTitle"><h3 id="customVideoTitleInnerText">TEST</h3></div>
                     <div id="catInfo"><h3 id="catInfoInnerText">TEST</h3></div>
-                    <div id="nextVidCont"><button id="nextVidBtn"><img src="next.png" srcset="next.svg"></button></div>
+                    <div id="nextVidCont"><button id="nextVidBtn"><img id="nextVidBtnImg" src="next.png" srcset="next.svg"></button></div>
                 </div>
             </div>
         

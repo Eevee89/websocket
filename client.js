@@ -72,13 +72,24 @@ conn.onmessage = function(e) {
         }
     }
     else if (msg["type"] == "BEGIN GAME") {
-        nbVids = msg["payload"];
+        spl = msg["payload"].split(";");
+        nbVids = parseInt(spl[0]);
+        hideTime = parseInt(spl[1]);
+        showTime = parseInt(spl[2]);
+
         $("#waitBody").hide();
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
+    } else if (msg["type"] == "CONTINUE GAME") {
+        $("#waitBody").hide();
+        $("#connBody").hide();
+        $("#gameBody").show();
+        $("#timer").show();
+        $("#timer").click();
+        $("#progressLbl").text("Musique "+ zeroPad(parseInt(msg["payload"]), 2)+ "/" + zeroPad(nbVids, 2));
     }
 
     return false;

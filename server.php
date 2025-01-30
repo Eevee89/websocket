@@ -154,7 +154,7 @@ class ServerImpl implements MessageComponentInterface {
             }
         }
 
-        if ($msg["type"] == "BEGIN GAME") {
+        if ($msg["type"] == "BEGIN GAME" || $msg["type"] == "CONTINUE GAME") {
             $targets = $this->rooms[$msg["room"]];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {

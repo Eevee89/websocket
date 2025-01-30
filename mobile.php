@@ -36,10 +36,12 @@
             <h2 id="progressLbl">Musique 01/20</h1>
         </div>
     
-        <div id="main">
+        <div id="mainMobile">
             <div id="timer">
                 <div id="countdown">10</div>
             </div>
+            <div style="width: 1px; height: 50px;"></div>
+            <button id="buzBtn">Buzzer</button>
         </div>
     </div>
 </body>

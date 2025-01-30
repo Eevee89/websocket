@@ -215,15 +215,16 @@ $(document).ready(async () => {
     });
 
     $("#beginBtn").click(() => {
+        hideTime = parseInt($("#btcvalue").text());
+        showtime = parseInt($("#rtcvalue").text());
+        
         msg = {
             "room": room,
             "type": "BEGIN GAME",
-            "payload": videosIds.length
+            "payload": videosIds.length+";"+hideTime+";"+showtime
         };
         conn.send(JSON.stringify(msg));
 
-        hideTime = parseInt($("#btcvalue").text());
-        showtime = parseInt($("#rtcvalue").text());
         for(const item of players) {
             createPlayerItem(item, players.indexOf(item));
         }
@@ -261,6 +262,12 @@ $(document).ready(async () => {
             $("#playBtn").hide();
             $("#countdown").text(hideTime);
             await delay(1000);
+            msg = {
+                "room": room,
+                "type": "CONTINUE GAME",
+                "payload": index
+            };
+            conn.send(JSON.stringify(msg));
             $("#timer").click();
             $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
             $("#catInfo").show();
