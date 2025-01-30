@@ -172,8 +172,13 @@ function addPlayer(item) {
     $(playerPseudo).css("color", item["color"]);
 
     playerTile.append(playerPseudo);
+    $(playerTile).attr({id: item["pseudo"]});
 
     $('#playerTiles').append(playerTile);
+}
+
+function removePlayer(pseudo) {
+    $('#'+pseudo).remove();
 }
 
 function createPlayerItem(item, index) {

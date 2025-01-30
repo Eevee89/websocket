@@ -162,7 +162,7 @@ class ServerImpl implements MessageComponentInterface {
             $res = [
                 "room" => $room,
                 "type" => "CLIENT GONE",
-                "payload" => $conn->resourceId
+                "payload" => $players[$conn->resourceId]
             ];
             logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
             $conn->send(json_encode($res));

@@ -54,6 +54,19 @@ conn.onmessage = function(e) {
         $("#waitBody").hide();
         $("#connBody").show();
     }
+    else if (msg["type"] == "CLIENT GONE") {
+        pseudo = msg["payload"];
+        removePlayer(pseudo);
+        tmp = players.filter((player) => player["pseudo"] != pseudo);
+        players = tmp;
+        readies -= 1;
+        if (readies == players.length) {
+            $("#beginBtn").show();
+        } else {
+            $("#beginBtn").hide();
+        }
+    }
+
     return false;
 };
 
