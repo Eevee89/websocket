@@ -2,6 +2,7 @@ $(document).ready(async () => {
     $("#sepconn").hide();
     $("#notroom").hide();
     $("#waitBody").hide();
+    $("#gameBody").hide();
 
     colors= [
         { name: "pink", hex: "#fe447d"},
@@ -58,4 +59,22 @@ $(document).ready(async () => {
         $("#waitBody").hide();
         $("#connBody").show();
     });
+});
+
+$(document).on("click", "#timer", async () => {
+    hideTime = 15;
+    seconds = hideTime;
+    let colors = gradientColorsCompute(seconds);
+    let intervalId = setInterval(() => {
+        $("#countdown").css("color", colors[hideTime-seconds]);
+        $("#timer").css("border-color", colors[hideTime-seconds]);
+        $("#countdown").text(seconds--);
+  
+        if (seconds === -1) {
+            clearInterval(intervalId);
+            $("#timer").hide();
+            $(".loader").show();
+            $(".loader").css("animation", "l6 "+showTime+"s 1");
+        }
+    }, 1000);
 });

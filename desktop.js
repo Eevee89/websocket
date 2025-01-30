@@ -215,6 +215,13 @@ $(document).ready(async () => {
     });
 
     $("#beginBtn").click(() => {
+        msg = {
+            "room": room,
+            "type": "BEGIN GAME",
+            "payload": ""
+        };
+        conn.send(JSON.stringify(msg));
+
         hideTime = parseInt($("#btcvalue").text());
         showtime = parseInt($("#rtcvalue").text());
         for(const item of players) {

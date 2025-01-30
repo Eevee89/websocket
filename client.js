@@ -26,6 +26,7 @@ conn.onmessage = function(e) {
     } 
     else if (msg["type"] == "WELCOM PLAYER") {
         $("#waitBody").show();
+        $("#gameBody").hide();
         $("#connBody").hide();
         room = msg["room"];
         $("#roomId").text("Room "+room);
@@ -53,7 +54,9 @@ conn.onmessage = function(e) {
     }
     else if (msg["type"] == "DELETED") {
         alert("Le maître de jeu est parti. Partie supprimée.");
+        $("#readyBtn").show();
         $("#waitBody").hide();
+        $("#gameBody").hide();
         $("#connBody").show();
     }
     else if (msg["type"] == "CLIENT GONE") {
@@ -67,6 +70,13 @@ conn.onmessage = function(e) {
         } else {
             $("#beginBtn").hide();
         }
+    }
+    else if (msg["type"] == "BEGIN GAME") {
+        $("#waitBody").hide();
+        $("#connBody").hide();
+        $("#gameBody").show();
+        $("#timer").show();
+        $("#timer").click();
     }
 
     return false;

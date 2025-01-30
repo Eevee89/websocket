@@ -29,6 +29,20 @@
         <div style="width: 1px; height: 20px;"></div>
         <button id="quitBtn">Quitter</button>
     </div>
+
+    <div id="gameBody" class="fakeBody">
+        <div id="header">
+            <h1 id="roomId2">Room 00000</h1>
+            <h1 id="progressLbl">Musique 01/20</h1>
+        </div>
+    
+        <div id="main">
+            <div id="timer">
+                <div id="countdown">10</div>
+            </div>
+            <div class="loader"></div>
+        </div>
+    </div>
 </body>
 
 <script src="mobile.js"></script>
