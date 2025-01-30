@@ -1,8 +1,8 @@
 let videosIds = ['srhni4w2TbI', 'i8wghCdMncU']
 let rejectedIds = [];
 let selectedItem = null;
-let hideTime = 0;
-let showTime = 0;
+let hideTime = 15;
+let showTime = 15;
 let players = [];
 let readies = 0;
 let myPseudo = "";

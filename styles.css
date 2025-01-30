@@ -491,7 +491,7 @@ iframe {
     left: 50%;
     z-index: 0;
     width: 80%;
-    height: 50%;
+    height: 5%;
     border-radius: 50px;
     color: #eed202;
     border: 2px solid;
@@ -566,6 +566,13 @@ iframe {
 
 /*#endregion */
 
+@media (max-width: 768px) {
+    #main {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 @media (min-width: 768px) {
     #connBox {
         width: 40%;
@@ -583,5 +590,18 @@ iframe {
         align-items: center;
         padding: 10px;
         background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0.35), rgba(255,255,255,0.5));
+    }
+
+    .loader {
+        top: 25%;
+        left: 50%;
+        z-index: 0;
+        width: 80%;
+        height: 50%;
+        border-radius: 50px;
+        color: #eed202;
+        border: 2px solid;
+        position: absolute;
+        transform: translate(-50%);
     }
 }

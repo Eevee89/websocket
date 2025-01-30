@@ -3,6 +3,7 @@ $(document).ready(async () => {
     $("#notroom").hide();
     $("#waitBody").hide();
     $("#gameBody").hide();
+    $(".loader").hide();
 
     colors= [
         { name: "pink", hex: "#fe447d"},
@@ -62,7 +63,6 @@ $(document).ready(async () => {
 });
 
 $(document).on("click", "#timer", async () => {
-    hideTime = 15;
     seconds = hideTime;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
