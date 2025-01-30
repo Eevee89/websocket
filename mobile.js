@@ -35,6 +35,6 @@ $(document).ready(async () => {
 
     $(".colorTile").click((event) => {
         hex = $(event.target).css("background-color")
-        $("#readySubmit").css("border-color", hex);
+        $("#readyBtn").css("border-color", hex);
     })
 });

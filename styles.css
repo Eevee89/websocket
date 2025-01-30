@@ -141,11 +141,11 @@ h1, h2, h3, h4, h5, h6, p {
     aspect-ratio: 1;
 }
 
-#readySubmit {
+#readyBtn {
     width: 33%;
     height: 5%;
     border-radius: 10px;
-    border: 1px var(--bgc) solid;
+    border: 2px var(--bgc) solid;
 }
 
 #header {
