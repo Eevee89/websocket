@@ -138,8 +138,10 @@ class ServerImpl implements MessageComponentInterface {
         if ($msg["type"] == "CLIENT GONE") {
             logMessage(sprintf("Rooms before : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
             $tmp = $this->rooms;
+            logMessage(sprintf("Room to delete from : %s", json_encode($tmp[$msg["room"]]))); /*TODO: DELETE THIS LOG*/
+            logMessage(sprintf("Conn to delete : %s", $conn->resourceId)); /*TODO: DELETE THIS LOG*/
             $tmp[$msg["room"]]->detach($conn->resourceId);
-            logMessage(sprintf("Rooms after : %s", json_encode($tmp))); /*TODO: DELETE THIS LOG*/
+            logMessage(sprintf("Rooms after : %s", json_encode($tmp[$msg["room"]]))); /*TODO: DELETE THIS LOG*/
             $this->rooms;
             logMessage(sprintf("Rooms after2 : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
             $players = $this->pseudos;
@@ -160,6 +162,7 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         $room = $this->isMaster($conn->resourceId);
+        logMessage("Connection {$conn->resourceId} is gone");
         $this->clients->detach($conn);
         logMessage("Connection {$conn->resourceId} is gone");
         
