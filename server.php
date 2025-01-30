@@ -157,10 +157,9 @@ class ServerImpl implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
+        logMessage("Connection {$conn->resourceId} is gone");
         $room = $this->isMaster($conn->resourceId);
-        logMessage("Connection {$conn->resourceId} is gone");
         $this->clients->detach($conn);
-        logMessage("Connection {$conn->resourceId} is gone");
         
         if ($room !== -1) { // The leaving connection is the master of a room
             foreach ($this->clients as $client) {
