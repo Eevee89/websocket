@@ -566,7 +566,7 @@ iframe {
 
 /*#endregion */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     #main {
         justify-content: center;
         align-items: center;
