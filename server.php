@@ -170,8 +170,13 @@ class ServerImpl implements MessageComponentInterface {
                 "type" => "CLIENT GONE",
                 "payload" => $players[$conn->resourceId]
             ];
-            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
-            $conn->send(json_encode($res));
+            foreach ($this->clients as $client) {
+                $tmp = $this->rooms[$room];
+                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    $client->send(json_encode($res));
+                }
+            }
         }
         logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
     }

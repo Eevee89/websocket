@@ -70,12 +70,6 @@ conn.onmessage = function(e) {
 };
 
 conn.onclose = function(e) {
-    msg = {
-        "room": room,
-        "type": "CLOSE",
-        "payload": ""
-    };
-    conn.send(JSON.stringify(msg));
     console.log("Bye bye!");
 }
 
