@@ -147,9 +147,8 @@ class ServerImpl implements MessageComponentInterface {
                 "payload" => $players[$conn->resourceId]
             ];
             $targets = $this->clients;
-            logMessage('Cloned $this->clients');
             foreach ($targets as $client) {
-                $tmp = $this->rooms[$room];
+                $tmp = $this->rooms[$msg["room"]];
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
                     logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
                     $client->send(json_encode($res));
