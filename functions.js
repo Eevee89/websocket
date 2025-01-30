@@ -9,6 +9,7 @@ let myPseudo = "";
 
 let connId = 0;
 let room = 0;
+let nbVids = 0;
 
 let customInfos = { };
 

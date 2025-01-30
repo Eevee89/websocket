@@ -72,11 +72,13 @@ conn.onmessage = function(e) {
         }
     }
     else if (msg["type"] == "BEGIN GAME") {
+        nbVids = msg["payload"];
         $("#waitBody").hide();
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
         $("#timer").click();
+        $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
     }
 
     return false;

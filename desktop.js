@@ -218,7 +218,7 @@ $(document).ready(async () => {
         msg = {
             "room": room,
             "type": "BEGIN GAME",
-            "payload": ""
+            "payload": videosIds.length
         };
         conn.send(JSON.stringify(msg));
 

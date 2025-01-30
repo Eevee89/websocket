@@ -1,3 +1,5 @@
+let index = 1;
+
 $(document).ready(async () => {
     $("#sepconn").hide();
     $("#notroom").hide();
@@ -77,4 +79,20 @@ $(document).on("click", "#timer", async () => {
             $(".loader").css("animation", "l6 "+showTime+"s 1");
         }
     }, 1000);
+});
+
+$(document).on("animationend", ".loader", async () => {
+    $(".loader").css("animation", "");
+
+    if (index < nbVids) {
+        
+        $(".loader").hide();
+        $("#countdown").text(hideTime);
+        await delay(1000);
+        $("#timer").click();
+        $("#progressLbl").text("Musique " + zeroPad(++index, 2) + "/" + zeroPad(nbVids, 2));
+    }
+    else {
+        $(".loader").hide();
+    }
 });
