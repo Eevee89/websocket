@@ -189,7 +189,7 @@ function createPlayerItem(item, pseudo) {
     const playerListItem = $('<li>').attr({id: "player"+pseudo});
     const playerInfo = $('<div>').addClass('playerInfo');
     const playerPseudo = $('<h3>').text(pseudo);
-    const playerScore = $('<h3>').text(0);
+    const playerScore = $('<h3>').text(item["score"]);
 
     playerInfo.append(playerPseudo, playerScore);
     playerListItem.append(playerInfo);

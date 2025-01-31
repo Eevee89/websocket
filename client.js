@@ -109,16 +109,12 @@ conn.onmessage = async function(e) {
 
             if (val) {
                 players[msg["payload"]]["score"] += 1;
-                console.table(players);
                 const sortedPlayers = Object.entries(players) 
                                         .sort((a, b) => b[1].score - a[1].score) 
                                         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-                console.table(sortedPlayers);
                 $("#playerList").html("");
                 for(const pseudo of Object.keys(sortedPlayers)) {
-                    console.table($("#playerList").html());
                     createPlayerItem(sortedPlayers[pseudo], pseudo);
-                    console.table($("#playerList").html());
                 }
                 timerStop = true;
             }
