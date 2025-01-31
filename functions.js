@@ -184,6 +184,8 @@ function addPlayer(pseudo, item) {
 function removePlayer(pseudo) {
     $('#'+pseudo).remove();
     $("#player"+pseudo).remove();
+    delete players[pseudo];
+    readies -= 1;
 }
 
 function createPlayerItem(item, pseudo) {

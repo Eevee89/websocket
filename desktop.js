@@ -383,6 +383,14 @@ $(document).on("click", "li", function(event) {
     }
 });
 
+$(document).on("click", "li", function(event) {
+    let pseudo = event.target.id;
+    if (confirm("Voulez-vous supprimer "+pseudo+" ?")) {
+        removePlayer(pseudo);
+    }
+});
+
+
 $(document).on("click", "#timer", async () => {
     player.playVideo();
     seconds = hideTime;

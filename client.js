@@ -61,8 +61,6 @@ conn.onmessage = async function(e) {
     else if (msg["type"] == "CLIENT GONE") {
         pseudo = msg["payload"];
         removePlayer(pseudo);
-        delete players[pseudo];
-        readies -= 1;
         let nbPlayers = Object.keys(players).length; 
         if (readies == nbPlayers && pnbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
