@@ -384,9 +384,14 @@ $(document).on("click", "li", function(event) {
 });
 
 $(document).on("click", ".playerTile", function(event) {
-    console.log(event.target);
-    let pseudo = event.target.id;
-    if (confirm("Voulez-vous supprimer "+pseudo+" ?")) {
+    let elt = event.target;
+    let toDel;
+    if (elt.tagName === "H3") {
+        toDel = $(elt).text();
+    } else {
+        toDel = elt.id;
+    }
+    if (confirm("Voulez-vous supprimer "+toDel+" ?")) {
         removePlayer(pseudo);
     }
 });
