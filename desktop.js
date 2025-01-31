@@ -235,6 +235,7 @@ $(document).ready(async () => {
         $("#customVideoTitle").hide();
         $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
         $("#catInfo").show();
+        $("#progressLbl").text("Musique 01/" + zeroPad(videosIds.length, 2));
     });
 
     $("#nextVidBtn").click(async () => {
