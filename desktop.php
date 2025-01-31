@@ -78,7 +78,8 @@
                             <img id="lastBtn" class="svg" src="last.png" srcset="last.svg"/>
 
                             <img id="dwnldBtn" class="svg" src="download.png" srcset="download.svg"/>
-                            <!--<img id="uploadBtn" class="svg" src="upload.png" srcset="upload.svg"/>-->
+                            <img id="uploadBtn" class="svg" src="upload.png" srcset="upload.svg"/>
+                            <input type="file" id="fileInput" accept=".json" style="display: none;">
                             <img id="deleteBtn" class="svg" src="delete.png" srcset="delete.svg" title="Supprimer tout"/>
                         </div>
                     </div>

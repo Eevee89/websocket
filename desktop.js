@@ -117,7 +117,7 @@ $(document).ready(async () => {
         $("#lastBtn").hide();
         $("#toggleBtn").show();
         $("#dwnldBtn").show();
-        //$("#uploadBtn").show();
+        $("#uploadBtn").show();
         $("#catForm").hide();
         $("#urlForm").show();
 
@@ -153,6 +153,10 @@ $(document).ready(async () => {
         document.body.removeChild(element);
     });
 
+    $("#uploadBtn").click(() => {
+        $("#fileInput").click();
+    });
+
     $("#deleteBtn").click(() => {
         console.log(selectedItem);
         if(selectedItem) {
@@ -164,7 +168,7 @@ $(document).ready(async () => {
             $("#lastBtn").hide();
             $("#toggleBtn").show();
             $("#dwnldBtn").show();
-            //$("#uploadBtn").show();
+            $("#uploadBtn").show();
             $("#catForm").hide();
             $("#urlForm").show();
 
@@ -359,8 +363,39 @@ $(document).on("click", "img", function(event) {
 
 $(document).on("change", "input", function(event) {
     const id = event.target.id;
-    if(id !== "urlInput" && id !== "catInput" && id !== "pseudoInput") {
+    if (id !== "urlInput" && id !== "catInput" && id !== "pseudoInput" && id !== "fileInput") {
         customInfos[id]["title"] = event.target.value;
+    }
+    if (id !== "fileInput") {
+        var file = this.files[0];
+
+        if (file.type !== 'application/json') {
+            new PNotify({
+                title: 'Mauvaise extension',
+                text: 'Le fichier doit être au format .json',
+                type: 'warning',
+                delay: 3000
+            });
+          return; 
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+          try {
+            var jsonData = JSON.parse(event.target.result);
+            console.log(jsonData); 
+          } catch (error) {
+            new PNotify({
+                title: 'Erreur',
+                text: 'Erreur lors de la lecture du fichier.',
+                type: 'error',
+                delay: 3000
+            });
+          }
+        };
+
+        reader.readAsText(file);
     }
 });
 
@@ -389,7 +424,7 @@ $(document).on("click", "li", function(event) {
     $("#lastBtn").hide();
     $("#toggleBtn").show();
     $("#dwnldBtn").show();
-    //$("#uploadBtn").show();
+    $("#uploadBtn").show();
     $("#catForm").hide();
     $("#urlForm").show();
     
@@ -408,7 +443,7 @@ $(document).on("click", "li", function(event) {
         }
         $("#toggleBtn").hide();
         $("#dwnldBtn").hide();
-        //$("#uploadBtn").hide();
+        $("#uploadBtn").hide();
         $("#catForm").show();
         $("#urlForm").hide();
         $("#catInput").val("Catégorie : "+customInfos[selectedItem]["category"]);
@@ -420,7 +455,7 @@ $(document).on("click", "li", function(event) {
         $("#lastBtn").hide();
         $("#toggleBtn").show();
         $("#dwnldBtn").show();
-        //$("#uploadBtn").show();
+        $("#uploadBtn").show();
         $("#catForm").hide();
         $("#urlForm").show();
 
