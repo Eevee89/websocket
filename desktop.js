@@ -376,8 +376,11 @@ $(document).on("click", "#timer", async () => {
     let intervalId = setInterval(() => {
         if (timerStop) {
             clearInterval(intervalId);
-            $("#timer").hide();
-            $("#buzBtn").hide();
+            $("#fakeIframe").hide();
+            $("#player").show();
+            $("#customVideoTitleInnerText").text(customInfos[videosIds[index-1]]["title"]);
+            $("#customVideoTitle").show();
+            $("#catInfo").hide();
         }
         if (!timerPaused && !timerStop) {
             $("#countdown").css("color", colors[hideTime-seconds]);

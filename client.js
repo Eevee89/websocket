@@ -111,6 +111,7 @@ conn.onmessage = function(e) {
                 "payload": val ? 1 : 0
             };
             conn.send(JSON.stringify(msg));
+            timerStop = true;
         }
     } else if (msg["type"] == "BUZZER VALIDATION") {
         if (msg["payload"] == 1) {
