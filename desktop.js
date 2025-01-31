@@ -396,7 +396,6 @@ $(document).on("click", ".playerTile", function(event) {
     }
 });
 
-
 $(document).on("click", "#timer", async () => {
     player.playVideo();
     seconds = hideTime;
@@ -426,3 +425,7 @@ $(document).on("click", "#timer", async () => {
         }
     }, 1000);
 });
+
+$(document).on("hide", "#connBody", function(event) {
+    alert("Comment y vont ?");
+}); 
