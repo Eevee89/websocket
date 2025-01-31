@@ -12,7 +12,7 @@
     --videoTile-bgc: #000;
 }
 
-.brighttheme-notice {
+.brighttheme-notice .ui-pnotify {
     background: repeating-linear-gradient(
         45deg,
         #eed202,
@@ -27,7 +27,7 @@
     border-radius: 10px;
 }
 
-.brighttheme-error {
+.brighttheme-error .ui-pnotify {
     background: repeating-linear-gradient(
         45deg,
         #ff3333,
