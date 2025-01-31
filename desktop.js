@@ -301,14 +301,11 @@ $(document).ready(async () => {
             $("#mainBody").show();
             $("#gameBody").hide();
 
-            for (const p in Object.keys(players)) {
-                console.log(p);
+            for (const p of Object.keys(players)) {
                 $("#"+p).remove();
                 $("#player"+p).remove();
                 players[p]["score"] = 0;
             }
-
-            console.table(players);
 
             readies = 0;
         }
