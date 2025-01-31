@@ -41,11 +41,11 @@ conn.onmessage = function(e) {
         pseudo = spl[1];
         hex = spl[0];
         players[pseudo]["color"] = hex;
-        addPlayer(pseudo, item);
+        addPlayer(pseudo, players[pseudo]);
         readies += 1;
 
         let nbPlayers = Object.keys(players).length; 
-        if (readies == nbPlayers && pnbPlayers >= 2 && videosIds.length > 1) {
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();
@@ -92,13 +92,14 @@ conn.onmessage = function(e) {
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(msg["payload"]), 2)+ "/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "BUZZER") {
         timerPaused = true;
+        player.pauseVideo();
         $("#buzBtn").hide();
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
 
             if (val) {
                 players[msg["payload"]]["score"] += 1;
-                $($($("#"+players.indexOf(player)).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
+                $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
             }
 
             msg = {
@@ -114,6 +115,7 @@ conn.onmessage = function(e) {
             timerStop = true;
         }
         timerPaused = false;
+        player.playVideo();
         $("#buzBtn").show();
     }
 

@@ -4,7 +4,6 @@ function onPlayerError(event) {
 }
 
 let index = 0;
-var player;
 
 $(document).ready(async () => {
     $("#connBody").show();

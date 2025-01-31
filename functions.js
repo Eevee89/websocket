@@ -12,6 +12,7 @@ let room = 0;
 let nbVids = 0;
 let timerPaused = false;
 let timerStop = false;
+var player;
 
 let customInfos = { };
 
