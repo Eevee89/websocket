@@ -368,7 +368,6 @@ $(document).on("change", "input", function(event) {
     }
     if (id == "fileInput") {
         var file = this.files[0];
-        console.log(file);
 
         if (file.type !== 'application/json') {
             new PNotify({
@@ -382,10 +381,13 @@ $(document).on("change", "input", function(event) {
 
         var reader = new FileReader();
 
-        reader.onload = function(event) {
+        reader.onload = async function(event) {
           try {
-            var jsonData = JSON.parse(event.target.result);
-            console.log(jsonData); 
+            customInfos = JSON.parse(event.target.result);
+            videosIds = Object.keys(customInfos);
+            for(const item of videosIds) {
+                await createVideoItem(item, videosIds.indexOf(item));
+            }
           } catch (error) {
             new PNotify({
                 title: 'Erreur',
