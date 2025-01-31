@@ -98,6 +98,8 @@ conn.onmessage = async function(e) {
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
 
+            player.playVideo();
+
             if (val) {
                 players[msg["payload"]]["score"] += 1;
                 $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
@@ -116,8 +118,6 @@ conn.onmessage = async function(e) {
             timerStop = true;
         }
         timerPaused = false;
-        player.playVideo();
-        await delay(1000);
         $("#buzBtn").show();
     }
 
