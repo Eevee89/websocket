@@ -102,8 +102,8 @@ conn.onmessage = function(e) {
             conn.send(JSON.stringify(msg));
 
             if (val) {
-                console.log("La réponse est valide");
                 for (const player of players) {
+                    console.table(player);
                     if (player["pseudo"] == msg["payload"]) {
                         console.log("SCORE");
                         li = $($($("#"+players.indexOf(player)).children()[0]).children()[1]);
