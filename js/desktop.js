@@ -177,7 +177,10 @@ $(document).ready(async () => {
         }
         else {
             videosIds = [];
+            customInfos = [];
             $("li").remove();
+            $("#ttlmlabel").text("Nombre de musiques : 0");
+            $("#ttltlabel").text("Temps total : 0");
         }
     });
 
@@ -398,6 +401,8 @@ $(document).on("change", "input", function(event) {
             for(const item of videosIds) {
                 await createVideoItem(item, videosIds.indexOf(item));
             }
+            $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
+            $("#ttltlabel").text("Temps total : "+formatTime());
           } catch (error) {
             new PNotify({
                 title: 'Erreur',
