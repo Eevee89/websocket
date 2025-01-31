@@ -217,13 +217,6 @@ $(document).ready(async () => {
         showtime = parseInt($("#rtcvalue").text());
         index = 0;
 
-        msg = {
-            "room": room,
-            "type": "BEGIN GAME",
-            "payload": videosIds.length+";"+hideTime+";"+showtime
-        };
-        conn.send(JSON.stringify(msg));
-
         for(const pseudo of Object.keys(players)) {
             createPlayerItem(players[pseudo], pseudo);
         }
@@ -242,7 +235,13 @@ $(document).ready(async () => {
         }
     
         player = new YT.Player('player', opt);
-        await delay(100);
+        await delay(1000);
+        msg = {
+            "room": room,
+            "type": "BEGIN GAME",
+            "payload": videosIds.length+";"+hideTime+";"+showtime
+        };
+        conn.send(JSON.stringify(msg));
         $("#timer").show();
         $("#timer").click();
         $("#catInfo").show();
