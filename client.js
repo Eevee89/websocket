@@ -94,16 +94,11 @@ conn.onmessage = async function(e) {
         timerPaused = true;
         player.pauseVideo();
         $("#buzBtn").hide();
-        await delay(1000);
+        await delay(100);
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
 
             player.playVideo();
-
-            if (val) {
-                players[msg["payload"]]["score"] += 1;
-                $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
-            }
 
             msg = {
                 "room": room,
@@ -111,7 +106,11 @@ conn.onmessage = async function(e) {
                 "payload": val ? 1 : 0
             };
             conn.send(JSON.stringify(msg));
-            timerStop = true;
+            if (val) {
+                players[msg["payload"]]["score"] += 1;
+                $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
+                timerStop = true;
+            }
         }
     } else if (msg["type"] == "BUZZER VALIDATION") {
         if (msg["payload"] == 1) {
