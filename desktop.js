@@ -309,6 +309,19 @@ $(document).ready(async () => {
 
             readies = 0;
             index = 0;
+            var opt = {
+                height: '360',
+                width: '640',
+                videoId: videosIds[index++],
+                events: {
+                  'onError': onPlayerError
+                }
+            }
+        
+            player = new YT.Player('player', opt);
+        
+            $("#player").hide();
+            $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
         }
     });
 
