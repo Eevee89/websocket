@@ -183,6 +183,7 @@ function addPlayer(pseudo, item) {
 
 function removePlayer(pseudo) {
     $('#'+pseudo).remove();
+    $("#player"+pseudo).remove();
 }
 
 function createPlayerItem(item, pseudo) {

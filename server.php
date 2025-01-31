@@ -220,6 +220,26 @@ class ServerImpl implements MessageComponentInterface {
             }
             unset($this->rooms[$room]);
             logMessage(sprintf("Created room %s", $room), $room);
+        } else {
+            $room = $this->roomOf($conn->resourceId);
+            $tmp = $this->rooms;
+            $id = array_search($conn->resourceId, $tmp[$room]);
+            unset($tmp[$room][$id]);
+            $this->rooms = $tmp;
+            $players = $this->pseudos;
+            $res = [
+                "room" => $room,
+                "type" => "CLIENT GONE",
+                "payload" => $players[$conn->resourceId]
+            ];
+            $targets = $this->clients;
+            foreach ($targets as $client) {
+                $tmp = $this->rooms[$room];
+                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
+                    $client->send(json_encode($res));
+                }
+            }
         }
     }
 
@@ -232,6 +252,16 @@ class ServerImpl implements MessageComponentInterface {
         $tmp = $this->rooms;
         foreach ($tmp as $roomId => $room) {
             if ($connId === $room[0]) {
+                return $roomId;
+            }
+        }
+        return -1;
+    }
+
+    public function roomOf($connId) {
+        $tmp = $this->rooms;
+        foreach ($tmp as $roomId => $room) {
+            if (in_array($room, $connId)) {
                 return $roomId;
             }
         }
