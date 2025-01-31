@@ -94,29 +94,27 @@ conn.onmessage = function(e) {
         $("#buzBtn").hide();
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
-            msg = {
-                "room": room,
-                "type": "BUZZER VALIDATION",
-                "payload": val ? 1 : 0
-            };
-            conn.send(JSON.stringify(msg));
 
             if (val) {
                 for (const player of players) {
-                    console.table(player);
                     if (player["pseudo"] == msg["payload"]) {
-                        console.log("SCORE");
                         li = $($($("#"+players.indexOf(player)).children()[0]).children()[1]);
                         score = parseInt(li.text());
                         li.text(score+1);
                     }
                 }
             }
+
+            msg = {
+                "room": room,
+                "type": "BUZZER VALIDATION",
+                "payload": val ? 1 : 0
+            };
+            conn.send(JSON.stringify(msg));
         }
     } else if (msg["type"] == "BUZZER VALIDATION") {
         if (msg["payload"] == 1) {
-            console.log("Le buz est valide");
-            hideTime = 0;
+            timerStop = true;
         }
         timerPaused = false;
         $("#buzBtn").show();

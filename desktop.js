@@ -374,7 +374,12 @@ $(document).on("click", "#timer", async () => {
     seconds = hideTime;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
-        if (!timerPaused) {
+        if (timerStop) {
+            clearInterval(intervalId);
+            $("#timer").hide();
+            $("#buzBtn").hide();
+        }
+        if (!timerPaused && !timerStop) {
             $("#countdown").css("color", colors[hideTime-seconds]);
             $("#timer").css("border-color", colors[hideTime-seconds]);
             $("#countdown").text(seconds--);

@@ -11,6 +11,7 @@ let connId = 0;
 let room = 0;
 let nbVids = 0;
 let timerPaused = false;
+let timerStop = false;
 
 let customInfos = { };
 
