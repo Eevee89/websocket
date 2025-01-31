@@ -73,6 +73,8 @@ conn.onmessage = async function(e) {
         nbVids = parseInt(spl[0]);
         hideTime = parseInt(spl[1]);
         showTime = parseInt(spl[2]);
+        timerStop = false;
+        timerPaused = false;
 
         $("#waitBody").hide();
         $("#connBody").hide();

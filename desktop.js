@@ -216,6 +216,8 @@ $(document).ready(async () => {
         hideTime = parseInt($("#btcvalue").text());
         showtime = parseInt($("#rtcvalue").text());
         index = 0;
+        timerStop = false;
+        timerPaused = false;
 
         for(const pseudo of Object.keys(players)) {
             createPlayerItem(players[pseudo], pseudo);
