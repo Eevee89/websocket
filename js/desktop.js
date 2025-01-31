@@ -132,7 +132,7 @@ $(document).ready(async () => {
 
     $("#toggleBtn").click(() => {
         if ($("#toggleBtn").attr('src').includes("shown")) {
-            $("#toggleBtn").attr({src: "hidden.png", srcset: "hidden.svg"});
+            $("#toggleBtn").attr({src: "images/hidden.png", srcset: "images/hidden.svg"});
         }
         else {
             $("#toggleBtn").attr({src: "shown.png", srcset: "shown.svg"});
