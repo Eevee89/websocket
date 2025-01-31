@@ -116,7 +116,9 @@ conn.onmessage = async function(e) {
                 console.table(sortedPlayers);
                 $("#playerList").html("");
                 for(const pseudo of Object.keys(sortedPlayers)) {
+                    console.table($("#playerList").html());
                     createPlayerItem(sortedPlayers[pseudo], pseudo);
+                    console.table($("#playerList").html());
                 }
                 timerStop = true;
             }
