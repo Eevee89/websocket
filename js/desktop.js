@@ -160,7 +160,6 @@ $(document).ready(async () => {
     });
 
     $("#deleteBtn").click(() => {
-        console.log(selectedItem);
         if(selectedItem) {
             videosIds.splice(videosIds.indexOf(selectedItem), 1);
             $("li").remove("#"+selectedItem);
