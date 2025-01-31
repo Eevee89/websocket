@@ -1,6 +1,5 @@
 function onPlayerError(event) {
-    console.log('Error occurred: ' + event.data);
-    // Handle the error, e.g., display an error message, retry, etc.
+    console.log('Player error occurred: ' + event.data);
 }
 
 let index = 0;
@@ -288,8 +287,24 @@ $(document).ready(async () => {
             };
             conn.send(JSON.stringify(msg));
             alert("La partie est finie.\nLe joueur "+ best +" est le vainqueur");
+            $("#firstBtn").hide();
+            $("#prevBtn").hide();
+            $("#nextBtn").hide();
+            $("#lastBtn").hide();
+            $("#catForm").hide();
+            $("#urlForm").show();
+            $("#player").hide();
+            $("#testplayer").hide();
+            $("#beginBtn").hide();
             $("#mainBody").show();
             $("#gameBody").hide();
+
+            for (const p in Object.keys(players)) {
+                $('#'+pseudo).remove();
+                $("#player"+pseudo).remove();
+            }
+
+            readies = 0;
         }
     });
 
@@ -425,7 +440,3 @@ $(document).on("click", "#timer", async () => {
         }
     }, 1000);
 });
-
-$(document).on("hide", "#connBody", function(event) {
-    alert("Comment y vont ?");
-}); 

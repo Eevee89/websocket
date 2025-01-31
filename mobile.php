@@ -43,8 +43,6 @@
             </div>
             <div style="width: 1px; height: 50px;"></div>
             <button id="buzBtn">Buzzer</button>
-            <p id="iwon" hidden>La partie est finie, vous avez gagné !</p>
-            <p id="hewon" hidden></p>
         </div>
     </div>
 </body>

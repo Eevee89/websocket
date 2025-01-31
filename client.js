@@ -78,6 +78,7 @@ conn.onmessage = async function(e) {
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
+        $("#buzBtn").show();
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "CONTINUE GAME") {
@@ -125,12 +126,20 @@ conn.onmessage = async function(e) {
         timerPaused = false;
         $("#buzBtn").show();
     } else if (msg["type"] == "END GAME") {
+        let alertMsg;
         if (msg["payload"] == myPseudo) {
-            $("#iwon").show();
+            alertMsg = "La partie est finie, vous avez gagné !";
         } else {
-            $("#hewon").text("La partie est finie. Le joueur "+ msg["payload"] +" a gagné.");
-            $("#hewon").show();
+            alertMsg = "La partie est finie. Le joueur "+ msg["payload"] +" a gagné.";
         }
+
+        alert(alertMsg);
+
+        $("#timer").hide();
+        $("#buzBtn").hide();
+        $("#waitBody").show();
+        $("#gameBody").hide();
+        $("#readyBtn").show();
     }
 
     return false;
