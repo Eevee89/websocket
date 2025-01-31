@@ -368,6 +368,7 @@ $(document).on("change", "input", function(event) {
     }
     if (id !== "fileInput") {
         var file = this.files[0];
+        console.log(file);
 
         if (file.type !== 'application/json') {
             new PNotify({
