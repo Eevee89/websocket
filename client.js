@@ -102,16 +102,20 @@ conn.onmessage = function(e) {
             conn.send(JSON.stringify(msg));
 
             if (val) {
+                console;log("La réponse est valide");
                 for (const player of players) {
                     if (player["pseudo"] == msg["payload"]) {
-                        score = parseInt($($($("#"+players.indexOf(player)).children()[0]).children()[1]).text());
-                        $($($("#"+players.indexOf(player)).children()[0]).children()[1]).text(score+1);
+                        console.log("SCORE");
+                        li = $($($("#"+players.indexOf(player)).children()[0]).children()[1]);
+                        score = parseInt(li.text());
+                        li.text(score+1);
                     }
                 }
             }
         }
     } else if (msg["type"] == "BUZZER VALIDATION") {
         if (msg["payload"] == 1) {
+            console.log("Le buz est valide");
             hideTime = 0;
         }
         timerPaused = false;
