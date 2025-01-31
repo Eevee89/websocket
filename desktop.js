@@ -277,6 +277,19 @@ $(document).ready(async () => {
         }
         else {
             $("#player").hide();
+            const sortedPlayers = Object.entries(players) 
+                                        .sort((a, b) => b[1].score - a[1].score) 
+                                        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+            const best = Object.keys(sortedPlayers)[0];
+            msg = {
+                "room": room,
+                "type": "END GAME",
+                "payload": best
+            };
+            conn.send(JSON.stringify(msg));
+            alert("La partie est finie.\nLe joueur "+ best +" est le vainqueur");
+            $("#mainBody").show();
+            $("#gameBody").hide();
         }
     });
 

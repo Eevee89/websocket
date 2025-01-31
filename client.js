@@ -109,7 +109,13 @@ conn.onmessage = async function(e) {
 
             if (val) {
                 players[msg["payload"]]["score"] += 1;
-                $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
+                const sortedPlayers = Object.entries(players) 
+                                        .sort((a, b) => b[1].score - a[1].score) 
+                                        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+                $("#playerList").html("");
+                for(const pseudo of Object.keys(sortedPlayers)) {
+                    createPlayerItem(sortedPlayers[pseudo], pseudo);
+                }
                 timerStop = true;
             }
             timerPaused = false;
@@ -120,6 +126,13 @@ conn.onmessage = async function(e) {
         }
         timerPaused = false;
         $("#buzBtn").show();
+    } else if (msg["type"] == "END GAME") {
+        if (msg["payload"] == myPseudo) {
+            $("#iwon").show();
+        } else {
+            $("#hewon").text("La partie est finie. Le joueur "+ msg["payload"] +" a gagné.");
+            $("#hewon").show();
+        }
     }
 
     return false;

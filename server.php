@@ -189,6 +189,16 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
         }
+
+        if ($msg["type"] == "END GAME") {
+            $targets = $this->rooms[$msg["room"]];
+            foreach ($this->clients as $client) {
+                if (in_array($client->resourceId, $targets) && $conn !== $client) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                    $client->send($raw);
+                }
+            }
+        }
     }
 
     public function onClose(ConnectionInterface $conn) {
