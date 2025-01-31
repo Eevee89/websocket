@@ -215,6 +215,7 @@ $(document).ready(async () => {
     $("#beginBtn").click(() => {
         hideTime = parseInt($("#btcvalue").text());
         showtime = parseInt($("#rtcvalue").text());
+        index = 0;
 
         msg = {
             "room": room,
@@ -229,9 +230,20 @@ $(document).ready(async () => {
         $("#countdown").text(hideTime);
         $("#mainBody").hide();
         $("#gameBody").show();
-        $("#timer").click();
         $("#customVideoTitle").hide();
         $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
+        var opt = {
+            height: '360',
+            width: '640',
+            videoId: videosIds[index++],
+            events: {
+              'onError': onPlayerError
+            }
+        }
+    
+        player = new YT.Player('player', opt);
+        $("#timer").show();
+        $("#timer").click();
         $("#catInfo").show();
         $("#progressLbl").text("Musique 01/" + zeroPad(videosIds.length, 2));
     });
@@ -308,20 +320,6 @@ $(document).ready(async () => {
             }
 
             readies = 0;
-            index = 0;
-            var opt = {
-                height: '360',
-                width: '640',
-                videoId: videosIds[index++],
-                events: {
-                  'onError': onPlayerError
-                }
-            }
-        
-            player = new YT.Player('player', opt);
-        
-            $("#player").hide();
-            $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
         }
     });
 
