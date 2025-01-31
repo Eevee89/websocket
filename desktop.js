@@ -212,7 +212,7 @@ $(document).ready(async () => {
         $("#catInput").val("");
     });
 
-    $("#beginBtn").click(() => {
+    $("#beginBtn").click(async () => {
         hideTime = parseInt($("#btcvalue").text());
         showtime = parseInt($("#rtcvalue").text());
         index = 0;
@@ -242,6 +242,7 @@ $(document).ready(async () => {
         }
     
         player = new YT.Player('player', opt);
+        await delay(100);
         $("#timer").show();
         $("#timer").click();
         $("#catInfo").show();
@@ -326,18 +327,6 @@ $(document).ready(async () => {
     $('#fakeIframe').css("width", $('iframe').width() + 'px');
     $('#fakeIframe').css("height", $('iframe').height() + 'px');
 
-    var opt = {
-        height: '360',
-        width: '640',
-        videoId: videosIds[index++],
-        events: {
-          'onError': onPlayerError
-        }
-    }
-
-    player = new YT.Player('player', opt);
-
-    $("#player").hide();
     $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
 });
 
