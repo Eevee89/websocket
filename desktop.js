@@ -302,9 +302,13 @@ $(document).ready(async () => {
             $("#gameBody").hide();
 
             for (const p in Object.keys(players)) {
+                console.log(p);
+                $("#"+p).remove();
                 $("#player"+p).remove();
                 players[p]["score"] = 0;
             }
+
+            console.table(players);
 
             readies = 0;
         }
