@@ -3,6 +3,17 @@ function onPlayerError(event) {
     // Handle the error, e.g., display an error message, retry, etc.
 }
 
+function onPlayerState(event) {
+    console.log(event);
+    if (event.data == 2) {
+        console.log('The player was paused');
+    } else if (event.data == 1) {
+        console.log('The player was resumed');
+    } else {
+        console.log('The player was stopped');
+    }
+}
+
 let index = 0;
 
 $(document).ready(async () => {
@@ -251,7 +262,8 @@ $(document).ready(async () => {
                 width: '640',
                 videoId: videosIds[index++],
                 events: {
-                'onError': onPlayerError
+                'onError': onPlayerError,
+                'onStateChange': onPlayerState
                 }
             }
         
@@ -288,7 +300,8 @@ $(document).ready(async () => {
         width: '640',
         videoId: videosIds[index++],
         events: {
-          'onError': onPlayerError
+          'onError': onPlayerError,
+          'onStateChange': onPlayerState
         }
     }
 
