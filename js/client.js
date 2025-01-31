@@ -146,9 +146,11 @@ conn.onmessage = async function(e) {
 };
 
 conn.onclose = function(e) {
+    alert("Votre connexion au serveur a été coupée.\nVous allez être renvoyé au menu principal.");
     $("#connBody").show();
     $("#mainBody").hide();
     $("#gameBody").hide();
     $("#waitBody").hide();
     $("#notconnected").show();
+    window.location.reload();
 }
