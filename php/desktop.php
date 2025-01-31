@@ -5,6 +5,8 @@
             <input type="text" id="pseudoInput" name="name"placeholder="Entrez votre pseudo"/>
             <button id="pseudoSubmit">Créer</button>
         </div>
+        <div id="sepconn" style="width: 1px; height: 20px;"></div>
+        <button id="rules">Règles</button>
     </div>
 
     <div id="mainBody" class="fakeBody">

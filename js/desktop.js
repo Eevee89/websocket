@@ -26,6 +26,8 @@ $(document).ready(async () => {
         $("#mainBody").show();
     })
 
+    $("#rules").click(() => { showRules(); });
+
     $("#firstBtn").hide();
     $("#prevBtn").hide();
     $("#nextBtn").hide();

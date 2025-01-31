@@ -240,3 +240,19 @@ function createColorItem(name, hex) {
 
     $('#colorList').append(color);
 }
+
+function showRules() {
+    alert(
+        "Depuis un ordinateur :\n"+
+        "- Créez une partie, puis ajouter les musiques que vous voulez.\n"+
+        "- Ajustez les temps pour deviner et de révelation des musiques.\n"+
+        "- Quand tous les participants sont prêts, appuyer sur 'Commencer' en haut à droite.\n"+
+        "- Lors de la partie, le bouton \"Flèche droite\" en bas à droite servira à passer à la musique suivante.\n\n"+
+
+        "Depuis un téléphone :\n"+
+        "- Connectez-vous à une partie avec l'identifiant fourni par le créateur de la partie.\n"+
+        "- Choisissez votre couleur (plusieurs joueurs peuvent avoir la même).\n"+
+        "- Mettez-vous prêt et en avant la musique ! Buzzez quand vous pensez avoir la bonne réponse.\n"+
+        "- Les buzz sont illimités et ne pénalisent pas en cas de mauvaises réponses."
+    );
+}

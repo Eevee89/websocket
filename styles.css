@@ -114,6 +114,13 @@ h1, h2, h3, h4, h5, h6, p {
     border-right: 1px var(--bgc) solid;
 }
 
+#rules {
+    width: 20%;
+    height: 5%;
+    border-radius: 10px;
+    border: 1px var(--bgc) solid;
+}
+
 #colorBox {
     display: flex;
     flex-direction: column;
@@ -569,5 +576,10 @@ iframe {
         width: 40%;
         height: 20%;
         padding: 10px;
+    }
+
+    #rules {
+        width: 5%;
+        height: 4%;
     }
 }

@@ -52,6 +52,8 @@ $(document).ready(async () => {
         conn.send(JSON.stringify(msg));
     });
 
+    $("#rules").click(() => { showRules(); });
+
     $(".colorTile").click((event) => {
         hex = $(event.target).css("background-color")
         $("#readyBtn").css("border-color", hex);
