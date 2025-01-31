@@ -383,7 +383,7 @@ $(document).on("click", "li", function(event) {
     }
 });
 
-$(document).on("click", "li", function(event) {
+$(document).on("click", ".playerTile", function(event) {
     let pseudo = event.target.id;
     if (confirm("Voulez-vous supprimer "+pseudo+" ?")) {
         removePlayer(pseudo);
