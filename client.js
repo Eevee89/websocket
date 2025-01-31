@@ -97,13 +97,8 @@ conn.onmessage = function(e) {
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
 
             if (val) {
-                for (const player of players) {
-                    if (player["pseudo"] == msg["payload"]) {
-                        li = $($($("#"+players.indexOf(player)).children()[0]).children()[1]);
-                        score = parseInt(li.text());
-                        li.text(score+1);
-                    }
-                }
+                players[msg["payload"]]["score"] += 1;
+                $($($("#"+players.indexOf(player)).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
             }
 
             msg = {
