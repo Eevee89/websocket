@@ -1,12 +1,10 @@
 var conn = new WebSocket('wss://blindtest.jorismartin.fr/websocket');
 conn.onopen = function(e) {
-    console.log("Connection established!");
     $("#notconnected").hide();
 };
 
 conn.onmessage = async function(e) {
     msg = JSON.parse(e.data);
-    console.table(msg);
     if (msg["type"] == "YOU ARE") {
         id = msg["payload"];
         connId = parseInt(id);
@@ -148,10 +146,9 @@ conn.onmessage = async function(e) {
 };
 
 conn.onclose = function(e) {
-    console.log(e);
-    console.log("Bye bye!");
-}
-
-function reconnect() {
-    conn = new WebSocket('wss://blindtest.jorismartin.fr/websocket');
+    $("#connBody").show();
+    $("#mainBody").hide();
+    $("#gameBody").hide();
+    $("#waitBody").hide();
+    $("#notconnected").show();
 }

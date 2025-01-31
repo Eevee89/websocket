@@ -23,6 +23,39 @@ function zeroPad(num, places) {
     return Array(+(zero > 0 && zero)).join("0") + num;
 }
 
+function verifyInput(input, from) {
+    if (from == "Pseudo") {
+        if (input.includes("<") || input.includes(">") || input.includes("!") || input.includes("?") 
+            || input.includes("/") || input.includes("\\") || input.includes("\"") || input.includes("\'") 
+            || input.includes("{") || input.includes("}") || input.includes("$") || input.includes("@")) {
+            return false;
+        }
+        if (input.length > 15) {
+            return false;
+        }
+        return true;
+    }
+    if (from == "Room") {
+        const intInput = parseInt(input);
+        if (isNaN(intInput) || input !== '' + intInput) {
+            return false;
+        }
+        if (intInput > 99999 || intInput < 10000) {
+            return false;
+        }
+        return true;
+    }
+    if (from == "Category") {
+        if (input.includes("<") || input.includes(">") || input.includes("!") || input.includes("?") 
+            || input.includes("/") || input.includes("\\") || input.includes("\"") || input.includes("\'") 
+            || input.includes("{") || input.includes("}") || input.includes("$") || input.includes("@")) {
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 function getYoutubeId(url) {
     if (url.includes("https://www.youtube.com/watch?v=")) {
         const tail = url.substring(32);
@@ -112,7 +145,6 @@ function formatTime() {
     }
 }
 
-
 function countdown(seconds) {
     let intervalId = setInterval(() => {
         $("#countdown").text(seconds--);
@@ -135,7 +167,6 @@ function hexToRgb(hex) {
 function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
-
 
 function gradientColorsCompute(n) {
     let color1 = "#00FF00";

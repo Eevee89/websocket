@@ -231,6 +231,15 @@ $(document).ready(async () => {
     });
 
     $("#catBtn").click(() => {
+        if (!verifyInput($("#catInput").val(), "Category")) {
+            new PNotify({
+                title: 'Categorie invalide',
+                text: "La catégorie contient des caractères interdits : <>{}!?/\\\'\"$@",
+                type: 'warning',
+                delay: 3000
+            });
+            return;
+        }
         customInfos[selectedItem]["category"] = $("#catInput").val();
         $("#catInput").val("");
     });

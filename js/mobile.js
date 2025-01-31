@@ -3,7 +3,7 @@ $(document).ready(async () => {
     $("#notroom").hide();
     $("#waitBody").hide();
     $("#gameBody").hide();
-    $(".loader").hide();
+    $("#connBody").show();
 
     colors= [
         { name: "pink", hex: "#fe447d"},
@@ -23,6 +23,24 @@ $(document).ready(async () => {
     }
 
     $("#pseudoSubmit").click(() => {
+        if (!verifyInput($("#pseudoInput").val(), "Pseudo")) {
+            new PNotify({
+                title: 'Pseudo invalide',
+                text: 'Le pseudo est trop long (max 15) ou contient des caractères interdits : <>{}!?/\\\'\"$@',
+                type: 'warning',
+                delay: 3000
+            });
+            return;
+        }
+        if (!verifyInput($("#roomInput").val(), "Room")) {
+            new PNotify({
+                title: 'ID de partie invalide',
+                text: "L'id de partie doit être un entier entre 10'000 et 99'999 compris",
+                type: 'warning',
+                delay: 3000
+            });
+            return;
+        }
         let pseudo = $("#pseudoInput").val();
         myPseudo = pseudo;
         let roomInput = parseInt($("#roomInput").val());
