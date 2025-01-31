@@ -30,16 +30,16 @@ $secureTcp = new SecureServer($tcp, $loop, [
 
 $logFile = '/var/log/websocket/websocket.log';
 
-function logMessage($message) {
+function logMessage($message, $room) {
     global $logFile;
     $timestamp = date('Y-m-d H:i:s');
-    $logMessage = "[$timestamp] " . $message . "\n";
+    $logMessage = "[$timestamp] | Room $room | " . $message . "\n";
     file_put_contents($logFile, $logMessage, FILE_APPEND);
 }
 
 class ServerImpl implements MessageComponentInterface {
     protected $clients;
-    protected $rooms = [15 => "Test"];
+    protected $rooms = [];
     protected $pseudos = [];
     private $mutex;
 
@@ -55,19 +55,18 @@ class ServerImpl implements MessageComponentInterface {
             "payload" => $conn->resourceId
         ];
         $conn->send(json_encode($res));
-        logMessage("New connection! ({$conn->resourceId})");
+        logMessage("New connection! ({$conn->resourceId})", "0");
     }
 
     public function onMessage(ConnectionInterface $conn, $raw) {
-        logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $raw));
-
         $msg = json_decode($raw, true);
+        logMessage(sprintf("New message from '%s': %s", $conn->resourceId, $raw), $msg["room"]);
 
         if ($msg["type"] == "CREATEROOM") {
             $room = random_int(10000, 99999);
             $this->rooms[$room] = [$conn->resourceId];
 
-            logMessage(sprintf("Created room %s", $room));
+            logMessage(sprintf("Created room %s", $room), $room);
 
             $pseudo = $msg["payload"];
             $this->pseudos[$conn->resourceId] = $pseudo;
@@ -93,7 +92,7 @@ class ServerImpl implements MessageComponentInterface {
                 foreach ($this->clients as $client) {
                     if (in_array($client->resourceId, $targets)) {
                         if ($conn !== $client) {
-                            logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                            logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw), $msg["room"]);
                             $client->send($raw);
                         } else {
                             $res = [
@@ -102,7 +101,7 @@ class ServerImpl implements MessageComponentInterface {
                                 "payload" => ""
                             ];
                             $conn->send(json_encode($res));
-                            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
+                            logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)), $msg["room"]);
                         }
                     }
                 }
@@ -113,7 +112,7 @@ class ServerImpl implements MessageComponentInterface {
                     "payload" => ""
                 ];
                 $conn->send(json_encode($res));
-                logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)));
+                logMessage(sprintf("New message sent to '%s': %s", $conn->resourceId, json_encode($res)), $msg["room"]);
             }
         }
 
@@ -127,7 +126,7 @@ class ServerImpl implements MessageComponentInterface {
             ];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $msg["room"]);
                     $client->send(json_encode($res));
                 }
             }
@@ -148,7 +147,7 @@ class ServerImpl implements MessageComponentInterface {
             foreach ($targets as $client) {
                 $tmp = $this->rooms[$msg["room"]];
                 if ($conn !== $client && in_array($client->resourceId, $tmp)) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $msg["room"]);
                     $client->send(json_encode($res));
                 }
             }
@@ -158,7 +157,7 @@ class ServerImpl implements MessageComponentInterface {
             $targets = $this->rooms[$msg["room"]];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw), $msg["room"]);
                     $client->send($raw);
                 }
             }
@@ -174,7 +173,7 @@ class ServerImpl implements MessageComponentInterface {
             ];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $msg["room"]);
                     $client->send(json_encode($res));
                 }
             }
@@ -184,7 +183,7 @@ class ServerImpl implements MessageComponentInterface {
             $targets = $this->rooms[$msg["room"]];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw), $msg["room"]);
                     $client->send($raw);
                 }
             }
@@ -194,7 +193,7 @@ class ServerImpl implements MessageComponentInterface {
             $targets = $this->rooms[$msg["room"]];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw), $msg["room"]);
                     $client->send($raw);
                 }
             }
@@ -202,7 +201,7 @@ class ServerImpl implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
-        logMessage("Connection {$conn->resourceId} is gone");
+        logMessage("Connection {$conn->resourceId} is gone", 0);
         $room = $this->isMaster($conn->resourceId);
         $this->clients->detach($conn);
         
@@ -215,17 +214,17 @@ class ServerImpl implements MessageComponentInterface {
                         "type" => "DELETED",
                         "payload" => ""
                     ];
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)));
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
                     $client->send(json_encode($res));
                 }
             }
             unset($this->rooms[$room]);
+            logMessage(sprintf("Created room %s", $room), $room);
         }
-        logMessage(sprintf("Rooms : %s", json_encode($this->rooms))); /*TODO: DELETE THIS LOG*/
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
-        logMessage("An error occured on connection {$conn->resourceId}: {$e->getMessage()}");
+        logMessage("An error occured on connection {$conn->resourceId}: {$e->getMessage()}", "0");
         $conn->close();
     }
 
