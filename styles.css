@@ -156,10 +156,11 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 #buzBtn {
-    width: 33%;
-    height: 5%;
+    width: 66%;
+    height: 10%;
     border-radius: 10px;
-    border: 2px var(--bgc) solid;
+    font-size: 3rem;
+    border: 5px var(--bgc) solid;
 }
 
 #header {
