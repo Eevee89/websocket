@@ -14,7 +14,10 @@ conn.onmessage = function(e) {
     else if (msg["type"] == "NEW PLAYER") {
         pseudo = msg["payload"];
         item = {"pseudo": pseudo, "color": "#FFF"};
-        players.push(item);
+        players[pseudo] = {
+            "color": "#FFF",
+            "score": 0
+        };
     } 
     else if (msg["type"] == "CREATED") {
         room = msg["room"];
@@ -37,16 +40,12 @@ conn.onmessage = function(e) {
         spl = msg["payload"].split(';');
         pseudo = spl[1];
         hex = spl[0];
-        for (const i of players) {
-            if (i["pseudo"] == pseudo) {
-                i["color"] = hex;
-            }
-        }
-        item = {"pseudo": pseudo, "color": hex};
-        addPlayer(item);
+        players[pseudo]["color"] = hex;
+        addPlayer(pseudo, item);
         readies += 1;
 
-        if (readies == players.length) {
+        let nbPlayers = Object.keys(players).length; 
+        if (readies == nbPlayers && pnbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();
@@ -62,10 +61,10 @@ conn.onmessage = function(e) {
     else if (msg["type"] == "CLIENT GONE") {
         pseudo = msg["payload"];
         removePlayer(pseudo);
-        tmp = players.filter((player) => player["pseudo"] != pseudo);
-        players = tmp;
+        delete players[pseudo];
         readies -= 1;
-        if (readies == players.length) {
+        let nbPlayers = Object.keys(players).length; 
+        if (readies == nbPlayers && pnbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();

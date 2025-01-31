@@ -169,13 +169,13 @@ function gradientColorsCompute(n) {
     return gradientColors;
 }
 
-function addPlayer(item) {
+function addPlayer(pseudo, item) {
     const playerTile = $('<div>').addClass('playerTile');
-    const playerPseudo = $('<h3>').text(item["pseudo"]);
+    const playerPseudo = $('<h3>').text(pseudo);
     $(playerPseudo).css("color", item["color"]);
 
     playerTile.append(playerPseudo);
-    $(playerTile).attr({id: item["pseudo"]});
+    $(playerTile).attr({id: pseudo});
 
     $('#playerTiles').append(playerTile);
 }
@@ -184,10 +184,10 @@ function removePlayer(pseudo) {
     $('#'+pseudo).remove();
 }
 
-function createPlayerItem(item, index) {
-    const playerListItem = $('<li>').attr({id: index});
+function createPlayerItem(item, pseudo) {
+    const playerListItem = $('<li>').attr({id: "player"+pseudo});
     const playerInfo = $('<div>').addClass('playerInfo');
-    const playerPseudo = $('<h3>').text(item["pseudo"]);
+    const playerPseudo = $('<h3>').text(pseudo);
     const playerScore = $('<h3>').text(0);
 
     playerInfo.append(playerPseudo, playerScore);

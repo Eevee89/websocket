@@ -225,8 +225,8 @@ $(document).ready(async () => {
         };
         conn.send(JSON.stringify(msg));
 
-        for(const item of players) {
-            createPlayerItem(item, players.indexOf(item));
+        for(const pseudo of Object.keys(players)) {
+            createPlayerItem(players[pseudo], pseudo);
         }
         $("#countdown").text(hideTime);
         $("#mainBody").hide();
