@@ -12,13 +12,28 @@
     --videoTile-bgc: #000;
 }
 
-.ui-pnotify {
+.brighttheme-notice {
     background: repeating-linear-gradient(
         45deg,
         #eed202,
         #eed202 10px,
         #ffe900 10px,
         #ffe900 20px
+    );
+    color: #333;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+.brighttheme-error {
+    background: repeating-linear-gradient(
+        45deg,
+        #ff3333,
+        #ff3333 10px,
+        #f28c8c 10px,
+        #f28c8c 20px
     );
     color: #333;
     position: absolute;
