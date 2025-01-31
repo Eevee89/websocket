@@ -1,5 +1,4 @@
 $(document).ready(async () => {
-    $("#sepconn").hide();
     $("#waitBody").hide();
     $("#gameBody").hide();
     $("#connBody").show();
