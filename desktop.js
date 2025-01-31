@@ -366,7 +366,7 @@ $(document).on("change", "input", function(event) {
     if (id !== "urlInput" && id !== "catInput" && id !== "pseudoInput" && id !== "fileInput") {
         customInfos[id]["title"] = event.target.value;
     }
-    if (id !== "fileInput") {
+    if (id == "fileInput") {
         var file = this.files[0];
         console.log(file);
 
