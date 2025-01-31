@@ -280,13 +280,15 @@ $(document).ready(async () => {
                                         .sort((a, b) => b[1].score - a[1].score) 
                                         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
             const best = Object.keys(sortedPlayers)[0];
+
+            alert("La partie est finie.\nLe joueur "+ best +" est le vainqueur");
+
             msg = {
                 "room": room,
                 "type": "END GAME",
                 "payload": best
             };
             conn.send(JSON.stringify(msg));
-            alert("La partie est finie.\nLe joueur "+ best +" est le vainqueur");
             $("#firstBtn").hide();
             $("#prevBtn").hide();
             $("#nextBtn").hide();
@@ -300,8 +302,8 @@ $(document).ready(async () => {
             $("#gameBody").hide();
 
             for (const p in Object.keys(players)) {
-                $('#'+pseudo).remove();
-                $("#player"+pseudo).remove();
+                $("#player"+p).remove();
+                players[p]["score"] = 0;
             }
 
             readies = 0;
