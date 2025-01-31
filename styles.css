@@ -12,36 +12,6 @@
     --videoTile-bgc: #000;
 }
 
-.brighttheme-notice .ui-pnotify {
-    background: repeating-linear-gradient(
-        45deg,
-        #eed202,
-        #eed202 10px,
-        #ffe900 10px,
-        #ffe900 20px
-    );
-    color: #333;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 10px;
-}
-
-.brighttheme-error .ui-pnotify {
-    background: repeating-linear-gradient(
-        45deg,
-        #ff3333,
-        #ff3333 10px,
-        #f28c8c 10px,
-        #f28c8c 20px
-    );
-    color: #333;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 10px;
-}
-
 body {
     background-color: var(--bgc);
     height: 100vh;
