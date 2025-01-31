@@ -76,7 +76,8 @@
                             <img id="prevBtn" class="svg" src="up.png" srcset="up.svg"/>
                             <img id="nextBtn" class="svg" src="down.png" srcset="down.svg"/>
                             <img id="lastBtn" class="svg" src="last.png" srcset="last.svg"/>
-    
+
+                            <img id="dwnldBtn" class="svg" src="download.png" srcset="download.svg"/>
                             <img id="deleteBtn" class="svg" src="delete.png" srcset="delete.svg" title="Supprimer tout"/>
                         </div>
                     </div>
