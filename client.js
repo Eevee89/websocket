@@ -93,7 +93,6 @@ conn.onmessage = async function(e) {
     } else if (msg["type"] == "BUZZER") {
         timerPaused = true;
         player.pauseVideo();
-        console.log(player);
         $("#buzBtn").hide();
         await delay(1000);
         if (videosIds.length != 0) { // Master of the game
@@ -118,7 +117,7 @@ conn.onmessage = async function(e) {
         }
         timerPaused = false;
         player.playVideo();
-        console.log(player);
+        await delay(1000);
         $("#buzBtn").show();
     }
 
