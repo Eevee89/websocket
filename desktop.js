@@ -117,6 +117,7 @@ $(document).ready(async () => {
         $("#lastBtn").hide();
         $("#toggleBtn").show();
         $("#dwnldBtn").show();
+        //$("#uploadBtn").show();
         $("#catForm").hide();
         $("#urlForm").show();
 
@@ -163,6 +164,7 @@ $(document).ready(async () => {
             $("#lastBtn").hide();
             $("#toggleBtn").show();
             $("#dwnldBtn").show();
+            //$("#uploadBtn").show();
             $("#catForm").hide();
             $("#urlForm").show();
 
@@ -387,6 +389,7 @@ $(document).on("click", "li", function(event) {
     $("#lastBtn").hide();
     $("#toggleBtn").show();
     $("#dwnldBtn").show();
+    //$("#uploadBtn").show();
     $("#catForm").hide();
     $("#urlForm").show();
     
@@ -405,6 +408,7 @@ $(document).on("click", "li", function(event) {
         }
         $("#toggleBtn").hide();
         $("#dwnldBtn").hide();
+        //$("#uploadBtn").hide();
         $("#catForm").show();
         $("#urlForm").hide();
         $("#catInput").val("Catégorie : "+customInfos[selectedItem]["category"]);
@@ -416,6 +420,7 @@ $(document).on("click", "li", function(event) {
         $("#lastBtn").hide();
         $("#toggleBtn").show();
         $("#dwnldBtn").show();
+        //$("#uploadBtn").show();
         $("#catForm").hide();
         $("#urlForm").show();
 
