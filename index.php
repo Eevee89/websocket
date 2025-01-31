@@ -10,7 +10,9 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blind Test</title>
+    <title>Blind Test Online</title>
+    <meta name="description" content="Wanna play blind test with some friends ?">
+    <link rel="icon" type="image/svg+xml" href="audio.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pnotify/dist/pnotify.min.css">
     <link id="style-link" rel="stylesheet" href="styles.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
