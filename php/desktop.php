@@ -70,17 +70,17 @@
                         </div>
     
                         <div id="otherOpt">
-                            <img id="toggleBtn" class="svg" src="shown.png" srcset="shown.svg"/>
+                            <img id="toggleBtn" class="svg" src="images/shown.png" srcset="images/shown.svg"/>
     
-                            <img id="firstBtn" class="svg" src="first.png" srcset="first.svg"/>
-                            <img id="prevBtn" class="svg" src="up.png" srcset="up.svg"/>
-                            <img id="nextBtn" class="svg" src="down.png" srcset="down.svg"/>
-                            <img id="lastBtn" class="svg" src="last.png" srcset="last.svg"/>
+                            <img id="firstBtn" class="svg" src="images/first.png" srcset="images/first.svg"/>
+                            <img id="prevBtn" class="svg" src="images/up.png" srcset="images/up.svg"/>
+                            <img id="nextBtn" class="svg" src="images/down.png" srcset="images/down.svg"/>
+                            <img id="lastBtn" class="svg" src="images/last.png" srcset="images/last.svg"/>
 
-                            <img id="dwnldBtn" class="svg" src="download.png" srcset="download.svg"/>
-                            <img id="uploadBtn" class="svg" src="upload.png" srcset="upload.svg"/>
+                            <img id="dwnldBtn" class="svg" src="images/download.png" srcset="images/download.svg"/>
+                            <img id="uploadBtn" class="svg" src="images/upload.png" srcset="images/upload.svg"/>
                             <input type="file" id="fileInput" accept=".json" style="display: none;">
-                            <img id="deleteBtn" class="svg" src="delete.png" srcset="delete.svg" title="Supprimer tout"/>
+                            <img id="deleteBtn" class="svg" src="images/delete.png" srcset="images/delete.svg" title="Supprimer tout"/>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                 <div id="optCont">
                     <div id="customVideoTitle"><h3 id="customVideoTitleInnerText">TEST</h3></div>
                     <div id="catInfo"><h3 id="catInfoInnerText">TEST</h3></div>
-                    <div id="nextVidCont"><button id="nextVidBtn"><img id="nextVidBtnImg" src="next.png" srcset="next.svg"></button></div>
+                    <div id="nextVidCont"><button id="nextVidBtn"><img id="nextVidBtnImg" src="images/next.png" srcset="images/next.svg"></button></div>
                 </div>
             </div>
         
@@ -124,4 +124,4 @@
     </div>
 </body>
 
-<script src="desktop.js"></script>
+<script src="js/desktop.js"></script>

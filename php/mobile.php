@@ -47,4 +47,4 @@
     </div>
 </body>
 
-<script src="mobile.js"></script>
+<script src="js/mobile.js"></script>
