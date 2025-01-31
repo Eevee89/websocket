@@ -107,10 +107,12 @@ conn.onmessage = async function(e) {
             };
             conn.send(JSON.stringify(msg));
             if (val) {
+                console.table(players[msg["payload"]]);
                 players[msg["payload"]]["score"] += 1;
                 $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
                 timerStop = true;
             }
+            timerPaused = false;
         }
     } else if (msg["type"] == "BUZZER VALIDATION") {
         if (msg["payload"] == 1) {
