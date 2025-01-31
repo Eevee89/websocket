@@ -23,8 +23,12 @@ conn.onmessage = async function(e) {
         $("#roomId2").text("Room "+room);
     } 
     else if (msg["type"] == "NOT ROOM") {
-        $("#sepconn").show();
-        $("#notroom").show();
+        new PNotify({
+            title: 'ID de partie invalide',
+            text: "La partie "+msg["room"]+" n'existe pas.",
+            type: 'warning',
+            delay: 3000
+        });
     } 
     else if (msg["type"] == "WELCOM PLAYER") {
         $("#waitBody").show();

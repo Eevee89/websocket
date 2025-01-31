@@ -7,8 +7,6 @@
             <button id="pseudoSubmit">Rejoindre</button>
         </div>
         <div id="sepconn" style="width: 1px; height: 20px;"></div>
-        <p id="notroom" style="color: red;"> La partie n'existe pas </p>
-        <div id="sepconn" style="width: 1px; height: 20px;"></div>
         <button id="rules">Règles</button>
     </div>
 
