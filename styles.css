@@ -12,6 +12,21 @@
     --videoTile-bgc: #000;
 }
 
+.ui-pnotify {
+    background: repeating-linear-gradient(
+        45deg,
+        #eed202,
+        #eed202 10px,
+        #ffe900 10px,
+        #ffe900 20px
+    );
+    color: #333;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
 body {
     background-color: var(--bgc);
     height: 100vh;
