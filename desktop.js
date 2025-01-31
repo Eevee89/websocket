@@ -257,6 +257,8 @@ $(document).ready(async () => {
             }
         
             player = new YT.Player('player', opt);
+            timerStop = false;
+            timerPaused = false;
             $("#player").hide();
             $("#customVideoTitle").hide();
             $("#fakeIframe").show();

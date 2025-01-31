@@ -85,6 +85,8 @@ conn.onmessage = function(e) {
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "CONTINUE GAME") {
         $("#countdown").text(hideTime);
+        timerStop = false;
+        timerPaused = false;
         $("#timer").show();
         $("#buzBtn").show();
         $("#timer").click();
