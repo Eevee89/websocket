@@ -100,15 +100,14 @@ conn.onmessage = async function(e) {
 
             player.playVideo();
 
-            msg = {
+            nmsg = {
                 "room": room,
                 "type": "BUZZER VALIDATION",
                 "payload": val ? 1 : 0
             };
-            conn.send(JSON.stringify(msg));
+            conn.send(JSON.stringify(nmsg));
+
             if (val) {
-                console.table(players);
-                console.log(msg["payload"]);
                 players[msg["payload"]]["score"] += 1;
                 $($($("#player"+msg["payload"]).children()[0]).children()[1]).text(players[msg["payload"]]["score"]);
                 timerStop = true;
