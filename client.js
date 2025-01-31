@@ -4,7 +4,7 @@ conn.onopen = function(e) {
     $("#notconnected").hide();
 };
 
-conn.onmessage = function(e) {
+conn.onmessage = async function(e) {
     msg = JSON.parse(e.data);
     console.table(msg);
     if (msg["type"] == "YOU ARE") {
@@ -95,6 +95,7 @@ conn.onmessage = function(e) {
         player.pauseVideo();
         console.log(player);
         $("#buzBtn").hide();
+        await delay(1000);
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
 
