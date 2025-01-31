@@ -308,6 +308,7 @@ $(document).ready(async () => {
             }
 
             readies = 0;
+            index = 0;
         }
     });
 
