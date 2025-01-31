@@ -93,6 +93,7 @@ conn.onmessage = function(e) {
     } else if (msg["type"] == "BUZZER") {
         timerPaused = true;
         player.pauseVideo();
+        console.log(player);
         $("#buzBtn").hide();
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
@@ -116,6 +117,7 @@ conn.onmessage = function(e) {
         }
         timerPaused = false;
         player.playVideo();
+        console.log(player);
         $("#buzBtn").show();
     }
 
