@@ -166,11 +166,21 @@ class ServerImpl implements MessageComponentInterface {
 
         if ($msg["type"] == "BUZZER") {
             $targets = $this->rooms[$msg["room"]];
+            foreach ($this->clients as $client) {
+                if (in_array($client->resourceId, $targets) && $conn !== $client) {
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, $raw));
+                    $client->send($raw);
+                }
+            }
+        }
+
+        if ($msg["type"] == "BUZZER VALIDATION") {
+            $targets = $this->rooms[$msg["room"]];
             $players = $this->pseudos;
             $res = [
                 "room" => $msg["room"],
-                "type" => "BUZZER",
-                "payload" => $players[$conn->resourceId]
+                "type" => "PLAYER READY",
+                "payload" => sprintf("%s;%s", $msg["payload"], $players[$conn->resourceId])
             ];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {

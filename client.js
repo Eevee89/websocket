@@ -93,8 +93,29 @@ conn.onmessage = function(e) {
         timerPaused = true;
         $("#buzBtn").hide();
         if (videosIds.length != 0) { // Master of the game
-            alert("Le joueur "+ msg["payload"] +" a buzzé !");
+            val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
+            msg = {
+                "room": room,
+                "type": "BUZZER VALIDATION",
+                "payload": val ? 1 : 0
+            };
+            conn.send(JSON.stringify(msg));
+
+            if (val) {
+                for (const player of players) {
+                    if (player["pseudo"] == msg["payload"]) {
+                        score = parseInt($($($("#"+players.indexOf(player)).children()[0]).children()[1]).text());
+                        $($($("#"+players.indexOf(player)).children()[0]).children()[1]).text(score+1);
+                    }
+                }
+            }
         }
+    } else if (msg["type"] == "BUZZER VALIDATION") {
+        if (msg["payload"] == 1) {
+            hideTime = 0;
+        }
+        timerPaused = false;
+        $("#buzBtn").show();
     }
 
     return false;
