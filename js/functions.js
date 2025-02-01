@@ -100,6 +100,8 @@ function getVideoTitle(id) {
 
 async function createVideoItem(item, index) {
     let videoTitle = await getVideoTitle(item);
+    console.log('\n -- Process '+item+' --\n');
+    console.table(customInfos);
 
     if (!customInfos[item]) {
         customInfos[item] = {

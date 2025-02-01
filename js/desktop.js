@@ -440,7 +440,6 @@ $(document).on("change", "input", function(event) {
         reader.onload = async function(event) {
           try {
             let customInfos = JSON.parse(event.target.result);
-            console.table(customInfos);
             if (!validateYoutubeObject(customInfos)) {
                 throw new Error();
             }
@@ -448,7 +447,6 @@ $(document).on("change", "input", function(event) {
             videosIds = Object.keys(customInfos);
 
             for(const item of videosIds) {
-                console.log('\n -- Process '+item+' --\n');
                 if (!verifyInput(customInfos[item]["title"], "Title")) {
                     new PNotify({
                         title: 'Titre invalide pour '+item,
@@ -458,7 +456,6 @@ $(document).on("change", "input", function(event) {
                     });
                     videosIds = [];
                     customInfos = [];
-                    console.log('Titre invalide pour '+item);
                     throw new Error();
                 }
                 if (!verifyInput(customInfos[item]["category"], "Category")) {
@@ -470,10 +467,8 @@ $(document).on("change", "input", function(event) {
                     });
                     videosIds = [];
                     customInfos = [];
-                    console.log('Categorie invalide pour '+item);
                     throw new Error();
                 }
-                console.table(customInfos);
                 await createVideoItem(item, videosIds.indexOf(item));
             }
             $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
