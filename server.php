@@ -204,12 +204,11 @@ class ServerImpl implements MessageComponentInterface {
         $room = $this->roomOf($conn->resourceId);
         $this->clients->detach($conn);
         
-        if ($room !== -1) { 
+        if ($room !== -1) {  // The leaving conn is in a room
             $tmp = $this->rooms;
             $ismaster = $tmp[$room][0] === $conn->resourceId;
 
-            if ($ismaster) {
-                logMessage("Gone is master");
+            if ($ismaster) { // The leaving con is the master of the room
                 foreach ($this->clients as $client) {
                     $tmp = $this->rooms[$room];
                     if ($conn !== $client && in_array($client->resourceId, $tmp)) {
@@ -224,8 +223,24 @@ class ServerImpl implements MessageComponentInterface {
                 }
                 unset($this->rooms[$room]);
                 logMessage(sprintf("Deleted room %s", $room), $room);
-            } else {
-                logMessage("Gone is player", $room);
+            } 
+            else {
+                $tmp = $this->rooms;
+                $id = array_search($conn->resourceId, $tmp[$room]);
+                unset($tmp[$room][$id]);
+                $this->rooms = $tmp;
+                foreach ($this->clients as $client) {
+                    $tmp = $this->rooms[$room];
+                    if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                        $res = [
+                            "room" => $msg["room"],
+                            "type" => "CLIENT GONE",
+                            "payload" => $players[$conn->resourceId]
+                        ];
+                        logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
+                        $client->send(json_encode($res));
+                    }
+                }
             }
         }
     }
