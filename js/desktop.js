@@ -440,6 +440,7 @@ $(document).on("change", "input", function(event) {
         reader.onload = async function(event) {
           try {
             let customInfos = JSON.parse(event.target.result);
+            console.table(customInfos);
             if (!validateYoutubeObject(customInfos)) {
                 throw new Error();
             }
