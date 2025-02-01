@@ -1,5 +1,18 @@
 function onPlayerError(event) {
-    console.log('Player error occurred: ' + event.data);
+    timerPaused = true;
+    timerStop = true;
+    msg = {
+        "room": room,
+        "type": "BUZZER VALIDATION",
+        "payload": 1
+    };
+    conn.send(JSON.stringify(msg));
+    new PNotify({
+        title: 'Une erreur est survenue',
+        text: "La vidéo ne peut pas être lue.",
+        type: 'warning',
+        delay: 3000
+    });
 }
 
 let index = 0;

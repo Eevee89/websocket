@@ -105,7 +105,7 @@ conn.onmessage = async function(e) {
         $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
-        $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId), 2)+ "/" + zeroPad(nbVids, 2));
+        $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId)+1, 2)+ "/" + zeroPad(nbVids, 2));
     }
     else if (msg["type"] == "BUZZER") {
         $("#buzCont").hide();
@@ -132,8 +132,6 @@ conn.onmessage = async function(e) {
             conn.send(JSON.stringify(nmsg));
 
             if (val) {
-                console.log(ps);
-                console.table(msg);
                 players[ps]["score"] += 1;
                 const sortedPlayers = Object.entries(players) 
                                         .sort((a, b) => b[1].score - a[1].score) 
