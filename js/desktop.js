@@ -320,7 +320,7 @@ $(document).ready(async () => {
             $("#countdown").text(hideTime);
             await delay(1000);
             conn.send(JSON.stringify(msg));
-            await delay(100);
+            await delay(200);
             $("#timer").click();
             $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
             $("#catInfo").show();

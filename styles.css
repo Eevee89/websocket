@@ -499,8 +499,8 @@ iframe {
 
 #thumb {
     width: 100%;
+    aspect-ratio: 16/9;
     object-fit: cover;
-    background-color: #F00;
 }
 
 #countdown {

@@ -100,7 +100,6 @@ $(document).on("click", "#timer", async () => {
             clearInterval(intervalId);
             $("#timer").hide();
             $("#buzBtn").hide();
-            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
             $("#ansTitle").text(customTitle);
             $("#thumb").show();
             $("#ansTitle").show();
@@ -114,7 +113,6 @@ $(document).on("click", "#timer", async () => {
                 clearInterval(intervalId);
                 $("#timer").hide();
                 $("#buzBtn").hide();
-                $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
                 $("#ansTitle").text(customTitle);
                 $("#thumb").show();
                 $("#ansTitle").show();

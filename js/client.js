@@ -79,6 +79,7 @@ conn.onmessage = async function(e) {
         videoId = spl[4];
         timerStop = false;
         timerPaused = false;
+        $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
 
         $("#waitBody").hide();
         $("#connBody").hide();
@@ -94,6 +95,7 @@ conn.onmessage = async function(e) {
         musicId = spl[0];
         customTitle = spl[1];
         videoId = spl[2];
+        $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
         $("#countdown").text(hideTime);
         timerStop = false;
         timerPaused = false;
