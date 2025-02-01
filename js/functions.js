@@ -114,7 +114,7 @@ async function createVideoItem(item, index) {
         id: item,
         type: "text",
         placeholder: "Titre personnalisé",
-        value: cust[item]["title"]
+        value: customInfos[item]["title"]
     });
     const videoInfo = $('<div>').addClass('videoInfo');
     const imageContainer = $('<div>').addClass('imgCont');
