@@ -149,7 +149,7 @@ $(document).ready(async () => {
             $("#toggleBtn").attr({src: "images/hidden.png", srcset: "images/hidden.svg"});
         }
         else {
-            $("#toggleBtn").attr({src: "shown.png", srcset: "shown.svg"});
+            $("#toggleBtn").attr({src: "images/shown.png", srcset: "images/shown.svg"});
         }
         $("#videoList").toggle();
     });
