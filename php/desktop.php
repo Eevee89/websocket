@@ -80,6 +80,7 @@
                             <img id="nextBtn" class="svg" src="images/down.png" srcset="images/down.svg"/>
                             <img id="lastBtn" class="svg" src="images/last.png" srcset="images/last.svg"/>
 
+                            <img id="shuffleBtn" class="svg" src="images/shuffle.png" srcset="images/shuffle.svg"/>
                             <img id="dwnldBtn" class="svg" src="images/download.png" srcset="images/download.svg"/>
                             <img id="uploadBtn" class="svg" src="images/upload.png" srcset="images/upload.svg"/>
                             <input type="file" id="fileInput" accept=".json" style="display: none;">

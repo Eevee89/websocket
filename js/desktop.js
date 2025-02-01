@@ -120,6 +120,7 @@ $(document).ready(async () => {
         $("#toggleBtn").show();
         $("#dwnldBtn").show();
         $("#uploadBtn").show();
+        $("#shuffleBtn").show();
         $("#catForm").hide();
         $("#urlForm").show();
 
@@ -140,8 +141,22 @@ $(document).ready(async () => {
         $("#videoList").toggle();
     });
 
+    $("#shuffleBtn").click(async () => {
+        $("#videoList").empty();
+
+        videosIds = shuffleArray(videosIds);
+
+        for(const item of videosIds) {
+            await createVideoItem(item, videosIds.indexOf(item));
+        }
+    });
+
     $("#dwnldBtn").click(() => {
-        let text = JSON.stringify(customInfos);
+        let toDownload = {};
+        for(const item of videosIds) {
+            toDownload[item] = customInfos[item];
+        }
+        let text = JSON.stringify(toDownload);
         let filename = "blindtest.json";
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -170,6 +185,7 @@ $(document).ready(async () => {
             $("#toggleBtn").show();
             $("#dwnldBtn").show();
             $("#uploadBtn").show();
+            $("#shuffleBtn").show();
             $("#catForm").hide();
             $("#urlForm").show();
 
@@ -446,6 +462,7 @@ $(document).on("click", "li", function(event) {
     $("#toggleBtn").show();
     $("#dwnldBtn").show();
     $("#uploadBtn").show();
+    $("#shuffleBtn").show();
     $("#catForm").hide();
     $("#urlForm").show();
     
@@ -465,6 +482,7 @@ $(document).on("click", "li", function(event) {
         $("#toggleBtn").hide();
         $("#dwnldBtn").hide();
         $("#uploadBtn").hide();
+        $("#shuffleBtn").hide();
         $("#catForm").show();
         $("#urlForm").hide();
         $("#catInput").val("Catégorie : "+customInfos[selectedItem]["category"]);
@@ -477,6 +495,7 @@ $(document).on("click", "li", function(event) {
         $("#toggleBtn").show();
         $("#dwnldBtn").show();
         $("#uploadBtn").show();
+        $("#shuffleBtn").show();
         $("#catForm").hide();
         $("#urlForm").show();
 

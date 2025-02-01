@@ -258,3 +258,11 @@ function showRules() {
         "- Les buzz sont illimités et ne pénalisent pas en cas de mauvaises réponses."
     );
 }
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
