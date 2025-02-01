@@ -225,6 +225,7 @@ class ServerImpl implements MessageComponentInterface {
             unset($this->rooms[$room]);
             logMessage(sprintf("Deleted room %s", $room), $room);
         } else {
+            logMessage("Gone is player");
             $tmp = $this->roomOf;
             logMessage("Cloned roomOf");
             $room = $tmp[$conn->resourceId];
