@@ -47,7 +47,7 @@ function verifyInput(input, from) {
         }
         return true;
     }
-    if (from == "Category" || from == "Title" || from == "Answer") {
+    if (from == "Category") {
         if (input.includes("<") || input.includes(">") || input.includes("!") || input.includes("?") 
             || input.includes("/") || input.includes("\\") || input.includes("\"") || input.includes("\'") 
             || input.includes("{") || input.includes("}") || input.includes("$") || input.includes("@")) {
