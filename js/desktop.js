@@ -430,8 +430,13 @@ $(document).on("change", "input", function(event) {
 
         reader.onload = async function(event) {
           try {
-            customInfos = JSON.parse(event.target.result);
+            let customInfos = JSON.parse(event.target.result);
+            if (!validateYoutubeObject(customInfos)) {
+                throw new Error();
+            }
+            
             videosIds = Object.keys(customInfos);
+
             for(const item of videosIds) {
                 await createVideoItem(item, videosIds.indexOf(item));
             }

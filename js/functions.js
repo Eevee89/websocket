@@ -266,3 +266,31 @@ function shuffleArray(array) {
     }
     return array;
 }
+
+function validateYoutubeObject(obj) {
+    for (const id in obj) {
+      if (!isValidYoutubeId(id)) {
+        return false; 
+      }
+    }
+
+    for (const id in obj) {
+      const videoData = obj[id];
+      if (
+        typeof videoData !== 'object' || 
+        videoData === null ||
+        !videoData.hasOwnProperty('title') ||
+        !videoData.hasOwnProperty('category') || 
+        Object.keys(videoData).length > 2
+      ) {
+        return false; 
+      }
+    }
+  
+    return true;
+}
+  
+  function isValidYoutubeId(str) {
+    const regExp = /^[a-zA-Z0-9_-]{11}$/; 
+    return regExp.test(str);
+}
