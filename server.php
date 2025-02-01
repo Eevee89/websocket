@@ -233,7 +233,7 @@ class ServerImpl implements MessageComponentInterface {
                     $tmp = $this->rooms[$room];
                     if ($conn !== $client && in_array($client->resourceId, $tmp)) {
                         $res = [
-                            "room" => $msg["room"],
+                            "room" => $room,
                             "type" => "CLIENT GONE",
                             "payload" => $players[$conn->resourceId]
                         ];
