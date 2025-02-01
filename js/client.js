@@ -130,6 +130,8 @@ conn.onmessage = async function(e) {
                     createPlayerItem(sortedPlayers[pseudo], pseudo);
                 }
                 timerStop = true;
+            } else {
+                await delay(100);
             }
             timerPaused = false;
         }
