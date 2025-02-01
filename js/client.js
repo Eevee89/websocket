@@ -85,7 +85,7 @@ conn.onmessage = async function(e) {
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
-        $("#buzBtn").show();
+        $("#buzCont").show();
         $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
@@ -101,14 +101,14 @@ conn.onmessage = async function(e) {
         timerStop = false;
         timerPaused = false;
         $("#timer").show();
-        $("#buzBtn").show();
+        $("#buzCont").show();
         $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId), 2)+ "/" + zeroPad(nbVids, 2));
     }
     else if (msg["type"] == "BUZZER") {
-        $("#buzBtn").hide();
+        $("#buzCont").hide();
         timerPaused = true;
         player.pauseVideo();
         spl = msg["payload"].split(';');
@@ -152,7 +152,7 @@ conn.onmessage = async function(e) {
             timerStop = true;
         }
         timerPaused = false;
-        $("#buzBtn").show();
+        $("#buzCont").show();
     }
     else if (msg["type"] == "END GAME") {
         let alertMsg;

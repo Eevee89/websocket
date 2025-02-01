@@ -100,7 +100,7 @@ $(document).on("click", "#timer", async () => {
         if (timerStop) {
             clearInterval(intervalId);
             $("#timer").hide();
-            $("#buzBtn").hide();
+            $("#buzCont").hide();
             $("#mainMobile").hide();
             $("#ansTitle").text(customTitle);
             $("#ansCont").show();
@@ -113,7 +113,7 @@ $(document).on("click", "#timer", async () => {
             if (seconds === -1) {
                 clearInterval(intervalId);
                 $("#timer").hide();
-                $("#buzBtn").hide();
+                $("#buzCont").hide();
                 $("#mainMobile").hide();
                 $("#ansTitle").text(customTitle);
                 $("#ansCont").show();
