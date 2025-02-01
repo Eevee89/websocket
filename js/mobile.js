@@ -82,7 +82,7 @@ $(document).ready(async () => {
 
     $("#buzBtn").click(() => {
         let answ = $("#answerInput").val() ?? "";
-        if (!verifyInput(anws, "Answer")) {
+        if (!verifyInput(answ, "Answer")) {
             new PNotify({
                 title: 'Réponse invalide',
                 text: "La réponse contient des caractères interdits : <>{}!?/\\\'\"$@",
