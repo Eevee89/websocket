@@ -14,21 +14,23 @@
         <div id="headerMobile">
             <h2 id="roomId">Room 00000</h1>
         </div>
-        
-        <p> La partie va bientôt commencer... </p>
-        <div style="width: 1px; height: 20px;"></div>
-        <div id="colorBox" class="box">
-            <p> Choisissez votre couleur </p>
-            <div id="colorList">
 
+        <div id="waitMain">
+            <p> La partie va bientôt commencer... </p>
+            <div style="width: 1px; height: 20px;"></div>
+            <div id="colorBox" class="box">
+                <p> Choisissez votre couleur </p>
+                <div id="colorList">
+
+                </div>
             </div>
+            <div style="width: 1px; height: 20px;"></div>
+            <button id="readyBtn">Prêt ?</button>
+            <div style="width: 1px; height: 20px;"></div>
+            <p> Note: Se mettre 'prêt' est définitif </p>
+            <div style="width: 1px; height: 20px;"></div>
+            <button id="quitBtn">Quitter</button>
         </div>
-        <div style="width: 1px; height: 20px;"></div>
-        <button id="readyBtn">Prêt ?</button>
-        <div style="width: 1px; height: 20px;"></div>
-        <p> Note: Se mettre 'prêt' est définitif </p>
-        <div style="width: 1px; height: 20px;"></div>
-        <button id="quitBtn">Quitter</button>
     </div>
 
     <div id="gameBody" class="fakeBody">
