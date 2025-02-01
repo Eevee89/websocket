@@ -90,6 +90,7 @@ conn.onmessage = async function(e) {
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "CONTINUE GAME") {
+        spl = msg["payload"].split(';');
         musicId = spl[0];
         customTitle = spl[1];
         videoId = spl[2];

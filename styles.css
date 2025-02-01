@@ -492,12 +492,10 @@ iframe {
 }
 
 #thumbCont {
-    height: 50%;
-    border-radius: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 90%;
+    height: inherit;
+    max-height: 100%;
+    border-radius: 20px;
 }
 
 #thumb {
