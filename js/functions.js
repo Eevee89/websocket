@@ -55,6 +55,14 @@ function verifyInput(input, from) {
         }
         return true;
     }
+    if (from == "Title" || from == "Answer") {
+        if (input.includes("<") || input.includes(">") || input.includes("?") || input.includes("/")
+            || input.includes("\\") || input.includes("\"") || input.includes("{") || input.includes("}") 
+            || input.includes("$") || input.includes("@")) {
+                return false;
+        }
+        return true;
+    }
     return false;
 }
 
