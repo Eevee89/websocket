@@ -82,7 +82,7 @@ $(document).ready(async () => {
 
     $("#buzBtn").click(() => {
         timerPaused = true;
-        $("#buzBtn").hide();
+        $("#buzCont").hide();
         let answ = $("#answerInput").val() ?? "";
         msg = {
             "room": room,
