@@ -229,6 +229,7 @@ class ServerImpl implements MessageComponentInterface {
                 $id = array_search($conn->resourceId, $tmp[$room]);
                 unset($tmp[$room][$id]);
                 $this->rooms = $tmp;
+                $players = $this->pseudos;
                 foreach ($this->clients as $client) {
                     $tmp = $this->rooms[$room];
                     if ($conn !== $client && in_array($client->resourceId, $tmp)) {
