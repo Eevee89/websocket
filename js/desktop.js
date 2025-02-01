@@ -442,7 +442,7 @@ $(document).on("change", "input", function(event) {
             customInfos = JSON.parse(event.target.result);
 
             if (!validateYoutubeObject(customInfos)) {
-                throw new Error();
+                throw new Error("Objet invalide");
             }
 
             videosIds = Object.keys(customInfos);
@@ -457,7 +457,7 @@ $(document).on("change", "input", function(event) {
                     });
                     videosIds = [];
                     customInfos = [];
-                    throw new Error();
+                    throw new Error("Titre invalide");
                 }
                 if (!verifyInput(customInfos[item]["category"], "Category")) {
                     new PNotify({
@@ -468,7 +468,7 @@ $(document).on("change", "input", function(event) {
                     });
                     videosIds = [];
                     customInfos = [];
-                    throw new Error();
+                    throw new Error("Catégorie invalide");
                 }
                 await createVideoItem(item, videosIds.indexOf(item));
             }
@@ -477,7 +477,7 @@ $(document).on("change", "input", function(event) {
           } catch (error) {
             new PNotify({
                 title: 'Erreur',
-                text: 'Erreur lors de la lecture du fichier.',
+                text: 'Erreur lors de la lecture du fichier.\n'+error,
                 type: 'error',
                 delay: 3000
             });
