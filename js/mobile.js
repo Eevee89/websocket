@@ -6,14 +6,19 @@ $(document).ready(async () => {
     colors= [
         { name: "pink", hex: "#fe447d"},
         { name: "orange", hex: "#f78f2e"},
-        { name: "yellow orange", hex: "#fedc0c"},
-        { name: "lime green", hex: "#d1f20a"},
-        { name: "emerald green", hex: "#5cd05b"},
+        { name: "yellow_orange", hex: "#fedc0c"},
+        { name: "lime_green", hex: "#d1f20a"},
+        { name: "emerald_green", hex: "#5cd05b"},
         { name: "teal", hex: "#03c1cd"},
         { name: "blue", hex: "#0e10e6"},
         { name: "violet", hex: "#9208e7"},
-        { name: "red orange", hex: "#f84c00"},
-        { name: "yellow", hex: "#f3f354"}
+        { name: "red_orange", hex: "#f84c00"},
+        { name: "yellow", hex: "#f3f354"},
+        { name: "red", hex: "#ff0000" }, 
+        { name: "purple", hex: "#800080" },
+        { name: "brown", hex: "#8B4513" },
+        { name: "gold", hex: "#FFD700" }, 
+        { name: "silver", hex: "#C0C0C0" } 
     ];
 
     for(const element of colors) {
