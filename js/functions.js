@@ -98,12 +98,10 @@ function getVideoTitle(id) {
     });
 }
 
-async function createVideoItem(item, index) {
+async function createVideoItem(item, index, cust) {
     let videoTitle = await getVideoTitle(item);
-    console.log('\n -- Process '+item+' --\n');
-    console.table(customInfos);
 
-    if (!customInfos[item]) {
+    if (!cust[item]) {
         customInfos[item] = {
             "title": "Nouveau titre " + index,
             "category": "Not specified"
@@ -116,7 +114,7 @@ async function createVideoItem(item, index) {
         id: item,
         type: "text",
         placeholder: "Titre personnalisé",
-        value: customInfos[item]["title"]
+        value: cust[item]["title"]
     });
     const videoInfo = $('<div>').addClass('videoInfo');
     const imageContainer = $('<div>').addClass('imgCont');
