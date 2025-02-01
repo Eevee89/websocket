@@ -79,12 +79,6 @@ h1, h2, h3, h4, h5, h6, p {
     align-items: center;
 }
 
-#waitBody {
-    position: absolute;
-    top: 10%;
-    left: 0%;
-}
-
 #connBox, #buzCont {
     display: flex;
     flex-direction: column;
@@ -199,7 +193,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 #mainMobile, #waitMain {
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: start;
     align-items: center;
 }
 
