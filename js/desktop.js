@@ -23,7 +23,7 @@ $(document).ready(async () => {
     $("#gameBody").hide();
 
     for(const item of videosIds) {
-        await createVideoItem(item, videosIds.indexOf(item), customInfos);
+        await createVideoItem(item, videosIds.indexOf(item));
     }
 
     $("#pseudoSubmit").click(() => {
@@ -112,7 +112,7 @@ $(document).ready(async () => {
             if (cont) {
                 let index = videosIds.length;
                 videosIds.push(id);
-                await createVideoItem(id, index, customInfos);
+                await createVideoItem(id, index);
                 $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
                 $("#ttltlabel").text("Temps total : "+formatTime());
             }
@@ -160,7 +160,7 @@ $(document).ready(async () => {
         videosIds = shuffleArray(videosIds);
 
         for(const item of videosIds) {
-            await createVideoItem(item, videosIds.indexOf(item), customInfos);
+            await createVideoItem(item, videosIds.indexOf(item));
         }
     });
 
@@ -223,7 +223,7 @@ $(document).ready(async () => {
         videosIds.unshift(selectedItem);
 
         for(const item of videosIds) {
-            await createVideoItem(item, videosIds.indexOf(item), customInfos);
+            await createVideoItem(item, videosIds.indexOf(item));
         }
     });
 
@@ -236,7 +236,7 @@ $(document).ready(async () => {
         videosIds[index] = tmp;
 
         for(const item of videosIds) {
-            await createVideoItem(item, videosIds.indexOf(item), customInfos);
+            await createVideoItem(item, videosIds.indexOf(item));
         }
     });
 
@@ -249,7 +249,7 @@ $(document).ready(async () => {
         videosIds[index] = tmp;
 
         for(const item of videosIds) {
-            await createVideoItem(item, videosIds.indexOf(item), customInfos);
+            await createVideoItem(item, videosIds.indexOf(item));
         }
     });
 
@@ -261,7 +261,7 @@ $(document).ready(async () => {
         videosIds.push(selectedItem);
 
         for(const item of videosIds) {
-            await createVideoItem(item, videosIds.indexOf(item), customInfos);
+            await createVideoItem(item, videosIds.indexOf(item));
         }
     });
 
@@ -439,7 +439,8 @@ $(document).on("change", "input", function(event) {
 
         reader.onload = async function(event) {
           try {
-            let customInfos = JSON.parse(event.target.result);
+            customInfos = JSON.parse(event.target.result);
+
             if (!validateYoutubeObject(customInfos)) {
                 throw new Error();
             }
@@ -469,7 +470,7 @@ $(document).on("change", "input", function(event) {
                     customInfos = [];
                     throw new Error();
                 }
-                await createVideoItem(item, videosIds.indexOf(item), customInfos);
+                await createVideoItem(item, videosIds.indexOf(item));
             }
             $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
             $("#ttltlabel").text("Temps total : "+formatTime());

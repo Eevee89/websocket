@@ -98,10 +98,10 @@ function getVideoTitle(id) {
     });
 }
 
-async function createVideoItem(item, index, cust) {
+async function createVideoItem(item, index) {
     let videoTitle = await getVideoTitle(item);
 
-    if (!cust[item]) {
+    if (!customInfos[item]) {
         customInfos[item] = {
             "title": "Nouveau titre " + index,
             "category": "Not specified"
