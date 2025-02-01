@@ -42,7 +42,10 @@
                 <div id="countdown">10</div>
             </div>
             <div style="width: 1px; height: 50px;"></div>
-            <button id="buzBtn">Buzzer</button>
+            <div id="buzCont" class="box">
+                <input type="text" id="answerInput" name="answer" placeholder="Entrez votre réponse"/>
+                <button id="buzBtn">Buzzer</button>
+            </div>
         </div>
 
         <div id="ansCont">

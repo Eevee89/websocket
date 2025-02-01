@@ -251,6 +251,7 @@ $(document).ready(async () => {
     $("#beginBtn").click(async () => {
         hideTime = parseInt($("#btcvalue").text());
         showtime = parseInt($("#rtcvalue").text());
+        $("#nextVidBtn").hide();
         index = 0;
         timerStop = false;
         timerPaused = false;
@@ -288,6 +289,7 @@ $(document).ready(async () => {
 
     $("#nextVidBtn").click(async () => {
         $("#player").hide();
+        $("#nextVidBtn").hide();
 
         if (player) {
             player.stopVideo();
@@ -498,6 +500,7 @@ $(document).on("click", ".playerTile", function(event) {
 $(document).on("click", "#timer", async () => {
     player.playVideo();
     seconds = hideTime;
+    showSec = showTime;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
         if (timerStop) {
@@ -507,6 +510,13 @@ $(document).on("click", "#timer", async () => {
             $("#customVideoTitleInnerText").text(customInfos[videosIds[index-1]]["title"]);
             $("#customVideoTitle").show();
             $("#catInfo").hide();
+
+            let showInterval = setInterval(() => {
+                if (showSec-- === -1) {
+                    clearInterval(showInterval);
+                    $("#nextVidBtn").show();
+                }
+            }, 1000);
         }
         if (!timerPaused && !timerStop) {
             $("#countdown").css("color", colors[hideTime-seconds]);
@@ -520,6 +530,12 @@ $(document).on("click", "#timer", async () => {
                 $("#customVideoTitleInnerText").text(customInfos[videosIds[index-1]]["title"]);
                 $("#customVideoTitle").show();
                 $("#catInfo").hide();
+                let showInterval = setInterval(() => {
+                    if (showSec-- === -1) {
+                        clearInterval(showInterval);
+                        $("#nextVidBtn").show();
+                    }
+                }, 1000);
             }
         }
     }, 1000);

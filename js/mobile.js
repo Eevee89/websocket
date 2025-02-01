@@ -83,10 +83,11 @@ $(document).ready(async () => {
     $("#buzBtn").click(() => {
         timerPaused = true;
         $("#buzBtn").hide();
+        let answ = $("#answerInput").val() ?? "";
         msg = {
             "room": room,
             "type": "BUZZER",
-            "payload": ""
+            "payload": answ
         };
         conn.send(JSON.stringify(msg));
     });

@@ -90,7 +90,8 @@ conn.onmessage = async function(e) {
         $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
-    } else if (msg["type"] == "CONTINUE GAME") {
+    }
+    else if (msg["type"] == "CONTINUE GAME") {
         spl = msg["payload"].split(';');
         musicId = spl[0];
         customTitle = spl[1];
@@ -105,13 +106,21 @@ conn.onmessage = async function(e) {
         $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId), 2)+ "/" + zeroPad(nbVids, 2));
-    } else if (msg["type"] == "BUZZER") {
+    }
+    else if (msg["type"] == "BUZZER") {
         $("#buzBtn").hide();
         timerPaused = true;
         player.pauseVideo();
+        spl = msg["payload"].split(';');
+        let ps = spl[0];
+        let answ = spl[1];
         await delay(100);
         if (videosIds.length != 0) { // Master of the game
-            val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
+            val = confirm(
+                "Le joueur "+ ps +" a buzzé !\n"+
+                "Sa réponse : "+answ+"\n"+
+                "Valider ? [OK] pour oui, [Annuler] pour non"
+            );
 
             player.playVideo();
 
@@ -137,13 +146,15 @@ conn.onmessage = async function(e) {
             }
             timerPaused = false;
         }
-    } else if (msg["type"] == "BUZZER VALIDATION") {
+    }
+    else if (msg["type"] == "BUZZER VALIDATION") {
         if (msg["payload"] == 1) {
             timerStop = true;
         }
         timerPaused = false;
         $("#buzBtn").show();
-    } else if (msg["type"] == "END GAME") {
+    }
+    else if (msg["type"] == "END GAME") {
         let alertMsg;
         if (msg["payload"] == myPseudo) {
             alertMsg = "La partie est finie, vous avez gagné !";

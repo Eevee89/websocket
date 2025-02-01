@@ -169,7 +169,7 @@ class ServerImpl implements MessageComponentInterface {
             $res = [
                 "room" => $msg["room"],
                 "type" => "BUZZER",
-                "payload" => $players[$conn->resourceId]
+                "payload" => $players[$conn->resourceId].";".$msg["payload"]
             ];
             foreach ($this->clients as $client) {
                 if (in_array($client->resourceId, $targets) && $conn !== $client) {
