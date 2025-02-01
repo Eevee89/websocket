@@ -41,7 +41,7 @@ class ServerImpl implements MessageComponentInterface {
     protected $clients;
     protected $rooms = [];
     protected $pseudos = [];
-    private $mutex;
+    protected $roomOf = [];
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
@@ -85,6 +85,7 @@ class ServerImpl implements MessageComponentInterface {
 
             if ($roomExists) {
                 $this->rooms[$msg["room"]][] = $conn->resourceId;
+                $this->roomOf[$conn->resourceId] = [$msg["room"]];
                 $targets = $this->rooms[$msg["room"]];
                 $pseudo = $msg["payload"];
                 $this->pseudos[$conn->resourceId] = $pseudo;
@@ -136,7 +137,10 @@ class ServerImpl implements MessageComponentInterface {
             $tmp = $this->rooms;
             $id = array_search($conn->resourceId, $tmp[$msg["room"]]);
             unset($tmp[$msg["room"]][$id]);
+            $tmp2 = $this->roomOf;
+            unset($tmp2[$conn->resourceId]);
             $this->rooms = $tmp;
+            $this->roomOf = $tmp2;
             $players = $this->pseudos;
             $res = [
                 "room" => $msg["room"],
@@ -219,7 +223,23 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
             unset($this->rooms[$room]);
-            logMessage(sprintf("Created room %s", $room), $room);
+            logMessage(sprintf("Deleted room %s", $room), $room);
+        } else {
+            $tmp = $this->roomOf;
+            $room = $tmp[$conn->resourceId];
+            foreach ($this->clients as $client) {
+                $tmp = $this->rooms[$room];
+                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                    $res = [
+                        "room" => $room,
+                        "type" => "CLIENT GONE",
+                        "payload" => $players[$conn->resourceId]
+                    ];
+                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
+                    $client->send(json_encode($res));
+                }
+            }
+            unset($tmp[$conn->resourceId]);
         }
     }
 
