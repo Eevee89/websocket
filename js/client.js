@@ -132,7 +132,7 @@ conn.onmessage = async function(e) {
             conn.send(JSON.stringify(nmsg));
 
             if (val) {
-                players[msg["payload"]]["score"] += 1;
+                players[ps]["score"] += 1;
                 const sortedPlayers = Object.entries(players) 
                                         .sort((a, b) => b[1].score - a[1].score) 
                                         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
