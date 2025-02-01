@@ -41,9 +41,13 @@
             <div id="timer">
                 <div id="countdown">10</div>
             </div>
-            <div id="thumbCont"><img id="thumb"/></div>
             <div style="width: 1px; height: 50px;"></div>
             <button id="buzBtn">Buzzer</button>
+        </div>
+
+        <div id="ansCont">
+            <div id="thumbCont"><img id="thumb"/></div>
+            <div style="width: 1px; height: 50px;"></div>
             <h3 id="ansTitle"></h3>
         </div>
     </div>

@@ -100,9 +100,9 @@ $(document).on("click", "#timer", async () => {
             clearInterval(intervalId);
             $("#timer").hide();
             $("#buzBtn").hide();
+            $("#mainMobile").hide();
             $("#ansTitle").text(customTitle);
-            $("#thumb").show();
-            $("#ansTitle").show();
+            $("#ansCont").show();
         }
         if (!timerPaused && !timerStop) {
             $("#countdown").css("color", colors[hideTime-seconds]);
@@ -113,9 +113,9 @@ $(document).on("click", "#timer", async () => {
                 clearInterval(intervalId);
                 $("#timer").hide();
                 $("#buzBtn").hide();
+                $("#mainMobile").hide();
                 $("#ansTitle").text(customTitle);
-                $("#thumb").show();
-                $("#ansTitle").show();
+                $("#ansCont").show();
             }
         }
     }, 1000);

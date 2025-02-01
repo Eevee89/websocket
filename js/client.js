@@ -86,11 +86,9 @@ conn.onmessage = async function(e) {
         $("#gameBody").show();
         $("#timer").show();
         $("#buzBtn").show();
-        $("#thumb").hide();
-        $("#ansTitle").hide();
+        $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
-        await delay(100);
     } else if (msg["type"] == "CONTINUE GAME") {
         spl = msg["payload"].split(';');
         musicId = spl[0];
@@ -102,11 +100,9 @@ conn.onmessage = async function(e) {
         timerPaused = false;
         $("#timer").show();
         $("#buzBtn").show();
-        $("#thumb").hide();
-        $("#ansTitle").hide();
+        $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId), 2)+ "/" + zeroPad(nbVids, 2));
-        await delay(100);
     } else if (msg["type"] == "BUZZER") {
         $("#buzBtn").hide();
         timerPaused = true;
