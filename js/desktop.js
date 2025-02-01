@@ -190,6 +190,8 @@ $(document).ready(async () => {
             $("#urlForm").show();
 
             selectedItem = null;
+            $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
+            $("#ttltlabel").text("Temps total : "+formatTime());
         }
         else {
             videosIds = [];

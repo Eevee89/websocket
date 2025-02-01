@@ -132,6 +132,8 @@ conn.onmessage = async function(e) {
             conn.send(JSON.stringify(nmsg));
 
             if (val) {
+                console.log(ps);
+                console.table(msg);
                 players[ps]["score"] += 1;
                 const sortedPlayers = Object.entries(players) 
                                         .sort((a, b) => b[1].score - a[1].score) 
