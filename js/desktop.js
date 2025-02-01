@@ -320,7 +320,6 @@ $(document).ready(async () => {
             $("#countdown").text(hideTime);
             await delay(1000);
             conn.send(JSON.stringify(msg));
-            await delay(200);
             $("#timer").click();
             $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
             $("#catInfo").show();
@@ -498,7 +497,7 @@ $(document).on("click", ".playerTile", function(event) {
 
 $(document).on("click", "#timer", async () => {
     player.playVideo();
-    seconds = hideTime;
+    seconds = hideTime+1;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
         if (timerStop) {
