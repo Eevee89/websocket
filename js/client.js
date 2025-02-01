@@ -86,6 +86,7 @@ conn.onmessage = async function(e) {
         $("#gameBody").show();
         $("#timer").show();
         $("#buzBtn").show();
+        $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
@@ -100,6 +101,7 @@ conn.onmessage = async function(e) {
         timerPaused = false;
         $("#timer").show();
         $("#buzBtn").show();
+        $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId), 2)+ "/" + zeroPad(nbVids, 2));
