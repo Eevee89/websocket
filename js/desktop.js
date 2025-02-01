@@ -497,7 +497,7 @@ $(document).on("click", ".playerTile", function(event) {
 
 $(document).on("click", "#timer", async () => {
     player.playVideo();
-    seconds = hideTime+1;
+    seconds = hideTime;
     let colors = gradientColorsCompute(seconds);
     let intervalId = setInterval(() => {
         if (timerStop) {
