@@ -94,9 +94,9 @@ conn.onmessage = async function(e) {
         $("#timer").click();
         $("#progressLbl").text("Musique "+ zeroPad(parseInt(msg["payload"]), 2)+ "/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "BUZZER") {
+        $("#buzBtn").hide();
         timerPaused = true;
         player.pauseVideo();
-        $("#buzBtn").hide();
         await delay(100);
         if (videosIds.length != 0) { // Master of the game
             val = confirm("Le joueur "+ msg["payload"] +" a buzzé !\nValider sa réponse ?\n[OK] pour oui, [Cancel] pour non");
