@@ -226,10 +226,12 @@ class ServerImpl implements MessageComponentInterface {
             logMessage(sprintf("Deleted room %s", $room), $room);
         } else {
             $tmp = $this->roomOf;
+            logMessage("Cloned roomOf");
             $room = $tmp[$conn->resourceId];
+            logMessage("Set room");
             foreach ($this->clients as $client) {
-                $tmp = $this->rooms[$room];
-                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                $tmp2 = $this->rooms[$room];
+                if ($conn !== $client && in_array($client->resourceId, $tmp2)) {
                     $res = [
                         "room" => $room,
                         "type" => "CLIENT GONE",
@@ -240,6 +242,8 @@ class ServerImpl implements MessageComponentInterface {
                 }
             }
             unset($tmp[$conn->resourceId]);
+            $this->roomOf = $tmp;
+            logMessage("Unset roomOf");
         }
     }
 
