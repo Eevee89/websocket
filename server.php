@@ -201,25 +201,32 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         logMessage("Connection {$conn->resourceId} is gone", 0);
-        $room = $this->isMaster($conn->resourceId);
+        $room = $this->roomOf($conn->resourceId);
         $this->clients->detach($conn);
         
-        if ($room !== -1) { // The leaving connection is the master of a room
-            logMessage("Gone is master");
-            foreach ($this->clients as $client) {
-                $tmp = $this->rooms[$room];
-                if ($conn !== $client && in_array($client->resourceId, $tmp)) {
-                    $res = [
-                        "room" => $room,
-                        "type" => "DELETED",
-                        "payload" => ""
-                    ];
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
-                    $client->send(json_encode($res));
+        if ($room !== -1) { 
+            $tmp = $this->rooms;
+            $ismaster = $tmp[$room][0] === $conn->resourceId;
+
+            if ($ismaster) {
+                logMessage("Gone is master");
+                foreach ($this->clients as $client) {
+                    $tmp = $this->rooms[$room];
+                    if ($conn !== $client && in_array($client->resourceId, $tmp)) {
+                        $res = [
+                            "room" => $room,
+                            "type" => "DELETED",
+                            "payload" => ""
+                        ];
+                        logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
+                        $client->send(json_encode($res));
+                    }
                 }
+                unset($this->rooms[$room]);
+                logMessage(sprintf("Deleted room %s", $room), $room);
+            } else {
+                logMessage("Gone is player", $room);
             }
-            unset($this->rooms[$room]);
-            logMessage(sprintf("Deleted room %s", $room), $room);
         }
     }
 
@@ -228,10 +235,10 @@ class ServerImpl implements MessageComponentInterface {
         $conn->close();
     }
 
-    public function isMaster($connId) {
+    public function roomOf($connId) {
         $tmp = $this->rooms;
         foreach ($tmp as $roomId => $room) {
-            if ($connId === $room[0]) {
+            if (in_array($connId, $room)) {
                 return $roomId;
             }
         }
