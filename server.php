@@ -41,8 +41,6 @@ class ServerImpl implements MessageComponentInterface {
     protected $clients;
     protected $rooms = [];
     protected $pseudos = [];
-    protected $roomOf = [];
-    protected $masters = [];
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
@@ -66,7 +64,6 @@ class ServerImpl implements MessageComponentInterface {
         if ($msg["type"] == "CREATEROOM") {
             $room = random_int(10000, 99999);
             $this->rooms[$room] = [$conn->resourceId];
-            $this->masters[] = $conn->resourceId;
 
             logMessage(sprintf("Created room %s", $room), $room);
 
@@ -87,7 +84,6 @@ class ServerImpl implements MessageComponentInterface {
 
             if ($roomExists) {
                 $this->rooms[$msg["room"]][] = $conn->resourceId;
-                $this->roomOf[$conn->resourceId] = [$msg["room"]];
                 $targets = $this->rooms[$msg["room"]];
                 $pseudo = $msg["payload"];
                 $this->pseudos[$conn->resourceId] = $pseudo;
@@ -139,10 +135,7 @@ class ServerImpl implements MessageComponentInterface {
             $tmp = $this->rooms;
             $id = array_search($conn->resourceId, $tmp[$msg["room"]]);
             unset($tmp[$msg["room"]][$id]);
-            $tmp2 = $this->roomOf;
-            unset($tmp2[$conn->resourceId]);
             $this->rooms = $tmp;
-            $this->roomOf = $tmp2;
             $players = $this->pseudos;
             $res = [
                 "room" => $msg["room"],
@@ -208,11 +201,10 @@ class ServerImpl implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         logMessage("Connection {$conn->resourceId} is gone", 0);
-        $masterTmp = $this->masters;
-        $isMaster = in_array($conn->resourceId, $masterTmp);
+        $room = $this->isMaster($conn->resourceId);
         $this->clients->detach($conn);
         
-        if ($isMaster) { // The leaving connection is the master of a room
+        if ($room !== -1) { // The leaving connection is the master of a room
             logMessage("Gone is master");
             foreach ($this->clients as $client) {
                 $tmp = $this->rooms[$room];
@@ -226,38 +218,24 @@ class ServerImpl implements MessageComponentInterface {
                     $client->send(json_encode($res));
                 }
             }
-            $id = array_search($conn->resourceId, $masterTmp);
-            unset($masterTmp[$id]);
             unset($this->rooms[$room]);
-            $this->masters = $masterTmp;
             logMessage(sprintf("Deleted room %s", $room), $room);
-        } else {
-            logMessage("Gone is player");
-            $tmp = $this->roomOf;
-            logMessage("Cloned roomOf");
-            $room = $tmp[$conn->resourceId];
-            logMessage("Set room");
-            foreach ($this->clients as $client) {
-                $tmp2 = $this->rooms[$room];
-                if ($conn !== $client && in_array($client->resourceId, $tmp2)) {
-                    $res = [
-                        "room" => $room,
-                        "type" => "CLIENT GONE",
-                        "payload" => $players[$conn->resourceId]
-                    ];
-                    logMessage(sprintf("New message sent to '%s': %s", $client->resourceId, json_encode($res)), $room);
-                    $client->send(json_encode($res));
-                }
-            }
-            unset($tmp[$conn->resourceId]);
-            $this->roomOf = $tmp;
-            logMessage("Unset roomOf");
         }
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
         logMessage("An error occured on connection {$conn->resourceId}: {$e->getMessage()}", "0");
         $conn->close();
+    }
+
+    public function isMaster($connId) {
+        $tmp = $this->rooms;
+        foreach ($tmp as $roomId => $room) {
+            if ($connId === $room[0]) {
+                return $roomId;
+            }
+        }
+        return -1;
     }
 }
 
