@@ -40,9 +40,11 @@
         </div>
     
         <div id="mainMobile">
+            <div style="width: 1px; height: 10px;"></div>
             <div id="timer">
                 <div id="countdown">10</div>
             </div>
+            <div style="width: 1px; height: 20px;"></div>
             <div id="buzCont" class="box">
                 <input type="text" id="answerInput" name="answer" placeholder="Entrez votre réponse"/>
                 <button id="buzBtn">Buzzer</button>
