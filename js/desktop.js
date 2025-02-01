@@ -300,7 +300,7 @@ $(document).ready(async () => {
                 "type": "CONTINUE GAME",
                 "payload": index+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
             };
-            
+
             var opt = {
                 height: '360',
                 width: '640',
@@ -320,6 +320,7 @@ $(document).ready(async () => {
             $("#countdown").text(hideTime);
             await delay(1000);
             conn.send(JSON.stringify(msg));
+            await delay(100);
             $("#timer").click();
             $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
             $("#catInfo").show();

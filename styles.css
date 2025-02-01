@@ -500,6 +500,7 @@ iframe {
 #thumb {
     width: 100%;
     object-fit: cover;
+    background-color: #F00;
 }
 
 #countdown {
