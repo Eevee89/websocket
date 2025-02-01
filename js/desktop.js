@@ -411,6 +411,15 @@ $(document).on("click", "img", function(event) {
 $(document).on("change", "input", function(event) {
     const id = event.target.id;
     if (id !== "urlInput" && id !== "catInput" && id !== "pseudoInput" && id !== "fileInput") {
+        if (!verifyInput(event.target.value, "Title")) {
+            new PNotify({
+                title: 'Titre invalide',
+                text: "Le titre personnalisé contient des caractères interdits : <>{}!?/\\\'\"$@",
+                type: 'warning',
+                delay: 3000
+            });
+            return;
+        }
         customInfos[id]["title"] = event.target.value;
     }
     if (id == "fileInput") {
@@ -434,10 +443,32 @@ $(document).on("change", "input", function(event) {
             if (!validateYoutubeObject(customInfos)) {
                 throw new Error();
             }
-            
+
             videosIds = Object.keys(customInfos);
 
             for(const item of videosIds) {
+                if (!verifyInput(customInfos[item]["title"], "Title")) {
+                    new PNotify({
+                        title: 'Titre invalide pour '+item,
+                        text: "Le titre personnalisé contient des caractères interdits : <>{}!?/\\\'\"$@",
+                        type: 'warning',
+                        delay: 3000
+                    });
+                    videosIds = [];
+                    customInfos = [];
+                    throw new Error();
+                }
+                if (!verifyInput(customInfos[item]["category"], "Category")) {
+                    new PNotify({
+                        title: 'Categorie invalide pour '+item,
+                        text: "La catégorie contient des caractères interdits : <>{}!?/\\\'\"$@",
+                        type: 'warning',
+                        delay: 3000
+                    });
+                    videosIds = [];
+                    customInfos = [];
+                    throw new Error();
+                }
                 await createVideoItem(item, videosIds.indexOf(item));
             }
             $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);

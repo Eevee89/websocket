@@ -81,9 +81,18 @@ $(document).ready(async () => {
     });
 
     $("#buzBtn").click(() => {
+        let answ = $("#answerInput").val() ?? "";
+        if (!verifyInput(anws, "Answer")) {
+            new PNotify({
+                title: 'Réponse invalide',
+                text: "La réponse contient des caractères interdits : <>{}!?/\\\'\"$@",
+                type: 'warning',
+                delay: 3000
+            });
+            return;
+        }
         timerPaused = true;
         $("#buzCont").hide();
-        let answ = $("#answerInput").val() ?? "";
         msg = {
             "room": room,
             "type": "BUZZER",
