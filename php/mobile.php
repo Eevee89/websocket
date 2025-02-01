@@ -43,6 +43,9 @@
             </div>
             <div style="width: 1px; height: 50px;"></div>
             <button id="buzBtn">Buzzer</button>
+            <div id="thumbCont"><img id="thumb"/></div>
+            <div style="width: 1px; height: 50px;"></div>
+            <p id="ansTitle"></p>
         </div>
     </div>
 </body>

@@ -491,6 +491,19 @@ iframe {
     z-index: 2;
 }
 
+#thumbCont {
+    height: 50%;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#thumb {
+    object-fit: cover;
+}
+
 #countdown {
     z-index: 1;
     font-size: 8rem;

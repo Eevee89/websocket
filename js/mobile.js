@@ -100,6 +100,10 @@ $(document).on("click", "#timer", async () => {
             clearInterval(intervalId);
             $("#timer").hide();
             $("#buzBtn").hide();
+            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/default.jpg", alt: 'Not implemented'});
+            $("#ansTitle").text(customTitle);
+            $("#thumb").show();
+            $("#ansTitle").show();
         }
         if (!timerPaused && !timerStop) {
             $("#countdown").css("color", colors[hideTime-seconds]);
@@ -110,6 +114,10 @@ $(document).on("click", "#timer", async () => {
                 clearInterval(intervalId);
                 $("#timer").hide();
                 $("#buzBtn").hide();
+                $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/default.jpg", alt: 'Not implemented'});
+                $("#ansTitle").text(customTitle);
+                $("#thumb").show();
+                $("#ansTitle").show();
             }
         }
     }, 1000);

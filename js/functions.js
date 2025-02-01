@@ -13,6 +13,8 @@ let nbVids = 0;
 let timerPaused = false;
 let timerStop = false;
 var player;
+let videoId = "";
+let customTitle = "";
 
 let customInfos = { };
 

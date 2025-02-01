@@ -75,6 +75,8 @@ conn.onmessage = async function(e) {
         nbVids = parseInt(spl[0]);
         hideTime = parseInt(spl[1]);
         showTime = parseInt(spl[2]);
+        customTitle = spl[3];
+        videoId = spl[4];
         timerStop = false;
         timerPaused = false;
 
@@ -83,16 +85,23 @@ conn.onmessage = async function(e) {
         $("#gameBody").show();
         $("#timer").show();
         $("#buzBtn").show();
+        $("#thumb").hide();
+        $("#ansTitle").hide();
         $("#timer").click();
         $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "CONTINUE GAME") {
+        musicId = spl[0];
+        customTitle = spl[1];
+        videoId = spl[2];
         $("#countdown").text(hideTime);
         timerStop = false;
         timerPaused = false;
         $("#timer").show();
         $("#buzBtn").show();
+        $("#thumb").hide();
+        $("#ansTitle").hide();
         $("#timer").click();
-        $("#progressLbl").text("Musique "+ zeroPad(parseInt(msg["payload"]), 2)+ "/" + zeroPad(nbVids, 2));
+        $("#progressLbl").text("Musique "+ zeroPad(parseInt(musicId), 2)+ "/" + zeroPad(nbVids, 2));
     } else if (msg["type"] == "BUZZER") {
         $("#buzBtn").hide();
         timerPaused = true;

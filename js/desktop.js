@@ -263,6 +263,11 @@ $(document).ready(async () => {
         $("#gameBody").show();
         $("#customVideoTitle").hide();
         $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
+        msg = {
+            "room": room,
+            "type": "BEGIN GAME",
+            "payload": videosIds.length+";"+hideTime+";"+showtime+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+        };
         var opt = {
             height: '360',
             width: '640',
@@ -274,11 +279,6 @@ $(document).ready(async () => {
     
         player = new YT.Player('player', opt);
         await delay(1000);
-        msg = {
-            "room": room,
-            "type": "BEGIN GAME",
-            "payload": videosIds.length+";"+hideTime+";"+showtime
-        };
         conn.send(JSON.stringify(msg));
         $("#timer").show();
         $("#timer").click();
@@ -295,6 +295,12 @@ $(document).ready(async () => {
         }
     
         if (index < videosIds.length) {
+            msg = {
+                "room": room,
+                "type": "CONTINUE GAME",
+                "payload": index+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+            };
+            
             var opt = {
                 height: '360',
                 width: '640',
@@ -313,11 +319,6 @@ $(document).ready(async () => {
             $("#playBtn").hide();
             $("#countdown").text(hideTime);
             await delay(1000);
-            msg = {
-                "room": room,
-                "type": "CONTINUE GAME",
-                "payload": index
-            };
             conn.send(JSON.stringify(msg));
             $("#timer").click();
             $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
