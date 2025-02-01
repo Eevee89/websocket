@@ -555,19 +555,6 @@ $(document).on("click", "li", function(event) {
     }
 });
 
-$(document).on("click", ".playerTile", function(event) {
-    let elt = event.target;
-    let toDel;
-    if (elt.tagName === "H3") {
-        toDel = $(elt).text();
-    } else {
-        toDel = elt.id;
-    }
-    if (confirm("Voulez-vous supprimer "+toDel+" ?")) {
-        removePlayer(pseudo);
-    }
-});
-
 $(document).on("click", "#timer", async () => {
     player.playVideo();
     seconds = hideTime;
