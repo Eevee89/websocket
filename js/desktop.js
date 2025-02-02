@@ -73,14 +73,14 @@ $(document).ready(async () => {
     });
 
     $("#rtcm5").click(() => {
-        nbEssais = parseInt($("#rtcvalue").text()) -1;
+        let nbEssais = parseInt($("#rtcvalue").text()) -1;
         if (nbEssais < 1) nbEssais = 1;
         $("#rtcvalue").text(""+nbEssais);
 
         $("#attemptlabel").text("Nombre d'essais : "+nbEssais);
     });
     $("#rtcp5").click(() => {
-        nbEssais = parseInt($("#rtcvalue").text()) +1;
+        let nbEssais = parseInt($("#rtcvalue").text()) +1;
         $("#rtcvalue").text(""+nbEssais);
 
         $("#attemptlabel").text("Nombre d'essais : "+nbEssais);
@@ -285,7 +285,8 @@ $(document).ready(async () => {
 
     $("#beginBtn").click(async () => {
         hideTime = parseInt($("#btcvalue").text());
-        showtime = parseInt($("#rtcvalue").text());
+        showtime = 5;
+        nbEssais = parseInt($("#rtcvalue").text());
         $("#nextVidBtn").hide();
         index = 0;
         timerStop = false;
