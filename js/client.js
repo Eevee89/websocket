@@ -111,6 +111,7 @@ conn.onmessage = async function(e) {
         $("#buzCont").hide();
         timerPaused = true;
         player.pauseVideo();
+        await delay(100);
         spl = msg["payload"].split(';');
         let ps = spl[0];
         let answ = spl[1];
@@ -140,6 +141,8 @@ conn.onmessage = async function(e) {
                     createPlayerItem(sortedPlayers[pseudo], pseudo);
                 }
                 timerStop = true;
+            } else {
+                await delay(100);
             }
             timerPaused = false;
         }
