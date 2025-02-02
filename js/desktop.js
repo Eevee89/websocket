@@ -442,6 +442,8 @@ $(document).ready(async () => {
     });
 
     $("#stopBtn").click(async () => {
+            player.pauseVideo();
+            await delay(100);
             timerStop = true;
             index = videosIds.length;
             $("#player").hide();
@@ -558,6 +560,7 @@ $(document).on("change", "input", function(event) {
             }
             $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
             $("#ttltlabel").text("Temps total : "+formatTime());
+            $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
           } catch (error) {
             new PNotify({
                 title: 'Erreur',
@@ -569,7 +572,6 @@ $(document).on("change", "input", function(event) {
         };
 
         reader.readAsText(file);
-        $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
     }
 });
 
