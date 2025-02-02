@@ -547,14 +547,14 @@ iframe {
     align-items: start;
 }
 
-#nextVidCont {
+#nextVidCont, #stopBTCont {
     height: 90%;
     aspect-ratio: 1;
     justify-self: end;
     align-self: flex-start;
 }
 
-#nextVidBtn {
+#nextVidBtn, #stopBtn {
     height: 100%;
     aspect-ratio: 1;
     border-radius: 50%;

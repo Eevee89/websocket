@@ -441,6 +441,44 @@ $(document).ready(async () => {
         }
     });
 
+    $("#stopBtn").click(async () => {
+            timerStop = true;
+            index = videosIds.length;
+            $("#player").hide();
+            const sortedPlayers = Object.entries(players) 
+                                        .sort((a, b) => b[1].score - a[1].score) 
+                                        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+            const best = Object.keys(sortedPlayers)[0];
+
+            alert("La partie est finie.\nLe joueur "+ best +" est le vainqueur");
+
+            msg = {
+                "room": room,
+                "type": "END GAME",
+                "payload": best
+            };
+            conn.send(JSON.stringify(msg));
+            $("#firstBtn").hide();
+            $("#prevBtn").hide();
+            $("#nextBtn").hide();
+            $("#lastBtn").hide();
+            $("#catForm").hide();
+            $("#urlForm").show();
+            $("#player").hide();
+            $("#testplayer").hide();
+            $("#beginBtn").hide();
+            $("#mainBody").show();
+            $("#gameBody").hide();
+
+            for (const p of Object.keys(players)) {
+                $("#"+p).remove();
+                $("#player"+p).remove();
+                players[p]["score"] = 0;
+            }
+
+            readies = 0;
+    });
+
     $('#fakeIframe').css("width", $('iframe').width() + 'px');
     $('#fakeIframe').css("height", $('iframe').height() + 'px');
 

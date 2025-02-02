@@ -111,6 +111,7 @@
                     <div id="player"></div>
                 </div>
                 <div id="optCont">
+                    <div id="stopBTCont"><button id="stopBtn"><img id="stopBtnImg" src="images/stop.png" srcset="images/stop.svg" title="STOP"></button></div>
                     <div id="customVideoTitle"><h3 id="customVideoTitleInnerText">TEST</h3></div>
                     <div id="catInfo"><h3 id="catInfoInnerText">TEST</h3></div>
                     <div id="nextVidCont"><button id="nextVidBtn"><img id="nextVidBtnImg" src="images/next.png" srcset="images/next.svg" title="Vidéo suivante"></button></div>
