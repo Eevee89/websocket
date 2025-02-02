@@ -73,14 +73,14 @@ $(document).ready(async () => {
     });
 
     $("#rtcm5").click(() => {
-        let nbEssais = parseInt($("#rtcvalue").text()) -1;
+        nbEssais = parseInt($("#rtcvalue").text()) -1;
         if (nbEssais < 1) nbEssais = 1;
         $("#rtcvalue").text(""+nbEssais);
 
         $("#attemptlabel").text("Nombre d'essais : "+nbEssais);
     });
     $("#rtcp5").click(() => {
-        let nbEssais = parseInt($("#rtcvalue").text()) +1;
+        nbEssais = parseInt($("#rtcvalue").text()) +1;
         $("#rtcvalue").text(""+nbEssais);
 
         $("#attemptlabel").text("Nombre d'essais : "+nbEssais);
