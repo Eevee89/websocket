@@ -48,7 +48,7 @@
                 </div>
                 <div id="playerControlPanel">
                     <div id="pcph">
-                        <h2>Liste des joueurs</h2>
+                        <h2 id="playerListLabel">Liste des joueurs</h2>
                     </div>
                     <div id="playerTiles">
                         
@@ -74,16 +74,16 @@
                         </div>
     
                         <div id="otherOpt">
-                            <img id="toggleBtn" class="svg" src="images/shown.png" srcset="images/shown.svg"/>
+                            <img id="toggleBtn" class="svg" src="images/shown.png" srcset="images/shown.svg" title="Montrer/cacher les vidéos"/>
     
-                            <img id="firstBtn" class="svg" src="images/first.png" srcset="images/first.svg"/>
-                            <img id="prevBtn" class="svg" src="images/up.png" srcset="images/up.svg"/>
-                            <img id="nextBtn" class="svg" src="images/down.png" srcset="images/down.svg"/>
-                            <img id="lastBtn" class="svg" src="images/last.png" srcset="images/last.svg"/>
+                            <img id="firstBtn" class="svg" src="images/first.png" srcset="images/first.svg" title="Mettre en premier"/>
+                            <img id="prevBtn" class="svg" src="images/up.png" srcset="images/up.svg" title="Mettre avant"/>
+                            <img id="nextBtn" class="svg" src="images/down.png" srcset="images/down.svg" title="Mettre après"/>
+                            <img id="lastBtn" class="svg" src="images/last.png" srcset="images/last.svg" title="Mettre en dernier"/>
 
-                            <img id="shuffleBtn" class="svg" src="images/shuffle.png" srcset="images/shuffle.svg"/>
-                            <img id="dwnldBtn" class="svg" src="images/download.png" srcset="images/download.svg"/>
-                            <img id="uploadBtn" class="svg" src="images/upload.png" srcset="images/upload.svg"/>
+                            <img id="shuffleBtn" class="svg" src="images/shuffle.png" srcset="images/shuffle.svg" title="Mélanger les vidéos"/>
+                            <img id="dwnldBtn" class="svg" src="images/download.png" srcset="images/download.svg" title="Sauvegarder"/>
+                            <img id="uploadBtn" class="svg" src="images/upload.png" srcset="images/upload.svg" title="Importer une playlist"/>
                             <input type="file" id="fileInput" accept=".json" style="display: none;">
                             <img id="deleteBtn" class="svg" src="images/delete.png" srcset="images/delete.svg" title="Supprimer tout"/>
                         </div>
@@ -113,7 +113,7 @@
                 <div id="optCont">
                     <div id="customVideoTitle"><h3 id="customVideoTitleInnerText">TEST</h3></div>
                     <div id="catInfo"><h3 id="catInfoInnerText">TEST</h3></div>
-                    <div id="nextVidCont"><button id="nextVidBtn"><img id="nextVidBtnImg" src="images/next.png" srcset="images/next.svg"></button></div>
+                    <div id="nextVidCont"><button id="nextVidBtn"><img id="nextVidBtnImg" src="images/next.png" srcset="images/next.svg" title="Vidéo suivante"></button></div>
                 </div>
             </div>
         

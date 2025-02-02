@@ -1,4 +1,4 @@
-let videosIds = []; // 'srhni4w2TbI', 'i8wghCdMncU'
+let videosIds = [];
 let rejectedIds = [];
 let selectedItem = null;
 let hideTime = 0;
@@ -6,7 +6,7 @@ let showTime = 0;
 let players = [];
 let readies = 0;
 let myPseudo = "";
-
+let langage = "fr";
 let connId = 0;
 let room = 0;
 let nbVids = 0;
@@ -15,10 +15,8 @@ let timerStop = false;
 var player;
 let videoId = "";
 let customTitle = "";
-
 let nbEssais = 3;
 let customNbEssais = 0;
-
 let customInfos = { };
 
 const delay = ms => new Promise(res => setTimeout(res, ms));

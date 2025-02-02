@@ -150,10 +150,10 @@ $(document).ready(async () => {
 
     $("#toggleBtn").click(() => {
         if ($("#toggleBtn").attr('src').includes("shown")) {
-            $("#toggleBtn").attr({src: "images/hidden.png", srcset: "images/hidden.svg"});
+            $("#toggleBtn").attr({src: "images/hidden.png", srcset: "images/hidden.svg", title: "Montrer les vidéos"});
         }
         else {
-            $("#toggleBtn").attr({src: "images/shown.png", srcset: "images/shown.svg"});
+            $("#toggleBtn").attr({src: "images/shown.png", srcset: "images/shown.svg", title: "Cacher les vidéos"});
         }
         $("#videoList").toggle();
     });
@@ -546,6 +546,7 @@ $(document).on("click", "li", function(event) {
     
 
     if (!isSelected) {
+        $("#deleteBtn").attr({title: "Supprimer la vidéo"});
         $(li[0]).addClass("selected");
         selectedItem = li[0].id;
 
@@ -566,6 +567,7 @@ $(document).on("click", "li", function(event) {
         $("#catInput").val("Catégorie : "+customInfos[selectedItem]["category"]);
     }
     else {
+        $("#deleteBtn").attr({title: "Supprimer toutes les vidéos"});
         $("#firstBtn").hide();
         $("#prevBtn").hide();
         $("#nextBtn").hide();
