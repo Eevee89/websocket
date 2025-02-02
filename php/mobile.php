@@ -54,7 +54,7 @@
         <div id="ansCont">
             <div id="thumbCont"><img id="thumb"/></div>
             <div style="width: 1px; height: 50px;"></div>
-            <h3 id="ansTitle"></h3>
+            <h3 id="ansTitle" style="text-align: center;"></h3>
         </div>
     </div>
 </body>
