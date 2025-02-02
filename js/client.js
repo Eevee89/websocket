@@ -64,7 +64,7 @@ conn.onmessage = async function(e) {
         pseudo = msg["payload"];
         removePlayer(pseudo);
         let nbPlayers = Object.keys(players).length; 
-        if (readies == nbPlayers && pnbPlayers >= 2 && videosIds.length > 1) {
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();

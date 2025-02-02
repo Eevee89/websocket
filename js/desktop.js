@@ -16,6 +16,12 @@ function onPlayerError(event) {
 }
 
 let index = 0;
+let isPlayerReady = false;
+
+function onPlayerReady(event) {
+    isPlayerReady = true;
+    console.log("ICI");
+}
 
 $(document).ready(async () => {
     $("#connBody").show();
@@ -286,6 +292,7 @@ $(document).ready(async () => {
         index = 0;
         timerStop = false;
         timerPaused = false;
+        isPlayerReady = false;
 
         for(const pseudo of Object.keys(players)) {
             createPlayerItem(players[pseudo], pseudo);
@@ -305,12 +312,13 @@ $(document).ready(async () => {
             width: '640',
             videoId: videosIds[index++],
             events: {
-              'onError': onPlayerError
+              'onError': onPlayerError,
+              'onReady': onPlayerReady
             }
         }
     
         player = new YT.Player('player', opt);
-        await delay(1000);
+        while (!isPlayerReady) { }
         conn.send(JSON.stringify(msg));
         $("#timer").show();
         $("#timer").click();
@@ -328,6 +336,7 @@ $(document).ready(async () => {
         }
     
         if (index < videosIds.length) {
+            isPlayerReady = false;
             msg = {
                 "room": room,
                 "type": "CONTINUE GAME",
@@ -339,7 +348,8 @@ $(document).ready(async () => {
                 width: '640',
                 videoId: videosIds[index++],
                 events: {
-                'onError': onPlayerError
+                    'onError': onPlayerError,
+                    'onReady': onPlayerReady
                 }
             }
         
@@ -351,7 +361,7 @@ $(document).ready(async () => {
             $("#fakeIframe").show();
             $("#playBtn").hide();
             $("#countdown").text(hideTime);
-            await delay(1000);
+            while (!isPlayerReady) { }
             conn.send(JSON.stringify(msg));
             $("#timer").click();
             $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
