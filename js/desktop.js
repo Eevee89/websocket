@@ -530,6 +530,7 @@ $(document).on("change", "input", function(event) {
         };
 
         reader.readAsText(file);
+        $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
     }
 });
 
