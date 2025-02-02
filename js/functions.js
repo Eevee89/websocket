@@ -16,7 +16,7 @@ var player;
 let videoId = "";
 let customTitle = "";
 
-let nbEssais = 0;
+let nbEssais = 3;
 let customNbEssais = 0;
 
 let customInfos = { };
