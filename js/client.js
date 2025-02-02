@@ -114,7 +114,6 @@ conn.onmessage = async function(e) {
         spl = msg["payload"].split(';');
         let ps = spl[0];
         let answ = spl[1];
-        await delay(100);
         if (videosIds.length != 0) { // Master of the game
             val = confirm(
                 "Le joueur "+ ps +" a buzzé !\n"+
@@ -141,8 +140,6 @@ conn.onmessage = async function(e) {
                     createPlayerItem(sortedPlayers[pseudo], pseudo);
                 }
                 timerStop = true;
-            } else {
-                await delay(100);
             }
             timerPaused = false;
         }
