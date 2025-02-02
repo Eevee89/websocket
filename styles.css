@@ -115,7 +115,6 @@ button {
     height: 5%;
     border-radius: 10px;
     border: 1px var(--bgc) solid;
-    cursor: pointer;
 }
 
 #colorBox {
@@ -618,8 +617,9 @@ iframe {
     }
 
     #rules {
-        width: 5%;
+        width: 10%;
         height: 4%;
+        cursor: pointer;
     }
 }
 
