@@ -300,6 +300,7 @@ $(document).ready(async () => {
         }
         customInfos[selectedItem]["category"] = $("#catInput").val();
         $("#catInput").val("");
+        $($("#"+selectedItem).children()[1]).click()
     });
 
     $("#beginBtn").click(async () => {
