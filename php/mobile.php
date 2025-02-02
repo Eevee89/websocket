@@ -7,7 +7,7 @@
             <button id="pseudoSubmit">Rejoindre</button>
         </div>
         <div id="sepconn" style="width: 1px; height: 20px;"></div>
-        <button id="rules">Règles</button>
+        <button id="rules">Comment jouer ?</button>
     </div>
 
     <div id="waitBody" class="fakeBody">
