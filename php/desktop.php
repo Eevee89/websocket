@@ -43,7 +43,7 @@
                     <div id="infos">
                         <h2 id="ttlmlabel">Nombre de musiques :</h2>
                         <h2 id="ttltlabel">Temps total :</h2>
-                        <h2 id="attemptlabel">Nombre d'essais :</h2>
+                        <h2 id="attemptlabel">Nombre d'essais : 3</h2>
                     </div>
                 </div>
                 <div id="playerControlPanel">

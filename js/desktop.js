@@ -74,7 +74,7 @@ $(document).ready(async () => {
 
     $("#rtcm5").click(() => {
         let nbEssais = parseInt($("#rtcvalue").text()) -1;
-        if (nbEssais < 0) nbEssais = 0;
+        if (nbEssais < 1) nbEssais = 1;
         $("#rtcvalue").text(""+nbEssais);
 
         $("#attemptlabel").text("Nombre d'essais : "+nbEssais);

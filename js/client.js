@@ -75,6 +75,7 @@ conn.onmessage = async function(e) {
         nbVids = parseInt(spl[0]);
         hideTime = parseInt(spl[1]);
         nbEssais = parseInt(spl[2]);
+        customNbEssais = nbEssais;
         customTitle = spl[3];
         videoId = spl[4];
         timerStop = false;
@@ -85,7 +86,7 @@ conn.onmessage = async function(e) {
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
-        if (nbEssais != 0) {
+        if (customNbEssais != 0) {
             $("#buzCont").show();
         }
         $("#mainMobile").show();
@@ -98,12 +99,13 @@ conn.onmessage = async function(e) {
         musicId = spl[0];
         customTitle = spl[1];
         videoId = spl[2];
+        customNbEssais = nbEssais;
         $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
         $("#countdown").text(hideTime);
         timerStop = false;
         timerPaused = false;
         $("#timer").show();
-        if(nbEssais != 0) {
+        if(customNbEssais != 0) {
             $("#buzCont").show();
         }
         $("#mainMobile").show();
@@ -156,7 +158,7 @@ conn.onmessage = async function(e) {
             timerStop = true;
         }
         timerPaused = false;
-        if (nbEssais != 0) {
+        if (customNbEssais != 0) {
             $("#buzCont").show();
         }
     }

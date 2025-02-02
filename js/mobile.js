@@ -86,7 +86,7 @@ $(document).ready(async () => {
     });
 
     $("#buzBtn").click(() => {
-        if (nbEssais != 0) {
+        if (customNbEssais != 0) {
             let answ = $("#answerInput").val() ?? "";
             if (!verifyInput(answ, "Answer")) {
                 new PNotify({
@@ -105,7 +105,7 @@ $(document).ready(async () => {
                 "payload": answ
             };
             conn.send(JSON.stringify(msg));
-            nbEssais -= 1;
+            customNbEssais -= 1;
         }
     });
 });
