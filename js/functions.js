@@ -16,6 +16,8 @@ var player;
 let videoId = "";
 let customTitle = "";
 
+let nbEssais = 3;
+
 let customInfos = { };
 
 const delay = ms => new Promise(res => setTimeout(res, ms));

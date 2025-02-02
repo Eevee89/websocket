@@ -79,13 +79,16 @@ conn.onmessage = async function(e) {
         videoId = spl[4];
         timerStop = false;
         timerPaused = false;
+        nbEssais = 3;
         $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
 
         $("#waitBody").hide();
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
-        $("#buzCont").show();
+        if (nbEssais != 0) {
+            $("#buzCont").show();
+        }
         $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
@@ -100,8 +103,11 @@ conn.onmessage = async function(e) {
         $("#countdown").text(hideTime);
         timerStop = false;
         timerPaused = false;
+        nbEssais = 3;
         $("#timer").show();
-        $("#buzCont").show();
+        if(nbEssais != 0) {
+            $("#buzCont").show();
+        }
         $("#mainMobile").show();
         $("#ansCont").hide();
         $("#timer").click();
@@ -152,7 +158,9 @@ conn.onmessage = async function(e) {
             timerStop = true;
         }
         timerPaused = false;
-        $("#buzCont").show();
+        if (nbEssais != 0) {
+            $("#buzCont").show();
+        }
     }
     else if (msg["type"] == "END GAME") {
         let alertMsg;
