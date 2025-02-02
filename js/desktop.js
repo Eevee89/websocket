@@ -73,17 +73,18 @@ $(document).ready(async () => {
     });
 
     $("#rtcm5").click(() => {
-        let revealtime = parseInt($("#rtcvalue").text()) -5;
-        if (revealtime < 0) revealtime = 0;
-        $("#rtcvalue").text(""+revealtime);
+        let nbEssais = parseInt($("#rtcvalue").text()) -1;
+        if (nbEssais < 0) nbEssais = 0;
+        $("#rtcvalue").text(""+nbEssais);
 
-        $("#ttltlabel").text("Temps total : "+formatTime());
+        $("#attemptlabel").text("Nombre d'essais : "+nbEssais);
     });
     $("#rtcp5").click(() => {
-        let revealtime = parseInt($("#rtcvalue").text()) +5;
-        $("#rtcvalue").text(""+revealtime);
+        let nbEssais = parseInt($("#rtcvalue").text()) +1;
+        if (nbEssais < 0) nbEssais = 0;
+        $("#rtcvalue").text(""+nbEssais);
 
-        $("#ttltlabel").text("Temps total : "+formatTime());
+        $("#attemptlabel").text("Nombre d'essais : "+nbEssais);
     });
 
     $("#addBtn").click(async () => {
@@ -302,7 +303,7 @@ $(document).ready(async () => {
         msg = {
             "room": room,
             "type": "BEGIN GAME",
-            "payload": videosIds.length+";"+hideTime+";"+showtime+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+            "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
         };
         var opt = {
             height: '360',

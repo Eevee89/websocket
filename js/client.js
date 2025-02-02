@@ -74,12 +74,11 @@ conn.onmessage = async function(e) {
         spl = msg["payload"].split(';');
         nbVids = parseInt(spl[0]);
         hideTime = parseInt(spl[1]);
-        showTime = parseInt(spl[2]);
+        nbEssais = parseInt(spl[2]);
         customTitle = spl[3];
         videoId = spl[4];
         timerStop = false;
         timerPaused = false;
-        nbEssais = 3;
         $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
 
         $("#waitBody").hide();
@@ -103,7 +102,6 @@ conn.onmessage = async function(e) {
         $("#countdown").text(hideTime);
         timerStop = false;
         timerPaused = false;
-        nbEssais = 3;
         $("#timer").show();
         if(nbEssais != 0) {
             $("#buzCont").show();
