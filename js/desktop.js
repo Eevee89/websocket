@@ -290,7 +290,6 @@ $(document).ready(async () => {
         index = 0;
         timerStop = false;
         timerPaused = false;
-        isPlayerReady = false;
 
         for(const pseudo of Object.keys(players)) {
             createPlayerItem(players[pseudo], pseudo);
@@ -343,7 +342,6 @@ $(document).ready(async () => {
         }
     
         if (index < videosIds.length) {
-            isPlayerReady = false;
             msg = {
                 "room": room,
                 "type": "CONTINUE GAME",
