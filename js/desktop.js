@@ -16,11 +16,9 @@ function onPlayerError(event) {
 }
 
 let index = 0;
-let isPlayerReady = false;
 
-function onPlayerReady(event) {
-    isPlayerReady = true;
-    console.log("ICI");
+function isPlayerReady() {
+    return player && player.getPlayerState() !== -1; 
 }
 
 $(document).ready(async () => {
@@ -312,18 +310,27 @@ $(document).ready(async () => {
             width: '640',
             videoId: videosIds[index++],
             events: {
-              'onError': onPlayerError,
-              'onReady': onPlayerReady
+              'onError': onPlayerError
             }
         }
     
         player = new YT.Player('player', opt);
-        while (!isPlayerReady) { }
-        conn.send(JSON.stringify(msg));
-        $("#timer").show();
-        $("#timer").click();
-        $("#catInfo").show();
-        $("#progressLbl").text("Musique 01/" + zeroPad(videosIds.length, 2));
+
+        new Promise((resolve) => {
+            const checkReadyInterval = setInterval(() => {
+                if (isPlayerReady()) {
+                    clearInterval(checkReadyInterval);
+                    resolve();
+                }
+            }, 100); 
+        }).then(() => {
+            // Player is ready with the new video
+            conn.send(JSON.stringify(msg));
+            $("#timer").show();
+            $("#timer").click();
+            $("#catInfo").show();
+            $("#progressLbl").text("Musique 01/" + zeroPad(videosIds.length, 2));
+        });
     });
 
     $("#nextVidBtn").click(async () => {
@@ -348,8 +355,7 @@ $(document).ready(async () => {
                 width: '640',
                 videoId: videosIds[index++],
                 events: {
-                    'onError': onPlayerError,
-                    'onReady': onPlayerReady
+                    'onError': onPlayerError
                 }
             }
         
@@ -361,12 +367,22 @@ $(document).ready(async () => {
             $("#fakeIframe").show();
             $("#playBtn").hide();
             $("#countdown").text(hideTime);
-            while (!isPlayerReady) { }
-            conn.send(JSON.stringify(msg));
-            $("#timer").click();
-            $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
-            $("#catInfo").show();
-            $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
+
+            new Promise((resolve) => {
+                const checkReadyInterval = setInterval(() => {
+                    if (isPlayerReady()) {
+                        clearInterval(checkReadyInterval);
+                        resolve();
+                    }
+                }, 100); 
+            }).then(() => {
+                // Player is ready with the new video
+                conn.send(JSON.stringify(msg));
+                $("#timer").click();
+                $("#catInfoInnerText").text("Catégorie : "+customInfos[videosIds[index-1]]["category"]);
+                $("#catInfo").show();
+                $("#progressLbl").text("Musique " + zeroPad(index, 2) + "/" + zeroPad(videosIds.length, 2));
+            });
         }
         else {
             $("#player").hide();
