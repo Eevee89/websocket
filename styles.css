@@ -622,3 +622,7 @@ iframe {
         height: 4%;
     }
 }
+
+.wip {
+    cursor: progress;
+}

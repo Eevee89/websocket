@@ -89,6 +89,15 @@ $(document).ready(async () => {
     $("#addBtn").click(async () => {
         let url = $("#urlInput").val();
         $("#urlInput").val("");
+        for (const elt of $("#urlForm").children()) {
+            $(elt).addClass("wip");
+        }
+        for (const elt of $("#catForm").children()) {
+            $(elt).addClass("wip");
+        }
+        for (const elt of $("#otherOpt").children()) {
+            $(elt).addClass("wip");
+        }
         let id = getYoutubeId(url);
         let cont = true;
         if (id && !videosIds.includes(id) && !rejectedIds.includes(id)) {
@@ -146,6 +155,15 @@ $(document).ready(async () => {
         }
 
         selectedItem = null;
+        for (const elt of $("#urlForm").children()) {
+            $(elt).removeClass("wip");
+        }
+        for (const elt of $("#catForm").children()) {
+            $(elt).removeClass("wip");
+        }
+        for (const elt of $("#otherOpt").children()) {
+            $(elt).removeClass("wip");
+        }
         $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
     });
 
