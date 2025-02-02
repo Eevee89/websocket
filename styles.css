@@ -79,6 +79,10 @@ h1, h2, h3, h4, h5, h6, p {
     align-items: center;
 }
 
+button {
+    cursor: pointer;
+}
+
 #connBox, #buzCont {
     display: flex;
     flex-direction: column;
@@ -103,6 +107,7 @@ h1, h2, h3, h4, h5, h6, p {
     height: 20%;
     border-radius: 10px;
     border: 1px var(--bgc) solid;
+    cursor: pointer;
 }
 
 #rules {
@@ -110,6 +115,7 @@ h1, h2, h3, h4, h5, h6, p {
     height: 5%;
     border-radius: 10px;
     border: 1px var(--bgc) solid;
+    cursor: pointer;
 }
 
 #colorBox {
@@ -358,6 +364,7 @@ li {
     align-items: center;
     border-radius: 10px;
     background-color: var(--videoTile-bgc);
+    cursor: pointer;
 }
 
 li:not(:last-child) { 
@@ -375,6 +382,7 @@ li input {
     color: #AAA;
     font-weight: bold;
     font-size: 1.5rem;
+    cursor: text;
 }
 
 .videoInfo {

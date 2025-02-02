@@ -12,7 +12,7 @@
     <div id="mainBody" class="fakeBody">
         <div id="header">
             <h1 id="roomId">Room 00000</h1>
-            <h1 id="beginBtn">Commencer</h1>
+            <h1 id="beginBtn" style="cursor: pointer;">Commencer</h1>
         </div>
     
         <div id="testplayer" hidden></div>

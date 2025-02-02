@@ -146,6 +146,7 @@ $(document).ready(async () => {
         }
 
         selectedItem = null;
+        $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
     });
 
     $("#toggleBtn").click(() => {
