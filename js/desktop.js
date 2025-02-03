@@ -18,6 +18,7 @@ function onPlayerError(event) {
 let index = 0;
 
 function isPlayerReady() {
+    console.log(player);
     return player && player.getPlayerState() !== -1; 
 }
 
