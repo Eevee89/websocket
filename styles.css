@@ -429,6 +429,14 @@ li input {
     padding: 10px;
 }
 
+#subRightPanel {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
 #timeControlPanel {
     width: calc(50% - 15px);
     height: 100%;
