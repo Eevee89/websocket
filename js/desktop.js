@@ -338,6 +338,8 @@ $(document).ready(async () => {
               'onError': onPlayerError
             }
         }
+
+        console.table(opt);
     
         player = new YT.Player('player', opt);
 
