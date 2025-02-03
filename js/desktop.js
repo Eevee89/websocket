@@ -166,6 +166,7 @@ $(document).ready(async () => {
         }
         $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
 
+        let nbPlayers = Object.keys(players).length;
         if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
         } else {
@@ -215,6 +216,7 @@ $(document).ready(async () => {
     $("#uploadBtn").click(() => {
         $("#fileInput").click();
 
+        let nbPlayers = Object.keys(players).length;
         if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
             $("#beginBtn").show();
         } else {
