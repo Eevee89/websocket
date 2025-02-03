@@ -227,7 +227,7 @@ button {
 /*#region: Left Panel */
 
 #leftPanel {
-    width: 80%;
+    width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -310,7 +310,7 @@ button {
 /*#region: Right Panel */
 
 #rightPanel {
-    width: 20%;
+    width: 50%;
     height: calc(100% - 20px);
     display: flex;
     flex-direction: column;

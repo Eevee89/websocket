@@ -19,6 +19,41 @@
     
         <div id="main">
             <div id="leftPanel">
+                <div id="subRightPanel" class="box">
+                    <div id="videoListCont">
+                        <ul id="videoList">
+                        </ul>
+                    </div>
+                    <div id="listControlPanel">
+                        <div id="urlForm">
+                            <input id="urlInput" type="text" placeholder="Entrez une url Youtube"/>
+                            <button id="addBtn"><strong><h1>+</h1></strong></button>
+                        </div>
+    
+                        <div id="catForm">
+                            <input id="catInput" type="text" placeholder="Entrez la categorie"/>
+                            <button id="catBtn"><strong><h1>&#x2714;</h1></strong></button>
+                        </div>
+    
+                        <div id="otherOpt">
+                            <img id="toggleBtn" class="svg" src="images/shown.png" srcset="images/shown.svg" title="Montrer/cacher les vidéos"/>
+    
+                            <img id="firstBtn" class="svg" src="images/first.png" srcset="images/first.svg" title="Mettre en premier"/>
+                            <img id="prevBtn" class="svg" src="images/up.png" srcset="images/up.svg" title="Mettre avant"/>
+                            <img id="nextBtn" class="svg" src="images/down.png" srcset="images/down.svg" title="Mettre après"/>
+                            <img id="lastBtn" class="svg" src="images/last.png" srcset="images/last.svg" title="Mettre en dernier"/>
+
+                            <img id="shuffleBtn" class="svg" src="images/shuffle.png" srcset="images/shuffle.svg" title="Mélanger les vidéos"/>
+                            <img id="dwnldBtn" class="svg" src="images/download.png" srcset="images/download.svg" title="Sauvegarder"/>
+                            <img id="uploadBtn" class="svg" src="images/upload.png" srcset="images/upload.svg" title="Importer une playlist"/>
+                            <input type="file" id="fileInput" accept=".json" style="display: none;">
+                            <img id="deleteBtn" class="svg" src="images/delete.png" srcset="images/delete.svg" title="Supprimer tout"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div id="rightPanel">
                 <div id="timeControlPanel">
                     <div id="hideTimeControl" class="box">
                         <h3 id="hideTimeControlLabel">Temps pour deviner (sec.)</h3>
@@ -52,41 +87,6 @@
                     </div>
                     <div id="playerTiles">
                         
-                    </div>
-                </div>
-            </div>
-        
-            <div id="rightPanel">
-                <div id="subRightPanel" class="box">
-                    <div id="videoListCont">
-                        <ul id="videoList">
-                        </ul>
-                    </div>
-                    <div id="listControlPanel">
-                        <div id="urlForm">
-                            <input id="urlInput" type="text" placeholder="Entrez une url Youtube"/>
-                            <button id="addBtn"><strong><h1>+</h1></strong></button>
-                        </div>
-    
-                        <div id="catForm">
-                            <input id="catInput" type="text" placeholder="Entrez la categorie"/>
-                            <button id="catBtn"><strong><h1>&#x2714;</h1></strong></button>
-                        </div>
-    
-                        <div id="otherOpt">
-                            <img id="toggleBtn" class="svg" src="images/shown.png" srcset="images/shown.svg" title="Montrer/cacher les vidéos"/>
-    
-                            <img id="firstBtn" class="svg" src="images/first.png" srcset="images/first.svg" title="Mettre en premier"/>
-                            <img id="prevBtn" class="svg" src="images/up.png" srcset="images/up.svg" title="Mettre avant"/>
-                            <img id="nextBtn" class="svg" src="images/down.png" srcset="images/down.svg" title="Mettre après"/>
-                            <img id="lastBtn" class="svg" src="images/last.png" srcset="images/last.svg" title="Mettre en dernier"/>
-
-                            <img id="shuffleBtn" class="svg" src="images/shuffle.png" srcset="images/shuffle.svg" title="Mélanger les vidéos"/>
-                            <img id="dwnldBtn" class="svg" src="images/download.png" srcset="images/download.svg" title="Sauvegarder"/>
-                            <img id="uploadBtn" class="svg" src="images/upload.png" srcset="images/upload.svg" title="Importer une playlist"/>
-                            <input type="file" id="fileInput" accept=".json" style="display: none;">
-                            <img id="deleteBtn" class="svg" src="images/delete.png" srcset="images/delete.svg" title="Supprimer tout"/>
-                        </div>
                     </div>
                 </div>
             </div>
