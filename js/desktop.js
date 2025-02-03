@@ -165,6 +165,12 @@ $(document).ready(async () => {
             $(elt).removeClass("wip");
         }
         $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
+
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
+            $("#beginBtn").show();
+        } else {
+            $("#beginBtn").hide();
+        }
     });
 
     $("#toggleBtn").click(() => {
@@ -208,6 +214,12 @@ $(document).ready(async () => {
 
     $("#uploadBtn").click(() => {
         $("#fileInput").click();
+
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
+            $("#beginBtn").show();
+        } else {
+            $("#beginBtn").hide();
+        }
     });
 
     $("#deleteBtn").click(() => {
@@ -235,6 +247,12 @@ $(document).ready(async () => {
             $("li").remove();
             $("#ttlmlabel").text("Nombre de musiques : 0");
             $("#ttltlabel").text("Temps total : 0");
+        }
+
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
+            $("#beginBtn").show();
+        } else {
+            $("#beginBtn").hide();
         }
     });
 
