@@ -167,7 +167,7 @@ $(document).ready(async () => {
         $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
 
         let nbPlayers = Object.keys(players).length;
-        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 0) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();
@@ -217,7 +217,7 @@ $(document).ready(async () => {
         $("#fileInput").click();
 
         let nbPlayers = Object.keys(players).length;
-        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 0) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();
@@ -251,7 +251,8 @@ $(document).ready(async () => {
             $("#ttltlabel").text("Temps total : 0");
         }
 
-        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 1) {
+        let nbPlayers = Object.keys(players).length;
+        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 0) {
             $("#beginBtn").show();
         } else {
             $("#beginBtn").hide();
