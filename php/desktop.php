@@ -56,7 +56,7 @@
             <div id="rightPanel">
                 <div id="timeControlPanel">
                     <div id="hideTimeControl" class="box">
-                        <h3 id="hideTimeControlLabel">Temps pour deviner (sec.)</h3>
+                        <h2 id="hideTimeControlLabel">Temps pour deviner (sec.)</h2>
                         <div class="sep"></div>
                         <div class="buttons">
                             <button id="btcm5"><strong><h2>-</h2></strong></button>
@@ -66,7 +66,7 @@
                     </div>
     
                     <div id="showTimeControl" class="box">
-                        <h3 id="showTimeControlLabel">Nombre d'essais/musique</h3>
+                        <h2 id="showTimeControlLabel">Nombre d'essais/musique</h2>
                         <div class="sep"></div>
                         <div class="buttons">
                             <button id="rtcm5"><strong><h2>-</h2></strong></button>
@@ -76,9 +76,9 @@
                     </div>
     
                     <div id="infos">
-                        <h3 id="ttlmlabel">Nombre de musiques :</h3>
-                        <h3 id="ttltlabel">Temps total :</h3>
-                        <h3 id="attemptlabel">Nombre d'essais : 3</h3>
+                        <h2 id="ttlmlabel">Nombre de musiques :</h2>
+                        <h2 id="ttltlabel">Temps total :</h2>
+                        <h2 id="attemptlabel">Nombre d'essais : 3</h2>
                     </div>
                 </div>
                 <div id="playerControlPanel">
