@@ -464,7 +464,9 @@ $(document).ready(async () => {
     });
 
     $("#stopBtn").click(async () => {
-            player.pauseVideo();
+            player.stopVideo();
+            player.destroy();
+            player = null;
             await delay(100);
             timerStop = true;
             index = videosIds.length;
