@@ -321,19 +321,10 @@ $(document).ready(async () => {
         hideTime = parseInt($("#btcvalue").text());
         showtime = 5;
         nbEssais = parseInt($("#rtcvalue").text());
-        $("#nextVidBtn").hide();
         index = 0;
         timerStop = false;
         timerPaused = false;
 
-        for(const pseudo of Object.keys(players)) {
-            createPlayerItem(players[pseudo], pseudo);
-        }
-        $("#countdown").text(hideTime);
-        $("#mainBody").hide();
-        $("#gameBody").show();
-        $("#customVideoTitle").hide();
-        $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
         msg = {
             "room": room,
             "type": "BEGIN GAME",
@@ -359,6 +350,18 @@ $(document).ready(async () => {
             }, 100); 
         }).then(() => {
             // Player is ready with the new video
+            $("#nextVidBtn").hide();
+            for(const pseudo of Object.keys(players)) {
+                createPlayerItem(players[pseudo], pseudo);
+            }
+            player.unMute();
+            player.setVolume(100);
+            $("#countdown").text(hideTime);
+            $("#mainBody").hide();
+            $("#gameBody").show();
+            $("#player").hide();
+            $("#customVideoTitle").hide();
+            $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
             conn.send(JSON.stringify(msg));
             $("#timer").show();
             $("#timer").click();
@@ -393,13 +396,6 @@ $(document).ready(async () => {
             }
         
             player = new YT.Player('player', opt);
-            timerStop = false;
-            timerPaused = false;
-            $("#player").hide();
-            $("#customVideoTitle").hide();
-            $("#fakeIframe").show();
-            $("#playBtn").hide();
-            $("#countdown").text(hideTime);
 
             new Promise((resolve) => {
                 const checkReadyInterval = setInterval(() => {
@@ -410,6 +406,15 @@ $(document).ready(async () => {
                 }, 100); 
             }).then(async () => {
                 // Player is ready with the new video
+                timerStop = false;
+                timerPaused = false;
+                $("#player").hide();
+                player.unMute();
+                player.setVolume(100);
+                $("#customVideoTitle").hide();
+                $("#fakeIframe").show();
+                $("#playBtn").hide();
+                $("#countdown").text(hideTime);
                 conn.send(JSON.stringify(msg));
                 await delay(100);
                 $("#timer").click();
