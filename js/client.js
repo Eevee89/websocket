@@ -163,6 +163,7 @@ conn.onmessage = async function(e) {
         }
     }
     else if (msg["type"] == "END GAME") {
+        timerStop = true;
         let alertMsg;
         if (msg["payload"] == myPseudo) {
             alertMsg = "La partie est finie, vous avez gagné !";
