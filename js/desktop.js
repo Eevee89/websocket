@@ -18,7 +18,6 @@ function onPlayerError(event) {
 let index = 0;
 
 function isPlayerReady() {
-    console.log(player);
     return player && player.getPlayerState() !== -1; 
 }
 
@@ -339,8 +338,6 @@ $(document).ready(async () => {
               'onError': onPlayerError
             }
         }
-
-        console.table(opt);
     
         player = new YT.Player('player', opt);
 
@@ -362,6 +359,7 @@ $(document).ready(async () => {
             $("#countdown").text(hideTime);
             $("#mainBody").hide();
             $("#gameBody").show();
+            $("#fakeIframe").hide();
             $("#player").hide();
             $("#customVideoTitle").hide();
             $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
