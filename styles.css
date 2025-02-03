@@ -415,8 +415,8 @@ li input {
 }
 
 #hideTimeControl, #showTimeControl {
-    width: 25%;
-    height: 80%;
+    width: 100%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -426,8 +426,8 @@ li input {
 }
 
 #infos {
-    width: 25%;
-    height: 80%;
+    width: 100%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
