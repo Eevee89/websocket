@@ -21,29 +21,29 @@
             <div id="leftPanel">
                 <div id="timeControlPanel">
                     <div id="hideTimeControl" class="box">
-                        <h2 id="hideTimeControlLabel">Temps pour deviner (sec.)</h2>
+                        <h3 id="hideTimeControlLabel">Temps pour deviner (sec.)</h3>
                         <div class="sep"></div>
                         <div class="buttons">
-                            <button id="btcm5"><strong><h1>-</h1></strong></button>
+                            <button id="btcm5"><strong><h2>-</h2></strong></button>
                             <h2 id="btcvalue">15</h2>
-                            <button id="btcp5"><strong><h1>+</h1></strong></button>
+                            <button id="btcp5"><strong><h2>+</h2></strong></button>
                         </div>
                     </div>
     
                     <div id="showTimeControl" class="box">
-                        <h2 id="showTimeControlLabel">Nombre d'essais/musique</h2>
+                        <h3 id="showTimeControlLabel">Nombre d'essais/musique</h3>
                         <div class="sep"></div>
                         <div class="buttons">
-                            <button id="rtcm5"><strong><h1>-</h1></strong></button>
+                            <button id="rtcm5"><strong><h2>-</h2></strong></button>
                             <h2 id="rtcvalue">3</h2>
-                            <button id="rtcp5"><strong><h1>+</h1></strong></button>
+                            <button id="rtcp5"><strong><h2>+</h2></strong></button>
                         </div>
                     </div>
     
                     <div id="infos">
-                        <h2 id="ttlmlabel">Nombre de musiques :</h2>
-                        <h2 id="ttltlabel">Temps total :</h2>
-                        <h2 id="attemptlabel">Nombre d'essais : 3</h2>
+                        <h3 id="ttlmlabel">Nombre de musiques :</h3>
+                        <h3 id="ttltlabel">Temps total :</h3>
+                        <h3 id="attemptlabel">Nombre d'essais : 3</h3>
                     </div>
                 </div>
                 <div id="playerControlPanel">
