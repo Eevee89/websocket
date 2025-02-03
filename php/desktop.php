@@ -19,7 +19,7 @@
     
         <div id="main">
             <div id="leftPanel">
-                <div id="subRightPanel" class="box">
+                <div id="subLeftPanel" class="box">
                     <div id="videoListCont">
                         <ul id="videoList">
                         </ul>
