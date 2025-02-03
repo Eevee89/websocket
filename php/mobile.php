@@ -57,6 +57,9 @@
             <h3 id="ansTitle" style="text-align: center;"></h3>
         </div>
     </div>
+
+    <div style="display: none;">
+    </div>
 </body>
 
 <script src="js/mobile.js"></script>
