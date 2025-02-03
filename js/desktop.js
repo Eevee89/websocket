@@ -215,13 +215,6 @@ $(document).ready(async () => {
 
     $("#uploadBtn").click(() => {
         $("#fileInput").click();
-
-        let nbPlayers = Object.keys(players).length;
-        if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 0) {
-            $("#beginBtn").show();
-        } else {
-            $("#beginBtn").hide();
-        }
     });
 
     $("#deleteBtn").click(() => {
@@ -582,6 +575,13 @@ $(document).on("change", "input", function(event) {
             $("#ttlmlabel").text("Nombre de musiques : "+videosIds.length);
             $("#ttltlabel").text("Temps total : "+formatTime());
             $("#videoList").animate({scrollTop: $("#videoList")[0].scrollHeight}, 1000);
+
+            let nbPlayers = Object.keys(players).length;
+            if (readies == nbPlayers && nbPlayers >= 2 && videosIds.length > 0) {
+                $("#beginBtn").show();
+            } else {
+                $("#beginBtn").hide();
+            }
           } catch (error) {
             new PNotify({
                 title: 'Erreur',
