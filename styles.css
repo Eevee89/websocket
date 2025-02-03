@@ -465,9 +465,8 @@ li input {
 }
 
 .playerTile {
-    flex: 0 0 25%;
-    width: 20%;
-    height: 50px;
+    width: 100%;
+    height: calc(inherit + 10px);
     display: flex;
     flex-direction: column;
     justify-content: center;
