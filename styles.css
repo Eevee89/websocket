@@ -580,7 +580,7 @@ iframe {
 }
 
 #nextVidCont, #stopBTCont {
-    height: 90%;
+    height: 80%;
     aspect-ratio: 1;
     justify-self: end;
     align-self: flex-start;
