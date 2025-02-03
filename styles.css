@@ -241,6 +241,16 @@ button {
     padding: 10px;
 }
 
+#leftPanel2 {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 20px;
+    padding: 10px;
+}
+
 #subLeftPanel {
     width: calc(100% - 20px);
     height: calc(100% - 20px);
@@ -404,6 +414,16 @@ li input {
     height: calc(100% - 20px);
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#rightPanel2 {
+    width: 20%;
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;

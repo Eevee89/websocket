@@ -100,7 +100,7 @@
         </div>
     
         <div id="main">
-            <div id="leftPanel">
+            <div id="leftPanel2">
                 <div id="videoCont">
                     <div id="fakeIframe">
                         <div id="timer">
@@ -118,7 +118,7 @@
                 </div>
             </div>
         
-            <div id="rightPanel">
+            <div id="rightPanel2">
                 <div id="subRightPanel" class="box">
                     <div id="playerListCont">
                         <ul id="playerList">
