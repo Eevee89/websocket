@@ -47,7 +47,7 @@
             <div style="width: 1px; height: 20px;"></div>
             <div id="buzCont" class="box">
                 <input type="text" id="answerInput" name="answer" placeholder="Entrez votre réponse"/>
-                <button id="buzBtn">Buzzer</button>
+                <button id="buzBtn"><strong>Buzzer</strong></button>
             </div>
         </div>
 

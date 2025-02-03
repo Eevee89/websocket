@@ -359,7 +359,7 @@ $(document).ready(async () => {
             $("#countdown").text(hideTime);
             $("#mainBody").hide();
             $("#gameBody").show();
-            $("#fakeIframe").hide();
+            $("#fakeIframe").show();
             $("#player").hide();
             $("#customVideoTitle").hide();
             $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
