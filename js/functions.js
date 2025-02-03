@@ -119,7 +119,7 @@ async function createVideoItem(item, index) {
     });
     const videoInfo = $('<div>').addClass('videoInfo');
     const imageContainer = $('<div>').addClass('imgCont');
-    const image = $('<img>').attr({ id: item, src: "https://img.youtube.com/vi/"+item+"/default.jpg", alt: 'Not implemented' });
+    const image = $('<img>').attr({ id: item, src: "https://img.youtube.com/vi/"+item+"/mqdefault.jpg", alt: 'Not implemented' });
     const titleElement = $('<h3>').text(videoTitle);
 
     imageContainer.append(image);
