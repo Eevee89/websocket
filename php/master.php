@@ -109,7 +109,7 @@
     <div id="gameBody" class="fakeBody">
         <div id="header">
             <h1 id="roomId2">Room 00000</h1>
-            <h1 id="progressLbl">Musique 01/20</h1>
+            <h1 id="progressLbl" style="text-align: right;">Musique 01/20</h1>
         </div>
     
         <div id="main">
