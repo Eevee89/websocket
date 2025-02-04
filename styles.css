@@ -632,7 +632,7 @@ iframe {
 }
 
 #nextVidCont, #stopBTCont {
-    height: 80%;
+    height: 60%;
     aspect-ratio: 1;
     justify-self: end;
     align-self: flex-start;
@@ -811,6 +811,10 @@ iframe {
 
     #thumb {
         width: auto;
+        height: 80%;
+    }
+
+    #nextVidCont, #stopBTCont {
         height: 80%;
     }
 
