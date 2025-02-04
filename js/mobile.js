@@ -79,7 +79,7 @@ $(document).ready(async () => {
         var soundclick = document.getElementById(sound+"Audio");
         soundclick.play();
         buzzerSound = sound+"Audio";
-        let number = sounds.indexof(sound);
+        let number = sounds.indexOf(sound);
         $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
         $("#buzzerSoundInfo").show();
     });
