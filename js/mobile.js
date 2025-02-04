@@ -82,7 +82,7 @@ $(document).ready(async () => {
             let sound = event.target.id;
             var soundclick = document.getElementById(sound+"Audio");
             buzzerSound = sound+"Audio";
-            let number = sounds.indexOf(sound);
+            let number = sounds.indexOf(sound)+1;
             $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
             $("#buzzerSoundInfo").show();
             soundclick.play();
@@ -92,7 +92,7 @@ $(document).ready(async () => {
     });
 
     $("#readyBtn").click(() => {
-        $("#readyBtn").hide();
+        $("#clearready").hide();
         hex = $("#readyBtn").css("border-color");
         msg = {
             "room": room,

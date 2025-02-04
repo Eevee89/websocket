@@ -177,7 +177,7 @@ conn.onmessage = async function(e) {
         $("#buzBtn").hide();
         $("#waitBody").show();
         $("#gameBody").hide();
-        $("#readyBtn").show();
+        $("#clearready").show();
     }
 
     return false;
