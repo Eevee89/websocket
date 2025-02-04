@@ -33,7 +33,6 @@ $_SESSION["LOGGED"] = false;
     <div id="connBody" class="fakeBody">
         <p id="notconnected" style="color: red;"> Erreur de connexion au serveur </p>
         <form id="connBox" class="box" method="POST" action="">
-            <input type="text" id="pseudoInput" name="pseudo" placeholder="Entrez votre pseudo"/>
             <div id="connBtns">
                 <input type="submit" name="action" id="createRoom" value="Créer"/> 
                 <input type="submit" name="action" id="joinRoom" value="Rejoindre"/>
