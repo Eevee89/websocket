@@ -176,6 +176,10 @@ button {
     cursor: pointer;
 }
 
+#soundList {
+    display: none;
+}
+
 .waitmenuselected {
     background-color: #555;
 }
@@ -716,6 +720,10 @@ iframe {
     .colorTile, .soundTile {
         width: auto;
         height: 31%;
+    }
+        
+    #soundList {
+        display: flex;
     }
 }
 
