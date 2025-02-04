@@ -18,6 +18,7 @@ let customTitle = "";
 let nbEssais = 3;
 let customNbEssais = 0;
 let customInfos = { };
+let buzzerSound = "";
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -255,7 +256,7 @@ function createColorItem(name, hex) {
 function createSoundItem(name, index) {
     const sound = $('<div>').attr({id: name});
     $(sound).addClass("soundTile");
-    const stext = $('<h3>').text(index);
+    const stext = $('<h3>').text(index+1);
     $(stext).attr({id: name});
     $(sound).append(stext);
 

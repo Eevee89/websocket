@@ -175,7 +175,10 @@ button {
     border-radius: 50%;
     aspect-ratio: 1;
     background-color: #555;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #readyBtn {

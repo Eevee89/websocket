@@ -78,6 +78,7 @@ $(document).ready(async () => {
         let sound = event.target.id;
         var soundclick = document.getElementById(sound+"Audio");
         soundclick.play();
+        buzzerSound = sound+"Audio";
     });
 
     $("#readyBtn").click(() => {
@@ -137,6 +138,8 @@ $(document).ready(async () => {
                 "payload": answ
             };
             conn.send(JSON.stringify(msg));
+            var soundclick = document.getElementById(sound+"Audio");
+            soundclick.play();
             customNbEssais -= 1;
         }
     });
