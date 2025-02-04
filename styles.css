@@ -498,7 +498,7 @@ li input {
 
 #timeControlPanel {
     width: calc(100% - 10px);
-    height: 60%;
+    height: 100%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -508,7 +508,7 @@ li input {
 
 #hideTimeControl, #showTimeControl {
     width: 95%;
-    height: 45%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     justify-content: start;
