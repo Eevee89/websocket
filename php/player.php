@@ -78,4 +78,4 @@
     </div>
 </body>
 
-<script src="js/mobile.js"></script>
+<script src="js/player.js"></script>

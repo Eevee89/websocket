@@ -130,4 +130,4 @@
     </div>
 </body>
 
-<script src="js/desktop.js"></script>
+<script src="js/master.js"></script>
