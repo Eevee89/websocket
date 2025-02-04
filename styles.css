@@ -125,6 +125,10 @@ button {
     cursor: pointer;
 }
 
+#pseudoSubmit {
+    height: 20%;
+}
+
 #rules {
     width: 30%;
     height: 5%;
@@ -275,6 +279,7 @@ button {
 }
 
 #mainBody>#main {
+    height: 85%;
     justify-content: space-around;
 }
 
@@ -755,6 +760,7 @@ iframe {
     }
 
     #main {
+        height: 90%;
         flex-direction: row;
         justify-content: center;
     }
