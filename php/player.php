@@ -32,7 +32,7 @@
                 <div id="colorList">
 
                 </div>
-                <div id="soundList" style="display: none;">
+                <div id="soundList">
 
                 </div>
             </div>
