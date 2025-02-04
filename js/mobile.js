@@ -75,7 +75,8 @@ $(document).ready(async () => {
 
     $(".soundTile").click((event) => {
         let sound = event.target.id;
-        $("#"+sound+"Audio").play();
+        var soundclick = document.getElementById(sound+"Audio");
+        soundclick.play();
     });
 
     $("#readyBtn").click(() => {
