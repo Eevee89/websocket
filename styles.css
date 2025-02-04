@@ -285,6 +285,7 @@ button {
 
 #mainBody>#main {
     flex-direction: column;
+    justify-content: center;
 }
 
 /*#region: Left Panel */
@@ -740,6 +741,7 @@ iframe {
 
     #mainBody>#main {
         flex-direction: row;
+        justify-content: normal;
     }
 
     #leftPanel, #rightPanel {
