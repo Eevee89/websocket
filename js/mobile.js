@@ -76,17 +76,10 @@ $(document).ready(async () => {
 
     $(".soundTile").click((event) => {
         let sound = event.target.id;
-        console.log($(event.target));
         var soundclick = document.getElementById(sound+"Audio");
         soundclick.play();
         buzzerSound = sound+"Audio";
-        let number = 0;
-        if (event.target.tagName === "H3") {
-            number = $(event.target).text();
-        } else {
-            console.log($(event.target).children[0]);
-            number = $($(event.target).children[0]).text();
-        }
+        let number = sounds.indexof(sound);
         $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
         $("#buzzerSoundInfo").show();
     });
