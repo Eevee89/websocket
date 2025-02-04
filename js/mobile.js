@@ -76,6 +76,7 @@ $(document).ready(async () => {
 
     $(".soundTile").click((event) => {
         let sound = event.target.id;
+        console.log(event.target);
         var soundclick = document.getElementById(sound+"Audio");
         soundclick.play();
         buzzerSound = sound+"Audio";
