@@ -1,0 +1,700 @@
+/*#region: Main Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bgc: #222;
+    --videoTile-bgc: #000;
+}
+
+.ui-pnotify {
+    background: repeating-linear-gradient(
+        45deg,
+        #eed202,
+        #eed202 10px,
+        #ffe900 10px,
+        #ffe900 20px
+    );
+    color: #333;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+}
+
+body {
+    background-color: var(--bgc);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.fakeBody {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+input {
+    font-family: "Parkinsans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: #AAA;
+    font-family: "Parkinsans", sans-serif;
+}
+
+.box {
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.3), 0 6px 20px 0 rgba(255, 255, 255, 0.29);
+    border-radius: 10px;
+}
+
+.sep {
+    width: 100%;
+    height: 1px;
+    background-color: #FFF;
+}
+
+.buttons {
+    width: 100%;
+    height: calc(100% - 25px);
+    background-color: var(--bgc);
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buttons>button {
+    height: 50%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+#connBody, #waitBody {
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    cursor: pointer;
+    font-family: "Parkinsans", sans-serif;
+}
+
+#connBox, #buzCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+    padding: 10px;
+}
+
+#pseudoInput, #roomInput, #answerInput{
+    width: 95%;
+    height: 25%;
+    border-radius: 10px;
+    border: none;
+    padding-left: 5px;
+    border-right: 1px var(--bgc) solid;
+}
+
+#pseudoSubmit {
+    width: 33%;
+    height: 20%;
+    border-radius: 10px;
+    border: 1px var(--bgc) solid;
+    cursor: pointer;
+}
+
+#rules {
+    width: 30%;
+    height: 5%;
+    border-radius: 10px;
+    border: 1px var(--bgc) solid;
+}
+
+#colorBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 40%;
+    padding: 10px;
+}
+
+#tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: calc(20% - 2px);
+    padding: 10px;
+    border-radius: 1px;
+}
+
+#tab1, #tab2 {
+    width: calc(50% - 2px);
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#colorList, #soundList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: calc(90% - 2px);
+    height: 80%;
+    padding: 10px;
+}
+
+.waitmenuselected {
+    background-color: #555;
+}
+
+.colorTile, .soundTile {
+    width: 17%;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    background-color: #555;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#clearready, #buzzerSoundInfo {
+    width: 90%;
+    height: 6%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#readyBtn, #clearBtn {
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+    border: 2px var(--bgc) solid;
+}
+
+#quitBtn {
+    width: 33%;
+    height: 5%;
+    border-radius: 10px;
+    border: 2px var(--bgc) solid;
+}
+
+#buzBtn {
+    width: 66%;
+    height: 40%;
+    border-radius: 10px;
+    font-size: 3rem;
+    border: 5px var(--bgc) solid;
+}
+
+#header {
+    width: calc(100% - 20px);
+    height: 10%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0.35), rgba(255,255,255,0.5));
+}
+
+#headerMobile {
+    width: calc(100% - 20px);
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(255,255,255,0.35), rgba(255,255,255,0.5));
+}
+
+#main, #mainMobile, #waitMain {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+}
+
+#mainMobile {
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+#waitMain {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#ansCont {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    text-align: center;
+    top: 10%;
+    left: 0%;
+}
+
+/*#endregion */
+
+/*#region: Left Panel */
+
+#leftPanel {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#leftPanel2 {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#subLeftPanel {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#videoListCont {
+    width: 100%;
+    height: 85%;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px #AAA solid;
+}
+
+#listControlPanel {
+    width: 100%;
+    height: 15%;
+    border-radius: 0 0 10px 10px;
+    padding: 10px;
+}
+
+ul {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+ul::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+li {
+    width: 100%;
+    height: 150px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border-radius: 10px;
+    background-color: var(--videoTile-bgc);
+    cursor: pointer;
+}
+
+li:not(:last-child) { 
+    margin-bottom: 5px;  
+}
+
+li input {
+    width: calc(100% - 10px);
+    height: 25px;
+    border: none;
+    border-radius: 10px 10px 0 0;
+    padding-left: 10px;
+    padding-top: 10px;
+    background-color: var(--videoTile-bgc);
+    color: #AAA;
+    font-weight: bold;
+    font-size: 1.5rem;
+    cursor: text;
+}
+
+.videoInfo {
+    width: calc(100% - 20px);
+    height: calc(100% - 45px);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    text-overflow: ellipsis;
+}
+
+.imgCont {
+    width: 30%;
+    height: 80%;
+    background-color: var(--videoTile-bgc);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgCont>img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.videoInfo>h3 {
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2;
+    line-clamp: 2;
+   -webkit-box-orient: vertical;
+    max-width: 70%;
+    max-height: 100%;
+    padding-left: 10px;
+}
+
+#urlForm, #catForm {
+    width: calc(100% - 20px);
+    height: calc(40% + 10px);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    border-radius: 10px;
+}
+
+#urlForm input, #catForm input {
+    width: 85%;
+    height: 80%;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    padding-left: 5px;
+    border-right: 1px var(--bgc) solid;
+}
+
+#urlForm button, #catForm button {
+    width: 15%;
+    height: 80%;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    border-left: 1px var(--bgc) solid;
+}
+
+#otherOpt {
+    width: calc(100% - 20px);
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: end;
+}
+
+.svg {
+    color: #F00;
+    height: 80%;
+    width: auto;
+    cursor: pointer;
+}
+
+.selected {
+    width: calc(100% - 4px);
+    border: 2px #F0F solid !important;
+}
+
+/*#endregion */
+
+/*#region: Right Panel */
+
+#rightPanel {
+    width: 50%;
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#rightPanel2 {
+    width: 20%;
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#subRightPanel {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+#timeControlPanel {
+    width: calc(50% - 15px);
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#hideTimeControl, #showTimeControl {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 10px;
+    background-color: #222;
+    align-items: center;
+}
+
+#infos {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    background-color: #222;
+    align-items: center;
+}
+
+#playerControlPanel {
+    width: calc(50% - 15px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+#pcph {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+#playerTiles {
+    width: calc(50% - 15px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.playerTile {
+    height: calc(inherit + 10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*#endregion */
+
+/*#region: Game Styles */
+
+#videoCont {
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+iframe {
+    width: 70%;
+    height: inherit;
+    max-height: 100%;
+    border-radius: 20px;
+    border: 2px #AAA solid;
+    z-index: 0;
+}
+
+#fakeIframe {
+    max-height: 100%;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#timer {
+    height: 50%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 3px #F00 solid;
+    box-shadow: inset 0 0 10px  rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #111;
+    z-index: 2;
+}
+
+#thumbCont {
+    width: 90%;
+    aspect-ratio: 16/9;
+}
+
+#thumb {
+    width: 100%;
+    border-radius: 20px;
+}
+
+#countdown {
+    z-index: 1;
+    font-size: 8rem;
+    color: #F00;
+    font-weight: bold;
+    font-family: "Parkinsans", sans-serif;
+}
+
+#optCont {
+    width: 100%;
+    height: 10%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+}
+
+#nextVidCont, #stopBTCont {
+    height: 80%;
+    aspect-ratio: 1;
+    justify-self: end;
+    align-self: flex-start;
+}
+
+#nextVidBtn, #stopBtn {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#customVideoTitle {
+    width: 80%;
+    height: 50%;
+    text-align: center;
+    mix-blend-mode: difference;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#catInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    font-weight: bold;
+}
+
+#playerList li {
+    justify-content: center;
+    height: auto;
+}
+
+.playerInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    padding: 10px;
+}
+
+.playerInfo h3 {
+    color: #AAA;
+    mix-blend-mode: difference;
+    font-weight: bold;
+}
+
+/*#endregion */
+
+@media (min-width: 768px) {
+    #connBox {
+        width: 40%;
+        height: 20%;
+        padding: 10px;
+    }
+
+    #rules {
+        width: 10%;
+        height: 4%;
+        cursor: pointer;
+    }
+}
+
+.wip {
+    cursor: progress;
+}

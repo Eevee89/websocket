@@ -14,7 +14,7 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
     <meta name="description" content="Wanna play blind test with some friends ?">
     <link rel="icon" type="image/svg+xml" href="images/audio.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pnotify/dist/pnotify.min.css">
-    <link id="style-link" rel="stylesheet" href="styles.css"/>
+    <link id="style-link" rel="stylesheet" href="styles2.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/pnotify/dist/pnotify.min.js"></script>
@@ -26,7 +26,7 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
 <?php 
 
 if ($isMob) {
-    include "php/mobile.php";
-} else {
     include "php/desktop.php";
+} else {
+    include "php/mobile.php";
 }
