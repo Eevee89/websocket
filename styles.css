@@ -133,13 +133,31 @@ button {
     padding: 10px;
 }
 
+#tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: calc(20% - 2px);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#tab1, #tab2 {
+    width: calc(50% - 2px);
+    border-radius: 10px;
+    text-align: center;
+}
+
 #colorList {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    width: 90%;
+    width: calc(90% - 2px);
     height: 80%;
     padding: 10px;
 }
