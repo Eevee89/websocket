@@ -151,8 +151,17 @@ conn.onmessage = async function(e) {
                                         .sort((a, b) => b[1].score - a[1].score) 
                                         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
                 $("#playerList").html("");
-                for(const pseudo of Object.keys(sortedPlayers)) {
-                    createPlayerItem(sortedPlayers[pseudo], pseudo);
+                if ($("#rightPanel").css("flex-direction") == "column") {
+                    let keys = Object.keys(sortedPlayers);
+                    let m = keys.length >= 3 ? 3 : keys.length;
+                    for(i=0; i<m; i++) {
+                        const pseudo = keys[i];
+                        createPlayerItem(sortedPlayers[pseudo], pseudo);
+                    }
+                } else {
+                    for(const pseudo of Object.keys(sortedPlayers)) {
+                        createPlayerItem(sortedPlayers[pseudo], pseudo);
+                    }
                 }
                 timerStop = true;
             } else {

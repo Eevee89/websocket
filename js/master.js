@@ -386,8 +386,17 @@ $(document).ready(async () => {
         }).then(() => {
             // Player is ready with the new video
             $("#nextVidBtn").hide();
-            for(const pseudo of Object.keys(players)) {
-                createPlayerItem(players[pseudo], pseudo);
+            if ($("#rightPanel").css("flex-direction") == "column") {
+                let keys = Object.keys(players);
+                let m = keys.length >= 3 ? 3 : keys.length;
+                for(i=0; i<m; i++) {
+                    const pseudo = keys[i];
+                    createPlayerItem(players[pseudo], pseudo);
+                }
+            } else {
+                for(const pseudo of Object.keys(players)) {
+                    createPlayerItem(players[pseudo], pseudo);
+                }
             }
             player.unMute();
             player.setVolume(100);
