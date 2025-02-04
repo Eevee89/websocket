@@ -717,9 +717,13 @@ iframe {
         height: 80%;
     }
 
+    #colorList, #soundList {
+        height: 90%;
+    }
+
     .colorTile, .soundTile {
         width: auto;
-        height: 31%;
+        height: 33%;
     }
         
     #soundList {
