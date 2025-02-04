@@ -490,7 +490,7 @@ li input {
 
 #rightPanel2 {
     width: 90%;
-    height: calc(30% - 20px);
+    height: calc(25% - 20px);
     display: flex;
     flex-direction: column;
     justify-content: center;
