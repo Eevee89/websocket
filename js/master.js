@@ -392,6 +392,7 @@ $(document).ready(async () => {
             player.unMute();
             player.setVolume(100);
             $("#countdown").text(hideTime);
+            console.table(customInfos[videosIds[index]]);
             $("#mainBody").hide();
             $("#gameBody").show();
             $("#fakeIframe").show();
