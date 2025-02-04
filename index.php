@@ -20,7 +20,6 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/pnotify/dist/pnotify.min.js"></script>
     <script src="js/functions.js"></script>
-    <script src="js/client.js"></script>
 </head>
 </html>
 

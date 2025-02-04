@@ -1,7 +1,6 @@
 $(document).ready(async () => {
-    $("#waitBody").hide();
+    $("#waitBody").show();
     $("#gameBody").hide();
-    $("#connBody").show();
 
     let soundclickable = true;
 
@@ -138,7 +137,6 @@ $(document).ready(async () => {
         };
         conn.send(JSON.stringify(msg));
         $("#waitBody").hide();
-        $("#connBody").show();
         $("#readyBtn").show();
     });
 

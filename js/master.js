@@ -22,61 +22,54 @@ function isPlayerReady() {
 }
 
 $(document).ready(async () => {
-    $("#connBody").show();
-    $("#mainBody").hide();
+    $("#mainBody").show();
     $("#gameBody").hide();
 
     for(const item of videosIds) {
         await createVideoItem(item, videosIds.indexOf(item));
     }
 
-    $("#pseudoSubmit").click(() => {
-        let pseudo = $("#pseudoInput").val();
-        msg = {
-            "room": 0,
-            "type": "CREATEROOM",
-            "payload": pseudo
-        };
-        conn.send(JSON.stringify(msg));
+    let pseudo = "Eevee";
+    msg = {
+        "room": 0,
+        "type": "CREATEROOM",
+        "payload": pseudo
+    };
+    conn.send(JSON.stringify(msg));
 
-        if ($("#rightPanel").css("flex-direction") == "column") {
-            $("#mtabs").show();
+    if ($("#rightPanel").css("flex-direction") == "column") {
+        $("#mtabs").show();
+        $("#leftPanel").show();
+        $("#rightPanel").hide();
+
+        $("#mtab1").click(() => {
             $("#leftPanel").show();
             $("#rightPanel").hide();
+            $("#mtab1").addClass("waitmenuselected");
+            $("#mtab2").removeClass("waitmenuselected");
+            $("#mtab3").removeClass("waitmenuselected");
+        });
 
-            $("#mtab1").click(() => {
-                $("#leftPanel").show();
-                $("#rightPanel").hide();
-                $("#mtab1").addClass("waitmenuselected");
-                $("#mtab2").removeClass("waitmenuselected");
-                $("#mtab3").removeClass("waitmenuselected");
-            });
+        $("#mtab2").click(() => {
+            $("#leftPanel").hide();
+            $("#rightPanel").show();
+            $("#playerControlPanel").hide();
+            $("#timeControlPanel").show();
+            $("#mtab2").addClass("waitmenuselected");
+            $("#mtab3").removeClass("waitmenuselected");
+            $("#mtab1").removeClass("waitmenuselected");
+        });
 
-            $("#mtab2").click(() => {
-                $("#leftPanel").hide();
-                $("#rightPanel").show();
-                $("#playerControlPanel").hide();
-                $("#timeControlPanel").show();
-                $("#mtab2").addClass("waitmenuselected");
-                $("#mtab3").removeClass("waitmenuselected");
-                $("#mtab1").removeClass("waitmenuselected");
-            });
-
-            $("#mtab3").click(() => {
-                $("#leftPanel").hide();
-                $("#rightPanel").show();
-                $("#timeControlPanel").hide();
-                $("#playerControlPanel").show();
-                $("#mtab3").addClass("waitmenuselected");
-                $("#mtab1").removeClass("waitmenuselected");
-                $("#mtab2").removeClass("waitmenuselected");
-            });
-        }
-
-        $("#submit").hide();
-        $("#connBody").hide();
-        $("#mainBody").show();
-    })
+        $("#mtab3").click(() => {
+            $("#leftPanel").hide();
+            $("#rightPanel").show();
+            $("#timeControlPanel").hide();
+            $("#playerControlPanel").show();
+            $("#mtab3").addClass("waitmenuselected");
+            $("#mtab1").removeClass("waitmenuselected");
+            $("#mtab2").removeClass("waitmenuselected");
+        });
+    }
 
     $("#rules").click(() => { showRules(); });
 

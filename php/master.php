@@ -1,14 +1,5 @@
+<script src="js/client.js"></script>
 <body>
-    <div id="connBody" class="fakeBody">
-        <div id="connBox" class="box">
-            <p id="notconnected" style="color: red;"> Erreur de connexion au serveur </p>
-            <input type="text" id="pseudoInput" name="name" placeholder="Entrez votre pseudo"/>
-            <button id="pseudoSubmit">Créer</button>
-        </div>
-        <div id="sepconn" style="width: 1px; height: 20px;"></div>
-        <button id="rules">Comment jouer ?</button>
-    </div>
-
     <div id="mainBody" class="fakeBody">
         <div id="header">
             <h1 id="roomId">Room 00000</h1>

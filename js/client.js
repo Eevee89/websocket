@@ -33,7 +33,6 @@ conn.onmessage = async function(e) {
     else if (msg["type"] == "WELCOM PLAYER") {
         $("#waitBody").show();
         $("#gameBody").hide();
-        $("#connBody").hide();
         room = msg["room"];
         $("#roomId").text("Room "+room);
         $("#roomId2").text("Room "+room);
@@ -58,7 +57,6 @@ conn.onmessage = async function(e) {
         $("#readyBtn").show();
         $("#waitBody").hide();
         $("#gameBody").hide();
-        $("#connBody").show();
     }
     else if (msg["type"] == "CLIENT GONE") {
         pseudo = msg["payload"];
@@ -87,7 +85,6 @@ conn.onmessage = async function(e) {
         }
 
         $("#waitBody").hide();
-        $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
         if (customNbEssais != 0) {
@@ -202,7 +199,6 @@ conn.onmessage = async function(e) {
 
 conn.onclose = function(e) {
     alert("Votre connexion au serveur a été coupée.\nVous allez être renvoyé au menu principal.");
-    $("#connBody").show();
     $("#mainBody").hide();
     $("#gameBody").hide();
     $("#waitBody").hide();
