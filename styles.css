@@ -711,6 +711,11 @@ iframe {
         height: 60%;
     }
 
+    #listsCont {
+        width: calc(100% - 20px);
+        height: 80%;
+    }
+
     .colorTile, .soundTile {
         width: auto;
         height: 31%;
