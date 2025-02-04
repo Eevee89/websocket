@@ -22,20 +22,16 @@
                 <div id="tabs">
                     <div id="tab1" class="waitmenuselected">
                         <h3 id="colorchoice"> Couleurs </h3>
-                        <div id="colorList2"></div>
                     </div>
                     <div style="width: 2px; height: 90%; background-color: #AAA"></div>
                     <div id="tab2">
                         <h3 id="buzzerchoice"> Sons de buzz </h3>
-                        <div id="soundList2"></div>
                     </div>
                 </div>
                 <div style="width: 90%; height: 2px; background-color: #AAA; margin-left: 1px; margin-right: 1px;"></div>
-                <div id="colorList">
-
-                </div>
-                <div id="soundList">
-
+                <div id="listsCont">
+                    <div id="colorList"></div>
+                    <div id="soundList"></div>
                 </div>
             </div>
             <div style="width: 1px; height: 20px;"></div>
