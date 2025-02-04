@@ -174,7 +174,8 @@ button {
     width: 17%;
     border-radius: 50%;
     aspect-ratio: 1;
-    background-color: #AAA;
+    background-color: #555;
+    text-align: center;
 }
 
 #readyBtn {

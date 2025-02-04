@@ -255,7 +255,9 @@ function createColorItem(name, hex) {
 function createSoundItem(name, index) {
     const sound = $('<div>').attr({id: name});
     $(sound).addClass("soundTile");
-    $(sound).append($('<h2>').text(index));
+    const stext = $('<h3>').text(index);
+    $(stext).attr({id: name});
+    $(sound).append(stext);
 
     $('#soundList').append(sound);
 
