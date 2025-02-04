@@ -1,9 +1,6 @@
 <?php
-
-$userAgent = $_SERVER['HTTP_USER_AGENT'];
-
-$isMob = is_numeric(strpos(strtolower($_SERVER["HTTP_USER_AGENT"]), "mobile"));
-$isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') !== false || stripos($userAgent, 'iPod') !== false;
+session_start();
+$_SESSION["LOGGED"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -20,25 +17,16 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/pnotify/dist/pnotify.min.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/client.js"></script>
 </head>
 </html>
 
-<?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-    <?php if ($_POST["action"] === "Create room"): ?>
+<?php if ($_SESSION["LOGGED"] || $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+    <?php $_SESSION["LOGGED"] = true; ?>
+    <?php if ($_POST["action"] === "Créer"): ?>
         <?= include "php/master.php"; ?>
     <?php else: ?>
-        <?php if ($_POST["action"] === "Join room"): ?>
-            <?= include "php/player.php"; ?>
-        <?php else: ?>
-            <div id="connBody" class="fakeBody">
-                <form id="connBox" class="box" method="POST" action="">
-                    <input type="text" id="pseudoInput" name="pseudo" placeholder="Entrez votre pseudo"/>
-                    <input type="submit" name="action" id="joinRoom" value="Join room">Rejoindre</button>
-                </form>
-                <div id="sepconn" style="width: 1px; height: 20px;"></div>
-                <button id="rules">Comment jouer ?</button>
-            </div>
-        <?php endif; ?>
+        <?= include "php/player.php"; ?>
     <?php endif; ?>
 
 <?php else: ?>
@@ -47,8 +35,8 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
         <form id="connBox" class="box" method="POST" action="">
             <input type="text" id="pseudoInput" name="pseudo" placeholder="Entrez votre pseudo"/>
             <div id="connBtns">
-                <input type="submit" name="action" id="createRoom" value="Create room">Créer</button> 
-                <input type="submit" name="action" id="joinRoom" value="Join room">Rejoindre</button>
+                <input type="submit" name="action" id="createRoom" value="Créer"/> 
+                <input type="submit" name="action" id="joinRoom" value="Rejoindre"/>
             </div>
         </form>
         <div id="sepconn" style="width: 1px; height: 20px;"></div>
