@@ -28,7 +28,11 @@ $(document).ready(async () => {
     ];
 
     for(const element of colors) {
-        createColorItem(element.name, element.hex)
+        createColorItem(element.name, element.hex);
+    }
+
+    for(i=0; i<15; i++) {
+        createSoundItem(sounds[i], i);
     }
 
     $("#pseudoSubmit").click(() => {
