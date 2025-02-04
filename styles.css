@@ -142,14 +142,17 @@ button {
     width: 100%;
     height: calc(20% - 2px);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 1px;
 }
 
 #tab1, #tab2 {
     width: calc(50% - 2px);
     height: 100%;
     border-radius: 10px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #colorList, #soundList {

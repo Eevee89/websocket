@@ -28,7 +28,7 @@
                         <h3 id="buzzerchoice"> Sons de buzz </h3>
                     </div>
                 </div>
-                <div style="width: 90%; height: 2px; background-color: #AAA"></div>
+                <div style="width: 90%; height: 2px; background-color: #AAA; margin-left: 1px; margin-right: 1px;"></div>
                 <div id="colorList">
 
                 </div>
