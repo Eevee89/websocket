@@ -280,7 +280,7 @@ button {
 
 #mainBody>#main {
     height: 85%;
-    justify-content: space-around;
+    justify-content: start;
 }
 
 #ansCont {
