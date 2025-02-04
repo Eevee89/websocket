@@ -31,6 +31,7 @@ body {
     background-color: var(--bgc);
     height: 100vh;
     width: 100vw;
+    overflow-y: hidden;
 }
 
 .fakeBody {
@@ -38,6 +39,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
 }
 
 input {
@@ -286,13 +288,14 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     border-radius: 20px;
     padding: 10px;
 }
 
 #leftPanel2 {
     width: 90%;
-    height: 60%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -469,7 +472,7 @@ li input {
 
 #rightPanel2 {
     width: 90%;
-    height: calc(50% - 20px);
+    height: calc(30% - 20px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -740,6 +743,7 @@ iframe {
 
     #leftPanel {
         justify-content: start;
+        align-items: normal;
     }
 
     #rightPanel {
