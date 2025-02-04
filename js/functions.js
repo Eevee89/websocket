@@ -255,9 +255,7 @@ function createColorItem(name, hex) {
 function createSoundItem(name, index) {
     const sound = $('<div>').attr({id: name});
     $(sound).addClass("soundTile");
-    let chooseColor = $("#readyBtn").css("border-color");
-    let color = chooseColor == 'rgb(34, 34, 34)' ? "#AAA": chooseColor;
-    $(sound).css("background-color", color);
+    $(sound).append($('<h2>').text(index));
 
     $('#soundList').append(sound);
 

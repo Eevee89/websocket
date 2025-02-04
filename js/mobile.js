@@ -71,6 +71,7 @@ $(document).ready(async () => {
         hex = $(event.target).css("background-color")
         $("#readyBtn").css("border-color", hex);
         $("#buzBtn").css("border-color", hex);
+        $(".soundTile").css("background-color", hex);
     });
 
     $(".soundTile").click((event) => {
