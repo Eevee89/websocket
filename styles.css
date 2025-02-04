@@ -700,11 +700,15 @@ iframe {
 
     .colorTile, .soundTile {
         width: auto;
-        height: 30%;
+        height: 31%;
+    }
+
+    #soundList {
+        display: block;
     }
 
     #colorList, #soundList {
-        width: calc(50% - 2px);
+        width: calc(45% - 2px);
     }
 }
 
