@@ -270,7 +270,7 @@ button {
 /*#endregion */
 
 #mainBody>#main {
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 /*#region: Left Panel */

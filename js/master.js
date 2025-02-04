@@ -55,6 +55,7 @@ $(document).ready(async () => {
             $("#mtab2").click(() => {
                 $("#leftPanel").hide();
                 $("#rightPanel").show();
+                $("#playerControlPanel").hide();
                 $("#timeControlPanel").show();
                 $("#mtab2").addClass("waitmenuselected");
                 $("#mtab3").removeClass("waitmenuselected");
@@ -64,6 +65,7 @@ $(document).ready(async () => {
             $("#mtab3").click(() => {
                 $("#leftPanel").hide();
                 $("#rightPanel").show();
+                $("#timeControlPanel").hide();
                 $("#playerControlPanel").show();
                 $("#mtab3").addClass("waitmenuselected");
                 $("#mtab1").removeClass("waitmenuselected");
