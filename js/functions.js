@@ -255,10 +255,17 @@ function createColorItem(name, hex) {
 function createSoundItem(name, index) {
     const sound = $('<div>').attr({id: name});
     $(sound).addClass("soundTile");
-    let color = $("#buzBtn").css("border-color") ?? "#AAA";
+    let chooseColor = $("#buzBtn").css("border-color");
+    let color = chooseColor == 'rgb(34, 34, 34)' ? "AAA": chooseColor;
     $(sound).css("background-color", color);
 
     $('#soundList').append(sound);
+
+    const audio = $('<audio>').attr({id: name+"Audio"});
+    const audsrc = $('<source>').attr({src: "../sounds/"+name+".mp3", type: "audio/mpeg"});
+
+    $(audio).append(audsrc);
+    $("#audsrcList").append(audio);
 }
 
 function showRules() {
