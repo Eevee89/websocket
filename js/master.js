@@ -366,8 +366,8 @@ $(document).ready(async () => {
             "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
         };
         var opt = {
-            height: '360',
-            width: '640',
+            height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
+            width: $("#rightPanel").css("flex-direction") == "column" ? '720' : '640',
             videoId: videosIds[index++],
             events: {
               'onError': onPlayerError
@@ -423,8 +423,8 @@ $(document).ready(async () => {
             };
 
             var opt = {
-                height: '360',
-                width: '640',
+                height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
+                width: $("#rightPanel").css("flex-direction") == "column" ? '720' : '640',
                 videoId: videosIds[index++],
                 events: {
                     'onError': onPlayerError
