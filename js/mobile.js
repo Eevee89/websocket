@@ -138,7 +138,7 @@ $(document).ready(async () => {
                 "payload": answ
             };
             conn.send(JSON.stringify(msg));
-            var soundclick = document.getElementById(sound+"Audio");
+            var soundclick = document.getElementById(buzzerSound);
             soundclick.play();
             customNbEssais -= 1;
         }
