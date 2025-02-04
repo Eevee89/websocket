@@ -313,7 +313,7 @@ button {
 
 #leftPanel2 {
     width: 90%;
-    height: 65%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -650,7 +650,7 @@ iframe {
 }
 
 #nextVidCont, #stopBTCont {
-    height: 60%;
+    height: 80%;
     aspect-ratio: 1;
     justify-self: end;
     align-self: flex-start;
