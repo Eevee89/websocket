@@ -482,10 +482,10 @@ li input {
 
 #subRightPanel {
     width: calc(100% - 20px);
-    height: calc(100% - 20px);
+    height: 150px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
 }
 
 #timeControlPanel {
@@ -812,6 +812,11 @@ iframe {
     #thumb {
         width: auto;
         height: 80%;
+    }
+
+    #subRightPanel {
+        height: calc(100% - 20px);
+        justify-content: start;
     }
 }
 
