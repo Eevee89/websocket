@@ -31,7 +31,7 @@ body {
     background-color: var(--bgc);
     height: 100vh;
     width: 100vw;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .fakeBody {
@@ -39,7 +39,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 input {
@@ -284,7 +284,7 @@ button {
 
 #leftPanel {
     width: 100%;
-    height: 90%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -463,7 +463,7 @@ li input {
 
 #rightPanel {
     width: 100%;
-    height: 90%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -694,10 +694,6 @@ iframe {
 /*#endregion */
 
 @media (min-width: 768px) {
-    body, #fakeBody {
-        overflow: hidden;
-    }
-
     #connBox {
         width: 40%;
         height: 20%;
