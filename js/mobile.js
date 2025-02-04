@@ -83,8 +83,8 @@ $(document).ready(async () => {
             var soundclick = document.getElementById(sound+"Audio");
             const soundplayint = setInterval(function() {
                 soundclick.play();
+                clearInterval(soundplayint);
             }, 5000);
-            clearInterval(soundplayint);
             buzzerSound = sound+"Audio";
             let number = sounds.indexOf(sound);
             $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
