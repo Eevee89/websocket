@@ -166,6 +166,10 @@ button {
     padding: 10px;
 }
 
+#colorList2, #soundList2 {
+    display: none;
+}
+
 #soundList {
     display: none;
 }
@@ -709,7 +713,17 @@ iframe {
 
     #colorList, #soundList {
         display: flex;
-        width: calc(45% - 2px);
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        width: calc(90% - 2px);
+        height: calc(80% - 2px);
+        padding: 10px;
+    }
+    
+    #colorList, #soundList {
+        display: none;
     }
 }
 
