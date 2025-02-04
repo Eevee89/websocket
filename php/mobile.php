@@ -41,7 +41,7 @@
                 <button id="clearBtn">Effacer sélection</button>
                 <button id="readyBtn">Prêt à jouer</button>
             </div>
-            <div id="buzzerSoundInfo"><p id="buzzerSoundInfoLabel">Buzzer</p></div>
+            <div id="buzzerSoundInfo" style="display: none;"><p id="buzzerSoundInfoLabel">Buzzer</p></div>
             <div style="width: 1px; height: 20px;"></div>
             <p id="readyinfo"> Note: Se mettre 'prêt' est définitif </p>
             <div style="width: 1px; height: 20px;"></div>
