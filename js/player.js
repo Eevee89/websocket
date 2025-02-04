@@ -124,6 +124,7 @@ $(document).ready(async () => {
             $("#tab1").removeClass("waitmenuselected");
             $("#colorList").hide();
             $("#soundList").show();
+            $("#soundList").css("display", "flex");
         });
     } else {
         $("#tab1").removeClass("waitmenuselected");
