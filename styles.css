@@ -190,13 +190,9 @@ button {
     align-items: center;
 }
 
-#buzzerSoundInfo {
-    height: 4%;
-}
-
 #readyBtn, #clearBtn {
     width: 40%;
-    height: 5%;
+    height: 100%;
     border-radius: 10px;
     border: 2px var(--bgc) solid;
 }
