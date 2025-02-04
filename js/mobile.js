@@ -3,6 +3,8 @@ $(document).ready(async () => {
     $("#gameBody").hide();
     $("#connBody").show();
 
+    let soundclickable = true;
+
     colors= [
         { name: "pink", hex: "#fe447d"},
         { name: "orange", hex: "#f78f2e"},
@@ -75,13 +77,20 @@ $(document).ready(async () => {
     });
 
     $(".soundTile").click((event) => {
-        let sound = event.target.id;
-        var soundclick = document.getElementById(sound+"Audio");
-        soundclick.play();
-        buzzerSound = sound+"Audio";
-        let number = sounds.indexOf(sound);
-        $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
-        $("#buzzerSoundInfo").show();
+        if (soundclickable) {
+            soundclickable = false;
+            let sound = event.target.id;
+            var soundclick = document.getElementById(sound+"Audio");
+            setInterval(function() {
+                soundclick.play();
+            }, 5000);
+            soundclick.play();
+            buzzerSound = sound+"Audio";
+            let number = sounds.indexOf(sound);
+            $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
+            $("#buzzerSoundInfo").show();
+            soundclickable = true;
+        }
     });
 
     $("#readyBtn").click(() => {
