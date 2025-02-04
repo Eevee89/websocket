@@ -293,7 +293,7 @@ button {
 
 #leftPanel {
     width: 100%;
-    height: 80%;
+    height: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -760,7 +760,7 @@ iframe {
     }
 
     #leftPanel {
-        justify-content: start;
+        justify-content: center;
         align-items: normal;
     }
 
@@ -784,6 +784,10 @@ iframe {
     #hideTimeControl, #showTimeControl {
         width: 100%;
         height: 35%;
+    }
+
+    #infos {
+        height: 20%;
     }
 
     #playerControlPanel {
