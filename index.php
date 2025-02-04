@@ -26,7 +26,7 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
 <?php 
 
 if ($isMob) {
-    include "php/master.php";
-} else {
     include "php/player.php";
+} else {
+    include "php/master.php";
 }
