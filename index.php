@@ -1,8 +1,6 @@
 <?php
-$userAgent = $_SERVER['HTTP_USER_AGENT'];
-
-$isMob = is_numeric(strpos(strtolower($_SERVER["HTTP_USER_AGENT"]), "mobile"));
-$isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') !== false || stripos($userAgent, 'iPod') !== false;
+session_start();
+$_SESSION["LOGGED"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +21,23 @@ $isios = stripos($userAgent, 'iPhone') !== false || stripos($userAgent, 'iPad') 
 </head>
 </html>
 
-<?php 
+<?php if ($_SESSION["LOGGED"] || $_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+    <?php $_SESSION["LOGGED"] = true; ?>
+    <?php if ($_POST["action"] === "Créer"): ?>
+        <?= include "php/master.php"; ?>
+    <?php else: ?>
+        <?= include "php/player.php"; ?>
+    <?php endif; ?>
 
-if ($isMob) {
-    include "php/mobile.php";
-} else {
-    include "php/desktop.php";
-}
+<?php else: ?>
+    <div id="connBody" class="fakeBody">
+        <form id="connBox" class="box" method="POST" action="">
+            <div id="connBtns">
+                <input type="submit" name="action" id="createRoom" value="Créer"/> 
+                <input type="submit" name="action" id="joinRoom" value="Rejoindre"/>
+            </div>
+        </form>
+        <div id="sepconn" style="width: 1px; height: 20px;"></div>
+        <button id="rules">Comment jouer ?</button>
+    </div>
+<?php endif; ?>

@@ -8,7 +8,7 @@
         <div id="sepconn" style="width: 1px; height: 20px;"></div>
         <button id="rules">Comment jouer ?</button>
     </div>
-
+    
     <div id="mainBody" class="fakeBody">
         <div id="header">
             <h1 id="roomId">Room 00000</h1>
@@ -18,6 +18,19 @@
         <div id="testplayer" hidden></div>
     
         <div id="main">
+            <div id="mtabs">
+                <div id="mtab1" class="waitmenuselected">
+                    <h3 id="colorchoice"> Vidéos </h3>
+                </div>
+                <div style="width: 2px; height: 90%; background-color: #AAA"></div>
+                <div id="mtab2">
+                    <h3 id="buzzerchoice"> Controls </h3>
+                </div>
+                <div style="width: 2px; height: 90%; background-color: #AAA"></div>
+                <div id="mtab3">
+                    <h3 id="buzzerchoice"> Joueurs </h3>
+                </div>
+            </div>
             <div id="leftPanel">
                 <div id="subLeftPanel" class="box">
                     <div id="videoListCont">
@@ -96,7 +109,7 @@
     <div id="gameBody" class="fakeBody">
         <div id="header">
             <h1 id="roomId2">Room 00000</h1>
-            <h1 id="progressLbl">Musique 01/20</h1>
+            <h1 id="progressLbl" style="text-align: right;">Musique 01/20</h1>
         </div>
     
         <div id="main">
@@ -130,4 +143,4 @@
     </div>
 </body>
 
-<script src="js/desktop.js"></script>
+<script src="js/master.js"></script>

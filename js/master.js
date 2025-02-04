@@ -38,6 +38,41 @@ $(document).ready(async () => {
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));
+
+        if ($("#rightPanel").css("flex-direction") == "column") {
+            $("#mtabs").show();
+            $("#leftPanel").show();
+            $("#rightPanel").hide();
+
+            $("#mtab1").click(() => {
+                $("#leftPanel").show();
+                $("#rightPanel").hide();
+                $("#mtab1").addClass("waitmenuselected");
+                $("#mtab2").removeClass("waitmenuselected");
+                $("#mtab3").removeClass("waitmenuselected");
+            });
+
+            $("#mtab2").click(() => {
+                $("#leftPanel").hide();
+                $("#rightPanel").show();
+                $("#playerControlPanel").hide();
+                $("#timeControlPanel").show();
+                $("#mtab2").addClass("waitmenuselected");
+                $("#mtab3").removeClass("waitmenuselected");
+                $("#mtab1").removeClass("waitmenuselected");
+            });
+
+            $("#mtab3").click(() => {
+                $("#leftPanel").hide();
+                $("#rightPanel").show();
+                $("#timeControlPanel").hide();
+                $("#playerControlPanel").show();
+                $("#mtab3").addClass("waitmenuselected");
+                $("#mtab1").removeClass("waitmenuselected");
+                $("#mtab2").removeClass("waitmenuselected");
+            });
+        }
+
         $("#submit").hide();
         $("#connBody").hide();
         $("#mainBody").show();
@@ -331,8 +366,8 @@ $(document).ready(async () => {
             "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
         };
         var opt = {
-            height: '360',
-            width: '640',
+            height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
+            width: $("#rightPanel").css("flex-direction") == "column" ? '720' : '640',
             videoId: videosIds[index++],
             events: {
               'onError': onPlayerError
@@ -351,8 +386,17 @@ $(document).ready(async () => {
         }).then(() => {
             // Player is ready with the new video
             $("#nextVidBtn").hide();
-            for(const pseudo of Object.keys(players)) {
-                createPlayerItem(players[pseudo], pseudo);
+            if ($("#rightPanel").css("flex-direction") == "column") {
+                let keys = Object.keys(players);
+                let m = keys.length >= 3 ? 3 : keys.length;
+                for(i=0; i<m; i++) {
+                    const pseudo = keys[i];
+                    createPlayerItem(players[pseudo], pseudo);
+                }
+            } else {
+                for(const pseudo of Object.keys(players)) {
+                    createPlayerItem(players[pseudo], pseudo);
+                }
             }
             player.unMute();
             player.setVolume(100);
@@ -362,7 +406,7 @@ $(document).ready(async () => {
             $("#fakeIframe").show();
             $("#player").hide();
             $("#customVideoTitle").hide();
-            $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
+            $("#catInfoInnerText").text(customInfos[videosIds[index-1]]["category"]);
             conn.send(JSON.stringify(msg));
             $("#timer").show();
             $("#timer").click();
@@ -388,8 +432,8 @@ $(document).ready(async () => {
             };
 
             var opt = {
-                height: '360',
-                width: '640',
+                height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
+                width: $("#rightPanel").css("flex-direction") == "column" ? '720' : '640',
                 videoId: videosIds[index++],
                 events: {
                     'onError': onPlayerError

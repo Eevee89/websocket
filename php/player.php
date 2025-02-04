@@ -9,9 +9,9 @@
         <div id="sepconn" style="width: 1px; height: 20px;"></div>
         <button id="rules">Comment jouer ?</button>
     </div>
-
+    
     <div id="waitBody" class="fakeBody">
-        <div id="headerMobile">
+        <div id="header">
             <h2 id="roomId">Room 00000</h1>
         </div>
 
@@ -29,11 +29,9 @@
                     </div>
                 </div>
                 <div style="width: 90%; height: 2px; background-color: #AAA; margin-left: 1px; margin-right: 1px;"></div>
-                <div id="colorList">
-
-                </div>
-                <div id="soundList" style="display: none;">
-
+                <div id="listsCont">
+                    <div id="colorList"></div>
+                    <div id="soundList"></div>
                 </div>
             </div>
             <div style="width: 1px; height: 20px;"></div>
@@ -50,7 +48,7 @@
     </div>
 
     <div id="gameBody" class="fakeBody">
-        <div id="headerMobile">
+        <div id="header">
             <h2 id="roomId2">Room 00000</h1>
             <h2 id="progressLbl">Musique 01/20</h1>
         </div>
@@ -78,4 +76,4 @@
     </div>
 </body>
 
-<script src="js/mobile.js"></script>
+<script src="js/player.js"></script>
