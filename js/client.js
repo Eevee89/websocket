@@ -80,7 +80,11 @@ conn.onmessage = async function(e) {
         videoId = spl[4];
         timerStop = false;
         timerPaused = false;
-        $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
+        if ($("#rightPanel").css("flex-direction") == "column") {
+            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/maxresdefault.jpg", alt: 'Not implemented'});
+        } else {
+            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
+        }
 
         $("#waitBody").hide();
         $("#connBody").hide();
@@ -100,7 +104,11 @@ conn.onmessage = async function(e) {
         customTitle = spl[1];
         videoId = spl[2];
         customNbEssais = nbEssais;
-        $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
+        if ($("#rightPanel").css("flex-direction") == "column") {
+            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/maxresdefault.jpg", alt: 'Not implemented'});
+        } else {
+            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
+        }
         $("#countdown").text(hideTime);
         timerStop = false;
         timerPaused = false;
