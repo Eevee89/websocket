@@ -109,19 +109,25 @@ $(document).ready(async () => {
         $("#buzzerSoundInfo").hide();
     });
 
-    $("#tab1").click(() => {
-        $("#tab1").addClass("waitmenuselected");
-        $("#tab2").removeClass("waitmenuselected");
+    if (!($("#colorList").css("display") == "flex" && $("#soundList").css("display") == "flex")) {
         $("#soundList").hide();
-        $("#colorList").show();
-    });
 
-    $("#tab2").click(() => {
-        $("#tab2").addClass("waitmenuselected");
+        $("#tab1").click(() => {
+            $("#tab1").addClass("waitmenuselected");
+            $("#tab2").removeClass("waitmenuselected");
+            $("#soundList").hide();
+            $("#colorList").show();
+        });
+    
+        $("#tab2").click(() => {
+            $("#tab2").addClass("waitmenuselected");
+            $("#tab1").removeClass("waitmenuselected");
+            $("#colorList").hide();
+            $("#soundList").show();
+        });
+    } else {
         $("#tab1").removeClass("waitmenuselected");
-        $("#colorList").hide();
-        $("#soundList").show();
-    });
+    }
 
     $("#quitBtn").click(() => {
         msg = {
