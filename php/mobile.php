@@ -71,6 +71,9 @@
     </div>
 
     <div style="display: none;">
+        <audio id="amongusAudio">
+            <source src="../sounds/amongus.mp3" type="audio/mpeg"/>
+        </audio>
     </div>
 </body>
 

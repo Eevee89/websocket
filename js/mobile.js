@@ -21,6 +21,12 @@ $(document).ready(async () => {
         { name: "silver", hex: "#C0C0C0" } 
     ];
 
+    sounds = [
+        "amongus", "anime_wow", "auughhh", "chocapic", "discord_notif", 
+        "error_xp", "fart", "goofy_run", "meow", "pew", 
+        "pornhub", "rizz", "roblox_death", "sncf", "uwu"
+    ];
+
     for(const element of colors) {
         createColorItem(element.name, element.hex)
     }
@@ -61,6 +67,11 @@ $(document).ready(async () => {
         hex = $(event.target).css("background-color")
         $("#readyBtn").css("border-color", hex);
         $("#buzBtn").css("border-color", hex);
+    });
+
+    $(".soundTile").click((event) => {
+        let sound = event.target.id;
+        $("#"+sound+"Audio").play();
     });
 
     $("#readyBtn").click(() => {

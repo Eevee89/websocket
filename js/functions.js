@@ -252,6 +252,15 @@ function createColorItem(name, hex) {
     $('#colorList').append(color);
 }
 
+function createSoundItem(name, index) {
+    const sound = $('<div>').attr({id: name});
+    $(sound).addClass("soundTile");
+    let color = $("#buzBtn").css("border-color") ?? "#AAA";
+    $(sound).css("background-color", color);
+
+    $('#soundList').append(sound);
+}
+
 function showRules() {
     window.open('https://github.com/Eevee89/blindtest/tree/main', '_blank');
 }
