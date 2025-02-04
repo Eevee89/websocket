@@ -269,6 +269,10 @@ button {
 
 /*#endregion */
 
+#mainBody>#main {
+    flex-direction: column-reverse;
+}
+
 /*#region: Left Panel */
 
 #leftPanel {
@@ -685,7 +689,7 @@ iframe {
     body, #fakeBody {
         overflow: hidden;
     }
-    
+
     #connBox {
         width: 40%;
         height: 20%;
@@ -718,6 +722,10 @@ iframe {
         
     #soundList {
         display: flex;
+    }
+
+    #mainBody>#main {
+        flex-direction: row;
     }
 }
 
