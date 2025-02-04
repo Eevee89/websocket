@@ -31,7 +31,6 @@ body {
     background-color: var(--bgc);
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
 }
 
 .fakeBody {
@@ -39,7 +38,6 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 input {
@@ -684,6 +682,10 @@ iframe {
 /*#endregion */
 
 @media (min-width: 768px) {
+    body, #fakeBody {
+        overflow: hidden;
+    }
+    
     #connBox {
         width: 40%;
         height: 20%;
