@@ -708,6 +708,7 @@ iframe {
     }
 
     #colorList, #soundList {
+        display: flex;
         width: calc(45% - 2px);
     }
 }
