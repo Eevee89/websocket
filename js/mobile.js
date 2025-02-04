@@ -82,8 +82,8 @@ $(document).ready(async () => {
     });
 
     $("#tab2").click(() => {
-        $("#tab1").addClass("waitmenuselected");
-        $("#tab2").removeClass("waitmenuselected");
+        $("#tab2").addClass("waitmenuselected");
+        $("#tab1").removeClass("waitmenuselected");
         $("#colorList").hide();
         $("#soundList").show();
     });
