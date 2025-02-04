@@ -258,6 +258,7 @@ function createSoundItem(name, index) {
     $(sound).addClass("soundTile");
     const stext = $('<h3>').text(index+1);
     $(stext).attr({id: name});
+    $(stext).css("mix-blend-mode", "difference");
     $(sound).append(stext);
 
     $('#soundList').append(sound);

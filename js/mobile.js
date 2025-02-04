@@ -79,6 +79,14 @@ $(document).ready(async () => {
         var soundclick = document.getElementById(sound+"Audio");
         soundclick.play();
         buzzerSound = sound+"Audio";
+        let number = 0;
+        if (event.target.tagName === "H3") {
+            number = $(event.target).text();
+        } else {
+            number = $($(event.target).children[0]).text();
+        }
+        $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
+        $("#buzzerSoundInfo").show();
     });
 
     $("#readyBtn").click(() => {
@@ -90,6 +98,13 @@ $(document).ready(async () => {
             "payload": hex
         };
         conn.send(JSON.stringify(msg));
+    });
+
+    $("#clearBtn").click(() => {
+        buzzerSound = "";
+        $("#readyBtn").css("border-color", "#222");
+        $(".soundTile").css("background-color", "#222");
+        $("#buzzerSoundInfo").hide();
     });
 
     $("#tab1").click(() => {
@@ -138,8 +153,10 @@ $(document).ready(async () => {
                 "payload": answ
             };
             conn.send(JSON.stringify(msg));
-            var soundclick = document.getElementById(buzzerSound);
-            soundclick.play();
+            if (buzzerSound != "") {
+                var soundclick = document.getElementById(buzzerSound);
+                soundclick.play();
+            }
             customNbEssais -= 1;
         }
     });
