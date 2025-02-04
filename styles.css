@@ -693,6 +693,19 @@ iframe {
         height: 4%;
         cursor: pointer;
     }
+
+    #colorBox {
+        height: 60%;
+    }
+
+    .colorTile, .soundTile {
+        width: auto;
+        height: 30%;
+    }
+
+    #colorList, #soundList {
+        width: calc(50% - 2px);
+    }
 }
 
 .wip {
