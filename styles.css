@@ -151,7 +151,7 @@ button {
     text-align: center;
 }
 
-#colorList {
+#colorList, #soundList {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -160,6 +160,10 @@ button {
     width: calc(90% - 2px);
     height: 80%;
     padding: 10px;
+}
+
+.waitmenuselected {
+    background-color: #555;
 }
 
 .colorTile {

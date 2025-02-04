@@ -74,6 +74,20 @@ $(document).ready(async () => {
         conn.send(JSON.stringify(msg));
     });
 
+    $("#tab1").click(() => {
+        $("#tab1").addClass("waitmenuselected");
+        $("#tab2").removeClass("waitmenuselected");
+        $("#soundList").hide();
+        $("#colorList").show();
+    });
+
+    $("#tab2").click(() => {
+        $("#tab1").addClass("waitmenuselected");
+        $("#tab2").removeClass("waitmenuselected");
+        $("#colorList").hide();
+        $("#soundList").show();
+    });
+
     $("#quitBtn").click(() => {
         msg = {
             "room": room,
