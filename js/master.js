@@ -392,13 +392,12 @@ $(document).ready(async () => {
             player.unMute();
             player.setVolume(100);
             $("#countdown").text(hideTime);
-            console.table(customInfos[videosIds[index]]);
             $("#mainBody").hide();
             $("#gameBody").show();
             $("#fakeIframe").show();
             $("#player").hide();
             $("#customVideoTitle").hide();
-            $("#catInfoInnerText").text(customInfos[videosIds[index]]["category"]);
+            $("#catInfoInnerText").text(customInfos[videosIds[index-1]]["category"]);
             conn.send(JSON.stringify(msg));
             $("#timer").show();
             $("#timer").click();
