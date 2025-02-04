@@ -558,7 +558,7 @@ li input {
 
 #videoCont {
     width: 100%;
-    height: 90%;
+    height: 80%;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -567,8 +567,9 @@ li input {
 }
 
 iframe {
-    width: 70%;
-    height: inherit;
+    width: inherit;
+    max-width: 90%;
+    height: 80%;
     max-height: 100%;
     border-radius: 20px;
     border: 2px #AAA solid;
@@ -619,7 +620,7 @@ iframe {
 
 #optCont {
     width: 100%;
-    height: 10%;
+    height: 20%;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -777,6 +778,20 @@ iframe {
     #rightPanel2 {
         width: 20%;
         height: calc(100% - 20px);
+    }
+
+    #videoCont {
+        height: 90%;
+    }
+    
+    iframe {
+        width: 70%;
+        height: inherit;
+        max-height: 100%;
+    }
+
+    #optCont {
+        height: 10%;
     }
 }
 
