@@ -18,6 +18,19 @@
         <div id="testplayer" hidden></div>
     
         <div id="main">
+            <div id="mtabs">
+                <div id="mtab1" class="waitmenuselected">
+                    <h3 id="colorchoice"> Vidéos </h3>
+                </div>
+                <div style="width: 2px; height: 90%; background-color: #AAA"></div>
+                <div id="mtab2">
+                    <h3 id="buzzerchoice"> Controls </h3>
+                </div>
+                <div style="width: 2px; height: 90%; background-color: #AAA"></div>
+                <div id="mtab3">
+                    <h3 id="buzzerchoice"> Joueurs </h3>
+                </div>
+            </div>
             <div id="leftPanel">
                 <div id="subLeftPanel" class="box">
                     <div id="videoListCont">

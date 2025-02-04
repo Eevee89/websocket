@@ -131,7 +131,7 @@ button {
     padding: 10px;
 }
 
-#tabs {
+#tabs, #mtabs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -493,7 +493,7 @@ li input {
 
 #hideTimeControl, #showTimeControl {
     width: 95%;
-    height: 50%;
+    height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: start;

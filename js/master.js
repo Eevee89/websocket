@@ -38,6 +38,39 @@ $(document).ready(async () => {
             "payload": pseudo
         };
         conn.send(JSON.stringify(msg));
+
+        if ($("#rightPanel").css("flex-direction") == "column") {
+            $("#mtabs").show();
+            $("#leftPanel").show();
+            $("#rightPanel").hide();
+
+            $("#mtab1").click(() => {
+                $("#leftPanel").show();
+                $("#rightPanel").hide();
+                $("#mtab1").addClass("waitmenuselected");
+                $("#mtab2").removeClass("waitmenuselected");
+                $("#mtab3").removeClass("waitmenuselected");
+            });
+
+            $("#mtab2").click(() => {
+                $("#leftPanel").hide();
+                $("#rightPanel").show();
+                $("#timeControlPanel").show();
+                $("#mtab2").addClass("waitmenuselected");
+                $("#mtab3").removeClass("waitmenuselected");
+                $("#mtab1").removeClass("waitmenuselected");
+            });
+
+            $("#mtab3").click(() => {
+                $("#leftPanel").hide();
+                $("#rightPanel").show();
+                $("#playerControlPanel").show();
+                $("#mtab3").addClass("waitmenuselected");
+                $("#mtab1").removeClass("waitmenuselected");
+                $("#mtab2").removeClass("waitmenuselected");
+            });
+        }
+
         $("#submit").hide();
         $("#connBody").hide();
         $("#mainBody").show();
