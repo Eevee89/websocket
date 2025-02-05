@@ -81,12 +81,13 @@ $(document).ready(async () => {
             soundclickable = false;
             let sound = event.target.id;
             var soundclick = document.getElementById(sound+"Audio");
+            let duration = Math.ceil(soundclick.duration *1000);
             buzzerSound = sound+"Audio";
             let number = sounds.indexOf(sound)+1;
             $("#buzzerSoundInfoLabel").text("Buzzer n°"+number);
             $("#buzzerSoundInfo").show();
             soundclick.play();
-            await delay(5000);
+            await delay(duration);
             soundclickable = true;
         }
     });
