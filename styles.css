@@ -49,6 +49,7 @@ input {
 h1, h2, h3, h4, h5, h6, p {
     color: #AAA;
     font-family: "Parkinsans", sans-serif;
+    cursor: context-menu;
 }
 
 .box {
@@ -221,6 +222,7 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 #clearready, #buzzerSoundInfo {
@@ -716,6 +718,10 @@ iframe {
         width: 40%;
         height: 20%;
         padding: 10px;
+    }
+
+    #roomId {
+        color: #CCC;
     }
 
     #connBtns {
