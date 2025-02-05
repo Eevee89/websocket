@@ -191,6 +191,7 @@ button {
     align-items: center;
     width: calc(90% - 2px);
     height: 80%;
+    pointer-events: none;
 }
 
 #colorList, #soundList {
@@ -203,6 +204,7 @@ button {
     height: 100%;
     padding: 10px;
     cursor: pointer;
+    pointer-events: none;
 }
 
 #soundList {
