@@ -216,6 +216,7 @@ button {
 }
 
 .colorTile, .soundTile {
+    pointer-events: auto;
     width: 17%;
     border-radius: 50%;
     aspect-ratio: 1;
