@@ -363,7 +363,7 @@ $(document).ready(async () => {
         msg = {
             "room": room,
             "type": "BEGIN GAME",
-            "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+            "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]+";"+index
         };
         var opt = {
             height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
@@ -427,8 +427,8 @@ $(document).ready(async () => {
         if (index < videosIds.length) {
             msg = {
                 "room": room,
-                "type": "CONTINUE GAME",
-                "payload": index+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+                "type": "BEGIN GAME",
+                "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]+";"+index
             };
 
             var opt = {
