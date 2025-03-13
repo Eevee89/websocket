@@ -70,7 +70,7 @@ conn.onmessage = async function(e) {
             $("#beginBtn").hide();
         }
     }
-    else if (msg["type"] == "BEGIN GAME") {
+    else if (msg["type"] == "BEGIN GAME" || msg["type"] == "CONTINUE GAME") {
         spl = msg["payload"].split(';');
         nbVids = parseInt(spl[0]);
         hideTime = parseInt(spl[1]);
@@ -78,6 +78,7 @@ conn.onmessage = async function(e) {
         customNbEssais = nbEssais;
         customTitle = spl[3];
         videoId = spl[4];
+        musicId = parseInt(spl[5]);
         timerStop = false;
         timerPaused = false;
         if ($("#rightPanel").css("flex-direction") == "column") {
@@ -86,34 +87,12 @@ conn.onmessage = async function(e) {
             $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
         }
 
+        $("#countdown").text(hideTime);
         $("#waitBody").hide();
         $("#connBody").hide();
         $("#gameBody").show();
         $("#timer").show();
         if (customNbEssais != 0) {
-            $("#buzCont").show();
-        }
-        $("#mainMobile").show();
-        $("#ansCont").hide();
-        $("#timer").click();
-        $("#progressLbl").text("Musique 01/" + zeroPad(nbVids, 2));
-    }
-    else if (msg["type"] == "CONTINUE GAME") {
-        spl = msg["payload"].split(';');
-        musicId = spl[0];
-        customTitle = spl[1];
-        videoId = spl[2];
-        customNbEssais = nbEssais;
-        if ($("#rightPanel").css("flex-direction") == "column") {
-            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/maxresdefault.jpg", alt: 'Not implemented'});
-        } else {
-            $("#thumb").attr({src: "https://img.youtube.com/vi/"+videoId+"/mqdefault.jpg", alt: 'Not implemented'});
-        }
-        $("#countdown").text(hideTime);
-        timerStop = false;
-        timerPaused = false;
-        $("#timer").show();
-        if(customNbEssais != 0) {
             $("#buzCont").show();
         }
         $("#mainMobile").show();
@@ -147,22 +126,6 @@ conn.onmessage = async function(e) {
 
             if (val) {
                 players[ps]["score"] += 1;
-                const sortedPlayers = Object.entries(players) 
-                                        .sort((a, b) => b[1].score - a[1].score) 
-                                        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-                $("#playerList").html("");
-                if ($("#rightPanel").css("flex-direction") == "column") {
-                    let keys = Object.keys(sortedPlayers);
-                    let m = keys.length >= 3 ? 3 : keys.length;
-                    for(i=0; i<m; i++) {
-                        const pseudo = keys[i];
-                        createPlayerItem(sortedPlayers[pseudo], pseudo);
-                    }
-                } else {
-                    for(const pseudo of Object.keys(sortedPlayers)) {
-                        createPlayerItem(sortedPlayers[pseudo], pseudo);
-                    }
-                }
                 timerStop = true;
             } else {
                 await delay(100);

@@ -363,8 +363,11 @@ $(document).ready(async () => {
         msg = {
             "room": room,
             "type": "BEGIN GAME",
-            "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+            "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]+";"+index
         };
+
+        const startAt = customInfos[videosIds[index]]["start"] || 0;
+
         var opt = {
             height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
             width: $("#rightPanel").css("flex-direction") == "column" ? '720' : '640',
@@ -398,6 +401,7 @@ $(document).ready(async () => {
                     createPlayerItem(players[pseudo], pseudo);
                 }
             }
+            player.seekTo(startAt);
             player.unMute();
             player.setVolume(100);
             $("#countdown").text(hideTime);
@@ -427,9 +431,11 @@ $(document).ready(async () => {
         if (index < videosIds.length) {
             msg = {
                 "room": room,
-                "type": "CONTINUE GAME",
-                "payload": index+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]
+                "type": "BEGIN GAME",
+                "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]+";"+index
             };
+
+            const startAt = customInfos[videosIds[index]]["start"] || 0;
 
             var opt = {
                 height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
@@ -451,9 +457,26 @@ $(document).ready(async () => {
                 }, 100); 
             }).then(async () => {
                 // Player is ready with the new video
+                const sortedPlayers = Object.entries(players) 
+                                        .sort((a, b) => b[1].score - a[1].score) 
+                                        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+                $("#playerList").html("");
+                if ($("#rightPanel").css("flex-direction") == "column") {
+                    let keys = Object.keys(sortedPlayers);
+                    let m = keys.length >= 3 ? 3 : keys.length;
+                    for(i=0; i<m; i++) {
+                        const pseudo = keys[i];
+                        createPlayerItem(sortedPlayers[pseudo], pseudo);
+                    }
+                } else {
+                    for(const pseudo of Object.keys(sortedPlayers)) {
+                        createPlayerItem(sortedPlayers[pseudo], pseudo);
+                    }
+                }
                 timerStop = false;
                 timerPaused = false;
                 $("#player").hide();
+                player.seekTo(startAt);
                 player.unMute();
                 player.setVolume(100);
                 $("#customVideoTitle").hide();
@@ -621,6 +644,19 @@ $(document).on("change", "input", function(event) {
                     videosIds = [];
                     customInfos = [];
                     throw new Error("Catégorie invalide");
+                }
+                if (customInfos[item]["start"]) {
+                    if (!verifyInput(customInfos[item]["start"], "StartTime")) {
+                        new PNotify({
+                            title: 'Temps de début invalide pour '+item,
+                            text: "Le temps n'est pas un entier positif",
+                            type: 'warning',
+                            delay: 3000
+                        });
+                        videosIds = [];
+                        customInfos = [];
+                        throw new Error("Temps invalide");
+                    }
                 }
                 await createVideoItem(item, videosIds.indexOf(item));
             }
