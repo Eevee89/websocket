@@ -365,6 +365,9 @@ $(document).ready(async () => {
             "type": "BEGIN GAME",
             "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]+";"+index
         };
+
+        const startAt = customInfos[videosIds[index]]["start"] || 0;
+
         var opt = {
             height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
             width: $("#rightPanel").css("flex-direction") == "column" ? '720' : '640',
@@ -398,6 +401,7 @@ $(document).ready(async () => {
                     createPlayerItem(players[pseudo], pseudo);
                 }
             }
+            player.seekTo(startAt);
             player.unMute();
             player.setVolume(100);
             $("#countdown").text(hideTime);
@@ -430,6 +434,8 @@ $(document).ready(async () => {
                 "type": "BEGIN GAME",
                 "payload": videosIds.length+";"+hideTime+";"+nbEssais+";"+customInfos[videosIds[index]]["title"]+";"+videosIds[index]+";"+index
             };
+
+            const startAt = customInfos[videosIds[index]]["start"] || 0;
 
             var opt = {
                 height: $("#rightPanel").css("flex-direction") == "column" ? '180' : '360',
@@ -470,6 +476,7 @@ $(document).ready(async () => {
                 timerStop = false;
                 timerPaused = false;
                 $("#player").hide();
+                player.seekTo(startAt);
                 player.unMute();
                 player.setVolume(100);
                 $("#customVideoTitle").hide();
@@ -637,6 +644,19 @@ $(document).on("change", "input", function(event) {
                     videosIds = [];
                     customInfos = [];
                     throw new Error("Catégorie invalide");
+                }
+                if (customInfos[item]["start"]) {
+                    if (!verifyInput(customInfos[item]["start"], "StartTime")) {
+                        new PNotify({
+                            title: 'Temps de début invalide pour '+item,
+                            text: "Le temps n'est pas un entier positif",
+                            type: 'warning',
+                            delay: 3000
+                        });
+                        videosIds = [];
+                        customInfos = [];
+                        throw new Error("Temps invalide");
+                    }
                 }
                 await createVideoItem(item, videosIds.indexOf(item));
             }

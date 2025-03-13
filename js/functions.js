@@ -49,6 +49,16 @@ function verifyInput(input, from) {
         }
         return true;
     }
+    if (from == "StartTime") {
+        const intInput = parseInt(input);
+        if (isNaN(intInput) || input != '' + intInput) {
+            return false;
+        }
+        if (intInput < 0) {
+            return false;
+        }
+        return true;
+    }
     if (from == "Category") {
         if (input.includes("<") || input.includes(">") || input.includes("!") || input.includes("?") 
             || input.includes("/") || input.includes("\\") || input.includes("\"") || input.includes("\'") 
@@ -296,7 +306,7 @@ function validateYoutubeObject(obj) {
         videoData === null ||
         !videoData.hasOwnProperty('title') ||
         !videoData.hasOwnProperty('category') || 
-        Object.keys(videoData).length > 2
+        Object.keys(videoData).length > 3
       ) {
         return false; 
       }
