@@ -6,19 +6,17 @@ use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 use React\Socket\SecureServer;
+use React\Socket\SocketServer;
 use React\Socket\TcpServer;
 
 $env = parse_ini_file(".env");
-
-$loop = Factory::create();
-
 $port = '8000';
 
+/*$loop = Factory::create();
+
 $tcp = new TcpServer('127.0.0.1:'.$port, $loop);
-
-
 
 $secureTcp = new SecureServer($tcp, $loop, [
     'local_cert' => $env["SSL_CERT"],
@@ -26,7 +24,22 @@ $secureTcp = new SecureServer($tcp, $loop, [
     'verify_peer' => false,
     'verify_peer_name' => false,
     'allow_self_signed' => false
-]);
+]);*/
+
+$loop =  Loop::get();
+$webSock = new SocketServer('0.0.0.0:'.$port);
+
+$secureWebSock = new SecureServer(
+    $webSock,
+    $loop,
+    [
+        'local_cert' => $env["SSL_CERT"],
+        'local_pk' => $env["SSL_KEY"],
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => false
+    ]
+);
 
 $logFile = '/var/log/websocket/websocket.log';
 
@@ -268,7 +281,7 @@ $server = new IoServer(
             new ServerImpl()
         )
     ),
-    $secureTcp,
+    $secureWebSock,
     $loop
 );
 echo "Server created on port $port\n\n";
