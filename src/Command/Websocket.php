@@ -28,7 +28,7 @@ class Websocket extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $host = '0.0.0.0';
+        $host = '127.0.0.1';
         $port = 9000;
         
         $masterComponent = new MasterComponent(); 

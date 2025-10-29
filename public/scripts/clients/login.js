@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    const socket = new WebSocket("http://localhost:9000");
+    const socket = new WebSocket("wss://blindtest.jorismartin.fr/ws");
     socket.onmessage = (e) => {
         const datas = e.data;
         const response = JSON.parse(datas);
