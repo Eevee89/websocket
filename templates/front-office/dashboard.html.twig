@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/styles/dashboard.css">
+{% endblock %}
+
+{% block body %}
+<div class="topbar glassmorph text-dark">
+    <div class="row">
+        <div class="col-12 d-flex flex-column justify-content-center">
+            <div class="row justify-content-between align-items-center px-3 py-2">
+                <div class="col-10 d-flex flex-column justify-content-center align-items-start">
+                    <h1>ROOM {{ room }}</h1>
+                </div>
+                <div class="col-2 d-flex flex-column justify-content-center align-items-end">
+                    <h1 class="btn-ready disabled success">Prêt</h1>
+                </div>
+            </div>
+            <div id="playersReady" class="row justify-content-between align-items-center px-3 py-2 d-md-none">
+                <div class="col-8 d-flex flex-column justify-content-center align-items-start">
+                    <h1>Joueurs prêts</h1>
+                </div>
+                <div class="col-4 d-flex flex-column justify-content-center align-items-end">
+                    <h1>00/20</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tab-content dashboard">
+    <div id="tabInfosContent" role="tabpanel" aria-labelledby="tab-infos" class="tab-pane fade dashboard-col m-0">
+        <div class="d-flex flex-column justify-content-between h-100 w-100">
+            <div class="sub glassmorph d-flex flex-row justify-content-around align-items-center" style="height: 10%">
+                <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                    <div id="selectedColor" class="big-round d-flex flex-column justify-content-center align-items-center" data-value=""></div>
+                </div>
+                <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                    <input id="teamInput" type="text" placeholder="Equipe" class="input--modific"></input>
+                </div>
+                <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                    <div class="big-round d-flex flex-column justify-content-center align-items-center">
+                        <span id="selectedBuzzer" class="info-span" data-value=""></span>
+                    </div>
+                </div>
+            </div>
+            <div class="sub glassmorph d-flex flex-column align-items-center" style="height: 40%">
+                <div class="row info-title-row align-items-center" style="height: 20%">
+                    <span class="info-span">Buzzer</span>
+                </div>
+                <div class="row justify-content-center align-items-center info-content-row w-100 p-0" style="height: 75%">
+                    <div class="col-12 d-flex flex-column align-items-center justify-content-around h-100">
+                        {% set sounds = ["amongus", "anime_wow", "auughhh", "chocapic", "discord_notif", "error_xp", "fart", "goofy_run", "meow", "pew", "pornhub", "rizz", "roblox_death", "sncf", "uwu"] %}
+                        {% for i in 0..2 %}
+                        <div class="row w-100 justify-content-around">
+                            {% for j in 1..5 %}
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <div class="big-round d-flex flex-column justify-content-center align-items-center btn-sound" data-id={{ 5 * i + j-1 }}>
+                                    <span class="info-span">{{ 5 * i + j }}</span>
+                                    <audio hidden>
+                                        <source src={{ ["/sounds/", sounds[5 * i + j-1], ".mp3"]|join }} type: "audio/mpeg"></source>
+                                    </audio>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="sub glassmorph d-flex flex-column align-items-center" style="height: 40%">
+                <div class="row info-title-row align-items-center" style="height: 20%">
+                    <span class="info-span">Couleur</span>
+                </div>
+                <div class="row justify-content-center align-items-center info-content-row w-100 p-0" style="height: 75%">
+                    <div class="col-12 d-flex flex-column align-items-center justify-content-around h-100">
+                        {% set colors = ['#fe447d', '#f78f2e', '#fedc0c', '#d1f20a', '#5cd05b', '#03c1cd', '#0e10e6', '#9208e7', '#f84c00', '#f3f354', '#ff0000', '#800080', '#8B4513', '#FFD700', '#C0C0C0'] %}
+                        {% for i in 0..2 %}
+                        <div class="row w-100 justify-content-around">
+                            {% for j in 1..5 %}
+                            <div class="col-2 d-flex flex-column justify-content-center align-items-center">
+                                <div class="big-round btn-color" data-color={{ colors[5 * i + j-1] }} style={{ ["background-color:", colors[5 * i + j-1]]|join  }}>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const iAmMaster = {{ master }} === 1;
+    const thisRoom = {{ room }};
+    const token = '{{ token }}';
+</script>
+<script src="/scripts/clients/dashboard.js"></script>
+<script src="/scripts/front-office/dashboard.js"></script>
+{% endblock %}

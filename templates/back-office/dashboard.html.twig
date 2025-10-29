@@ -1,0 +1,170 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/styles/dashboard.css">
+{% endblock %}
+
+{% block body %}
+<div class="topbar glassmorph text-dark">
+    <div class="row">
+        <div class="col-12 d-flex flex-column justify-content-between">
+            <div class="row justify-content-between align-items-center px-3 py-2">
+                <div class="col-10 d-flex flex-column justify-content-center align-items-start">
+                    <h1>ROOM {{ room }}</h1>
+                </div>
+                <div class="col-2 d-flex flex-column justify-content-center align-items-end">
+                    <h1 class="btn-go disabled" data-redirect-url="{{ path('app_game', { 'room': room }) }}">GO!</h1>
+                </div>
+            </div>
+            <ul class="nav nav-tabs d-flex d-md-none flex-row justify-content-between">
+                <li class="nav-item">
+                    <button
+                        id="tab-playlist" 
+                        class="nav-link active" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#tabPlaylistContent" 
+                        type="button" 
+                        role="tab" 
+                        aria-controls="tabPlaylistContent" 
+                        aria-selected="true"
+                    > Playlist
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button
+                        id="tab-infos" 
+                        class="nav-link" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#tabInfosContent" 
+                        type="button" 
+                        role="tab" 
+                        aria-controls="tabInfosContent" 
+                        aria-selected="true"
+                    > Infos
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button
+                        id="tab-players" 
+                        class="nav-link" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#tabPlayersContent" 
+                        type="button" 
+                        role="tab" 
+                        aria-controls="tabPlayersContent" 
+                        aria-selected="true"
+                    > Joueurs
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="tab-content dashboard">
+    <div id="tabPlaylistContent" role="tabpanel" aria-labelledby="tab-playlist" class="tab-pane fade show active dashboard-col glassmorph m-0">
+        <div class="d-flex flex-column align-items-center h-100 w-100 p-1">
+            <div id="videoListTopBar" class="row justify-content-around align-items-center">
+                <span class="info-span">Playlist</span>
+            </div>
+            <ul id="videoList" class="list-group sortable-list p-1">
+                {% for video in videos %}
+                <li class="list-group-item d-flex flex-column sortable-item"
+                    draggable="true" 
+                    data-video='{{ video.video }}' 
+                    data-title='{{ video.title }}'
+                    data-category='{{ video.category }}',
+                    data-points='{{ video.points }}'
+                >
+                    <div class="row">
+                        <div class="col-4 p-0 ps-1">
+                            <img class="video-thumbnail" src="https://img.youtube.com/vi/{{video.video}}/mqdefault.jpg" alt="Miniature YouTube" data-src="https://img.youtube.com/vi/{{video.video}}/mqdefault.jpg"/>
+                        </div>
+                        <div class="col-8 d-flex flex-column justify-content-center">
+                            <div class="row justify-content-end align-items-center pr-2">
+                                <span class="badge bg-secondary item-number-label striped-info mr-2"></span>
+                                <i class="fa fa-solid fa-circle-info info ms-2 mr-2 btn-info"></i>
+                                <i class="fa fa-solid fa-pen warning ms-2 mr-2 btn-edit"></i>
+                                <i class="fa fa-solid fa-trash danger ms-2 btn-delete"></i>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div id="videoListBottomBar" class="row justify-content-around align-items-center">
+                <i class="fa fa-solid fa-plus success btn-add"></i>
+                <i class="fa fa-solid fa-eye-slash warning btn-hide"></i>
+                <i class="fa fa-solid fa-shuffle warning btn-shuffle"></i>
+                <i class="fa fa-solid fa-download info btn-download"></i>
+                <i class="fa fa-solid fa-upload info btn-upload"></i>
+                <i class="fa fa-solid fa-trash danger btn-delete-all"></i>
+            </div>
+        </div>
+    </div>
+    <div id="tabInfosContent" role="tabpanel" aria-labelledby="tab-infos" class="tab-pane fade dashboard-col m-0">
+        <div class="d-flex flex-column justify-content-between h-100 w-100">
+            <div class="sub glassmorph d-flex flex-column justify-content-around align-items-center">
+                <span id="nbTrack" class="info-span"><i class="fa fa-solid fa-music info mx-3"></i>0</span>
+                <span id="maxScore" class="info-span"><i class="fa fa-solid fa-ranking-star info mx-3"></i>0 pts</span>
+                <span id="avgTime" class="info-span"><i class="fa fa-solid fa-clock info mx-3"></i>0min</span>
+            </div>
+            <div class="sub glassmorph d-flex flex-column align-items-center">
+                <div class="row info-title-row align-items-center">
+                    <span class="info-span">Temps de réflexion</span>
+                </div>
+                <div class="row justify-content-around align-items-center info-content-row">
+                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <i class="fa fa-solid fa-minus danger btn-rem-guessing"></i>
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <span id="guessingTime" class="info-span">20</span>
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <i class="fa fa-solid fa-plus success btn-add-guessing"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="sub glassmorph d-flex flex-column align-items-center">
+                <div class="row info-title-row align-items-center">
+                    <span class="info-span">Temps d'interlude</span>
+                </div>
+                <div class="row justify-content-around align-items-center info-content-row">
+                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <i class="fa fa-solid fa-minus danger btn-rem-cooldown"></i>
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <span id="cooldownTime" class="info-span">10</span>
+                    </div>
+                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                        <i class="fa fa-solid fa-plus success btn-add-cooldown"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tabPlayersContent" role="tabpanel" aria-labelledby="tab-players" class="tab-pane fade dashboard-col glassmorph m-0">
+        <div class="d-flex flex-column align-items-center h-100 w-100 p-1">
+            <div id="playerListTopBar" class="row justify-content-around align-items-center">
+                <span class="info-span">Joueurs</span>
+            </div>
+            <ul id="playerList" class="list-group sortable-list p-1"></ul>
+        </div>
+    </div>
+</div>
+
+{% include './back-office/edit-video.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const iAmMaster = {{ master }} === 1;
+    const thisRoom = {{ room }};
+    const token = '{{ token }}';
+    const editVideoUrl = '{{ path("edit_video") }}';
+    const delVideoUrl = '{{ path("delete_video") }}';
+    const editHideUrl = '{{ path("edit_hide_time") }}';
+</script>
+<script src="/scripts/clients/dashboard.js"></script>
+<script src="/scripts/back-office/dashboard.js"></script>
+{% endblock %}

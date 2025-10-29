@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/styles/login.css">
+{% endblock %}
+
+{% block body %}
+<div id="body">
+    <div class="glassmorph container text-dark">
+        {{ form_start(form, {'attr': {'class': 'row justify-content-md-center align-items-center'}}) }}
+
+            <div id="two" class="col-md-10 col-ms-4 rounded-1 py-2 my-1">
+                {{ form_label(form.roomId) }}
+                {{ form_widget(form.roomId) }}
+                {{ form_errors(form.roomId) }}
+            </div>
+
+            <div id="three" class="col-md-10 col-ms-10 rounded-1 py-2 my-1">
+                {{ form_label(form.pseudo) }}
+                {{ form_widget(form.pseudo) }}
+                {{ form_errors(form.pseudo) }}
+            </div>
+
+            <div id="four" class="row justify-content-md-around col-md-10 col-ms-7 rounded-1 mb-2">
+                {{ form_widget(form.create_room, {'attr': {'class': 'd-none'}}) }}
+                {{ form_widget(form.join_room, {'attr': {'class': 'd-none'}}) }}
+                <button id="create-room-btn" type="button" class="btn btn-secondary col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button striped-success">
+                    Créer une partie
+                </button>
+
+                <button id="join-room-btn" type="button" class="btn btn-secondary col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button striped-warning">
+                    Rejoindre une partie
+                </button>
+            </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    const token = '{{ token }}';
+</script>
+<script src="/scripts/clients/login.js"></script>
+{% endblock %}

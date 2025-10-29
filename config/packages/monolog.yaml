@@ -1,0 +1,16 @@
+monolog:
+    channels: ['websocket', 'room_*']
+
+    handlers:
+        websocket_rooms:
+            type: rotating_file
+            path: '%kernel.logs_dir%/websocket-%kernel.environment%.log'
+            level: info
+            max_files: 30
+            channels: ['websocket', 'room_*'] 
+
+        main:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            level: debug
+            channels: ["!websocket", "!room_*"]

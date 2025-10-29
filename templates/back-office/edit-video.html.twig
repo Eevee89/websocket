@@ -1,0 +1,43 @@
+<div id="editVideoModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header striped-info">
+                <div class="col-10">
+                    <h5 id="modal-title" class="modal-title">Information sur la vidéo</h5>
+                </div>
+                <div class="col-2">
+                    <img id="thumbnail" src="/images/default.jpg" alt=""/>
+                </div>
+            </div>
+            <div class="modal-body striped-info-light">
+                <div class="container text-dark">
+                    <div class="row justify-content-md-center align-items-center">
+                        <div id="one" class="col-md-12 col-ms-4 rounded-1 py-2 my-1">
+                            <label for="url" class="form-label">URL</label>
+                            <input type="url" class="form-control input--modific" id="url" disabled required>
+                        </div>
+                        <div id="two" class="col-md-12 col-ms-4 rounded-1 py-2 my-1">
+                            <label for="title" class="form-label">Titre custom</label>
+                            <input type="text" class="form-control input--modific" id="title" disabled required>
+                        </div>
+                        <div id="three" class="col-md-12 col-ms-4 rounded-1 py-2 my-1">
+                            <div class="row justify-content-md-center align-items-center">
+                                <div class="col-md-8 col-ms-4 rounded-1 py-2 my-1">
+                                    <label for="category" class="form-label">Catégorie</label>
+                                    <input type="text" class="form-control input--modific" id="category" disabled required>
+                                </div>
+                                <div class="col-md-4 col-ms-4 rounded-1 py-2 my-1">
+                                    <label for="points" class="form-label">Points</label>
+                                    <input type="number" min="-2" max="10" class="form-control input--modific" id="points" disabled required>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="four" class="row justify-content-md-around col-md-10 col-ms-7 rounded-1 mb-2">
+                            <button id="submitBtn" type="btn" class="btn btn-secondary col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button">Modifier</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

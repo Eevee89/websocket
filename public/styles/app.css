@@ -1,0 +1,228 @@
+:root {
+    /* Color Variables */
+    --success: #5F5;
+    --success-shade: #5C5;
+    --success-light: #7F7;
+    --success-light-shade: #7C7;
+
+    --info: #55F;
+    --info-shade: #55C;
+    --info-light: #77F;
+    --info-light-shade: #77C;
+
+    --warning: #FF5;
+    --warning-shade: #CC5;
+    --warning-light: #FF7;
+    --warning-light-shade: #CC7;
+
+    --danger: #F55;
+    --danger-shade: #C55;
+    --danger-light: #F77;
+    --danger-light-shade: #C77;
+
+    --dark: #222;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.success {
+    color: var(--success);
+}
+
+.info {
+    color: var(--info);
+}
+
+.warning {
+    color: var(--warning);
+}
+
+.danger {
+    color: var(--danger);
+}
+
+.striped-success {
+    background: repeating-linear-gradient(-45deg,
+            var(--success),
+            var(--success) 20px,
+            var(--success-shade) 20px,
+            var(--success-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-success-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--success-light),
+            var(--success-light) 20px,
+            var(--success-light-shade) 20px,
+            var(--success-light-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-info {
+    background: repeating-linear-gradient(-45deg,
+            var(--info),
+            var(--info) 20px,
+            var(--info-shade) 20px,
+            var(--info-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-info-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--info-light),
+            var(--info-light) 20px,
+            var(--info-light-shade) 20px,
+            var(--info-light-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-warning {
+    background: repeating-linear-gradient(-45deg,
+            var(--warning),
+            var(--warning) 20px,
+            var(--warning-shade) 20px,
+            var(--warning-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-warning-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--warning-light),
+            var(--warning-light) 20px,
+            var(--warning-light-shade) 20px,
+            var(--warning-light-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-danger {
+    background: repeating-linear-gradient(-45deg,
+            var(--danger),
+            var(--danger) 20px,
+            var(--danger-shade) 20px,
+            var(--danger-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-danger-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--danger-light),
+            var(--danger-light) 20px,
+            var(--danger-light-shade) 20px,
+            var(--danger-light-shade) 40px);
+    color: var(--dark);
+}
+
+.glassmorph {
+    background-color: #FDFEFF47;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.input--modific {
+    border: none;
+    border-bottom: solid #FFF 3px;
+    border-radius: 2px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: transparent;
+}
+
+.input--modific:focus {
+    border: none;
+    border-bottom: transparent;
+    background-color: #F0F0F0DE;
+}
+
+.container {
+    height: auto;
+    width: 95% !important;
+    border-radius: 20px;
+    max-width: none !important;
+}
+
+.form__button {
+    margin: 0 30%;
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+}
+
+h1,
+h5,
+label,
+input,
+#countdown {
+    font-family: "Fredoka", sans-serif;
+}
+
+.info-span {
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn,
+.btn:hover {
+    color: var(--dark);
+    font-family: "Fredoka", sans-serif;
+}
+
+.sortable-list {
+    list-style: none;
+}
+
+.sortable-item {
+    cursor: grab;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.2s, transform 0.2s;
+}
+
+.sortable-item:hover {
+    background: #E8F0FF;
+    transform: scale(1.01);
+}
+
+.dragging {
+    opacity: 0.7;
+    transform: rotate(-2deg);
+}
+
+.over {
+    border: 2px dashed #FF8C42;
+    background: #FFF3E0;
+}
+
+.badge {
+    width: auto;
+    height: 2em;
+}
+
+.fa {
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.info-span .fa {
+    font-size: 1.5em;
+}
+
+.not-ready {
+    border: var(--bs-list-group-border-width) solid var(--danger);
+}
+
+.ready {
+    border: var(--bs-list-group-border-width) solid var(--success);
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 50% !important;
+    }
+}

@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+
+.topbar {
+    width: 100vw;
+    height: 15vh;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.tab-content {
+    overflow: hidden;
+}
+
+.game {
+    width: 100vw;
+    height: 85vh;
+}
+
+.game-col {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.game-col .sub {
+    height: 30%;
+    border-radius: 20px;
+}
+
+.info-title-row {
+    height: 30%;
+}
+
+.info-content-row {
+    height: 70%;
+}
+
+#videoList,
+#playerList {
+    width: 100%;
+    height: 80%;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-scrollbar: none;
+}
+
+#playerList {
+    height: 100%;
+    border-bottom: none;
+}
+
+#videoListTopBar,
+#playerListTopBar {
+    width: 100%;
+    height: 10%;
+    border-radius: 20px 20px 0 0;
+    border-bottom: 1px #000 solid;
+}
+
+#videoListBottomBar {
+    width: 100%;
+    height: 10%;
+    border-radius: 0 0 20px 20px;
+    border-top: 1px #000 solid;
+}
+
+.list-group-item,
+.list-group-item:hover,
+.list-group-item:focus {
+    background-color: transparent !important;
+}
+
+img {
+    width: 100%;
+    object-fit: scale-down;
+    border-radius: 5px;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.btn-go {
+    color: var(--success);
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: 0.5;
+    color: var(--danger);
+    cursor: default;
+}
+
+.round {
+    width: 1em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.player {
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+}
+
+.nav {
+    border: none !important;
+}
+
+.nav-item {
+    width: 30%;
+}
+
+.nav-link {
+    width: 100%;
+    border: none !important;
+    color: #222 !important;
+}
+
+.nav-link.active {
+    background-color: #55F !important;
+    border: 1px solid #55C !important;
+    border-radius: 5px !important;
+}
+
+@media (min-width: 768px) {
+    .topbar {
+        height: 10vh;
+    }
+
+    .dashboard,
+    .game {
+        height: 90vh;
+    }
+}
+
+#player {
+    border-radius: 10px;
+}
+
+.answerRow {
+    height: 20%;
+}
+
+#timer {
+    height: 50%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 5px var(--danger) solid;
+    background-color: var(--info);
+    z-index: 2;
+}
+
+#countdown {
+    z-index: 1;
+    font-size: 8rem;
+    color: var(--danger);
+    font-weight: bold;
+    cursor: default;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.sound {
+    width: 21%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--success);
+}
