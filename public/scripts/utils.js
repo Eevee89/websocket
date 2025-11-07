@@ -119,3 +119,39 @@ function gradientColorsCompute(n) {
 
     return gradientColors;
 }
+
+function showToast(elementId) {
+    const toastEl = document.getElementById(elementId);
+    if (toastEl) {
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    }
+}
+
+function showSuccessToast(message = "") {
+    if (message) {
+        $("#successToast").find(".toast-message").text(message);
+    }
+    showToast('successToast');
+}
+
+function showErrorToast(message = "") {
+    if (message) {
+        $("#errorToast").find(".toast-message").text(message);
+    }
+    showToast('errorToast');
+}
+
+function showWarningToast(message = "") {
+    if (message) {
+        $("#warningToast").find(".toast-message").text(message);
+    }
+    showToast('warningToast');
+}
+
+function showInfoToast(message = "") {
+    if (message) {
+        $("#infoToast").find(".toast-message").text(message);
+    }
+    showToast('infoToast');
+}

@@ -26,6 +26,11 @@
     </head>
     <body class="striped-info-light">
         {% block body %}{% endblock %}
+
+        {% include '/toast/success.html.twig' %}
+        {% include '/toast/error.html.twig' %}
+        {% include '/toast/warning.html.twig' %}
+        {% include '/toast/info.html.twig' %}
     </body>
 
     <style>

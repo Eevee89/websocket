@@ -33,16 +33,32 @@ body {
     color: var(--success);
 }
 
+.success-bg {
+    background-color: var(--success);
+}
+
 .info {
     color: var(--info);
+}
+
+.info-bg {
+    background-color: var(--info);
 }
 
 .warning {
     color: var(--warning);
 }
 
+.warning-bg {
+    background-color: var(--warning);
+}
+
 .danger {
     color: var(--danger);
+}
+
+.danger-bg {
+    background-color: var(--danger);
 }
 
 .striped-success {

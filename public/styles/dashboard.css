@@ -81,8 +81,7 @@ img {
     -ms-user-select: none;
 }
 
-.btn-go {
-    color: var(--success);
+.btn-go, .btn-ready {
     cursor: pointer;
 }
 

@@ -25,6 +25,8 @@ $(document).ready(() => {
 
         window.mySocket.send(message);
         console.log("SEND: " + message);
+
+        showSuccessToast("Joueur prêt");
     });
 });
 

@@ -84,12 +84,12 @@ $(document).ready(() => {
                 showErrorSwal("Impossible de se mettre prêt", response.message);
                 return;
             }
-            
+
             const datas = response.datas;
             if (iAmMaster) {
                 const player = $("li[data-pseudo='" + datas.pseudo + "']");
-                player.closest(".round").css("background-color", datas.color);
-                player.closest(".info-span").text(`[${datas.team}] ${datas.pseudo}`)
+                player.find(".round").css("background-color", datas.color);
+                player.find(".info-span").text(`[${datas.team}] ${datas.pseudo}`)
                 player.removeClass("not-ready").addClass("ready").data("color", datas.color);
 
                 if (everyoneReady()) {
