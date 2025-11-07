@@ -80,6 +80,11 @@ $(document).ready(() => {
         }
 
         if (response.route === "room/ready") {
+            if (!response.success) {
+                showErrorSwal("Impossible de se mettre prêt", response.message);
+                return;
+            }
+            
             const datas = response.datas;
             if (iAmMaster) {
                 const player = $("li[data-pseudo='" + datas.pseudo + "']");
