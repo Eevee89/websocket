@@ -3,6 +3,7 @@ $(document).ready(() => {
     window.mySocket.onmessage = (e) => {
         const datas = e.data;
         const response = JSON.parse(datas);
+        console.log(response);
 
         if (response.route === "login") {
             console.log("HERE");
@@ -81,7 +82,10 @@ $(document).ready(() => {
         if (response.route === "room/ready") {
             const datas = response.datas;
             if (iAmMaster) {
-                $("li[data-pseudo='" + datas.pseudo + "']").removeClass("not-ready").addClass("ready");
+                const player = $("li[data-pseudo='" + datas.pseudo + "']");
+                player.closest(".round").css("background-color", datas.color);
+                player.closest(".info-span").text(`[${datas.team}] ${datas.pseudo}`)
+                player.removeClass("not-ready").addClass("ready").data("color", datas.color);
 
                 if (everyoneReady()) {
                     $(".btn-go").removeClass("disabled");

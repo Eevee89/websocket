@@ -97,6 +97,7 @@ class AppController extends AbstractController
         if ($session->get("isMaster")) {
             return $this->render("back-office/dashboard.html.twig", [
                 "room" => $room,
+                "pseudo" => $session->get("pseudo"),
                 "hide" => $session->get("hideTime") ?? 20,
                 "master" => 1,
                 "token" => $session->get("user"),
@@ -106,6 +107,7 @@ class AppController extends AbstractController
 
         return $this->render("front-office/dashboard.html.twig", [
             "room" => $room,
+            "pseudo" => $session->get("pseudo"),
             "hide" => $session->get("hideTime") ?? 20,
             "master" => 0,
             "token" => $session->get("user"),
