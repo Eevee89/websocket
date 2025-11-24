@@ -15,6 +15,7 @@ class Room
     {
         $this->master = $master;
         $this->id = $id;
+        $this->players = [];
     }
 
     public function getId(): string
@@ -105,7 +106,7 @@ class Room
         return $this;
     }
 
-    public function removePlayerWithPseudo(string $pseudo): self
+    public function removePlayerWithPseudo(string $pseudo): string
     {
         $index = -1;
         foreach ($this->players as $key => $player) {
@@ -116,11 +117,12 @@ class Room
         }
 
         if (-1 === $index) {
-            return $this;
+            return "";
         }
 
-        $this->players[$index];
-        return $this;
+        $token = $this->players[$index]->getToken();
+        unset($this->players[$index]);
+        return $token;
     }
 
     public function getPlayersToken(): array

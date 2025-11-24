@@ -182,7 +182,7 @@ class MasterComponent implements MessageComponentInterface
         $this->rooms = $result;
 
         echo json_encode($this->rooms) . "\n";
-        $masterToken = $this->rooms[$datas["room"]]["master"];
+        $masterToken = $this->rooms[$datas["room"]]->getMaster()->getToken();
         $master = $this->activeConnections[$masterToken];
         $master->send(Response::success('room/join', [
             "pseudo" => $datas["pseudo"],
@@ -204,7 +204,7 @@ class MasterComponent implements MessageComponentInterface
         $this->rooms = $result;
 
         echo json_encode($this->rooms) . "\n";
-        $masterToken = $this->rooms[$datas["room"]]["master"];
+        $masterToken = $this->rooms[$datas["room"]]->getMaster()->getToken();
         $master = $this->activeConnections[$masterToken];
         $master->send(Response::success('room/ready', [
             "pseudo" => $datas["pseudo"],
@@ -255,7 +255,7 @@ class MasterComponent implements MessageComponentInterface
         }
         unset($datas['room']);
         $room = $this->rooms[$room];
-        $datas["isMaster"] = $from->token === $room["master"];
+        $datas["isMaster"] = $room->isMaster($from->token);
 
         if (!$datas["isMaster"] && !isset($datas["pseudo"]) || empty($datas["pseudo"])) {
             $from->send(Response::error($route, 'Missing mandatory \'pseudo\' field.'));

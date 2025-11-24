@@ -164,8 +164,15 @@ class RoomComponent
             return ['error' => 'Only master of a room can kick out from it'];
         }
 
-        $room->removePlayerWithPseudo($datas["player"]);
+        $token = $room->removePlayerWithPseudo($datas["player"]);
+        if ("" === $token) {
+            return ['error' => 'This player is not in the room'];
+        }
+
         $rooms[$roomId] = $room;
-        return $rooms;
+        return [
+            "rooms" => $rooms,
+            "token" => $token
+        ];
     }
 }
