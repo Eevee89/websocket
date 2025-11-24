@@ -9,8 +9,12 @@ use SplObjectStorage;
 use App\Websocket\ResponseComponent as Response;
 use App\Websocket\RoomComponent;
 
+use App\Entity\Player;
+use App\Entity\Room;
+
 class MasterComponent implements MessageComponentInterface
 {
+    /** @var Room[] $rooms */
     private array $rooms = [];
     private array $activeConnections = [];
     protected SplObjectStorage $clients;
@@ -119,7 +123,7 @@ class MasterComponent implements MessageComponentInterface
             $this->rooms = $result;
 
             foreach($this->clients as $client) {
-                if (in_array($client->token, array_keys($room))) {
+                if (in_array($client->token, $room->getPlayersToken())) {
                     $client->send(Response::success('room/delete'));
                 }
             }
@@ -158,7 +162,7 @@ class MasterComponent implements MessageComponentInterface
         $this->rooms = $result;
 
         foreach($this->clients as $client) {
-            if (in_array($client->token, array_keys($room))) {
+            if (in_array($client->token, $room->getPlayersToken())) {
                 $client->send(Response::success('room/delete'));
             }
         }
@@ -259,7 +263,7 @@ class MasterComponent implements MessageComponentInterface
         }
 
         foreach ($this->clients as $client) {
-            if ($client->token !== $from->token && in_array($client->token, array_keys($room))) {
+            if ($client->token !== $from->token && in_array($client->token, $room->getPlayersToken())) {
                 $client->send(Response::success($route, $datas));
             }
         }

@@ -82,6 +82,7 @@ img {
 }
 
 .btn-go, .btn-ready {
+    color: var(--success);
     cursor: pointer;
 }
 

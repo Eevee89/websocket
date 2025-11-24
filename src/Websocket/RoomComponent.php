@@ -3,38 +3,47 @@
 namespace App\Websocket;
 
 use Ratchet\ConnectionInterface;
+use App\Entity\Player;
+use App\Entity\Room;
 
 class RoomComponent
 {
+    /**
+     * @param ConnectionInterface $from
+     * @param array $datas
+     * @param Room[] $rooms
+     */
     public static function create(ConnectionInterface $from, array $datas, array $rooms): array
     {
         if (!isset($datas["pseudo"]) || empty($datas["pseudo"])) {
             return ['error' => 'Missing mandatory \'pseudo\' field.'];
         }
 
-        $master = $from->token;
+        $masterToken = $from->token;
 
         $roomsId = [];
-        foreach ($rooms as $key => $val) {
-            if ($val["master"] === $master) {
+        foreach ($rooms as $key => $room) {
+            if ($room->isMaster($masterToken)) {
                 return ['error' => 'Already master of a room'];
             }
             $roomsId[] = $key;
         }
 
-        $room = random_int(0, 999999);
-        while (in_array($room, $roomsId)) {
-            $room = random_int(0, 999999);
+        $roomId = random_int(0, 999999);
+        while (in_array($roomId, $roomsId)) {
+            $roomId = random_int(0, 999999);
         }
-
+        $master = new Player($masterToken, $datas["pseudo"]);
         return [
-            $room => [
-                "master" => $master,
-                $master => $datas["pseudo"]
-            ]
+            $roomId => new Room($roomId, $master)
         ];
     }
 
+    /**
+     * @param ConnectionInterface $from
+     * @param array $datas
+     * @param Room[] $rooms
+     */
     public static function delete(ConnectionInterface $from, array $datas, array $rooms): array
     {
         if (!isset($datas["room"]) || empty($datas["room"])) {
@@ -46,7 +55,7 @@ class RoomComponent
             return ['error' => 'The room doesn\'t exist'];
         }
 
-        if ($rooms[$room]["master"] !== $from->token) {
+        if (!$rooms[$room]->isMaster($from->token)) {
             return ['error' => 'Only the master of a room can delete it'];
         }
 
@@ -54,6 +63,11 @@ class RoomComponent
         return $rooms;
     }
 
+    /**
+     * @param ConnectionInterface $from
+     * @param array $datas
+     * @param Room[] $rooms
+     */
     public static function join(ConnectionInterface $from, array $datas, array $rooms): array
     {
         if (!isset($datas["room"]) || empty($datas["room"])) {
@@ -63,44 +77,36 @@ class RoomComponent
             return ['error' => 'Missing mandatory \'pseudo\' field.'];
         }
 
-        $room = $datas["room"];
-        if (!isset($rooms[$room])) {
+        $roomId = $datas["room"];
+        if (!isset($rooms[$roomId])) {
             return ['error' => 'The room doesn\'t exist'];
         }
 
         $playerToken = $from->token;
-        if ($rooms[$room]["master"] === $playerToken) {
+        $room = $rooms[$roomId];
+        if ($room->isMaster($playerToken)) {
             return ['error' => 'Master cannot join the room as player'];
         }
 
-        if (in_array($playerToken, array_keys($rooms[$room]))) {
-            return ['error' => 'Already joined the room'];
+        $player = new Player($playerToken, $datas["pseudo"]);
+        $res = $room->addPlayer($player);
+        if ("" !== $res) {
+            return ['error' => $res];
         }
 
-        foreach($rooms[$room] as $key => $player) {
-            if ($key === "master" || $key === $rooms[$room]["master"]) {
-                continue;
-            }
-
-            if ($player["pseudo"] === $datas["pseudo"]) {
-                return ['error' => 'Pseudo already taken'];
-            }
-        }
-
-        $rooms[$room][$playerToken] = [
-            "pseudo" => $datas["pseudo"],
-            "ready" => false
-        ];
+        $rooms[$roomId] = $room;
         return $rooms;
     }
 
+    /**
+     * @param ConnectionInterface $from
+     * @param array $datas
+     * @param Room[] $rooms
+     */
     public static function ready(ConnectionInterface $from, array $datas, array $rooms): array
     {
         if (!isset($datas["room"]) || empty($datas["room"])) {
             return ['error' => 'Missing mandatory \'room\' field.'];
-        }
-        if (!isset($datas["pseudo"]) || empty($datas["pseudo"])) {
-            return ['error' => 'Missing mandatory \'pseudo\' field.'];
         }
         if (!isset($datas["team"]) || empty($datas["team"])) {
             return ['error' => 'Missing mandatory \'team\' field.'];
@@ -109,70 +115,57 @@ class RoomComponent
             return ['error' => 'Missing mandatory \'color\' field.'];
         }
 
-        $room = $datas["room"];
-        if (!isset($rooms[$room])) {
+        $roomId = $datas["room"];
+        if (!isset($rooms[$roomId])) {
             return ['error' => 'The room doesn\'t exist'];
         }
 
+        $room = $rooms[$roomId];
         $playerToken = $from->token;
-        if ($rooms[$room]["master"] === $playerToken) {
+        if ($room->isMaster($playerToken)) {
             return ['error' => 'Master cannot mark as ready in the room as player'];
         }
 
-        if (!in_array($playerToken, array_keys($rooms[$room]))) {
+        if (!$room->hasPlayer($playerToken)) {
             return ['error' => 'Not in the room'];
         }
 
-        $rooms[$room][$playerToken] = [
-            "pseudo" => $datas["pseudo"],
-            "team" => $datas["team"],
-            "color" => $datas["color"],
-            "ready" => true
-        ];
+        $player = $room->getPlayer($playerToken);
+        $player->setTeam($datas["team"]);
+        $player->setColor($datas["color"]);
+        $player->setReady(true);
+
+        $room->setPlayer($player);
+        $rooms[$roomId] = $room;
         return $rooms;
     }
 
+    /**
+     * @param ConnectionInterface $from
+     * @param array $datas
+     * @param Room[] $rooms
+     */
     public static function kickOut(ConnectionInterface $from, array $datas, array $rooms): array
     {
         if (!isset($datas["room"]) || empty($datas["room"])) {
             return ['error' => 'Missing mandatory \'room\' field.'];
         }
-
         if (!isset($datas["player"]) || empty($datas["player"])) {
             return ['error' => 'Missing mandatory \'player\' field.'];
         }
 
-        $room = $datas["room"];
-        if (!isset($rooms[$room])) {
+        $roomId = $datas["room"];
+        if (!isset($rooms[$roomId])) {
             return ['error' => 'The room doesn\'t exist'];
         }
-        $room = $rooms[$room];
+        $room = $rooms[$roomId];
 
-        if ($room["master"] !== $from->token) {
+        if (!$room->isMaster($from->token)) {
             return ['error' => 'Only master of a room can kick out from it'];
         }
 
-        $token = "";
-        foreach ($room as $key => $value) {
-            if ($key === "master" || $key === $room["master"]) {
-                continue;
-            }
-
-            if ($value["pseudo"] === $datas["player"]) {
-                $token = $key;
-                break;
-            }
-        }
-
-        if (empty($token)) {
-            return ['error' => 'This player is not in this room'];
-        }
-
-        unset($room[$token]);
-        $rooms[$datas["room"]] = $room;
-        return [
-            "rooms" => $rooms,
-            "token" => $token
-        ];
+        $room->removePlayerWithPseudo($datas["player"]);
+        $rooms[$roomId] = $room;
+        return $rooms;
     }
 }
