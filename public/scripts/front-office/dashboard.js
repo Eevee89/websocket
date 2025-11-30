@@ -16,6 +16,7 @@ $(document).ready(() => {
             "route": "room/ready",
             "datas": {
                 "room": thisRoom,
+                "pseudo": pseudo,
                 "color": $("#selectedColor").data("value"),
                 "buzzer": $("#selectedBuzzer").data("value"),
                 "team": $("#teamInput").val() || ""

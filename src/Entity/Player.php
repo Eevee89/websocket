@@ -39,9 +39,9 @@ class Player
         return $this->team;
     }
 
-    public function setTeam(string $team): static
+    public function setTeam(?string $team): static
     {
-        $this->team = $team;
+        $this->team = $team ?? "";
 
         return $this;
     }

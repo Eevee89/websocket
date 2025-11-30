@@ -108,7 +108,7 @@ class RoomComponent
         if (!isset($datas["room"]) || empty($datas["room"])) {
             return ['error' => 'Missing mandatory \'room\' field.'];
         }
-        if (!isset($datas["team"]) || empty($datas["team"])) {
+        if (!isset($datas["team"])) {
             return ['error' => 'Missing mandatory \'team\' field.'];
         }
         if (!isset($datas["color"]) || empty($datas["color"])) {
@@ -131,7 +131,7 @@ class RoomComponent
         }
 
         $player = $room->getPlayer($playerToken);
-        $player->setTeam($datas["team"]);
+        $player->setTeam($datas["team"] ?? "");
         $player->setColor($datas["color"]);
         $player->setReady(true);
 
