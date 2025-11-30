@@ -10,7 +10,6 @@ class Player
     private string $team;
     private string $color = '#000000';
     private bool $ready;
-    private bool $master;
     private int $score;
     private int $room;
 
@@ -67,18 +66,6 @@ class Player
     public function setReady(bool $ready): static
     {
         $this->ready = $ready;
-
-        return $this;
-    }
-
-    public function isMaster(): bool
-    {
-        return $this->master;
-    }
-
-    public function setMaster(bool $master): static
-    {
-        $this->master = $master;
 
         return $this;
     }

@@ -23,20 +23,25 @@ class Room
         return $this->id;
     }
 
+    /**
+     * Ajoute un joueur à la salle.
+     * @param Player $newPlayer
+     * @return string|self L'instance de Room en cas de succès, ou une chaîne d'erreur.
+     */
     public function addPlayer(Player $newPlayer): string|self
     {
         $token = $newPlayer->getToken();
         $pseudo = $newPlayer->getPseudo();
 
-        if (!$token || !$pseudo) {
+        if (empty($token) || empty($pseudo)) {
             return 'Pseudo or token is empty';
         }
 
-        foreach($this->players as $player) {
+        foreach ($this->players as $player) {
             if ($player->getToken() === $token) {
                 return 'Already joined the room';
             }
-            if ($player->getPseudo() === $pseudo) {
+            if (strtolower($player->getPseudo()) === strtolower($pseudo)) {
                 return 'Pseudo already taken';
             }
         }
@@ -71,24 +76,49 @@ class Room
         return false;
     }
 
-    public function getPlayer(string $player): Player
+    /**
+     * Récupère un joueur par son jeton.
+     */
+    public function getPlayer(string $token): ?Player
     {
-        return array_find($this->players, fn ($player) => $player->getToken() === $player);
+        foreach ($this->players as $player) {
+            if ($player->getToken() === $token) {
+                return $player;
+            }
+        }
+
+        return null;
     }
 
-    public function setPlayer(Player $player): self
+    /**
+     * Met à jour un joueur existant dans la salle.
+     * @param Player $player
+     * @return string|self L'instance de Room en cas de succès, ou une chaîne d'erreur.
+     */
+    public function setPlayer(Player $player): string|self
     {
+        $found = false;
         foreach ($this->players as &$p) {
             if ($p->getToken() === $player->getToken()) {
                 $p = $player;
-                return $this;
+                $found = true;
+                break;
             }
+        }
+
+        if (!$found) {
+            return 'Player not found in the room';
         }
 
         return $this;
     }
 
-    public function removePlayerWithToken(string $token): self
+    /**
+     * Retire un joueur de la salle en utilisant son jeton.
+     * @param string $token
+     * @return string|self L'instance de Room en cas de succès, ou une chaîne d'erreur.
+     */
+    public function removePlayerWithToken(string $token): string|self
     {
         $index = -1;
         foreach ($this->players as $key => $player) {
@@ -99,34 +129,42 @@ class Room
         }
 
         if (-1 === $index) {
-            return $this;
+            return 'Player with this token is not in the room';
         }
 
-        $this->players[$index];
+        unset($this->players[$index]);
+        $this->players = array_values($this->players);
+
         return $this;
     }
 
+    /**
+     * Retire un joueur de la salle en utilisant son pseudo.
+     * @param string $pseudo
+     * @return string La chaîne du jeton du joueur retiré, ou une chaîne d'erreur.
+     */
     public function removePlayerWithPseudo(string $pseudo): string
     {
         $index = -1;
         foreach ($this->players as $key => $player) {
-            if ($player->getPseudo() === $pseudo) {
+            if (strtolower($player->getPseudo()) === strtolower($pseudo)) {
                 $index = $key;
                 break;
             }
         }
 
         if (-1 === $index) {
-            return "";
+            return 'This player is not in the room';
         }
 
         $token = $this->players[$index]->getToken();
         unset($this->players[$index]);
+        $this->players = array_values($this->players);
         return $token;
     }
 
     public function getPlayersToken(): array
     {
-        return array_map(fn ($player) => $player->getToken(), $this->players);
+        return array_map(fn(Player $player) => $player->getToken(), $this->players);
     }
 }
