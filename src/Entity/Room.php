@@ -23,7 +23,7 @@ class Room
         return $this->id;
     }
 
-    public function addPlayer(Player $newPlayer): string
+    public function addPlayer(Player $newPlayer): string|self
     {
         $token = $newPlayer->getToken();
         $pseudo = $newPlayer->getPseudo();
@@ -43,7 +43,7 @@ class Room
 
         $this->players[] = $newPlayer;
 
-        return '';
+        return $this;
     }
 
     public function getMaster(): Player

@@ -8,8 +8,6 @@ use SplObjectStorage;
 
 use App\Websocket\ResponseComponent as Response;
 use App\Websocket\RoomComponent;
-
-use App\Entity\Player;
 use App\Entity\Room;
 
 class MasterComponent implements MessageComponentInterface

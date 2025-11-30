@@ -90,11 +90,11 @@ class RoomComponent
 
         $player = new Player($playerToken, $datas["pseudo"]);
         $res = $room->addPlayer($player);
-        if ("" !== $res) {
+        if ($res instanceof string) {
             return ['error' => $res];
         }
 
-        $rooms[$roomId] = $room;
+        $rooms[$roomId] = $res;
         return $rooms;
     }
 
@@ -168,6 +168,7 @@ class RoomComponent
         if ("" === $token) {
             return ['error' => 'This player is not in the room'];
         }
+        $room = $room->removePlayerWithToken($token);
 
         $rooms[$roomId] = $room;
         return [
