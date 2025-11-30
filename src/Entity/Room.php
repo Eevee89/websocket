@@ -58,7 +58,7 @@ class Room
 
     public function isMaster(string|Player $subject): bool
     {
-        if ($subject instanceof Player) {
+        if (!is_string($subject)) {
             return $this->isMaster($subject->getToken());
         }
 

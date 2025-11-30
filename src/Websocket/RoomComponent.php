@@ -90,7 +90,7 @@ class RoomComponent
 
         $player = new Player($playerToken, $datas["pseudo"]);
         $res = $room->addPlayer($player);
-        if ($res instanceof string) {
+        if (is_string($res)) {
             return ['error' => $res];
         }
 
