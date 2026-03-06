@@ -38,13 +38,14 @@ $(document).ready(() => {
     socket.onclose = () => {
         Swal.fire({
             title: "Connexion coupée",
-            text: "La connexion avec le serveur a été interompue. Veuillez recharger la page.",
+            text: "La connexion avec le serveur a été interompue.\nVeuillez recharger la page.",
             confirmButtonText: "OK",
             color: "var(--dark)",
             customClass: {
+                containrer: 'glassmorph',
                 confirmButton: "striped-warning-light",
             },
-            background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
+            //background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
         });
 
         $("#create-room-btn").prop("disabled", true);

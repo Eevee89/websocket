@@ -1,0 +1,77 @@
+.striped-success {
+    background: repeating-linear-gradient(-45deg,
+            var(--success),
+            var(--success) 20px,
+            var(--success-shade) 20px,
+            var(--success-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-success-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--success-light),
+            var(--success-light) 20px,
+            var(--success-light-shade) 20px,
+            var(--success-light-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-info {
+    background: repeating-linear-gradient(-45deg,
+            var(--info),
+            var(--info) 20px,
+            var(--info-shade) 20px,
+            var(--info-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-info-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--info-light),
+            var(--info-light) 20px,
+            var(--info-light-shade) 20px,
+            var(--info-light-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-warning {
+    background: repeating-linear-gradient(-45deg,
+            var(--warning),
+            var(--warning) 20px,
+            var(--warning-shade) 20px,
+            var(--warning-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-warning-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--warning-light),
+            var(--warning-light) 20px,
+            var(--warning-light-shade) 20px,
+            var(--warning-light-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-danger {
+    background: repeating-linear-gradient(-45deg,
+            var(--danger),
+            var(--danger) 20px,
+            var(--danger-shade) 20px,
+            var(--danger-shade) 40px);
+    color: var(--dark);
+}
+
+.striped-danger-light {
+    background: repeating-linear-gradient(-45deg,
+            var(--danger-light),
+            var(--danger-light) 20px,
+            var(--danger-light-shade) 20px,
+            var(--danger-light-shade) 40px);
+    color: var(--dark);
+}
+
+.glassmorph {
+    background-color: #FDFEFF47;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}

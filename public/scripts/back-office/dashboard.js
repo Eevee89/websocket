@@ -906,15 +906,15 @@ function updateItemLabels() {
         maxScore += $(items[index]).data("points");
     });
 
-    $("#nbTrack").html("<i class='fa fa-solid fa-music info mx-3'></i>" + items.length);
-    $("#maxScore").html("<i class='fa fa-solid fa-ranking-star info mx-3'></i>" + maxScore);
+    $("#nbTrack").html("<i class='fa fa-solid fa-music warning mx-3'></i>" + items.length);
+    $("#maxScore").html("<i class='fa fa-solid fa-ranking-star warning mx-3'></i>" + maxScore);
 }
 
 function computeAverageTime() {
     const items = $('#videoList .list-group-item');
 
     if (items.length === 0) {
-        $("#avgTime").html("<i class='fa fa-solid fa-clock info mx-3'></i>0min");
+        $("#avgTime").html("<i class='fa fa-solid fa-clock warning mx-3'></i>0min");
 
         return;
     }
@@ -925,5 +925,5 @@ function computeAverageTime() {
     const rest = quarters % 4;
     const hours = (quarters - rest) / 4;
 
-    $("#avgTime").html("<i class='fa fa-solid fa-clock info mx-3'></i>" + (hours ? hours + "h" : "") + rest * 15 + "min");
+    $("#avgTime").html("<i class='fa fa-solid fa-clock warning mx-3'></i>" + (hours ? hours + "h" : "") + rest * 15 + "min");
 }
