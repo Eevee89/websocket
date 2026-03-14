@@ -1,0 +1,71 @@
+const pusher = new Pusher(pusherKey, {
+    cluster: 'eu',
+    authEndpoint: urls.pusher_auth
+});
+
+const channel = pusher.subscribe(`presence-room-${thisRoom}`);
+
+channel.bind_global((eventName, data) => {
+    console.log("Événement reçu : " + eventName, data);
+});
+
+// ARRIVAL
+
+channel.bind('pusher:subscription_succeeded', (event) => {
+    console.log("Liste initiale des joueurs :", event.members);
+    const players = event.members;
+    $("#playerList").html('');
+    for (const pToken in players) {
+        if (pToken === event.myID) {
+            continue;
+        }
+        
+        const player = players[pToken];
+        const item = generatePlayerListItem(player.pseudo, player.team, player.color);
+
+        if (player.ready) {
+            item.removeClass("not-ready").addClass("ready");
+        }
+
+        $("#playerList").append(item);
+    }
+
+    if (everyoneReady()) {
+        $(".btn-go").removeClass("disabled");
+    }
+});
+
+channel.bind('pusher:member_added', (member) => {
+    const player = member.info;
+    console.log(player.pseudo + " a rejoint la partie !");
+
+    const item = generatePlayerListItem(player.pseudo, player.team, player.color);
+
+    if (player.ready) {
+        item.removeClass("not-ready").addClass("ready");
+    }
+
+    $("#playerList").append(item);
+
+    if (everyoneReady()) {
+        $(".btn-go").removeClass("disabled");
+    }
+});
+
+// DECONNECTION 
+
+channel.bind('pusher:member_removed', (member) => {
+    console.log("Le joueur " + member.info.pseudo + " est parti.");
+    $(`#player-${member.id}`).remove();
+    toastr.info(`${member.info.pseudo} a quitté la partie.`);
+});
+
+pusher.connection.bind('state_change', (states) => {
+    if (states.current === 'unavailable') {
+        showErrorSwal(
+            "Connexion perdue",
+            "Pusher ne parvient pas à vous reconnecter.\nVous serez rediriger à l'accueil",
+            () => { window.location.href = "/"; }
+        );
+    }
+});

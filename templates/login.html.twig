@@ -41,6 +41,11 @@
 {% block javascripts %}
 <script>
     const token = '{{ token }}';
+
+    const urls = {
+        create: "{{ path('room_create') }}",
+        join: "{{ path('room_join') }}"
+    };
 </script>
 <script src="/scripts/clients/login.js"></script>
 {% endblock %}

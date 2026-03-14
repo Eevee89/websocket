@@ -98,9 +98,13 @@
 <script>
     const iAmMaster = {{ master }} === 1;
     const thisRoom = {{ room }};
-    const token = '{{ token }}';
     const pseudo = '{{ pseudo }}';
+
+    const urls = {
+        room_ready: '{{ path("room_ready") }}',
+    };
 </script>
+<script src="/scripts/clients/global.js"></script>
 <script src="/scripts/clients/dashboard.js"></script>
 <script src="/scripts/front-office/dashboard.js"></script>
 {% endblock %}

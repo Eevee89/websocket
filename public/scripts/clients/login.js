@@ -1,90 +1,65 @@
 $(document).ready(() => {
-    const socket = new WebSocket("wss://blindtest.jorismartin.fr/ws");
-    socket.onmessage = (e) => {
-        const datas = e.data;
-        const response = JSON.parse(datas);
+    // --- BOUTON CRÉER ---
+    $("#create-room-btn").on('click', function (e) {
+        e.preventDefault();
 
-        if (response.route === "login") {
-            if (!response.success) {
-                showErrorSwal("Connexion au serveur impossible", response.message);
-                return;
-            }
-        }
-
-        if (response.route === "room/create") {
-            if (!response.success) {
-                showErrorSwal("Création de partie impossible", response.message);
-                return;
-            }
-
-            $("#form_roomId").val(response.datas.room);
-            $("#form_create_room").click();
+        const pseudo = $("#form_pseudo").val();
+        if (!pseudo) {
+            showErrorSwal("Champ manquant", "Veuillez saisir un pseudo.");
             return;
         }
 
-        if (response.route === "room/join") {
-            if (!response.success) {
-                showErrorSwal("Impossible de rejoindre la partie", response.message);
-                return;
-            }
-
-            $("#form_join_room").click();
-            return;
-        }
-    };
-    
-    socket.onerror = (e) => console.log(e);
-
-    socket.onclose = () => {
-        Swal.fire({
-            title: "Connexion coupée",
-            text: "La connexion avec le serveur a été interompue. Veuillez recharger la page.",
-            confirmButtonText: "OK",
-            color: "var(--dark)",
-            customClass: {
-                confirmButton: "striped-warning-light",
+        $.ajax({
+            url: urls.create,
+            method: 'POST',
+            data: {
+                pseudo: pseudo
             },
-            background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-        });
-
-        $("#create-room-btn").prop("disabled", true);
-        $("#join-room-btn").prop("disabled", true);
-    };
-
-    socket.onopen = () => {
-        const message = JSON.stringify({
-            "route": "login",
-            "datas": {
-                "token": token
+        })
+            .done(function (response) {
+                console.log(response);
+            if (response.success) {
+                $("#form_create_room").click();
+            } else {
+                showErrorSwal("Création impossible", response.message);
             }
+        })
+        .fail(function (xhr) {
+            const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
+            showErrorSwal("Erreur", errorMsg);
         });
-
-        socket.send(message);
-        console.log("SEND: " + message);
-    };
-
-    $("#create-room-btn").click(() => {
-        const message = JSON.stringify({
-            "route": "room/create",
-            "datas": {
-                "pseudo": $("#form_pseudo").val()
-            }
-        });
-
-        socket.send(message);
-        console.log("SEND: " + message);
     });
 
-    $("#join-room-btn").click(() => {
-        const message = JSON.stringify({
-            "route": "room/join",
-            "datas": {
-                "room": $("#form_roomId").val(),
-                "pseudo": $("#form_pseudo").val()
-            }
-        });
+    // --- BOUTON REJOINDRE ---
+    $("#join-room-btn").on('click', function (e) {
+        e.preventDefault();
 
-        socket.send(message);
-        console.log("SEND: " + message);
+        const roomId = $("#form_roomId").val();
+        const pseudo = $("#form_pseudo").val();
+
+        if (!roomId || !pseudo) {
+            showErrorSwal("Champs manquants", "ID de partie et pseudo requis.");
+            return;
+        }
+
+        $.ajax({
+            url: urls.create,
+            method: 'POST',
+            data: {
+                room: roomId,
+                pseudo: pseudo
+            },
+        })
+        .done(function (response) {
+            if (response.success) {
+                $("#form_join_room").click();
+            } else {
+                showErrorSwal("Impossible de rejoindre", response.message);
+            }
+        })
+        .fail(function (xhr) {
+            const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur de connexion";
+            showErrorSwal("Erreur", errorMsg);
+        });
     });
 });

@@ -91,9 +91,17 @@ $(document).on("click", ".list-group-item", async (event) => {
 });
 
 function buildPlayer(video) {
+    readyPlayersCount = 0;
+
     var opt = {
         videoId: video.video,
         events: {
+            'onReady': () => {
+                $.ajax({
+                    url: `/room/${thisRoom}/round-ready`,
+                    method: 'POST'
+                });
+            },
             'onStateChange': onPlayerStateChange,
             'onError': onPlayerError
         },

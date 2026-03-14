@@ -118,7 +118,7 @@ $(document).ready(() => {
                     }
 
                     $.ajax({
-                        url: editVideoUrl,
+                        url: urls.edit_video,
                         type: "POST",
                         data: {
                             [video]: {
@@ -140,7 +140,7 @@ $(document).ready(() => {
                 }
                 
                 $.ajax({
-                    url: editVideoUrl,
+                    url: urls.edit_video,
                     type: "POST",
                     data: {
                         [video]: {
@@ -252,7 +252,7 @@ $(document).ready(() => {
             }
 
             $.ajax({
-                url: editVideoUrl,
+                url: urls.edit_video,
                 type: "POST",
                 data: {
                     [video]: {
@@ -279,7 +279,7 @@ $(document).ready(() => {
         }
 
         $.ajax({
-            url: editVideoUrl,
+            url: urls.edit_video,
             type: "POST",
             data: {
                 [video]: {
@@ -326,7 +326,7 @@ $(document).ready(() => {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: delVideoUrl,
+                    url: urls.del_video,
                     type: "POST",
                     data: {
                         "all": 1,
@@ -407,7 +407,7 @@ $(document).ready(() => {
                                 }
 
                                 $.ajax({
-                                    url: editVideoUrl,
+                                    url: urls.edit_video,
                                     type: "POST",
                                     data: {
                                         [video]: {
@@ -429,7 +429,7 @@ $(document).ready(() => {
                             }
 
                             $.ajax({
-                                url: editVideoUrl,
+                                url: urls.edit_video,
                                 type: "POST",
                                 data: {
                                     [video]: {
@@ -543,7 +543,7 @@ $(document).ready(() => {
         }
 
         $.ajax({
-            url: editHideUrl,
+            url: urls.edit_hide,
             type: "POST",
             data: {
                 "hideTime": time - 5
@@ -566,7 +566,7 @@ $(document).ready(() => {
         const time = Number($("#guessingTime").text());
 
         $.ajax({
-            url: editHideUrl,
+            url: urls.edit_hide,
             type: "POST",
             data: {
                 "hideTime": time + 5
@@ -676,7 +676,7 @@ $(document).on("click", ".btn-delete", ((event) => {
             const video = parent.data("video");
 
             $.ajax({
-                url: delVideoUrl,
+                url: urls.del_video,
                 type: "POST",
                 data: {
                     "all": 0,
@@ -697,14 +697,27 @@ $(document).on("click", ".btn-delete", ((event) => {
 }));
 
 $(document).on('click', ".btn-kick-out", ((event) => {
-    const parent = $($(event.target).parents()[3]);
-    window.mySocket.send(JSON.stringify({
-        "route": "room/kick-out",
-        "datas": {
+    const pseudo = $($($(event.target).parents()[3])).data("pseudo");
+
+    $.ajax({
+        url: urls.kick_out,
+        method: 'POST',
+        data: {
             "room": thisRoom,
-            "player": $(parent).data("pseudo")
+            "player": pseudo
+        },
+    })
+    .done(() => {
+        $($('[data-pseudo="' + pseudo + '"]')[0]).remove();
+
+        if ($('#playerList .list-group-item').length === 0) {
+            $(".btn-go").addClass("disabled");
         }
-    }));
+    })
+    .fail(function (xhr) {
+        const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
+        showErrorSwal("Impossible de supprimer ce joueur", errorMsg);
+    });
 }));
 
 function generateVideoListItem(videoId, customTitle, category, points) {

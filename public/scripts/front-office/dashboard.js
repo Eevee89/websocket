@@ -12,21 +12,24 @@ $(document).ready(() => {
             return;
         }
 
-        const message = JSON.stringify({
-            "route": "room/ready",
-            "datas": {
+        $.ajax({
+            url: urls.room_ready,
+            method: 'POST',
+            data: {
                 "room": thisRoom,
                 "pseudo": pseudo,
                 "color": $("#selectedColor").data("value"),
                 "buzzer": $("#selectedBuzzer").data("value"),
                 "team": $("#teamInput").val() || ""
             }
+        })
+        .done(function () {
+            showSuccessToast("Joueur prêt");
+        })
+        .fail(function (xhr) {
+            const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
+            showErrorSwal("Impossible de supprimer ce joueur", errorMsg);
         });
-
-        window.mySocket.send(message);
-        console.log("SEND: " + message);
-
-        showSuccessToast("Joueur prêt");
     });
 });
 

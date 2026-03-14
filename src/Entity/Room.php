@@ -2,169 +2,134 @@
 
 namespace App\Entity;
 
+use App\Repository\RoomRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: RoomRepository::class)]
 class Room
 {
-    private string $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /** @var Player[] $players */
-    private array $players;
+    /** @var Collection<int, Player> */
+    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $players;
 
-    private Player $master;
+    #[ORM\OneToOne(targetEntity: Player::class)]
+    #[ORM\JoinColumn(name: "master_id", referencedColumnName: "id", nullable: true)]
+    private ?Player $master = null;
 
-    public function __construct(string $id, Player $master)
+    public function __construct(Player $master)
     {
         $this->master = $master;
-        $this->id = $id;
-        $this->players = [];
+        $this->players = new ArrayCollection();
+        
+        $this->addPlayer($master);
     }
 
-    public function getId(): string
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Ajoute un joueur à la salle.
-     * @param Player $newPlayer
-     * @return string|self L'instance de Room en cas de succès, ou une chaîne d'erreur.
-     */
-    public function addPlayer(Player $newPlayer): string|self
-    {
-        $token = $newPlayer->getToken();
-        $pseudo = $newPlayer->getPseudo();
-
-        if (empty($token) || empty($pseudo)) {
-            return 'Pseudo or token is empty';
-        }
-
-        foreach ($this->players as $player) {
-            if ($player->getToken() === $token) {
-                return 'Already joined the room';
-            }
-            if (strtolower($player->getPseudo()) === strtolower($pseudo)) {
-                return 'Pseudo already taken';
-            }
-        }
-
-        $this->players[] = $newPlayer;
-
-        return $this;
-    }
-
-    public function getMaster(): Player
+    public function getMaster(): ?Player
     {
         return $this->master;
     }
 
-    public function isMaster(string|Player $subject): bool
+    /**
+     * @return Collection<int, Player>
+     */
+    public function getPlayers(): Collection
     {
-        if (!is_string($subject)) {
-            return $this->isMaster($subject->getToken());
-        }
-
-        return $this->master->getToken() === $subject;
+        return $this->players;
     }
 
-    public function hasPlayer(string $token): bool
+    public function addPlayer(Player $player): string|self
     {
-        foreach ($this->players as $player) {
-            if ($player->getToken() === $token) {
-                return true;
+        if (empty($player->getToken()) || empty($player->getPseudo())) {
+            return 'Pseudo or token is empty';
+        }
+
+        foreach ($this->players as $p) {
+            if ($p->getToken() === $player->getToken()) {
+                return 'Already joined the room';
+            }
+            if (strtolower($p->getPseudo()) === strtolower($player->getPseudo())) {
+                return 'Pseudo already taken';
             }
         }
 
-        return false;
+        if (!$this->players->contains($player)) {
+            $this->players->add($player);
+            $player->setRoom($this);
+        }
+
+        return $this;
     }
 
-    /**
-     * Récupère un joueur par son jeton.
-     */
+    public function removePlayer(Player $player): string
+    {
+        if ($this->players->removeElement($player)) {
+            if ($player->getRoom() === $this) {
+                $player->setRoom(null);
+                return $player->getId();
+            }
+        }
+        return '';
+    }
+
+
+    public function removePlayerByPseudo(string $pseudo): string
+    {
+        $player = $this->getPlayerByPseudo($pseudo);
+        if (!$player) {
+            return '';
+        }
+
+        return $this->removePlayer($player);
+    }
+
+    public function isMaster(string|Player $subject): bool
+    {
+        $token = ($subject instanceof Player) ? $subject->getToken() : $subject;
+        return $this->master !== null && $this->master->getToken() === $token;
+    }
+
     public function getPlayer(string $token): ?Player
     {
         foreach ($this->players as $player) {
-            if ($player->getToken() === $token) {
-                return $player;
-            }
+            if ($player->getToken() === $token) return $player;
         }
-
         return null;
     }
 
-    /**
-     * Met à jour un joueur existant dans la salle.
-     * @param Player $player
-     * @return string|self L'instance de Room en cas de succès, ou une chaîne d'erreur.
-     */
-    public function setPlayer(Player $player): string|self
+    public function getPlayerByPseudo(string $pseudo): ?Player
     {
-        $found = false;
-        foreach ($this->players as &$p) {
-            if ($p->getToken() === $player->getToken()) {
-                $p = $player;
-                $found = true;
-                break;
-            }
+        foreach ($this->players as $player) {
+            if ($player->getPseudo() === $pseudo) return $player;
         }
-
-        if (!$found) {
-            return 'Player not found in the room';
-        }
-
-        return $this;
-    }
-
-    /**
-     * Retire un joueur de la salle en utilisant son jeton.
-     * @param string $token
-     * @return string|self L'instance de Room en cas de succès, ou une chaîne d'erreur.
-     */
-    public function removePlayerWithToken(string $token): string|self
-    {
-        $index = -1;
-        foreach ($this->players as $key => $player) {
-            if ($player->getToken() === $token) {
-                $index = $key;
-                break;
-            }
-        }
-
-        if (-1 === $index) {
-            return 'Player with this token is not in the room';
-        }
-
-        unset($this->players[$index]);
-        $this->players = array_values($this->players);
-
-        return $this;
-    }
-
-    /**
-     * Retire un joueur de la salle en utilisant son pseudo.
-     * @param string $pseudo
-     * @return string La chaîne du jeton du joueur retiré, ou une chaîne d'erreur.
-     */
-    public function removePlayerWithPseudo(string $pseudo): string
-    {
-        $index = -1;
-        foreach ($this->players as $key => $player) {
-            if (strtolower($player->getPseudo()) === strtolower($pseudo)) {
-                $index = $key;
-                break;
-            }
-        }
-
-        if (-1 === $index) {
-            return 'This player is not in the room';
-        }
-
-        $token = $this->players[$index]->getToken();
-        unset($this->players[$index]);
-        $this->players = array_values($this->players);
-        return $token;
+        return null;
     }
 
     public function getPlayersToken(): array
     {
-        return array_map(fn(Player $player) => $player->getToken(), $this->players);
+        return $this->players->map(fn(Player $p) => $p->getToken())->toArray();
+    }
+
+    public function setPlayer(Player $player): self
+    {
+        foreach ($this->players as $key => $existingPlayer) {
+            if ($existingPlayer->getToken() === $player->getToken()) {
+                $this->players[$key] = $player;
+                break;
+            }
+        }
+
+        return $this;
     }
 }

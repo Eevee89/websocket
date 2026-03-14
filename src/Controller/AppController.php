@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\RoomService;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,16 +16,17 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class AppController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
-    public function login(Request $request, SessionInterface $session)
-    {
+    public function login(
+        Request $request, 
+        SessionInterface $session,
+        RoomService $roomService,
+        string $pusherClientKey
+    ) {
         $form = $this->createFormBuilder()
-            ->add('roomId', NumberType::class, [
+            ->add('roomId', TextType::class, [
                 'label' => 'ID de partie',
-                'html5' => true,
                 'attr' => [
-                    'min' => 0, 
-                    'max' => 999999, 
-                    'placeholder' => '000000',
+                    'placeholder' => 'MTAwMDA1',
                     'class' => 'form-control input--modific'
                 ],
                 'required' => false,
@@ -65,9 +67,9 @@ class AppController extends AbstractController
             $pseudo = $data['pseudo'];
 
             $session->set("pseudo", $pseudo);
-            $session->set("roomId", $roomId);
 
             if ($form->get('create_room')->isClicked()) {
+                $roomId = $roomService->getRoomIdFromMaster($session->get('user'));
                 $session->set("isMaster", true);
             }
 
@@ -75,6 +77,7 @@ class AppController extends AbstractController
                 $session->set("isMaster", false);
             }
 
+            $session->set("roomId", $roomId);
             return $this->redirectToRoute('app_dashboard', ['room' => $roomId]);
         }
 
@@ -87,53 +90,49 @@ class AppController extends AbstractController
 
         return $this->render('login.html.twig', [
             'form' => $form->createView(),
-            'token' => $randomString
+            'token' => $randomString,
+            'pusher' => [
+                'key' => $pusherClientKey,
+            ]
         ]);
     }
 
     #[Route('/game/{room}/dashboard', name: 'app_dashboard')]
-    public function dashboard(int $room, SessionInterface $session)
+    public function dashboard(string $room, SessionInterface $session, string $pusherClientKey)
     {
-        if ($session->get("isMaster")) {
-            return $this->render("back-office/dashboard.html.twig", [
-                "room" => $room,
-                "pseudo" => $session->get("pseudo"),
-                "hide" => $session->get("hideTime") ?? 20,
-                "master" => 1,
-                "token" => $session->get("user"),
-                "videos" => $session->get("videos") ?? []
-            ]);
-        }
+        $template = $session->get("isMaster") 
+            ? "back-office/dashboard.html.twig"
+            : "front-office/dashboard.html.twig"
+        ;
 
-        return $this->render("front-office/dashboard.html.twig", [
+        return $this->render($template, [
             "room" => $room,
             "pseudo" => $session->get("pseudo"),
             "hide" => $session->get("hideTime") ?? 20,
-            "master" => 0,
+            "master" => $session->get("isMaster") ? 1 : 0,
             "token" => $session->get("user"),
-            "videos" => $session->get("videos") ?? []
+            "videos" => $session->get("videos") ?? [],
+            'pusher' => [
+                'key' => $pusherClientKey,
+            ]
         ]);
     }
 
     #[Route('/game/{room}/', name: 'app_game')]
-    public function game(int $room, SessionInterface $session)
+    public function game(string $room, SessionInterface $session, string $pusherClientKey)
     {
-        if ($session->get("isMaster")) {
-            return $this->render("back-office/game.html.twig", [
-                "room" => $room,
-                "hide" => $session->get("hideTime") ?? 20,
-                "master" => 1,
-                "token" => $session->get("user"),
-                "videos" => array_values($session->get("videos") ?? [])
-            ]);
-        }
+        $template = $session->get("isMaster")
+            ? "back-office/game.html.twig"
+            : "front-office/game.html.twig";
 
-        return $this->render("front-office/game.html.twig", [
+        return $this->render($template, [
             "room" => $room,
             "hide" => $session->get("hideTime") ?? 20,
-            "master" => 0,
-            "token" => $session->get("user"),
-            "videos" => array_values($session->get("videos") ?? [])
+            "master" => $session->get("isMaster") ? 1 : 0,
+            "videos" => array_values($session->get("videos") ?? []),
+            'pusher' => [
+                'key' => $pusherClientKey,
+            ]
         ]);
     }
 }

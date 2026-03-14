@@ -57,7 +57,7 @@ function isValidYoutubeId(str) {
     return regExp.test(str);
 }
 
-function showErrorSwal(title, message) {
+function showErrorSwal(title, message, onConfirm = () => {}) {
     Swal.fire({
         title: title ? title : '',
         text: message ? message : '',
@@ -67,7 +67,7 @@ function showErrorSwal(title, message) {
             confirmButton: "striped-warning-light",
         },
         background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-    });
+    }).then(onConfirm);
 }
 
 function everyoneReady() {

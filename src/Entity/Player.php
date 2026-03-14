@@ -2,16 +2,38 @@
 
 namespace App\Entity;
 
+use App\Repository\PlayerRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: PlayerRepository::class)]
 class Player
 {
-    private int $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 255)]
     private string $token;
+
+    #[ORM\Column(length: 50)]
     private string $pseudo;
-    private string $team;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $team = null;
+
+    #[ORM\Column(length: 7)]
     private string $color = '#000000';
-    private bool $ready;
-    private int $score;
-    private int $room;
+
+    #[ORM\Column]
+    private bool $ready = false;
+
+    #[ORM\Column]
+    private int $score = 0;
+
+    #[ORM\ManyToOne(inversedBy: 'players')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Room $room = null;
 
     public function __construct(string $token, string $pseudo)
     {
@@ -19,7 +41,7 @@ class Player
         $this->pseudo = $pseudo;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -34,7 +56,7 @@ class Player
         return $this->pseudo;
     }
 
-    public function getTeam(): string
+    public function getTeam(): ?string
     {
         return $this->team;
     }
@@ -42,7 +64,6 @@ class Player
     public function setTeam(?string $team): static
     {
         $this->team = $team ?? "";
-
         return $this;
     }
 
@@ -54,7 +75,6 @@ class Player
     public function setColor(string $color): static
     {
         $this->color = $color;
-
         return $this;
     }
 
@@ -66,7 +86,6 @@ class Player
     public function setReady(bool $ready): static
     {
         $this->ready = $ready;
-
         return $this;
     }
 
@@ -78,19 +97,17 @@ class Player
     public function setScore(int $score): static
     {
         $this->score = $score;
-
         return $this;
     }
 
-    public function getRoom(): int
+    public function getRoom(): ?Room
     {
         return $this->room;
     }
 
-    public function setRoom(int $room): static
+    public function setRoom(?Room $room): static
     {
         $this->room = $room;
-
         return $this;
     }
 }

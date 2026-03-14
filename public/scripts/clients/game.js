@@ -1,77 +1,50 @@
-$(document).ready(() => {
-    window.mySocket = new WebSocket("wss://blindtest.jorismartin.fr/ws");
-    window.mySocket.onmessage = (e) => {
-        const datas = e.data;
-        const response = JSON.parse(datas);
+let totalPlayersInRoom = 0;
 
-        if (response.route === "login") {
-            if (!response.success) {
-                showErrorSwal("Connexion au serveur impossible", response.message);
-                return;
-            }
+channel.members.each((member) => {
+    if (!member.info.isMaster) {
+        totalPlayersInRoom++;
+    }
+});
 
-            const message = JSON.stringify({
-                "route": "dump/rooms",
-                "datas": {}
-            });
+channel.bind('player-ack-ready', (data) => {
+    readyPlayersCount++;
+    $("li[data-pseudo='" + data.pseudo + "']").removeClass("not-ready").addClass("ready");
 
-            window.mySocket.send(message);
-            console.log("SEND: " + message);
+    if (readyPlayersCount >= totalPlayersInRoom) {
+        console.log("Tout le monde est prêt, lancement du round !");
+        const hasInteracted = localStorage.getItem('userInteractedWithMedia') === 'true';
+        if (hasInteracted) {
+            localStorage.setItem('userInteractedWithMedia', 'false');
 
-            return;
+            player.unMute();
+            player.setVolume(100);
+            $("#countdown").css("color", "var(--success)");
+            $("#timer").css("border-color", "var(--success)");
+            player.playVideo();
         }
+    }
+});
 
-        if (response.route === "dump/rooms") {
-            if (!response.success) {
-                showErrorSwal("Impossible de récupérer les joueurs", response.message);
-                return;
-            }
+channel.bind('player-buzzed', (data) => {
+    if (timerPaused) return;
 
-            const rooms = response.datas;
-            for (const roomId in rooms) {
-                const room = rooms[roomId];
-                if (roomId == thisRoom && room.master == token) {
-                    for (const key in room) {
-                        if (key !== "master" && key != token) {
-                            const player = room[key];
-                            const item = generatePlayerListItem(player.pseudo, player.team, player.color, false);
-                            $("#playerList").append(item);
-                        }
-                    }
-                }
-            }
+    player.pauseVideo();
+    timerPaused = true;
 
-            return;
+    Swal.fire({
+        title: "Buzz de " + data.pseudo,
+        text: "Est-ce la bonne réponse ?",
+        showCancelButton: true,
+        confirmButtonText: "Oui",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Appeler une route API pour ajouter les points au serveur
+            updateScore(data.token, videos[current].points);
+            answerGiven = true;
+        } else {
+            timerPaused = false;
+            player.playVideo();
+            // Envoyer un event pour dire au joueur "Faux, tu es bloqué"
         }
-
-        if (response.route === "round/ready") {
-            if (!response.success) {
-                showErrorSwal("Impossible de se mettre prêt", response.message);
-                return;
-            }
-
-            const datas = response.datas;
-            if (iAmMaster) {
-                $("li[data-pseudo='" + datas.pseudo + "']").removeClass("not-ready").addClass("ready");
-            }
-        }
-    };
-
-    window.mySocket.onerror = (e) => console.log(e);
-
-    window.mySocket.onclose = () => {
-        window.location.href = "/";
-    };
-    
-    window.mySocket.onopen = () => {
-        const message = JSON.stringify({
-            "route": "login",
-            "datas": {
-                "token": token
-            }
-        });
-
-        window.mySocket.send(message);
-        console.log("SEND: " + message);
-    };
+    });
 });

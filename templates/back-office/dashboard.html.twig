@@ -159,12 +159,18 @@
 {% block javascripts %}
 <script>
     const iAmMaster = {{ master }} === 1;
-    const thisRoom = {{ room }};
-    const token = '{{ token }}';
-    const editVideoUrl = '{{ path("edit_video") }}';
-    const delVideoUrl = '{{ path("delete_video") }}';
-    const editHideUrl = '{{ path("edit_hide_time") }}';
+    const thisRoom = '{{ room }}';
+    const pusherKey = '{{ pusher.key }}';
+
+    const urls = {
+        pusher_auth: '{{ path("pusher_auth") }}',
+        edit_video: '{{ path("edit_video") }}',
+        del_video: '{{ path("delete_video") }}',
+        edit_hide: '{{ path("edit_hide_time") }}',
+        kick_out: '{{ path("room_kick_out") }}'
+    };
 </script>
+<script src="/scripts/clients/global.js"></script>
 <script src="/scripts/clients/dashboard.js"></script>
 <script src="/scripts/back-office/dashboard.js"></script>
 {% endblock %}
