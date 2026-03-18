@@ -37,6 +37,7 @@ class PlayerService
 
         $decodedId = base64_decode($roomId);
         $intId = (int) $decodedId;
+        dd($intId);
         $room = $this->roomRepository->find($intId);
         if (null === $room) {
             return ['error' => 'Room doesn\'t exist'];
@@ -54,7 +55,7 @@ class PlayerService
         if (is_string($result)) {
             return ['error' => $result];
         }
-        
+
         $this->entityManager->persist($player);
         $this->entityManager->flush();
 
