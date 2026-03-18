@@ -1,4 +1,4 @@
-function generatePlayerListItem(pseudo, team, color, dashboard = true) {
+function generatePlayerListItem(token, pseudo, team, color, dashboard = true) {
     const thirdColumn = dashboard
         ? '<i class="fa fa-solid fa-trash danger ms-2 btn-kick-out"></i>'
         : '<span id="score" class="info-span">000</span>'
@@ -9,7 +9,7 @@ function generatePlayerListItem(pseudo, team, color, dashboard = true) {
     }
 
     const item = $(`
-        <li class="list-group-item d-flex flex-column sortable-item not-ready" draggable="true" data-color="${color}" data-pseudo="${pseudo}">
+        <li id='player-${token}' class="list-group-item d-flex flex-column sortable-item not-ready" draggable="true" data-color="${color}" data-pseudo="${pseudo}">
             <div class="row">
                 <div class="col-1 d-flex flex-column justify-content-center align-items-center">
                     <div class="round"></div>

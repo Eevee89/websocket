@@ -76,7 +76,7 @@ class Room
         if ($this->players->removeElement($player)) {
             if ($player->getRoom() === $this) {
                 $player->setRoom(null);
-                return $player->getId();
+                return $player->getToken();
             }
         }
         return '';

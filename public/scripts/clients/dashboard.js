@@ -1,12 +1,4 @@
-channel.bind('room-join', (event) => {
-    const player = event.info;
-
-    $("#playerList").append(generatePlayerListItem(player.pseudo, player.team, player.color));
-    $("#playerGameList").append(generatePlayerListItem(player.pseudo, player.team, player.color));
-    $(".btn-go").addClass("disabled");
-});
-
-channel.bind('room-ready', (data) => {
+channel.bind('player-ready', (data) => {
     if (iAmMaster) {
         const player = $("li[data-pseudo='" + data.pseudo + "']");
         player.find(".round").css("background-color", data.color);
@@ -16,6 +8,26 @@ channel.bind('room-ready', (data) => {
         if (everyoneReady()) {
             $(".btn-go").removeClass("disabled");
         }
+    } else {
+        console.log(data);
+    }
+});
+
+channel.bind('player-kicked', (data) => {
+    if (!iAmMaster && data.token === token) {
+        Swal.fire({
+            title: "Attention",
+            text: "Vous avez été exclu de la salle par le maître du jeu.\nVous allez être rediriger vers la page d'accueil.",
+            showCancelButton: false,
+            confirmButtonText: "OK",
+            color: "var(--dark)",
+            customClass: {
+                confirmButton: "striped-warning-light",
+            },
+            background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
+        }).then(() => {
+            window.location.href = "/";
+        });
     } else {
         console.log(data);
     }

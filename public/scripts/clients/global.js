@@ -9,6 +9,8 @@ channel.bind_global((eventName, data) => {
     console.log("Événement reçu : " + eventName, data);
 });
 
+const playersId = [];
+
 // ARRIVAL
 
 channel.bind('pusher:subscription_succeeded', (event) => {
@@ -19,9 +21,11 @@ channel.bind('pusher:subscription_succeeded', (event) => {
         if (pToken === event.myID) {
             continue;
         }
+
+        playersId.push(pToken);
         
         const player = players[pToken];
-        const item = generatePlayerListItem(player.pseudo, player.team, player.color);
+        const item = generatePlayerListItem(pToken, player.pseudo, player.team, player.color);
 
         if (player.ready) {
             item.removeClass("not-ready").addClass("ready");
@@ -30,26 +34,26 @@ channel.bind('pusher:subscription_succeeded', (event) => {
         $("#playerList").append(item);
     }
 
-    if (everyoneReady()) {
-        $(".btn-go").removeClass("disabled");
-    }
+    $(".btn-go").toggleClass("disabled", !everyoneReady());
 });
 
 channel.bind('pusher:member_added', (member) => {
     const player = member.info;
     console.log(player.pseudo + " a rejoint la partie !");
 
-    const item = generatePlayerListItem(player.pseudo, player.team, player.color);
+    let item = null;
+    if (playersId.includes(member.id)) {
+        item = generatePlayerListItem(member.id, player.pseudo, player.team, player.color);
+        $("#playerList").append(item);
+    } else {
+        item = $('#player-' + member.id);
+    }
 
     if (player.ready) {
         item.removeClass("not-ready").addClass("ready");
     }
 
-    $("#playerList").append(item);
-
-    if (everyoneReady()) {
-        $(".btn-go").removeClass("disabled");
-    }
+    $(".btn-go").toggleClass("disabled", !everyoneReady());
 });
 
 // DECONNECTION 

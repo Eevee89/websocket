@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PlayerRepository;
 use App\Service\RoomService;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -20,11 +21,20 @@ class AppController extends AbstractController
         Request $request, 
         SessionInterface $session,
         RoomService $roomService,
-        string $pusherClientKey
+        string $pusherClientKey,
+        PlayerRepository $repository
     ) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+        for ($i = 0; $i < 12; $i++) {
+            $randomString .= $characters[random_int(0, 35)];
+        }
+
+        $token = $session->get('user');
         $form = $this->createFormBuilder()
             ->add('roomId', TextType::class, [
                 'label' => 'ID de partie',
+                'value' => $session->get('isMaster') ? null : $session->get('roomId'),
                 'attr' => [
                     'placeholder' => 'MTAwMDA1',
                     'class' => 'form-control input--modific'
@@ -36,6 +46,7 @@ class AppController extends AbstractController
             ])
             ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo',
+                'value' => $session->get('pseudo'),
                 'attr' => [
                     'placeholder' => 'Pseudo',
                     'class' => 'form-control input--modific'
@@ -61,7 +72,7 @@ class AppController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($token && $repository->findByToken($token) && $form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $roomId = $data['roomId'];
             $pseudo = $data['pseudo'];
@@ -69,7 +80,7 @@ class AppController extends AbstractController
             $session->set("pseudo", $pseudo);
 
             if ($form->get('create_room')->isClicked()) {
-                $roomId = $roomService->getRoomIdFromMaster($session->get('user'));
+                $roomId = $roomService->getRoomIdFromMaster($token);
                 $session->set("isMaster", true);
             }
 
@@ -81,11 +92,6 @@ class AppController extends AbstractController
             return $this->redirectToRoute('app_dashboard', ['room' => $roomId]);
         }
 
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-        for ($i = 0; $i < 12; $i++) {
-            $randomString .= $characters[random_int(0, 35)];
-        }
         $session->set("user", $randomString);
 
         return $this->render('login.html.twig', [
@@ -98,8 +104,14 @@ class AppController extends AbstractController
     }
 
     #[Route('/game/{room}/dashboard', name: 'app_dashboard')]
-    public function dashboard(string $room, SessionInterface $session, string $pusherClientKey)
+    public function dashboard(string $room, SessionInterface $session, string $pusherClientKey, PlayerRepository $repository)
     {
+        $token = $session->get("user");
+        if (!$repository->findByToken($token)) {
+            $session->set('user', null);
+            return $this->redirectToRoute('/');
+        }
+
         $template = $session->get("isMaster") 
             ? "back-office/dashboard.html.twig"
             : "front-office/dashboard.html.twig"
@@ -119,8 +131,14 @@ class AppController extends AbstractController
     }
 
     #[Route('/game/{room}/', name: 'app_game')]
-    public function game(string $room, SessionInterface $session, string $pusherClientKey)
+    public function game(string $room, SessionInterface $session, string $pusherClientKey, PlayerRepository $repository)
     {
+        $token = $session->get("user");
+        if (!$repository->findByToken($token)) {
+            $session->set('user', null);
+            return $this->redirectToRoute('/');
+        }
+
         $template = $session->get("isMaster")
             ? "back-office/game.html.twig"
             : "front-office/game.html.twig";
