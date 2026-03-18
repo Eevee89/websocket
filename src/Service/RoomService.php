@@ -58,7 +58,9 @@ class RoomService
 
     public function deleteRoom(string $id): void
     {
-        $room = $this->roomRepository->find(base64_decode($id) - 100000);
+        $decodedId = base64_decode($id);
+        $intId = (int) $decodedId;
+        $room = $this->roomRepository->find($intId - 100000);
         if (null === $room) {
             return;
         }

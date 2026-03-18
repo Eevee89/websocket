@@ -37,8 +37,7 @@ class PlayerService
 
         $decodedId = base64_decode($roomId);
         $intId = (int) $decodedId;
-        dd($intId);
-        $room = $this->roomRepository->find($intId);
+        $room = $this->roomRepository->find($intId - 100000);
         if (null === $room) {
             return ['error' => 'Room doesn\'t exist'];
         }
