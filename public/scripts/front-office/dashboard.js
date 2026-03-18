@@ -27,7 +27,6 @@ $(document).ready(() => {
             showSuccessToast("Joueur prêt");
         })
         .fail(function (xhr) {
-            console.log(xhr);
             const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
             showErrorSwal("Impossible de se mettre prêt", errorMsg);
         });
