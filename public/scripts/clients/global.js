@@ -39,7 +39,7 @@ channel.bind('pusher:subscription_succeeded', (event) => {
 
 channel.bind('pusher:member_added', (member) => {
     const player = member.info;
-    showSuccessToast(player.pseudo + " a rejoint la partie !");
+    showInfoToast(player.pseudo + " a rejoint la partie !");
 
     let item = null;
     if (!playersId.includes(member.id)) {

@@ -24,7 +24,7 @@ $(document).ready(() => {
             }
         })
         .done(function () {
-            showSuccessToast("Joueur prêt");
+            showSuccessToast("Vous êtes prêt !");
         })
         .fail(function (xhr) {
             const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
