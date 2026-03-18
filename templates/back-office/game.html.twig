@@ -92,6 +92,7 @@
 
 {% block javascripts %}
 <script>
+    const pusherKey = '{{ pusher.key }}';
     const iAmMaster = {{ master }} === 1;
     const thisRoom = '{{ room }}';
     const token = '{{ token }}';
