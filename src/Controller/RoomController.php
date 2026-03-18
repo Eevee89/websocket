@@ -82,7 +82,7 @@ class RoomController extends AbstractController
         $session = $request->getSession();
         $masterToken = $session->get('user');
 
-        $data = json_decode($request->getContent(), true);
+        $data = $request->request->all();
         $targetPseudo = $data['player'] ?? null;
 
         $room = $this->roomService->getRoom($id);
@@ -114,14 +114,8 @@ class RoomController extends AbstractController
         $session = $request->getSession();
         $playerToken = $session->get('user');
 
-        $data = json_decode($request->getContent(), true);
+        $data = $request->request->all();
 
-        if (!isset($data["team"])) {
-            return $this->json([
-                'success' => false, 
-                'message' => 'Missing mandatory \'team\' field.'
-            ], 400);
-        }
         if (empty($data["color"])) {
             return $this->json([
                 'success' => false, 
