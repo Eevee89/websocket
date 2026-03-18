@@ -43,7 +43,7 @@ $(document).ready(() => {
         }
 
         $.ajax({
-            url: urls.create,
+            url: urls.join,
             method: 'POST',
             data: {
                 room: roomId,

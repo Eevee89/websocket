@@ -54,24 +54,8 @@ class PlayerService
         if (is_string($result)) {
             return ['error' => $result];
         }
+        
         $this->entityManager->persist($player);
-
-        // --- DEBUG ---
-        $uow = $this->entityManager->getUnitOfWork();
-        dump('ROOM STATE:', $uow->getEntityState($room));
-        // 2 = MANAGED (Ok), 4 = DETACHED (Problème !)
-
-        dump('PLAYER STATE:', $uow->getEntityState($player));
-        // 1 = NEW (Ok)
-
-        // Est-ce que Doctrine prévoit d'insérer une nouvelle Room ?
-        $scheduledInsertions = $uow->getScheduledEntityInsertions();
-        foreach ($scheduledInsertions as $entity) {
-            dump('SCHEDULED INSERT:', get_class($entity));
-        }
-        die();
-        // --- FIN DEBUG ---
-
         $this->entityManager->flush();
 
         return [];
