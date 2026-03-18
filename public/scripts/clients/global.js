@@ -42,9 +42,10 @@ channel.bind('pusher:member_added', (member) => {
     console.log(player.pseudo + " a rejoint la partie !");
 
     let item = null;
-    if (playersId.includes(member.id)) {
+    if (!playersId.includes(member.id)) {
         item = generatePlayerListItem(member.id, player.pseudo, player.team, player.color);
         $("#playerList").append(item);
+        playersId.push(member.id);
     } else {
         item = $('#player-' + member.id);
     }
