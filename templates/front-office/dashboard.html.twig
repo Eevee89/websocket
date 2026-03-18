@@ -101,7 +101,7 @@
     const pseudo = '{{ pseudo }}';
 
     const urls = {
-        room_ready: '{{ path("room_ready") }}',
+        player_ready: '{{ path("player_ready", { "id": thisRoom }) }}',
     };
 </script>
 <script src="/scripts/clients/global.js"></script>

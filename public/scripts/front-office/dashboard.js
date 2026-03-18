@@ -13,7 +13,7 @@ $(document).ready(() => {
         }
 
         $.ajax({
-            url: urls.room_ready,
+            url: urls.player_ready,
             method: 'POST',
             data: {
                 "room": thisRoom,
