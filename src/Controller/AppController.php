@@ -34,7 +34,6 @@ class AppController extends AbstractController
         $form = $this->createFormBuilder()
             ->add('roomId', TextType::class, [
                 'label' => 'ID de partie',
-                'value' => $session->get('isMaster') ? null : $session->get('roomId'),
                 'attr' => [
                     'placeholder' => 'MTAwMDA1',
                     'class' => 'form-control input--modific'
@@ -46,7 +45,6 @@ class AppController extends AbstractController
             ])
             ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo',
-                'value' => $session->get('pseudo'),
                 'attr' => [
                     'placeholder' => 'Pseudo',
                     'class' => 'form-control input--modific'
