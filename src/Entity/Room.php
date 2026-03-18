@@ -16,7 +16,7 @@ class Room
     private ?int $id = null;
 
     /** @var Collection<int, Player> */
-    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Player::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'room', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $players;
 
     #[ORM\OneToOne(targetEntity: Player::class)]

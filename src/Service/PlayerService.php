@@ -52,8 +52,8 @@ class PlayerService
         if (is_string($result)) {
             return ['error' => $result];
         }
-        
-        $this->entityManager->persist($player);
+
+        $this->entityManager->persist($room);
         $this->entityManager->flush();
 
         return [];
