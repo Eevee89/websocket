@@ -39,7 +39,7 @@ channel.bind('pusher:subscription_succeeded', (event) => {
 
 channel.bind('pusher:member_added', (member) => {
     const player = member.info;
-    console.log(player.pseudo + " a rejoint la partie !");
+    showSuccessToast(player.pseudo + " a rejoint la partie !");
 
     let item = null;
     if (!playersId.includes(member.id)) {
@@ -60,9 +60,10 @@ channel.bind('pusher:member_added', (member) => {
 // DECONNECTION 
 
 channel.bind('pusher:member_removed', (member) => {
-    console.log("Le joueur " + member.info.pseudo + " est parti.");
     $(`#player-${member.id}`).remove();
-    toastr.info(`${member.info.pseudo} a quitté la partie.`);
+    const index = playersId.indexOf(member.id);
+    playersId.splice(index, 1);
+    showErrorToast(`${member.info.pseudo} a quitté la partie.`);
 });
 
 pusher.connection.bind('state_change', (states) => {
