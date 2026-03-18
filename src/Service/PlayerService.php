@@ -53,7 +53,7 @@ class PlayerService
             return ['error' => $result];
         }
 
-        $this->entityManager->persist($room);
+        $this->entityManager->persist($player);
         $this->entityManager->flush();
 
         return [];

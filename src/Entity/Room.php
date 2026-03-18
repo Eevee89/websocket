@@ -65,7 +65,6 @@ class Room
         }
 
         if (!$this->players->contains($player)) {
-            $this->players->add($player);
             $player->setRoom($this);
         }
 
