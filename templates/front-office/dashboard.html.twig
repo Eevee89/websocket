@@ -97,7 +97,7 @@
 {% block javascripts %}
 <script>
     const iAmMaster = {{ master }} === 1;
-    const thisRoom = {{ room }};
+    const thisRoom = '{{ room }}';
     const pseudo = '{{ pseudo }}';
 
     const urls = {
