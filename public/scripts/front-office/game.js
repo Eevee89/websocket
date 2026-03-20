@@ -25,7 +25,7 @@ $(document).ready(() => {
 function buildPlayer(video) {
     readyPlayersCount = 0;
 
-    var opt = {
+    const opt = {
         videoId: video.video,
         events: {
             'onReady': () => {
@@ -39,7 +39,7 @@ function buildPlayer(video) {
         },
         host: 'https://www.youtube-nocookie.com',
         playerVars: {
-            origin: window.location.origin
+            origin: window.location.host
         },
         width: width - 20,
         height: (width - 20) * 9 / 16

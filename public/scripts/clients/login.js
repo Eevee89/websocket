@@ -9,24 +9,45 @@ $(document).ready(() => {
             return;
         }
 
-        $.ajax({
-            url: urls.create,
-            method: 'POST',
-            data: {
-                pseudo: pseudo
+        new YT.Player('player', {
+            videoId: video.video,
+            events: {
+                'onReady': () => {
+                    $.ajax({
+                        url: urls.create,
+                        method: 'POST',
+                        data: {
+                            pseudo: pseudo
+                        },
+                    })
+                    .done(function (response) {
+                        console.log(response);
+                        if (response.success) {
+                            $("#form_create_room").click();
+                        } else {
+                            showErrorSwal("Création impossible", response.message);
+                        }
+                    })
+                    .fail(function (xhr) {
+                        const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
+                        showErrorSwal("Erreur", errorMsg);
+                    });
+                },
+                'onStateChange': onPlayerStateChange,
+                'onError': () => {
+                    showErrorSwal(
+                        "Player Youtube non supporté",
+                        "Votre navigateur ne supporte pas les players Youtube intégrés.\n"
+                        + "Veuillez réessayer depuis Chrome, Opéra ou Edge."
+                    );
+                }
             },
-        })
-            .done(function (response) {
-                console.log(response);
-            if (response.success) {
-                $("#form_create_room").click();
-            } else {
-                showErrorSwal("Création impossible", response.message);
-            }
-        })
-        .fail(function (xhr) {
-            const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
-            showErrorSwal("Erreur", errorMsg);
+            host: 'https://www.youtube-nocookie.com',
+            playerVars: {
+                origin: window.location.host
+            },
+            width: width - 20,
+            height: (width - 20) * 9 / 16
         });
     });
 
@@ -42,24 +63,45 @@ $(document).ready(() => {
             return;
         }
 
-        $.ajax({
-            url: urls.join,
-            method: 'POST',
-            data: {
-                room: roomId,
-                pseudo: pseudo
+        new YT.Player('player', {
+            videoId: video.video,
+            events: {
+                'onReady': () => {
+                    $.ajax({
+                        url: urls.join,
+                        method: 'POST',
+                        data: {
+                            room: roomId,
+                            pseudo: pseudo
+                        },
+                    })
+                    .done(function (response) {
+                        if (response.success) {
+                            $("#form_join_room").click();
+                        } else {
+                            showErrorSwal("Impossible de rejoindre", response.message);
+                        }
+                    })
+                    .fail(function (xhr) {
+                        const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur de connexion";
+                        showErrorSwal("Erreur", errorMsg);
+                    });
+                },
+                'onStateChange': onPlayerStateChange,
+                'onError': () => {
+                    showErrorSwal(
+                        "Player Youtube non supporté",
+                        "Votre navigateur ne supporte pas les players Youtube intégrés.\n"
+                        + "Veuillez réessayer depuis Chrome, Opéra ou Edge."
+                    );
+                }
             },
-        })
-        .done(function (response) {
-            if (response.success) {
-                $("#form_join_room").click();
-            } else {
-                showErrorSwal("Impossible de rejoindre", response.message);
-            }
-        })
-        .fail(function (xhr) {
-            const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur de connexion";
-            showErrorSwal("Erreur", errorMsg);
+            host: 'https://www.youtube-nocookie.com',
+            playerVars: {
+                origin: window.location.host
+            },
+            width: width - 20,
+            height: (width - 20) * 9 / 16
         });
     });
 });
