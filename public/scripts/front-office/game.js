@@ -39,7 +39,7 @@ function buildPlayer(video) {
         },
         host: 'https://www.youtube-nocookie.com',
         playerVars: {
-            origin: window.location.host
+            origin: window.location.origin
         },
         width: width - 20,
         height: (width - 20) * 9 / 16
