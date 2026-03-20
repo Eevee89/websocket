@@ -182,7 +182,7 @@ class RoomController extends AbstractController
             ], 404);
         }
 
-        if ($room->isMaster($playerToken)) {
+        if (!$room->isMaster($playerToken)) {
             return $this->json([
                 'success' => false,
                 'message' => 'Only master cannot launch game'

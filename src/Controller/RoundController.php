@@ -112,7 +112,7 @@ class RoundController extends AbstractController
         if (!$room->isMaster($playerToken)) {
             return $this->json([
                 'success' => false,
-                'message' => 'Player cannot mark round as ready'
+                'message' => 'Player cannot launch the round'
             ], 403);
         }
 
