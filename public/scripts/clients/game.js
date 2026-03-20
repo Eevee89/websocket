@@ -21,19 +21,20 @@ channel.bind('player-ack-ready', (data) => {
         $.ajax({
             url: urls.round_launch,
             method: 'POST'
-        })
-        .done(() => {
-            const hasInteracted = localStorage.getItem('userInteractedWithMedia') === 'true';
-            if (hasInteracted) {
-                localStorage.setItem('userInteractedWithMedia', 'false');
-
-                player.unMute();
-                player.setVolume(100);
-                $("#countdown").css("color", "var(--success)");
-                $("#timer").css("border-color", "var(--success)");
-                player.playVideo();
-            }
         });
+    }
+});
+
+channel.bind('launch', () => {
+    const hasInteracted = localStorage.getItem('userInteractedWithMedia') === 'true';
+    if (hasInteracted) {
+        localStorage.setItem('userInteractedWithMedia', 'false');
+
+        player.unMute();
+        player.setVolume(100);
+        $("#countdown").css("color", "var(--success)");
+        $("#timer").css("border-color", "var(--success)");
+        player.playVideo();
     }
 });
 
