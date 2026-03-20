@@ -104,6 +104,7 @@
 
     const urls = {
         player_ready: '{{ path("room_player_ready", { id: room }) }}',
+        game_page: "{{ path('app_game', { 'room': room }) }}"
     };
 </script>
 <script src="/scripts/clients/global.js"></script>

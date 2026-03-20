@@ -11,7 +11,8 @@ class PlayerService
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private RoomRepository $roomRepository
+        private RoomRepository $roomRepository,
+        private PlayerRepository $playerRepository
     ) {}
 
     /**
@@ -88,5 +89,13 @@ class PlayerService
             $this->entityManager->remove($player);
             $this->entityManager->flush();
         }
+    }
+
+    public function remove(string $token): void
+    {
+        $player = $this->playerRepository->findByToken($token);
+        
+        $this->entityManager->remove($player);
+        $this->entityManager->flush();
     }
 }

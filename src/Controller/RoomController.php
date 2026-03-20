@@ -96,6 +96,7 @@ class RoomController extends AbstractController
 
         $playerToken = $room->removePlayerByPseudo($targetPseudo);
         $this->roomService->saveRoom($room);
+        $this->playerService->remove($playerToken);
 
         $pusher->trigger("presence-room-$id", 'player-kicked', [
             'pseudo' => $targetPseudo,
@@ -160,6 +161,35 @@ class RoomController extends AbstractController
             'color' => $player->getColor(),
             'isReady' => true
         ]);
+
+        return $this->json(['success' => true]);
+    }
+
+    #[Route('/{id}/launch', name: 'launch', methods: ['POST'])]
+    public function launch(
+        string $id,
+        Request $request,
+        Pusher $pusher
+    ): JsonResponse {
+        $session = $request->getSession();
+        $playerToken = $session->get('user');
+
+        $room = $this->roomService->getRoom($id);
+        if (!$room) {
+            return $this->json([
+                'success' => false,
+                'message' => 'The room doesn\'t exist'
+            ], 404);
+        }
+
+        if ($room->isMaster($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Only master cannot launch game'
+            ], 403);
+        }
+
+        $pusher->trigger("presence-room-$id", 'game-start', []);
 
         return $this->json(['success' => true]);
     }

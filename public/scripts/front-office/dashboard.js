@@ -25,6 +25,7 @@ $(document).ready(() => {
         })
         .done(function () {
             showSuccessToast("Vous êtes prêt !");
+            localStorage.setItem('userInteractedWithMedia', 'true');
         })
         .fail(function (xhr) {
             const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";

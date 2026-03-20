@@ -618,11 +618,17 @@ $(document).ready(() => {
             return;
         }
 
-        localStorage.setItem('userInteractedWithMedia', 'true');
-        const redirectUrl = btn.data('redirect-url');
-        if (redirectUrl) {
-            window.location.href = redirectUrl;
-        }
+        $.ajax({
+            url: urls.game_launch,
+            method: 'POST'
+        })
+        .done(() => {
+            localStorage.setItem('userInteractedWithMedia', 'true');
+            const redirectUrl = btn.data('redirect-url');
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        });
     });
 });
 

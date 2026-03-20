@@ -1,13 +1,12 @@
+// TODO: onReady => round/ready
 $(document).ready(() => {
     if ($(".nav").css("display") === "none") {
         $(".game").addClass("row justify-content-around align-items-end p-3").removeClass("tab-content");
-        $("#tabPlayer").addClass("col-7").removeClass("tab-pane fade show active m-2");
-        $("#tabPlayersContent").addClass("col-3").removeClass("tab-pane fade show active m-2");
+        $("#tabMain").addClass("col-7").removeClass("tab-pane fade show active m-2");
         $("#countdown").css("font-size", "8rem");
     } else {
         $(".game").addClass("tab-content").removeClass("row justify-content-around align-items-end p-3");
-        $("#tabPlayer").addClass("tab-pane fade show active m-2").removeClass("col-7");
-        $("#tabPlayersContent").addClass("tab-pane fade show active m-2").removeClass("col-3");
+        $("#tabMain").addClass("tab-pane fade show active m-2").removeClass("col-7");
         $("#countdown").css("font-size", "6rem");
     }
 
@@ -15,78 +14,12 @@ $(document).ready(() => {
     $("#countdown").css("color", "var(--success)");
     $("#timer").css("border-color", "var(--success)");
     $(".game").show();
+    $(".game-controls").removeClass("d-none");
     $("#player").hide();
     $("#timer").addClass("d-none");
 
     width = $($('.col-7')[0]).width();
     localStorage.setItem('playerBuilt', 'true');
-    buildPlayer(videos[current]);
-
-    $(".btn-next").click(() => {
-        if ($(".btn-next").hasClass("disabled")) {
-            return;
-        }
-
-        localStorage.setItem('userInteractedWithMedia', 'true');
-        $("#player").hide();
-        $("#timer").addClass("d-none");
-
-        if (current !== videos.length) {
-            localStorage.setItem('playerBuilt', 'true');
-            buildPlayer(videos[current]);
-            return;
-        }
-
-        Swal.fire({
-            title: "Fin de la partie",
-            text: "Vainqueur : " + $($("#playerList .list-group-item")[0]).data("pseudo"),
-            color: "var(--dark)",
-            customClass: {
-                confirmButton: "striped-info-light"
-            },
-            background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
-        });
-
-        if (player) {
-            player.stopVideo();
-            player.destroy();
-        }
-
-        window.location.href += 'dashboard';
-    });
-});
-
-$(document).on("click", ".list-group-item", async (event) => {
-    if ($("#timer").hasClass("d-none")) {
-        return;
-    }
-
-    const tile = $(event.target).closest('.list-group-item');
-    player.pauseVideo();
-    timerPaused = true;
-    Swal.fire({
-        title: "Buzz de " + tile.data("pseudo"),
-        text: "Est-ce la bonne réponse ?",
-        showCancelButton: true,
-        confirmButtonText: "Oui",
-        cancelButtonText: "Non",
-        color: "var(--dark)",
-        customClass: {
-            confirmButton: "striped-success-light",
-            cancelButton: "striped-danger-light"
-        },
-        background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const span = tile.find("#score");
-            const score = Number(span.text()) + Number(videos[current].points);
-            span.text(`${score}`.padStart(3, '0'));
-            sortPlayersByScore();
-            answerGiven = true;
-        }
-        timerPaused = false;
-        player.playVideo();
-    });
 });
 
 function buildPlayer(video) {
@@ -97,7 +30,7 @@ function buildPlayer(video) {
         events: {
             'onReady': () => {
                 $.ajax({
-                    url: urls.round_ready,
+                    url: urls.player_ack_ready,
                     method: 'POST'
                 });
             },
@@ -183,18 +116,4 @@ function onPlayerError(event) {
     // 5 : Erreur liée au lecteur HTML5
     // 100 : Vidéo introuvable (supprimée/privée)
     // 101/150 : Le propriétaire n'autorise pas la lecture intégrée
-}
-
-function sortPlayersByScore() {
-    const playersList = $('#playerList');
-    const players = playersList.find('li').get();
-
-    players.sort(function (a, b) {
-        const scoreA = Number($(a).find("#score").text());
-        const scoreB = Number($(b).find("#score").text());
-
-        return scoreB - scoreA;
-    });
-
-    playersList.html(players);
 }

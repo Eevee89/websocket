@@ -32,3 +32,11 @@ channel.bind('player-kicked', (data) => {
         console.log(data);
     }
 });
+
+channel.bind('game-start', () => {
+    if (!iAmMaster) {
+        window.location.href = urls.game_page;
+    } else {
+        console.log('Game start !');
+    }
+});
