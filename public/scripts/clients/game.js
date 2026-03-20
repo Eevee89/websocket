@@ -7,7 +7,9 @@ channel.members.each((member) => {
 });
 
 channel.bind('round-ready', (data) => {
-    buildPlayer(data.videoId);
+    if (!iAmMaster) {
+        buildPlayer(data.videoId);
+    }
 });
 
 channel.bind('player-ack-ready', (data) => {

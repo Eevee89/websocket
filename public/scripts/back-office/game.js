@@ -98,6 +98,7 @@ function buildPlayer(video) {
             'onReady': () => {
                 $.ajax({
                     url: urls.round_ready,
+                    data: current,
                     method: 'POST'
                 });
             },
