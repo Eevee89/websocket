@@ -16,7 +16,7 @@ channel.bind('player-ack-ready', (data) => {
     readyPlayersCount++;
     $("li[data-pseudo='" + data.pseudo + "']").removeClass("not-ready").addClass("ready");
 
-    if (readyPlayersCount >= totalPlayersInRoom) {
+    if (iAmMaster && readyPlayersCount >= totalPlayersInRoom) {
         console.log("Tout le monde est prêt, lancement du round !");
         $.ajax({
             url: urls.round_launch,

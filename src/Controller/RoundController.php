@@ -51,7 +51,7 @@ class RoundController extends AbstractController
         return $this->json(['success' => true]);
     }
 
-    #[Route('/{id}/ready', name: 'player_ack_ready', methods: ['POST'])]
+    #[Route('/{id}/player-ready', name: 'player_ack_ready', methods: ['POST'])]
     public function ackReady(
         string $id,
         Request $request,
