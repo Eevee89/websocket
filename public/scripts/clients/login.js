@@ -10,7 +10,7 @@ $(document).ready(() => {
         }
 
         new YT.Player('player', {
-            videoId: video.video,
+            videoId: 'FtutLA63Cp8',
             events: {
                 'onReady': () => {
                     $.ajax({
@@ -33,7 +33,6 @@ $(document).ready(() => {
                         showErrorSwal("Erreur", errorMsg);
                     });
                 },
-                'onStateChange': onPlayerStateChange,
                 'onError': () => {
                     showErrorSwal(
                         "Player Youtube non supporté",
@@ -46,8 +45,6 @@ $(document).ready(() => {
             playerVars: {
                 origin: window.location.host
             },
-            width: width - 20,
-            height: (width - 20) * 9 / 16
         });
     });
 
@@ -64,7 +61,7 @@ $(document).ready(() => {
         }
 
         new YT.Player('player', {
-            videoId: video.video,
+            videoId: 'FtutLA63Cp8',
             events: {
                 'onReady': () => {
                     $.ajax({
@@ -87,7 +84,6 @@ $(document).ready(() => {
                         showErrorSwal("Erreur", errorMsg);
                     });
                 },
-                'onStateChange': onPlayerStateChange,
                 'onError': () => {
                     showErrorSwal(
                         "Player Youtube non supporté",
@@ -99,9 +95,7 @@ $(document).ready(() => {
             host: 'https://www.youtube-nocookie.com',
             playerVars: {
                 origin: window.location.host
-            },
-            width: width - 20,
-            height: (width - 20) * 9 / 16
+            }
         });
     });
 });
