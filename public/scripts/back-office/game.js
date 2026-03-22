@@ -18,7 +18,7 @@ $(document).ready(() => {
     $("#player").hide();
     $("#timer").addClass("d-none");
 
-    width = $($('.col-7')[0]).width();
+    width = $($('#tabPlayer')[0]).width();
     localStorage.setItem('playerBuilt', 'true');
     buildPlayer(videos[current]);
 

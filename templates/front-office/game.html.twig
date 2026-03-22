@@ -54,7 +54,9 @@
     let HIDE = {{ hide }};
     const colors = gradientColorsCompute(HIDE);
     const urls = {
-        player_ack_ready: '{{ path("round_player_ack_ready", { id: room }) }}'
+        player_ack_ready: '{{ path("round_player_ack_ready", { id: room }) }}',
+        player_buzzed: '{{ path("round_player_buzzed", { id: room }) }}',
+        player_ack_finish: '{{ path("round_player_ack_finish", { id: room }) }}'
     }
     let width = 0;
     let current = 0;

@@ -7,9 +7,9 @@ channel.members.each((member) => {
 });
 
 channel.bind('round-ready', (data) => {
-    videoCount = data.count;
-    HIDE = data.hideTime;
     if (!iAmMaster) {
+        videoCount = data.count;
+        HIDE = data.hideTime;
         buildPlayer(data.videoId);
     }
 });
@@ -56,7 +56,7 @@ channel.bind('player-buzzed', (data) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 // TODO: Appeler une route API pour ajouter les points au serveur
-                updateScore(data.token, videos[current].points);
+                //updateScore(data.token, videos[current].points);
                 answerGiven = true;
             } else {
                 timerPaused = false;

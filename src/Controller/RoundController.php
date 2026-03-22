@@ -163,4 +163,45 @@ class RoundController extends AbstractController
 
         return $this->json(['success' => true]);
     }
+
+    #[Route('/{id}/buzz', name: 'player_buzzed', methods: ['POST'])]
+    public function buzz(
+        string $id,
+        Request $request,
+        Pusher $pusher
+    ): JsonResponse {
+        $session = $request->getSession();
+        $playerToken = $session->get('user');
+
+        $room = $this->roomService->getRoom($id);
+        if (!$room) {
+            return $this->json([
+                'success' => false,
+                'message' => 'The room doesn\'t exist'
+            ], 404);
+        }
+
+        if ($room->isMaster($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Master cannot mark as ready'
+            ], 403);
+        }
+
+        if (!$room->getPlayer($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Not in the room'
+            ], 403);
+        }
+
+        $player = $room->getPlayer($playerToken);
+
+        $pusher->trigger("presence-room-$id", 'player-buzzed', [
+            'token' => $playerToken,
+            'pseudo' => $player->getPseudo()
+        ]);
+
+        return $this->json(['success' => true]);
+    }
 }

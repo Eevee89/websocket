@@ -19,8 +19,15 @@ $(document).ready(() => {
     $("#timer").addClass("d-none");
     $("#answer").addClass('d-none');
 
-    width = $($('.col-7')[0]).width();
+    width = $($('#tabMain')[0]).width();
     localStorage.setItem('playerBuilt', 'true');
+
+    $('#buzzerBtn').click(() => {
+        $.ajax({
+            url: urls.player_buzzed,
+            method: 'POST'
+        });
+    });
 });
 
 function buildPlayer(video) {
@@ -113,6 +120,7 @@ function onPlayerStateChange(event) {
                 title: "Porchain round",
                 text: "Prêt pour le prochain round ?",
                 confirmButtonText: "Oui",
+                allowOutsideClick: false,
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
