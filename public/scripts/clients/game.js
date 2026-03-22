@@ -71,9 +71,9 @@ channel.bind('player-buzzed', (data) => {
 channel.bind('validation', (data) => {
     if (data.isValid) {
         if (iAmMaster) {
-            const playerTile = $('#player-' + data.token);
-            const score = playerTile.closest('#score').text();
-            playerTile.closest('#score').text(score + videos[current].points);
+            const scoreInfo = $("#player-peyg458nwid1 #score");
+            const score = Number(scoreInfo.text()) + videos[current].points;
+            scoreInfo.text((''+score).padStart(3, '0'));
         }
 
         answerGiven = true;
