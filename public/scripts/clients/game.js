@@ -8,7 +8,7 @@ channel.members.each((member) => {
 
 channel.bind('round-ready', (data) => {
     videoCount = data.count;
-    HIDE = data.hide;
+    HIDE = data.hideTime;
     if (!iAmMaster) {
         buildPlayer(data.videoId);
     }

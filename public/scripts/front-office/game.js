@@ -17,6 +17,7 @@ $(document).ready(() => {
     $(".game-controls").removeClass("d-none");
     $("#player").hide();
     $("#timer").addClass("d-none");
+    $("#answer").addClass('d-none');
 
     width = $($('.col-7')[0]).width();
     localStorage.setItem('playerBuilt', 'true');
@@ -46,9 +47,11 @@ function buildPlayer(video) {
     };
 
     $("#category").text("Categorie : " + video.category);
+    $("#answer").addClass('d-none');
     $("#answer").text(video.title);
     $("#points").text("Points : " + video.points)
     $(".tracker").text(`${current + 1}`.padStart(2, '0') + "/" + `${videoCount}`.padStart(2, '0'));
+    $("#buzzerBtn").removeClass('d-none');
 
     if (player) {
         player.stopVideo();
@@ -100,6 +103,8 @@ function onPlayerStateChange(event) {
         }).then(async () => {
             $("#player").show();
             $("#timer").addClass("d-none");
+            $("#answer").removeClass('d-none');
+            $("#buzzerBtn").addClass('d-none');
             $("#countdown").text(HIDE + 1);
 
             await delay(5000);
