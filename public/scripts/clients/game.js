@@ -10,8 +10,34 @@ channel.bind('round-ready', (data) => {
     if (!iAmMaster) {
         videoCount = data.count;
         HIDE = data.hideTime;
-        colors = gradientColorsCompute(HIDE);
-        buildPlayer(data.videoId);
+        
+        if (current !== videoCount) {
+            colors = gradientColorsCompute(HIDE);
+
+            $("#player").hide();
+            $("#timer").addClass("d-none");
+            localStorage.setItem('playerBuilt', 'true');
+
+            buildPlayer(data.videoId);
+            return;
+        }
+
+        Swal.fire({
+            title: "Fin de la partie",
+            text: "Vainqueur : A CHANGER", // TODO
+            color: "var(--dark)",
+            customClass: {
+                confirmButton: "striped-info-light"
+            },
+            background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
+        });
+
+        if (player) {
+            player.stopVideo();
+            player.destroy();
+        }
+
+        window.location.href += 'dashboard';
     }
 });
 
@@ -69,16 +95,15 @@ channel.bind('player-buzzed', (data) => {
 });
 
 channel.bind('validation', (data) => {
-    if (data.isValid) {
+    if (data.isValid === 'true') {
         if (iAmMaster) {
-            const scoreInfo = $("#player-peyg458nwid1 #score");
-            const score = Number(scoreInfo.text()) + videos[current].points;
+            const scoreInfo = $(`#player-${data.token} #score`);
+            const score = Number(scoreInfo.text()) + Number(videos[current].points);
             scoreInfo.text((''+score).padStart(3, '0'));
         }
 
         answerGiven = true;
         player.playVideo();
-
     } else {
         timerPaused = false;
         player.playVideo();
