@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\PlayerService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,7 @@ class RoundController extends AbstractController
 {
     public function __construct(
         private RoomService $roomService,
+        private PlayerService $playerService
     ) {}
 
     #[Route('/{id}/ready', name: 'ready', methods: ['POST'])]
@@ -184,7 +186,7 @@ class RoundController extends AbstractController
         if ($room->isMaster($playerToken)) {
             return $this->json([
                 'success' => false,
-                'message' => 'Master cannot mark as ready'
+                'message' => 'Master cannot buzzed'
             ], 403);
         }
 
@@ -200,6 +202,46 @@ class RoundController extends AbstractController
         $pusher->trigger("presence-room-$id", 'player-buzzed', [
             'token' => $playerToken,
             'pseudo' => $player->getPseudo()
+        ]);
+
+        return $this->json(['success' => true]);
+    }
+
+    #[Route('/{id}/valid', name: 'valid', methods: ['POST'])]
+    public function valid(
+        string $id,
+        Request $request,
+        Pusher $pusher
+    ): JsonResponse {
+        $session = $request->getSession();
+        $playerToken = $session->get('user');
+
+        $data = $request->request->all();
+        $buzzer = $data['buzzer'];
+
+        $room = $this->roomService->getRoom($id);
+        if (!$room) {
+            return $this->json([
+                'success' => false,
+                'message' => 'The room doesn\'t exist'
+            ], 404);
+        }
+
+        if (!$room->isMaster($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Player cannot mark as valid or not'
+            ], 403);
+        }
+
+        $player = $room->getPlayer($buzzer);
+        if ($player) {
+            $this->playerService->updateScore($player, intval($data['points']));
+        }
+
+        $pusher->trigger("presence-room-$id", 'validation', [
+            'token' => $buzzer,
+            'isValid' => $data['isValid'],
         ]);
 
         return $this->json(['success' => true]);

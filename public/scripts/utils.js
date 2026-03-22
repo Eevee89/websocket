@@ -1,7 +1,7 @@
-function generatePlayerListItem(token, pseudo, team, color, dashboard = true) {
+function generatePlayerListItem(token, pseudo, team, color, dashboard = true, score = 0) {
     const thirdColumn = dashboard
         ? '<i class="fa fa-solid fa-trash danger ms-2 btn-kick-out"></i>'
-        : '<span id="score" class="info-span">000</span>'
+        : `<span id="score" class="info-span">${(""+score).padStart(3, '0')}</span>`
         ;
     
     if (!team) {

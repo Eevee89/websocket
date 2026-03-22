@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Pusher\Pusher;
+use App\Service\RoomService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class PusherController extends AbstractController
 {
     #[Route('/pusher/auth', name: 'pusher_auth', methods: ['POST'])]
-    public function auth(Request $request, Pusher $pusher): JsonResponse
+    public function auth(Request $request, Pusher $pusher, RoomService $roomService): JsonResponse
     {
         $session = $request->getSession();
         $userToken = $session->get('user');
@@ -34,14 +35,29 @@ class PusherController extends AbstractController
             ], 403);
         }
 
+        $room = $roomService->getRoom($roomId);
+        if (!$room) {
+            return $this->json([
+                'success' => false,
+                'message' => 'The room doesn\'t exist'
+            ], 404);
+        }
+
+        $player = $room->getPlayer($userToken);
         $presenceData = [
             'user_id' => $userToken,
             'user_info' => [
                 'pseudo' => $pseudo,
                 'isMaster' => $session->get('isMaster', false),
-                'color' => '#' . substr(md5($userToken), 0, 6)
+                'color' => '#' . substr(md5($userToken), 0, 6),
+                'score' => 0,
+                'team' => ''
             ]
         ];
+        if ($player) {
+            $presenceData['user_info']['score'] = $player->getScore();
+            $presenceData['user_info']['team'] = $player->getTeam();
+        }
 
         $auth = $pusher->authorizePresenceChannel(
             $channelName, 

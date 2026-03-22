@@ -51,13 +51,15 @@
     const thisRoom = '{{ room }}';
     const token = '{{ token }}';
     const videos = JSON.parse('{{ videos|json_encode(constant('JSON_HEX_APOS'))|raw }}');
-    let HIDE = {{ hide }};
     const colors = gradientColorsCompute(HIDE);
     const urls = {
         player_ack_ready: '{{ path("round_player_ack_ready", { id: room }) }}',
         player_buzzed: '{{ path("round_player_buzzed", { id: room }) }}',
         player_ack_finish: '{{ path("round_player_ack_finish", { id: room }) }}'
     }
+    const dashboard = false;
+
+    let HIDE = {{ hide }};
     let width = 0;
     let current = 0;
     var player = null;

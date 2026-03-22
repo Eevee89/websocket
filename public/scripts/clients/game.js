@@ -54,16 +54,33 @@ channel.bind('player-buzzed', (data) => {
             showCancelButton: true,
             confirmButtonText: "Oui",
         }).then((result) => {
-            if (result.isConfirmed) {
-                // TODO: Appeler une route API pour ajouter les points au serveur
-                //updateScore(data.token, videos[current].points);
-                answerGiven = true;
-            } else {
-                timerPaused = false;
-                player.playVideo();
-                // TODO: Envoyer un event pour dire au joueur "Faux, tu es bloqué"
-            }
+            $.ajax({
+                url: urls.round_valid,
+                data: {
+                    'isValid': result.isConfirmed,
+                    'buzzer': data.token,
+                    'points': videos[current].points
+                },
+                method: 'POST'
+            });
         });
+    }
+});
+
+channel.bind('validation', (data) => {
+    if (data.isValid) {
+        if (iAmMaster) {
+            const playerTile = $('#player-' + data.token);
+            const score = playerTile.closest('#score').text();
+            playerTile.closest('#score').text(score + videos[current].points);
+        }
+
+        answerGiven = true;
+        player.playVideo();
+
+    } else {
+        timerPaused = false;
+        player.playVideo();
     }
 });
 

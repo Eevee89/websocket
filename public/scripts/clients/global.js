@@ -25,7 +25,7 @@ channel.bind('pusher:subscription_succeeded', (event) => {
         playersId.push(pToken);
         
         const player = players[pToken];
-        const item = generatePlayerListItem(pToken, player.pseudo, player.team, player.color);
+        const item = generatePlayerListItem(pToken, player.pseudo, player.team, player.color, dashboard, player.score);
 
         if (player.ready) {
             item.removeClass("not-ready").addClass("ready");

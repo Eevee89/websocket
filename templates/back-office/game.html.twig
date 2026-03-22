@@ -101,8 +101,11 @@
     const colors = gradientColorsCompute(HIDE);
     const urls = {
         round_ready: '{{ path("round_ready", { id: room }) }}',
-        round_launch: '{{ path("round_launch", { id: room }) }}'
+        round_launch: '{{ path("round_launch", { id: room }) }}',
+        round_valid: '{{ path("round_valid", { id: room }) }}'
     }
+    const dashboard = false;
+    
     let width = 0;
     let current = 0;
     var player = null;
