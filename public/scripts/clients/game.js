@@ -7,6 +7,8 @@ channel.members.each((member) => {
 });
 
 channel.bind('round-ready', (data) => {
+    videoCount = data.count;
+    HIDE = data.hide;
     if (!iAmMaster) {
         buildPlayer(data.videoId);
     }
@@ -18,6 +20,7 @@ channel.bind('player-ack-ready', (data) => {
 
     if (iAmMaster && readyPlayersCount >= totalPlayersInRoom) {
         console.log("Tout le monde est prêt, lancement du round !");
+        readyPlayersCount = 0;
         $.ajax({
             url: urls.round_launch,
             method: 'POST'
@@ -61,5 +64,15 @@ channel.bind('player-buzzed', (data) => {
                 // TODO: Envoyer un event pour dire au joueur "Faux, tu es bloqué"
             }
         });
+    }
+});
+
+channel.bind('player-ack-finish', (data) => {
+    readyPlayersCount++;
+    $("li[data-pseudo='" + data.pseudo + "']").removeClass("not-ready").addClass("ready");
+
+    if (iAmMaster && readyPlayersCount >= totalPlayersInRoom) {
+        $(".btn-next").removeClass("disabled");
+        showSuccessToast('Vous pouvez lancer le prochain round');
     }
 });

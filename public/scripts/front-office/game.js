@@ -46,9 +46,9 @@ function buildPlayer(video) {
     };
 
     $("#category").text("Categorie : " + video.category);
-    $("#answer").text("???");
+    $("#answer").text(video.title);
     $("#points").text("Points : " + video.points)
-    $(".tracker").text(`${current + 1}`.padStart(2, '0') + "/" + `${videos.length}`.padStart(2, '0'));
+    $(".tracker").text(`${current + 1}`.padStart(2, '0') + "/" + `${videoCount}`.padStart(2, '0'));
 
     if (player) {
         player.stopVideo();
@@ -83,7 +83,6 @@ function onPlayerStateChange(event) {
 
         let seconds = HIDE;
         $("#timer").removeClass("d-none");
-        $(".btn-next").addClass("disabled");
         new Promise((resolve) => {
             const timer = setInterval(() => {
                 if (!timerPaused) {
@@ -98,13 +97,27 @@ function onPlayerStateChange(event) {
                     resolve();
                 }
             }, 1000);
-        }).then(() => {
+        }).then(async () => {
             $("#player").show();
             $("#timer").addClass("d-none");
-            $("#answer").text(videos[current++].title);
             $("#countdown").text(HIDE + 1);
-            $(".btn-next").removeClass("disabled");
-            $(".list-group-item").removeClass("ready").addClass("not-ready");
+
+            await delay(5000);
+
+            Swal.fire({
+                title: "Porchain round",
+                text: "Prêt pour le prochain round ?",
+                confirmButtonText: "Oui",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: urls.player_ack_finish,
+                        method: 'POST'
+                    }).done(() => {
+                        localStorage.setItem('userInteractedWithMedia', 'true');
+                    });
+                }
+            });
         });
     }
 }

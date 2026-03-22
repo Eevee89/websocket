@@ -33,7 +33,9 @@
             </div>
             <div class="row answerRow">
                 <div class="col-12 d-flex flex-column align-items-center justify-content-end p-3">
-                    <span id="answer" class="info-span">BUZZER</span>
+                    <span id="answer" class="info-span"></span>
+                    <span id="category" class="info-span">Catégorie:</span>
+                    <span id="points" class="info-span">Points:</span>
                 </div>
             </div>
         </div>
@@ -48,7 +50,7 @@
     const thisRoom = '{{ room }}';
     const token = '{{ token }}';
     const videos = JSON.parse('{{ videos|json_encode(constant('JSON_HEX_APOS'))|raw }}');
-    const HIDE = {{ hide }};
+    let HIDE = {{ hide }};
     const colors = gradientColorsCompute(HIDE);
     const urls = {
         player_ack_ready: '{{ path("round_player_ack_ready", { id: room }) }}'
@@ -59,6 +61,7 @@
     let timerPaused = false;
     let answerGiven = false;
     let readyPlayersCount = 0;
+    let videoCount = 0;
 </script>
 <script src="/scripts/clients/global.js"></script>
 <script src="/scripts/clients/game.js"></script>

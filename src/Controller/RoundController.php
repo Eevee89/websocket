@@ -45,7 +45,9 @@ class RoundController extends AbstractController
 
         $videos = array_values($session->get("videos") ?? []);
         $pusher->trigger("presence-room-$id", 'round-ready', [
-            'videoId' => count($videos) ? $videos[$round] : ''
+            'videoId' => count($videos) ? $videos[$round] : '',
+            'count' => count($videos),
+            'hideTime' => $session->get("hideTime") ?? 20
         ]);
 
         return $this->json(['success' => true]);
@@ -117,6 +119,47 @@ class RoundController extends AbstractController
         }
 
         $pusher->trigger("presence-room-$id", 'launch', []);
+
+        return $this->json(['success' => true]);
+    }
+
+    #[Route('/{id}/player-finish', name: 'player_ack_finish', methods: ['POST'])]
+    public function ackFinish(
+        string $id,
+        Request $request,
+        Pusher $pusher
+    ): JsonResponse {
+        $session = $request->getSession();
+        $playerToken = $session->get('user');
+
+        $room = $this->roomService->getRoom($id);
+        if (!$room) {
+            return $this->json([
+                'success' => false,
+                'message' => 'The room doesn\'t exist'
+            ], 404);
+        }
+
+        if ($room->isMaster($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Master cannot mark as ready'
+            ], 403);
+        }
+
+        if (!$room->getPlayer($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Not in the room'
+            ], 403);
+        }
+
+        $player = $room->getPlayer($playerToken);
+
+        $pusher->trigger("presence-room-$id", 'player-ack-finish', [
+            'token' => $playerToken,
+            'pseudo' => $player->getPseudo()
+        ]);
 
         return $this->json(['success' => true]);
     }

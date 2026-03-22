@@ -173,7 +173,6 @@ function onPlayerStateChange(event) {
             $("#timer").addClass("d-none");
             $("#answer").text(videos[current++].title);
             $("#countdown").text(HIDE + 1);
-            $(".btn-next").removeClass("disabled");
             $(".list-group-item").removeClass("ready").addClass("not-ready");
         });
     }
