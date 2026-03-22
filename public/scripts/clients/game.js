@@ -10,6 +10,7 @@ channel.bind('round-ready', (data) => {
     if (!iAmMaster) {
         videoCount = data.count;
         HIDE = data.hideTime;
+        colors = gradientColorsCompute(HIDE);
         buildPlayer(data.videoId);
     }
 });
