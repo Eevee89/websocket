@@ -795,21 +795,17 @@ function getYoutubeId(url) {
  * @returns {Promise<string[]>} Un tableau contenant toutes les URLs de vidéos.
  */
 async function getAllPlaylistVideoUrls(playlistUrl) {
-    const BASE_URL = 'https://www.googleapis.com/youtube/v3/playlistItems';
-    let videoUrls = [];
-    let nextPageToken = null;
-
-    console.log(playlistUrl);
-    const splitted = playlistUrl.split('list=')[1];
-    console.log(splitted);
+    const splitted = playlistUrl.split('list=');
     if (!splitted || !splitted[1]) {
         showErrorSwal("Impossible de lire la playlist", "Veuillez vérifier l'url");
         return [];
     }
     const playlistId = splitted[1].substring(0, 34);
-    console.log(playlistId);
+    const BASE_URL = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50';
 
-    const url = `${BASE_URL}?part=snippet&maxResults=50&playlistId=${playlistId}&key=AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA`;
+    const url = `${BASE_URL}&playlistId=${playlistId}&key=AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA`;
+    const videoUrls = [];
+    let nextPageToken = null;
     do {
         console.log(`Requête en cours... (Token: ${nextPageToken || 'Initial'})`);
         const response = await fetch(url + (nextPageToken ? `&pageToken=${nextPageToken}` : ''));
