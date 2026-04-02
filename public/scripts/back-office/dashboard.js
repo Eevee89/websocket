@@ -795,7 +795,12 @@ async function getAllPlaylistVideoUrls(playlistUrl) {
     let videoUrls = [];
     let nextPageToken = null;
 
-    const playlistId = playlistUrl.substring(38);
+    const splitted = playlistUrl.split('list=')[1];
+    if (!splitted || !splitted[1]) {
+        showErrorSwal("Impossible de lire la playlist", "Veuillez vérifier l'url");
+        return [];
+    }
+    const playlistId = splitted[1].substring(0, 34);
 
     do {
         let url = `${BASE_URL}?part=snippet&maxResults=50&playlistId=${playlistId}&key=AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA`;
