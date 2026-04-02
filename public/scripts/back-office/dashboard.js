@@ -376,8 +376,8 @@ $(document).ready(() => {
 
                 console.log(result);
                 getAllPlaylistVideoUrls(result.value)
-                    .then(async (urls) => {
-                        for (const videoUrl of urls) {
+                    .then(async (yurls) => {
+                        for (const videoUrl of yurls) {
                             const video = getYoutubeId(videoUrl);
                             if (null === video) {
                                 continue;
@@ -467,7 +467,7 @@ $(document).ready(() => {
                         console.error('Échec de la récupération des URLs:', error);
                     });
             } else {
-                const { value: file } = await Swal.fire({
+                const result = await Swal.fire({
                     input: "file",
                     inputLabel: "Sélectionner votre fichier",
                     color: "var(--dark)",
@@ -479,8 +479,11 @@ $(document).ready(() => {
                     },
                     background: "repeating-linear-gradient(-45deg, var(--info-light), var(--info-light) 20px, var(--info-light-shade) 20px, var(--info-light-shade) 40px)"
                 });
+                if (!result.isConfirmed) {
+                    return;
+                }
 
-                reader.readAsText(file);
+                reader.readAsText(result.value);
             }
         });
     });
