@@ -361,7 +361,7 @@ $(document).ready(() => {
             background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const { value: url } = await Swal.fire({
+                const result = await Swal.fire({
                     input: "url",
                     inputLabel: "URL de la playlist",
                     color: "var(--dark)",
@@ -370,8 +370,11 @@ $(document).ready(() => {
                     },
                     background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
                 });
+                if (!result.isConfirmed) {
+                    return;
+                }
 
-                getAllPlaylistVideoUrls(url)
+                getAllPlaylistVideoUrls(result.value)
                     .then(async (urls) => {
                         for (const videoUrl of urls) {
                             const video = getYoutubeId(videoUrl);
