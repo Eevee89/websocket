@@ -374,6 +374,7 @@ $(document).ready(() => {
                     return;
                 }
 
+                console.log(result);
                 getAllPlaylistVideoUrls(result.value)
                     .then(async (urls) => {
                         for (const videoUrl of urls) {
@@ -798,21 +799,20 @@ async function getAllPlaylistVideoUrls(playlistUrl) {
     let videoUrls = [];
     let nextPageToken = null;
 
+    console.log(playlistUrl);
     const splitted = playlistUrl.split('list=')[1];
+    console.log(splitted);
     if (!splitted || !splitted[1]) {
         showErrorSwal("Impossible de lire la playlist", "Veuillez vérifier l'url");
         return [];
     }
     const playlistId = splitted[1].substring(0, 34);
+    console.log(playlistId);
 
+    const url = `${BASE_URL}?part=snippet&maxResults=50&playlistId=${playlistId}&key=AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA`;
     do {
-        let url = `${BASE_URL}?part=snippet&maxResults=50&playlistId=${playlistId}&key=AIzaSyDWgvbXvCah8-fdnR7yMid0Uhjxj5t9KBA`;
-        if (nextPageToken) {
-            url += `&pageToken=${nextPageToken}`;
-        }
-
         console.log(`Requête en cours... (Token: ${nextPageToken || 'Initial'})`);
-        const response = await fetch(url);
+        const response = await fetch(url + (nextPageToken ? `&pageToken=${nextPageToken}` : ''));
         if (!response.ok) {
             console.error(`Erreur API: ${response.status} ${response.statusText}`);
             return [];
