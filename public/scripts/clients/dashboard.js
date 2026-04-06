@@ -7,7 +7,8 @@ channel.bind('player-ready', (data) => {
 
         showInfoToast(data.pseudo + ' est prêt');
 
-        $(".btn-go").toggleClass("disabled", !everyoneReady());
+        const canGo = everyoneReady() && $('#videoList li').length > 0;
+        $(".btn-go").toggleClass("disabled", !canGo);
     } else {
         console.log(data);
     }

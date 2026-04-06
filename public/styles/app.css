@@ -272,3 +272,7 @@ input,
     color: #222;
     background-color: var(--bs-secondary-bg);
 }
+
+#buzzerBtn {
+    font-size: 3em;
+}

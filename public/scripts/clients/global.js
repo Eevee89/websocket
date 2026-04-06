@@ -34,7 +34,8 @@ channel.bind('pusher:subscription_succeeded', (event) => {
         $("#playerList").append(item);
     }
 
-    $(".btn-go").toggleClass("disabled", !everyoneReady());
+    const canGo = everyoneReady() && $('#videoList li').length > 0;
+    $(".btn-go").toggleClass("disabled", !canGo);
 });
 
 channel.bind('pusher:member_added', (member) => {
@@ -54,7 +55,8 @@ channel.bind('pusher:member_added', (member) => {
         item.removeClass("not-ready").addClass("ready");
     }
 
-    $(".btn-go").toggleClass("disabled", !everyoneReady());
+    const canGo = everyoneReady() && $('#videoList li').length > 0;
+    $(".btn-go").toggleClass("disabled", !canGo);
 });
 
 // DECONNECTION 

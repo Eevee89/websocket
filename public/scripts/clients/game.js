@@ -75,7 +75,7 @@ channel.bind('player-buzzed', (data) => {
 
     if (iAmMaster) {
         Swal.fire({
-            title: "Buzz de " + tile.data("pseudo"),
+            title: "Buzz de " + data.pseudo,
             text: "Est-ce la bonne réponse ?",
             showCancelButton: true,
             confirmButtonText: "Oui",

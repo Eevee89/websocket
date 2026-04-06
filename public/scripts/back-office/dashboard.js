@@ -264,6 +264,9 @@ $(document).ready(() => {
                 computeAverageTime();
 
                 $("#editVideoModal").modal("hide");
+
+                const canGo = everyoneReady() && $('#videoList li').length > 0;
+                $(".btn-go").toggleClass("disabled", !canGo);
             })
             .fail((err) => {
                 console.log(err);
@@ -331,6 +334,7 @@ $(document).ready(() => {
                     $("#nbTrack").html("<i class='fa fa-solid fa-music warning mx-3'></i>0");
                     $("#maxScore").html("<i class='fa fa-solid fa-ranking-star warning mx-3'></i>0 pts");
                     $("#avgTime").html("<i class='fa fa-solid fa-clock warning mx-3'></i>0min");
+                    $(".btn-go").addClass("disabled");
                 })
                 .fail((err) => {
                     console.log(err);
@@ -376,6 +380,9 @@ $(document).ready(() => {
                 }
 
                 reader.readAsText(result.value);
+
+                const canGo = everyoneReady() && $('#videoList li').length > 0;
+                $(".btn-go").toggleClass("disabled", !canGo);
 
                 return;
             }
@@ -480,6 +487,9 @@ $(document).ready(() => {
 
                     updateItemLabels();
                     computeAverageTime();
+
+                    const canGo = everyoneReady() && $('#videoList li').length > 0;
+                    $(".btn-go").toggleClass("disabled", !canGo);
                 })
                 .catch(error => {
                     console.error('Échec de la récupération des URLs:', error);
@@ -699,6 +709,9 @@ $(document).on("click", ".btn-delete", ((event) => {
 
                 updateItemLabels();
                 computeAverageTime();
+
+                const canGo = everyoneReady() && $('#videoList li').length > 0;
+                $(".btn-go").toggleClass("disabled", !canGo);
             })
             .fail((err) => {
                 console.log(err);
