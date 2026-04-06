@@ -228,9 +228,9 @@ class RoomController extends AbstractController
                 'winner' => $data['winner']
             ]);
 
-            return $this->json(['success' => true]);
+            return $this->json(['success' => true], 200);
         } catch (\Throwable $e) {
-            return $this->json(['success' => false, 'message' => $e->getMessage()]);
+            return $this->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 }
