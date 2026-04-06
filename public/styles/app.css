@@ -263,16 +263,3 @@ input,
         width: 50% !important;
     }
 }
-
-#editVideoModal .modal-content {
-    background-image: url('../images/desktop_bg.png');
-}
-
-#editVideoModal .input--modific {
-    color: #222;
-    background-color: var(--bs-secondary-bg);
-}
-
-#buzzerBtn {
-    font-size: 3em;
-}

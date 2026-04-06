@@ -170,3 +170,7 @@ img {
     border-radius: 50%;
     background-color: var(--success);
 }
+
+#buzzerBtn {
+    font-size: 3em !important;
+}

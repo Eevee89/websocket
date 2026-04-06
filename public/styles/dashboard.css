@@ -2,7 +2,7 @@
 
 .topbar {
     width: 100vw;
-    height: 15vh;
+    height: 10vh;
     border-radius: 0;
     overflow: hidden;
 }
@@ -13,7 +13,7 @@
 
 .dashboard {
     width: 100vw;
-    height: 85vh;
+    height: 90vh;
 }
 
 .dashboard-col {
@@ -81,9 +81,8 @@ img {
     -ms-user-select: none;
 }
 
-.btn-go, .btn-ready {
-    color: var(--success);
-    cursor: pointer;
+.btn-ready {
+    font-size: 2em !important;
 }
 
 .disabled {
@@ -133,13 +132,22 @@ img {
     border-radius: 5px !important;
 }
 
+#editVideoModal .modal-content {
+    background-image: url('../images/desktop_bg.png');
+}
+
+#editVideoModal .input--modific {
+    color: #222;
+    background-color: var(--bs-secondary-bg);
+}
+
 @media (min-width: 768px) {
     .topbar {
-        height: 10vh;
+        height: 15vh;
     }
 
     .dashboard,
     .game {
-        height: 90vh;
+        height: 85vh;
     }
 }
