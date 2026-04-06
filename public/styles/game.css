@@ -2,7 +2,7 @@
 
 .topbar {
     width: 100vw;
-    height: 15vh;
+    height: 10vh;
     border-radius: 0;
     overflow: hidden;
 }
@@ -13,7 +13,7 @@
 
 .game {
     width: 100vw;
-    height: 85vh;
+    height: 90vh;
 }
 
 .game-col {
@@ -126,12 +126,12 @@ img {
 
 @media (min-width: 768px) {
     .topbar {
-        height: 10vh;
+        height: 15vh;
     }
 
     .dashboard,
     .game {
-        height: 90vh;
+        height: 85vh;
     }
 }
 

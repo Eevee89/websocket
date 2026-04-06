@@ -140,14 +140,3 @@ img {
     color: #222;
     background-color: var(--bs-secondary-bg);
 }
-
-@media (min-width: 768px) {
-    .topbar {
-        height: 15vh;
-    }
-
-    .dashboard,
-    .game {
-        height: 85vh;
-    }
-}
