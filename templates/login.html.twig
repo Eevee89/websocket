@@ -6,7 +6,7 @@
 
 {% block body %}
 <div id="body">
-    <div class="glassmorph container text-dark">
+    <div class="liquid-glass container text-white">
         {{ form_start(form, {'attr': {'class': 'row justify-content-md-center align-items-center'}}) }}
 
             <div id="two" class="col-md-10 col-ms-4 rounded-1 py-2 my-1">
@@ -21,14 +21,14 @@
                 {{ form_errors(form.pseudo) }}
             </div>
 
-            <div id="four" class="row justify-content-md-around col-md-10 col-ms-7 rounded-1 mb-2">
+            <div id="four" class="col-md-10 col-ms-7 rounded-1 mb-2">
                 {{ form_widget(form.create_room, {'attr': {'class': 'd-none'}}) }}
                 {{ form_widget(form.join_room, {'attr': {'class': 'd-none'}}) }}
-                <button id="create-room-btn" type="button" class="btn btn-secondary col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button striped-success">
+                <button id="create-room-btn" type="button" class="btn btn-secondary btn-success col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button">
                     Créer une partie
                 </button>
 
-                <button id="join-room-btn" type="button" class="btn btn-secondary col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button striped-warning">
+                <button id="join-room-btn" type="button" class="btn btn-secondary btn-warning col-md-4 col-ms-6 rounded-1 py-2 my-1 form__button">
                     Rejoindre une partie
                 </button>
             </div>

@@ -23,18 +23,46 @@
     --dark: #222;
 }
 
+.glassmorph {
+    /*background-color: #57add4; var(--danger-light);*/
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background-position: bottom;
+}
+
+.btn-success {
+    --bs-btn-bg: var(--success-light);
+    --bs-btn-border-color: var(--success-light);
+}
+
+.btn-warning {
+    --bs-btn-bg: var(--warning-light);
+    --bs-btn-border-color: var(--warning-light);
+}
+
+.btn-danger {
+    --bs-btn-bg: var(--danger-light);
+    --bs-btn-border-color: var(--danger-light);
+}
+
+.btn-info {
+    --bs-btn-bg: var(--info-light);
+    --bs-btn-border-color: var(--info-light);
+}
+
 body {
     margin: 0;
     width: 100vw;
     height: 100vh;
+    background-image: url('../images/desktop_bg.png');
 }
 
 .success {
-    color: var(--success);
+    color: var(--success-light);
 }
 
 .success-bg {
-    background-color: var(--success);
+    background-color: var(--success-light);
 }
 
 .info {
@@ -61,82 +89,28 @@ body {
     background-color: var(--danger);
 }
 
-.striped-success {
-    background: repeating-linear-gradient(-45deg,
-            var(--success),
-            var(--success) 20px,
-            var(--success-shade) 20px,
-            var(--success-shade) 40px);
-    color: var(--dark);
+.liquid-glass {
+    overflow: hidden;
+    border-radius: inherit;
+    transition: opacity 0.26s ease-out;
+    border-radius: 28px;
+    filter: drop-shadow(-8px -10px 46px #0000005f);
+    backdrop-filter: brightness(1.1) blur(2px) url("../images/feImage.png");
+    -webkit-backdrop-filter: brightness(1.1) blur(2px) url("../images/feImage.png");
 }
 
-.striped-success-light {
-    background: repeating-linear-gradient(-45deg,
-            var(--success-light),
-            var(--success-light) 20px,
-            var(--success-light-shade) 20px,
-            var(--success-light-shade) 40px);
-    color: var(--dark);
-}
-
-.striped-info {
-    background: repeating-linear-gradient(-45deg,
-            var(--info),
-            var(--info) 20px,
-            var(--info-shade) 20px,
-            var(--info-shade) 40px);
-    color: var(--dark);
-}
-
-.striped-info-light {
-    background: repeating-linear-gradient(-45deg,
-            var(--info-light),
-            var(--info-light) 20px,
-            var(--info-light-shade) 20px,
-            var(--info-light-shade) 40px);
-    color: var(--dark);
-}
-
-.striped-warning {
-    background: repeating-linear-gradient(-45deg,
-            var(--warning),
-            var(--warning) 20px,
-            var(--warning-shade) 20px,
-            var(--warning-shade) 40px);
-    color: var(--dark);
-}
-
-.striped-warning-light {
-    background: repeating-linear-gradient(-45deg,
-            var(--warning-light),
-            var(--warning-light) 20px,
-            var(--warning-light-shade) 20px,
-            var(--warning-light-shade) 40px);
-    color: var(--dark);
-}
-
-.striped-danger {
-    background: repeating-linear-gradient(-45deg,
-            var(--danger),
-            var(--danger) 20px,
-            var(--danger-shade) 20px,
-            var(--danger-shade) 40px);
-    color: var(--dark);
-}
-
-.striped-danger-light {
-    background: repeating-linear-gradient(-45deg,
-            var(--danger-light),
-            var(--danger-light) 20px,
-            var(--danger-light-shade) 20px,
-            var(--danger-light-shade) 40px);
-    color: var(--dark);
-}
-
-.glassmorph {
-    background-color: #FDFEFF47;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+.liquid-glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 28px;
+    pointer-events: none;
+    -webkit-box-shadow: inset 2px 2px 0px -2px rgba(255, 255, 255, 0.7),
+        inset 0 0 3px 1px rgba(255, 255, 255, 0.7);
+    box-shadow: inset 6px 6px 0px -6px rgba(255, 255, 255, 0.7),
+        inset 0 0 8px 1px rgba(255, 255, 255, 0.7);
 }
 
 .input--modific {
@@ -146,12 +120,12 @@ body {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background-color: transparent;
+    color: #FFF;
 }
 
 .input--modific:focus {
     border: none;
     border-bottom: transparent;
-    background-color: #F0F0F0DE;
 }
 
 .container {
@@ -168,12 +142,17 @@ body {
     width: 90%;
 }
 
+.form-control {
+    color: #FFF;
+}
+
 h1,
 h5,
 label,
 input,
 #countdown {
     font-family: "Fredoka", sans-serif;
+    color: #FFF;
 }
 
 .info-span {
@@ -182,6 +161,7 @@ input,
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: #FFF;
 }
 
 .btn,
@@ -235,6 +215,84 @@ input,
 
 .ready {
     border: var(--bs-list-group-border-width) solid var(--success);
+}
+
+.icon-btn {
+    position: relative;
+    list-style: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+    padding-left: 10px;
+    color: #FFF;
+    transition: 0.5s;
+    --pseudo-bg: var(--danger);
+}
+
+.icon-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 60px;
+    background: var(--pseudo-bg);
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.icon-btn::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 60px;
+    background: var(--pseudo-bg);
+    transition: 0.5s;
+    filter: blur(15px);
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.icon-btn i {
+    font-size: 2rem;
+    transition: 0.5s;
+    color: #FFF;
+    transition-delay: 0.25s;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.icon-btn span {
+    position: absolute;
+}
+
+.icon-btn .title {
+    color: #FFF;
+    font-size: 1.1em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transform: scale(0);
+    transition: 0.5s;
+    transition-delay: 0s;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.icon-btn .disabled {
+    --pseudo-bg: var(--dark);
+    opacity: 0.5;
 }
 
 @media (min-width: 768px) {

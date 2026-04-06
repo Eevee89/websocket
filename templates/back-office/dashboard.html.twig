@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="topbar glassmorph text-dark">
+<div class="topbar liquid-glass text-dark">
     <div class="row">
         <div class="col-12 d-flex flex-column justify-content-between">
             <div class="row justify-content-between align-items-center px-3 py-2">
@@ -13,7 +13,11 @@
                     <h1>ROOM {{ room }}</h1>
                 </div>
                 <div class="col-2 d-flex flex-column justify-content-center align-items-end">
-                    <h1 class="btn-go disabled success" data-redirect-url="{{ path('app_game', { 'room': room }) }}">GO!</h1>
+                    <div class="icon-btn disabled">
+                        <span class="icon"><i class="fa fa-solid fa-forward"></i></span>
+                        <span class="title">TEST</span>
+                    </div>
+                    <!--<h1 class="btn-go disabled success" data-redirect-url="{{ path('app_game', { 'room': room }) }}">GO!</h1>-->
                 </div>
             </div>
             <ul class="nav nav-tabs d-flex d-md-none flex-row justify-content-between">
@@ -62,7 +66,7 @@
 </div>
 
 <div class="tab-content dashboard">
-    <div id="tabPlaylistContent" role="tabpanel" aria-labelledby="tab-playlist" class="tab-pane fade show active dashboard-col glassmorph m-0">
+    <div id="tabPlaylistContent" role="tabpanel" aria-labelledby="tab-playlist" class="tab-pane fade show active dashboard-col liquid-glass m-0">
         <div class="d-flex flex-column align-items-center h-100 w-100 p-1">
             <div id="videoListTopBar" class="row justify-content-around align-items-center">
                 <span class="info-span">Playlist</span>
@@ -104,12 +108,12 @@
     </div>
     <div id="tabInfosContent" role="tabpanel" aria-labelledby="tab-infos" class="tab-pane fade dashboard-col m-0">
         <div class="d-flex flex-column justify-content-between h-100 w-100">
-            <div class="sub glassmorph d-flex flex-column justify-content-around align-items-center">
-                <span id="nbTrack" class="info-span"><i class="fa fa-solid fa-music info mx-3"></i>0</span>
-                <span id="maxScore" class="info-span"><i class="fa fa-solid fa-ranking-star info mx-3"></i>0 pts</span>
-                <span id="avgTime" class="info-span"><i class="fa fa-solid fa-clock info mx-3"></i>0min</span>
+            <div class="sub liquid-glass d-flex flex-column justify-content-around align-items-center">
+                <span id="nbTrack" class="info-span"><i class="fa fa-solid fa-music warning mx-3"></i>0</span>
+                <span id="maxScore" class="info-span"><i class="fa fa-solid fa-ranking-star warning mx-3"></i>0 pts</span>
+                <span id="avgTime" class="info-span"><i class="fa fa-solid fa-clock warning mx-3"></i>0min</span>
             </div>
-            <div class="sub glassmorph d-flex flex-column align-items-center">
+            <div class="sub liquid-glass d-flex flex-column align-items-center">
                 <div class="row info-title-row align-items-center">
                     <span class="info-span">Temps de réflexion</span>
                 </div>
@@ -125,7 +129,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sub glassmorph d-flex flex-column align-items-center">
+            <div class="sub liquid-glass d-flex flex-column align-items-center">
                 <div class="row info-title-row align-items-center">
                     <span class="info-span">Temps d'interlude</span>
                 </div>
@@ -143,7 +147,7 @@
             </div>
         </div>
     </div>
-    <div id="tabPlayersContent" role="tabpanel" aria-labelledby="tab-players" class="tab-pane fade dashboard-col glassmorph m-0">
+    <div id="tabPlayersContent" role="tabpanel" aria-labelledby="tab-players" class="tab-pane fade dashboard-col liquid-glass m-0">
         <div class="d-flex flex-column align-items-center h-100 w-100 p-1">
             <div id="playerListTopBar" class="row justify-content-around align-items-center">
                 <span class="info-span">Joueurs</span>

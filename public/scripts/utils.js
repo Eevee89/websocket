@@ -59,15 +59,19 @@ function isValidYoutubeId(str) {
 
 function showErrorSwal(title, message, onConfirm = () => {}) {
     Swal.fire({
+        //icon: 'error',
+        //iconColor: 'var(--danger-light)',
         title: title ? title : '',
         text: message ? message : '',
-        color: "var(--dark)",
+        color: "#FFF",
         confirmButtonText: "OK",
         customClass: {
-            confirmButton: "striped-warning-light",
+            popup: 'glassmorph',
+            //confirmButton: "danger-bg",
         },
-        background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-    }).then(onConfirm);
+        background: "url('/images/swal_bg.png')"
+        //background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
+    });
 }
 
 function everyoneReady() {
