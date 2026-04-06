@@ -15,3 +15,7 @@ form {
     border-radius: 60px !important;
     width: 50% !important;
 }
+
+#loader .modal-content {
+    background-image: url('../images/desktop_bg.png');
+}

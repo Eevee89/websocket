@@ -5,16 +5,11 @@ const pusher = new Pusher(pusherKey, {
 
 const channel = pusher.subscribe(`presence-room-${thisRoom}`);
 
-channel.bind_global((eventName, data) => {
-    console.log("Événement reçu : " + eventName, data);
-});
-
 const playersId = [];
 
 // ARRIVAL
 
 channel.bind('pusher:subscription_succeeded', (event) => {
-    console.log("Liste initiale des joueurs :", event.members);
     const players = event.members;
     $("#playerList").html('');
     for (const pToken in players) {

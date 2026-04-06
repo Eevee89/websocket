@@ -9,8 +9,6 @@ channel.bind('player-ready', (data) => {
 
         const canGo = everyoneReady() && $('#videoList li').length > 0;
         $(".btn-go").toggleClass("disabled", !canGo);
-    } else {
-        console.log(data);
     }
 });
 
@@ -29,8 +27,6 @@ channel.bind('player-kicked', (data) => {
         }).then(() => {
             window.location.href = window.location.origin;
         });
-    } else {
-        console.log(data);
     }
 });
 

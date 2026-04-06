@@ -9,6 +9,7 @@ $(document).ready(() => {
             return;
         }
 
+        $("#loader").modal("show");
         new YT.Player('player', {
             videoId: 'FtutLA63Cp8',
             events: {
@@ -21,7 +22,7 @@ $(document).ready(() => {
                         },
                     })
                     .done(function (response) {
-                        console.log(response);
+                        $("#loader").modal("hide");
                         if (response.success) {
                             $("#form_create_room").click();
                         } else {
@@ -29,6 +30,7 @@ $(document).ready(() => {
                         }
                     })
                     .fail(function (xhr) {
+                        $("#loader").modal("hide");
                         const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur serveur";
                         showErrorSwal("Erreur", errorMsg);
                     });
@@ -60,6 +62,7 @@ $(document).ready(() => {
             return;
         }
 
+        $("#loader").modal("show");
         new YT.Player('player', {
             videoId: 'FtutLA63Cp8',
             events: {
@@ -73,6 +76,7 @@ $(document).ready(() => {
                         },
                     })
                     .done(function (response) {
+                        $("#loader").modal("hide");
                         if (response.success) {
                             $("#form_join_room").click();
                         } else {
@@ -80,6 +84,7 @@ $(document).ready(() => {
                         }
                     })
                     .fail(function (xhr) {
+                        $("#loader").modal("hide");
                         const errorMsg = xhr.responseJSON ? xhr.responseJSON.message : "Erreur de connexion";
                         showErrorSwal("Erreur", errorMsg);
                     });
