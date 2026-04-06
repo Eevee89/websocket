@@ -36,7 +36,7 @@ channel.bind('round-ready', (data) => {
                 popup: 'glassmorph',
             },
             background: "url('/images/swal_bg.png')"
-        }).then(() => window.location.href += '/');
+        }).then(() => window.location.href = window.location.origin);
     }
 });
 
@@ -56,7 +56,7 @@ channel.bind('game-end', (data) => {
                 popup: 'glassmorph',
             },
             background: "url('/images/swal_bg.png')"
-        }).then(() => window.location.href += '/');
+        }).then(() => window.location.href = window.location.origin);
     }
 });
 

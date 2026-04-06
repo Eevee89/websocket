@@ -44,7 +44,7 @@ $(document).ready(() => {
 
         const winner = $($("#playerList .list-group-item")[0]).data("pseudo");
         $.ajax({
-            url: urls.end_of_game,
+            url: urls.game_end,
             data: {
                 'winner': winner
             },
@@ -59,7 +59,7 @@ $(document).ready(() => {
                     popup: 'glassmorph',
                 },
                 background: "url('/images/swal_bg.png')"
-            }).then(() => window.location.href += '/');
+            }).then(() => window.location.href = window.location.origin);
         });
     });
 });

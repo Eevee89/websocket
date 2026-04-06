@@ -27,7 +27,7 @@ channel.bind('player-kicked', (data) => {
             },
             background: "url('/images/swal_bg.png')"
         }).then(() => {
-            window.location.href = "/";
+            window.location.href = window.location.origin;
         });
     } else {
         console.log(data);

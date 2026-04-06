@@ -70,10 +70,15 @@ channel.bind('pusher:member_removed', (member) => {
 
 pusher.connection.bind('state_change', (states) => {
     if (states.current === 'unavailable') {
-        showErrorSwal(
-            "Connexion perdue",
-            "Pusher ne parvient pas à vous reconnecter.\nVous serez rediriger à l'accueil",
-            () => { window.location.href = "/"; }
-        );
+        Swal.fire({
+            title: "Connexion perdue",
+            text: "Pusher ne parvient pas à vous reconnecter.\Vous serez redirifer à l'accueil",
+            color: "#FFF",
+            confirmButtonText: "OK",
+            customClass: {
+                popup: 'glassmorph',
+            },
+            background: "url('/images/swal_bg.png')"
+        }).then(() => window.location.href = window.location.origin );
     }
 });
