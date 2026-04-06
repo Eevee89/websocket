@@ -37,22 +37,21 @@ $(document).ready(() => {
             return;
         }
 
-        Swal.fire({
-            title: "Fin de la partie",
-            text: "Vainqueur : " + $($("#playerList .list-group-item")[0]).data("pseudo"),
-            color: "var(--dark)",
-            customClass: {
-                confirmButton: "striped-info-light"
-            },
-            background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
-        });
-
         if (player) {
             player.stopVideo();
             player.destroy();
         }
 
-        window.location.href += 'dashboard';
+        Swal.fire({
+            title: "Fin de la partie",
+            text: "Vainqueur : " + $($("#playerList .list-group-item")[0]).data("pseudo"),
+            color: "#FFF",
+            confirmButtonText: "Fin de la partie",
+            customClass: {
+                popup: 'glassmorph',
+            },
+            background: "url('/images/swal_bg.png')"
+        }).then(() => window.location.href += 'dashboard');
     });
 });
 
@@ -64,28 +63,28 @@ $(document).on("click", ".list-group-item", async (event) => {
     const tile = $(event.target).closest('.list-group-item');
     player.pauseVideo();
     timerPaused = true;
+
     Swal.fire({
         title: "Buzz de " + tile.data("pseudo"),
         text: "Est-ce la bonne réponse ?",
         showCancelButton: true,
         confirmButtonText: "Oui",
         cancelButtonText: "Non",
-        color: "var(--dark)",
+        color: "#FFF",
         customClass: {
-            confirmButton: "striped-success-light",
-            cancelButton: "striped-danger-light"
+            popup: 'glassmorph',
         },
-        background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
+        background: "url('/images/swal_bg.png')"
     }).then((result) => {
-        if (result.isConfirmed) {
-            const span = tile.find("#score");
-            const score = Number(span.text()) + Number(videos[current].points);
-            span.text(`${score}`.padStart(3, '0'));
-            sortPlayersByScore();
-            answerGiven = true;
-        }
-        timerPaused = false;
-        player.playVideo();
+        $.ajax({
+            url: urls.round_valid,
+            data: {
+                'isValid': result.isConfirmed,
+                'buzzer': data.token,
+                'points': videos[current].points
+            },
+            method: 'POST'
+        });
     });
 });
 

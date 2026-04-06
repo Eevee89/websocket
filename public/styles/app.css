@@ -24,7 +24,6 @@
 }
 
 .glassmorph {
-    /*background-color: #57add4; var(--danger-light);*/
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     background-position: bottom;
@@ -54,7 +53,7 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/desktop_bg.png');
+    background-image: url('../images/mobile_bg.png');
 }
 
 .success {
@@ -218,85 +217,58 @@ input,
 }
 
 .icon-btn {
-    position: relative;
-    list-style: none;
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
+    font-size: 1.5em;
     cursor: pointer;
     display: flex;
     justify-content:  center;
     align-items: center;
-    padding-left: 10px;
-    color: #FFF;
-    transition: 0.5s;
-    --pseudo-bg: var(--danger);
+    aspect-ratio: 1;
+    border-radius: 25%;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
-.icon-btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 60px;
-    background: var(--pseudo-bg);
-    opacity: 1;
-    transition: 0.5s;
-}
-
-.icon-btn::after {
-    content: "";
-    position: absolute;
-    top: 10px;
-    width: 100%;
-    height: 100%;
-    border-radius: 60px;
-    background: var(--pseudo-bg);
-    transition: 0.5s;
-    filter: blur(15px);
-    z-index: -1;
+.icon-btn.disabled {
+    cursor: default;
     opacity: 0.5;
+    background-color: var(--danger-light) !important;
+    color: var(--danger-shade) !important;
 }
 
-.icon-btn i {
-    font-size: 2rem;
-    transition: 0.5s;
-    color: #FFF;
-    transition-delay: 0.25s;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.icon-btn.info {
+    background-color: var(--info-light);
+    color: var(--info-shade);
 }
 
-.icon-btn span {
-    position: absolute;
+.icon-btn.success {
+    background-color: var(--success-light);
+    color: var(--success-shade);
 }
 
-.icon-btn .title {
-    color: #FFF;
-    font-size: 1.1em;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transform: scale(0);
-    transition: 0.5s;
-    transition-delay: 0s;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+.icon-btn.warning {
+    background-color: var(--warning-light);
+    color: var(--warning-shade);
 }
 
-.icon-btn .disabled {
-    --pseudo-bg: var(--dark);
-    opacity: 0.5;
+.icon-btn.danger {
+    background-color: var(--danger-light);
+    color: var(--danger-shade);
 }
 
 @media (min-width: 768px) {
+    body {
+        background-image: url('../images/desktop_bg.png');
+    }
+
     .container {
         width: 50% !important;
     }
+}
+
+#editVideoModal .modal-content {
+    background-image: url('../images/desktop_bg.png');
+}
+
+#editVideoModal .input--modific {
+    color: #222;
+    background-color: var(--bs-secondary-bg);
 }

@@ -58,8 +58,12 @@ $(document).ready(() => {
                         title: 'Titre invalide pour ' + video,
                         text: "Le titre personnalisé contient des caractères interdits : <>{}!?/\\\'\"$@",
                         timer: 3000,
-                        color: "var(--dark)",
-                        background: "repeating-linear-gradient(-45deg, var(--warning), var(--warning) 20px, var(--warning-shade) 20px, var(--warning-shade) 40px)"
+                        color: "#FFF",
+                        confirmButtonText: "OK",
+                        customClass: {
+                            popup: 'glassmorph',
+                        },
+                        background: "url('/images/swal_bg.png')"
                     });
                     continue;
                 }
@@ -68,8 +72,12 @@ $(document).ready(() => {
                         title: 'Categorie invalide pour ' + video,
                         text: "La catégorie contient des caractères interdits : <>{}!?/\\\'\"$@",
                         timer: 3000,
-                        color: "var(--dark)",
-                        background: "repeating-linear-gradient(-45deg, var(--warning), var(--warning) 20px, var(--warning-shade) 20px, var(--warning-shade) 40px)"
+                        color: "#FFF",
+                        confirmButtonText: "OK",
+                        customClass: {
+                            popup: 'glassmorph',
+                        },
+                        background: "url('/images/swal_bg.png')"
                     });
                     continue;
                 }
@@ -79,8 +87,12 @@ $(document).ready(() => {
                             title: 'Temps de début invalide pour ' + video,
                             text: "Le temps n'est pas un entier positif",
                             timer: 3000,
-                            color: "var(--dark)",
-                            background: "repeating-linear-gradient(-45deg, var(--warning), var(--warning) 20px, var(--warning-shade) 20px, var(--warning-shade) 40px)"
+                            color: "#FFF",
+                            confirmButtonText: "OK",
+                            customClass: {
+                                popup: 'glassmorph',
+                            },
+                            background: "url('/images/swal_bg.png')"
                         });
                         continue;
                     }
@@ -89,17 +101,11 @@ $(document).ready(() => {
                 if ($.isEmptyObject($('[data-video="' + video + '"]')[0])) {
                     const title = await getVideoTitle(video);
                     if (!title) {
-                        Swal.fire({
-                            title: "Vidéo inaccessible",
-                            text: "La vidéo " + video + " a été supprimée ou passée en privée.\n" +
-                                "Elle ne peut donc plus être utilisée dans ce blind test",
-                            confirmButtonText: "OK",
-                            color: "var(--dark)",
-                            customClass: {
-                                confirmButton: "striped-danger-light"
-                            },
-                            background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-                        });
+                        showErrorSwal(
+                            "Vidéo inaccessible",
+                            "La vidéo " + video + " a été supprimée ou passée en privée.\n" +
+                            "Elle ne peut donc plus être utilisée dans ce blind test"
+                        );
                         continue;
                     }
 
@@ -169,13 +175,7 @@ $(document).ready(() => {
             updateItemLabels();
             computeAverageTime();
         } catch (error) {
-            Swal.fire({
-                title: 'Erreur',
-                text: 'Erreur lors de la lecture du fichier.\n' + error,
-                timer: 3000,
-                color: "var(--dark)",
-                background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-            });
+            showErrorSwal('Erreur', 'Erreur lors de la lecture du fichier.\n' + error);
         }
     };
 
@@ -222,17 +222,11 @@ $(document).ready(() => {
 
         if ($.isEmptyObject($('[data-video="' + video + '"]')[0])) {
             if (!title) {
-                Swal.fire({
-                    title: "Vidéo inaccessible",
-                    text: "La vidéo " + video + " a été supprimée ou passée en privée.\n" +
-                        "Elle ne peut donc plus être utilisée dans ce blind test",
-                    confirmButtonText: "OK",
-                    color: "var(--dark)",
-                    customClass: {
-                        confirmButton: "striped-danger-light"
-                    },
-                    background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-                });
+                showErrorSwal(
+                    "Vidéo inaccessible",
+                    "La vidéo " + video + " a été supprimée ou passée en privée.\n" +
+                    "Elle ne peut donc plus être utilisée dans ce blind test",
+                );
                 return;
             }
 
@@ -316,13 +310,12 @@ $(document).ready(() => {
             text: "Supprimer la liste de vidéo ?",
             showCancelButton: true,
             confirmButtonText: "OK",
-            color: "var(--dark)",
+            color: "#FFF",
             cancelButtonText: "Annuler",
             customClass: {
-                confirmButton: "striped-warning-light",
-                cancelButton: "striped-danger-light"
+                popup: 'glassmorph',
             },
-            background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
+            background: "url('/images/swal_bg.png')"
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -335,9 +328,9 @@ $(document).ready(() => {
                 })
                 .done(() => {
                     $("#videoList").html("");
-                    $("#nbTrack").html("<i class='fa fa-solid fa-music info mx-3'></i>0");
-                    $("#maxScore").html("<i class='fa fa-solid fa-ranking-star info mx-3'></i>0 pts");
-                    $("#avgTime").html("<i class='fa fa-solid fa-clock info mx-3'></i>0min");
+                    $("#nbTrack").html("<i class='fa fa-solid fa-music warning mx-3'></i>0");
+                    $("#maxScore").html("<i class='fa fa-solid fa-ranking-star warning mx-3'></i>0 pts");
+                    $("#avgTime").html("<i class='fa fa-solid fa-clock warning mx-3'></i>0min");
                 })
                 .fail((err) => {
                     console.log(err);
@@ -350,86 +343,89 @@ $(document).ready(() => {
         Swal.fire({
             title: "Que voulez-vous importer ?",
             text: "Importer un fichier ou une playlist Youtube",
+            showDenyButton: true,
             showCancelButton: true,
-            color: "var(--dark)",
+            color: "#FFF",
             confirmButtonText: "Playlist",
-            cancelButtonText: "Fichier",
+            denyButtonText: "Fichier",
+            cancelButtonText: "Annuler",
             customClass: {
-                confirmButton: "striped-info-light",
-                cancelButton: "striped-info-light"
+                popup: 'glassmorph',
             },
-            background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
+            background: "url('/images/swal_bg.png')"
+        }).then(async (choice) => {
+            if (choice.isDismissed) {
+                return;
+            }
+
+            if (choice.isDenied) {
                 const result = await Swal.fire({
-                    input: "url",
-                    inputLabel: "URL de la playlist",
-                    color: "var(--dark)",
-                    customClass: {
-                        confirmButton: "striped-info-light",
+                    input: "file",
+                    inputLabel: "Sélectionner votre fichier",
+                    color: "#FFF",
+                    inputAttributes: {
+                        "accept": "application/json",
                     },
-                    background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
+                    customClass: {
+                        popup: 'glassmorph',
+                    },
+                    background: "url('/images/swal_bg.png')"
                 });
                 if (!result.isConfirmed) {
                     return;
                 }
 
-                console.log(result);
-                getAllPlaylistVideoUrls(result.value)
-                    .then(async (yurls) => {
-                        for (const videoUrl of yurls) {
-                            const video = getYoutubeId(videoUrl);
-                            if (null === video) {
-                                continue;
-                            }
+                reader.readAsText(result.value);
 
-                            const title = await getVideoTitle(video);
-                            if (!title) {
-                                Swal.fire({
-                                    title: "Vidéo inaccessible",
-                                    text: "La vidéo " + video + " a été supprimée ou passée en privée.\n" +
-                                        "Elle ne peut donc plus être utilisée dans ce blind test",
-                                    confirmButtonText: "OK",
-                                    color: "var(--dark)",
-                                    customClass: {
-                                        confirmButton: "striped-danger-light"
-                                    },
-                                    background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
-                                });
-                                continue;
-                            }
+                return;
+            }
 
-                            if ($.isEmptyObject($('[data-video="' + video + '"]')[0])) {
-                                const item = generateVideoListItem(video, title, "", 1);
+            const result = await Swal.fire({
+                input: "url",
+                inputLabel: "URL de la playlist",
+                color: "#FFF",
+                customClass: {
+                    popup: 'glassmorph',
+                },
+                background: "url('/images/swal_bg.png')"
+            });
+            if (!result.isConfirmed) {
+                return;
+            }
 
-                                const img = item.find(".video-thumbnail")[0];
-                                if ($(".btn-hide").hasClass("fa-eye-slash")) {
-                                    $(img).attr("src", $(img).data("src"));
-                                } else {
-                                    $(img).data("src", $(img).attr("src"));
-                                    $(img).attr("src", "/images/default.jpg");
-                                }
+            getAllPlaylistVideoUrls(result.value)
+                .then(async (yurls) => {
+                    for (const videoUrl of yurls) {
+                        const video = getYoutubeId(videoUrl);
+                        if (null === video) {
+                            continue;
+                        }
 
-                                $.ajax({
-                                    url: urls.edit_video,
-                                    type: "POST",
-                                    data: {
-                                        [video]: {
-                                            "video": video,
-                                            "title": title,
-                                            "category": "",
-                                            "points": 1
-                                        }
-                                    }
-                                })
-                                .done(() => {
-                                    $("#videoList").append(item);
-                                })
-                                .fail((err) => {
-                                    console.log(err);
-                                });
+                        const title = await getVideoTitle(video);
+                        if (!title) {
+                            Swal.fire({
+                                title: "Vidéo inaccessible",
+                                text: "La vidéo " + video + " a été supprimée ou passée en privée.\n" +
+                                    "Elle ne peut donc plus être utilisée dans ce blind test",
+                                confirmButtonText: "OK",
+                                color: "#FFF",
+                                customClass: {
+                                    popup: 'glassmorph',
+                                },
+                                background: "url('/images/swal_bg.png')"
+                            });
+                            continue;
+                        }
 
-                                continue;
+                        if ($.isEmptyObject($('[data-video="' + video + '"]')[0])) {
+                            const item = generateVideoListItem(video, title, "", 1);
+
+                            const img = item.find(".video-thumbnail")[0];
+                            if ($(".btn-hide").hasClass("fa-eye-slash")) {
+                                $(img).attr("src", $(img).data("src"));
+                            } else {
+                                $(img).data("src", $(img).attr("src"));
+                                $(img).attr("src", "/images/default.jpg");
                             }
 
                             $.ajax({
@@ -444,6 +440,28 @@ $(document).ready(() => {
                                     }
                                 }
                             })
+                                .done(() => {
+                                    $("#videoList").append(item);
+                                })
+                                .fail((err) => {
+                                    console.log(err);
+                                });
+
+                            continue;
+                        }
+
+                        $.ajax({
+                            url: urls.edit_video,
+                            type: "POST",
+                            data: {
+                                [video]: {
+                                    "video": video,
+                                    "title": title,
+                                    "category": "",
+                                    "points": 1
+                                }
+                            }
+                        })
                             .done(() => {
                                 $($('[data-video="' + video + '"]')[0])
                                     .data("video", video)
@@ -454,37 +472,18 @@ $(document).ready(() => {
                                 console.log(err);
                             });
 
-                            $($('[data-video="' + video + '"]')[0])
-                                .data("video", video)
-                                .data("title", await getVideoTitle(video))
-                                .data("category", "");
-                        }
+                        $($('[data-video="' + video + '"]')[0])
+                            .data("video", video)
+                            .data("title", await getVideoTitle(video))
+                            .data("category", "");
+                    }
 
-                        updateItemLabels();
-                        computeAverageTime();
-                    })
-                    .catch(error => {
-                        console.error('Échec de la récupération des URLs:', error);
-                    });
-            } else {
-                const result = await Swal.fire({
-                    input: "file",
-                    inputLabel: "Sélectionner votre fichier",
-                    color: "var(--dark)",
-                    inputAttributes: {
-                        "accept": "application/json",
-                    },
-                    customClass: {
-                        confirmButton: "striped-info-light",
-                    },
-                    background: "repeating-linear-gradient(-45deg, var(--info-light), var(--info-light) 20px, var(--info-light-shade) 20px, var(--info-light-shade) 40px)"
+                    updateItemLabels();
+                    computeAverageTime();
+                })
+                .catch(error => {
+                    console.error('Échec de la récupération des URLs:', error);
                 });
-                if (!result.isConfirmed) {
-                    return;
-                }
-
-                reader.readAsText(result.value);
-            }
         });
     });
 
@@ -676,14 +675,13 @@ $(document).on("click", ".btn-delete", ((event) => {
         text: "Supprimer '" + parent.data("title") + ' ?',
         imageUrl: `https://img.youtube.com/vi/${parent.data("video")}/mqdefault.jpg`,
         showCancelButton: true,
-        color: "var(--dark)",
+        color: "#FFF",
         confirmButtonText: "OK",
         cancelButtonText: "Annuler",
         customClass: {
-            confirmButton: "striped-warning-light",
-            cancelButton: "striped-danger-light"
+            popup: 'glassmorph',
         },
-        background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
+        background: "url('/images/swal_bg.png')"
     }).then((result) => {
         if (result.isConfirmed) {
             const video = parent.data("video");
@@ -750,9 +748,9 @@ function generateVideoListItem(videoId, customTitle, category, points) {
                 <div class="col-8 d-flex flex-column justify-content-center">
                     <div class="row justify-content-end align-items-center pr-2">
                         <span class="badge bg-secondary item-number-label striped-info mr-2"></span>
-                        <i class="fa fa-solid fa-circle-info info ms-2 mr-2 btn-info"></i>
-                        <i class="fa fa-solid fa-pen warning ms-2 mr-2 btn-edit"></i>
-                        <i class="fa fa-solid fa-trash danger ms-2 btn-delete"></i>
+                        <i class="fa fa-solid fa-circle-info icon-btn info ms-2 mr-2 btn-info"></i>
+                        <i class="fa fa-solid fa-pen icon-btn warning ms-2 mr-2 btn-edit"></i>
+                        <i class="fa fa-solid fa-trash icon-btn danger ms-2 btn-delete"></i>
                     </div>
                 </div>
             </div>

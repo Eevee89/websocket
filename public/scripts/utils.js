@@ -1,6 +1,6 @@
 function generatePlayerListItem(token, pseudo, team, color, dashboard = true, score = 0) {
     const thirdColumn = dashboard
-        ? '<i class="fa fa-solid fa-trash danger ms-2 btn-kick-out"></i>'
+        ? '<i class="fa fa-solid fa-trash icon-btn danger ms-2 btn-kick-out"></i>'
         : `<span id="score" class="info-span">${(""+score).padStart(3, '0')}</span>`
         ;
     
@@ -57,20 +57,16 @@ function isValidYoutubeId(str) {
     return regExp.test(str);
 }
 
-function showErrorSwal(title, message, onConfirm = () => {}) {
+function showErrorSwal(title, message) {
     Swal.fire({
-        //icon: 'error',
-        //iconColor: 'var(--danger-light)',
-        title: title ? title : '',
-        text: message ? message : '',
+        title: title ? title : 'Erreur',
+        text: message ? message : 'Une erreur est survenue',
         color: "#FFF",
         confirmButtonText: "OK",
         customClass: {
             popup: 'glassmorph',
-            //confirmButton: "danger-bg",
         },
         background: "url('/images/swal_bg.png')"
-        //background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
     });
 }
 

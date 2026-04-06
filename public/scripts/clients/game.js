@@ -22,22 +22,21 @@ channel.bind('round-ready', (data) => {
             return;
         }
 
-        Swal.fire({
-            title: "Fin de la partie",
-            text: "Vainqueur : A CHANGER", // TODO
-            color: "var(--dark)",
-            customClass: {
-                confirmButton: "striped-info-light"
-            },
-            background: "repeating-linear-gradient(-45deg, var(--info), var(--info) 20px, var(--info-shade) 20px, var(--info-shade) 40px)"
-        });
-
         if (player) {
             player.stopVideo();
             player.destroy();
         }
 
-        window.location.href += 'dashboard';
+        Swal.fire({
+            title: "Fin de la partie",
+            text: "Vainqueur : A CHANGER",
+            color: "#FFF",
+            confirmButtonText: "Fin de la partie",
+            customClass: {
+                popup: 'glassmorph',
+            },
+            background: "url('/images/swal_bg.png')"
+        }).then(() => window.location.href += 'dashboard');
     }
 });
 
@@ -76,10 +75,16 @@ channel.bind('player-buzzed', (data) => {
 
     if (iAmMaster) {
         Swal.fire({
-            title: "Buzz de " + data.pseudo,
+            title: "Buzz de " + tile.data("pseudo"),
             text: "Est-ce la bonne réponse ?",
             showCancelButton: true,
             confirmButtonText: "Oui",
+            cancelButtonText: "Non",
+            color: "#FFF",
+            customClass: {
+                popup: 'glassmorph',
+            },
+            background: "url('/images/swal_bg.png')"
         }).then((result) => {
             $.ajax({
                 url: urls.round_valid,

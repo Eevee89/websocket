@@ -121,6 +121,11 @@ function onPlayerStateChange(event) {
                 text: "Prêt pour le prochain round ?",
                 confirmButtonText: "Oui",
                 allowOutsideClick: false,
+                color: "#FFF",
+                customClass: {
+                    popup: 'glassmorph',
+                },
+                background: "url('/images/swal_bg.png')"
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({

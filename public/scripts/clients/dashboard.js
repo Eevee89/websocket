@@ -20,11 +20,11 @@ channel.bind('player-kicked', (data) => {
             text: "Vous avez été exclu de la salle par le maître du jeu.\nVous allez être rediriger vers la page d'accueil.",
             showCancelButton: false,
             confirmButtonText: "OK",
-            color: "var(--dark)",
+            color: "#FFF",
             customClass: {
-                confirmButton: "striped-warning-light",
+                popup: 'glassmorph',
             },
-            background: "repeating-linear-gradient(-45deg, var(--danger), var(--danger) 20px, var(--danger-shade) 20px, var(--danger-shade) 40px)"
+            background: "url('/images/swal_bg.png')"
         }).then(() => {
             window.location.href = "/";
         });

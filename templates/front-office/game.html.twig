@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="topbar glassmorph text-dark">
+<div class="topbar liquid-glass text-dark">
     <div class="row">
         <div class="col-12 d-flex flex-column justify-content-between">
             <div class="row justify-content-between align-items-center px-3 py-2">
@@ -23,7 +23,7 @@
 </div>
 
 <div class="tab-content game">
-    <div id="tabMain" role="tabpanel" aria-labelledby="tab-player" class="tab-pane fade show active game-col glassmorph m-0">
+    <div id="tabMain" role="tabpanel" aria-labelledby="tab-player" class="tab-pane fade show active game-col liquid-glass m-0">
         <div class="d-flex flex-column align-items-center h-100 w-100 p-3">
             <div class="player d-flex flex-column justify-content-center align-items-center">
                 <div id="timer" class="d-flex flex-column justify-content-center align-items-center d-none">
@@ -34,7 +34,7 @@
             <div class="row answerRow">
                 <div class="col-12 d-flex flex-column align-items-center justify-content-end p-3">
                     <span id="answer" class="info-span"></span>
-                    <span id="buzzerBtn">BUZZER</span>
+                    <i id="buzzerBtn" class="fa-solid fa-bell-concierge icon-btn success"></i>
                     <span id="category" class="info-span">Catégorie:</span>
                     <span id="points" class="info-span">Points:</span>
                 </div>
