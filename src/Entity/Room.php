@@ -19,8 +19,8 @@ class Room
     #[ORM\OneToMany(mappedBy: 'room', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $players;
 
-    #[ORM\OneToOne(targetEntity: Player::class)]
-    #[ORM\JoinColumn(name: "master_id", cascade: ['persist', 'remove'], referencedColumnName: "id", nullable: true)]
+    #[ORM\OneToOne(targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\JoinColumn(name: "master_id", referencedColumnName: "id", nullable: true)]
     private ?Player $master = null;
 
     public function __construct(Player $master)
