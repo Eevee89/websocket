@@ -43,7 +43,6 @@ class PusherController extends AbstractController
             ], 404);
         }
 
-        $player = $room->getPlayer($userToken);
         $presenceData = [
             'user_id' => $userToken,
             'user_info' => [
@@ -54,9 +53,12 @@ class PusherController extends AbstractController
                 'team' => ''
             ]
         ];
+
+        $player = $room->getPlayer($userToken);
         if ($player) {
             $presenceData['user_info']['score'] = $player->getScore();
             $presenceData['user_info']['team'] = $player->getTeam();
+            $presenceData['user_info']['color'] = $player->getColor();
         }
 
         $auth = $pusher->authorizePresenceChannel(

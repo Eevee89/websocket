@@ -218,15 +218,19 @@ class RoomController extends AbstractController
             ], 403);
         }
 
-        $this->roomService->deleteRoom($id);
+        try {
+            $this->roomService->deleteRoom($id);
 
-        $data = $request->request->all();
-        $session->clear(); 
+            $data = $request->request->all();
+            $session->clear();
 
-        $pusher->trigger("presence-room-$id", 'game-end', [
-            'winner' => $data['winner']
-        ]);
+            $pusher->trigger("presence-room-$id", 'game-end', [
+                'winner' => $data['winner']
+            ]);
 
-        return $this->json(['success' => true]);
+            return $this->json(['success' => true]);
+        } catch (\Throwable $e) {
+            return $this->json(['success' => false, 'message' => $e->getMessage()]);
+        }
     }
 }

@@ -49,7 +49,7 @@ $(document).ready(() => {
                 'winner': winner
             },
             method: 'POST'
-        }).then(() => {
+        }).done(() => {
             Swal.fire({
                 title: "Fin de la partie",
                 text: "Vainqueur : " + winner,
@@ -60,7 +60,7 @@ $(document).ready(() => {
                 },
                 background: "url('/images/swal_bg.png')"
             }).then(() => window.location.href = window.location.origin);
-        });
+        }).fail((response) => console.log(response));
     });
 });
 
