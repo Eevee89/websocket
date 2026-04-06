@@ -36,7 +36,27 @@ channel.bind('round-ready', (data) => {
                 popup: 'glassmorph',
             },
             background: "url('/images/swal_bg.png')"
-        }).then(() => window.location.href += 'dashboard');
+        }).then(() => window.location.href += '/');
+    }
+});
+
+channel.bind('game-end', (data) => {
+    if (!iAmMaster) {
+        if (player) {
+            player.stopVideo();
+            player.destroy();
+        }
+
+        Swal.fire({
+            title: "Fin de la partie",
+            text: "Vainqueur : " + data.winner,
+            color: "#FFF",
+            confirmButtonText: "Fin de la partie",
+            customClass: {
+                popup: 'glassmorph',
+            },
+            background: "url('/images/swal_bg.png')"
+        }).then(() => window.location.href += '/');
     }
 });
 

@@ -193,4 +193,40 @@ class RoomController extends AbstractController
 
         return $this->json(['success' => true]);
     }
+
+    #[Route('/{id}/end', name: 'end', methods: ['POST'])]
+    public function end(
+        string $id,
+        Request $request,
+        Pusher $pusher
+    ): JsonResponse {
+        $session = $request->getSession();
+        $playerToken = $session->get('user');
+
+        $room = $this->roomService->getRoom($id);
+        if (!$room) {
+            return $this->json([
+                'success' => false,
+                'message' => 'The room doesn\'t exist'
+            ], 404);
+        }
+
+        if (!$room->isMaster($playerToken)) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Only master cannot end game'
+            ], 403);
+        }
+
+        $this->roomService->deleteRoom($id);
+
+        $data = $request->request->all();
+        $session->clear(); 
+
+        $pusher->trigger("presence-room-$id", 'game-end', [
+            'winner' => $data['winner']
+        ]);
+
+        return $this->json(['success' => true]);
+    }
 }

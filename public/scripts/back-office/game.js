@@ -42,16 +42,25 @@ $(document).ready(() => {
             player.destroy();
         }
 
-        Swal.fire({
-            title: "Fin de la partie",
-            text: "Vainqueur : " + $($("#playerList .list-group-item")[0]).data("pseudo"),
-            color: "#FFF",
-            confirmButtonText: "Fin de la partie",
-            customClass: {
-                popup: 'glassmorph',
+        const winner = $($("#playerList .list-group-item")[0]).data("pseudo");
+        $.ajax({
+            url: urls.end_of_game,
+            data: {
+                'winner': winner
             },
-            background: "url('/images/swal_bg.png')"
-        }).then(() => window.location.href += 'dashboard');
+            method: 'POST'
+        }).then(() => {
+            Swal.fire({
+                title: "Fin de la partie",
+                text: "Vainqueur : " + winner,
+                color: "#FFF",
+                confirmButtonText: "Fin de la partie",
+                customClass: {
+                    popup: 'glassmorph',
+                },
+                background: "url('/images/swal_bg.png')"
+            }).then(() => window.location.href += '/');
+        });
     });
 });
 
