@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\PlayerRepository;
 use App\Service\RoomService;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
@@ -13,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class AppController extends AbstractController
 {
@@ -31,12 +31,14 @@ class AppController extends AbstractController
         }
 
         $token = $session->get('user');
+        $roomId = $session->get('roomId');
         $form = $this->createFormBuilder()
             ->add('roomId', TextType::class, [
                 'label' => 'ID de partie',
                 'attr' => [
                     'placeholder' => 'MTAwMDA1',
-                    'class' => 'form-control input--modific'
+                    'class' => 'form-control input--modific',
+                    'value' => $roomId ?: ''
                 ],
                 'required' => false,
                 'constraints' => [
@@ -150,5 +152,12 @@ class AppController extends AbstractController
                 'key' => $pusherClientKey,
             ]
         ]);
+    }
+
+    #[Route('/qr-code/join/{room}', name: 'app_qr_code_join')]
+    public function generate(string $room, SessionInterface $session): Response
+    {
+        $session->set('roomId', $room);
+        return $this->redirectToRoute('app_main');
     }
 }

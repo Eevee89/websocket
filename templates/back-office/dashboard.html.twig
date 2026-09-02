@@ -13,7 +13,11 @@
                     <h1>ROOM {{ room }}</h1>
                 </div>
                 <div class="col-2 d-flex flex-column justify-content-center align-items-end">
-                    <i class="fa fa-solid fa-forward icon-btn disabled success btn-go" data-redirect-url="{{ path('app_game', { 'room': room }) }}"></i>
+                    <div class="row justify-content-end align-items-center w-100 px-3">
+                        <i class="fa fa-solid fa-qrcode icon-btn info btn-qr-code"></i>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-solid fa-forward icon-btn disabled success btn-go" data-redirect-url="{{ path('app_game', { 'room': room }) }}"></i>
+                    </div>
                 </div>
             </div>
             <ul class="nav nav-tabs d-flex d-md-none flex-row justify-content-between">
@@ -170,8 +174,17 @@
         del_video: '{{ path("delete_video") }}',
         edit_hide: '{{ path("edit_hide_time") }}',
         kick_out: '{{ path("room_kick_out", { id: room }) }}',
-        game_launch: '{{ path("room_launch", { id: room }) }}'
+        game_launch: '{{ path("room_launch", { id: room }) }}',
     };
+
+    const qrcode = '{{ qr_code_data_uri(url("app_qr_code_join", {room: room})) }}';;
+    const qrswal = {
+        title: "Scannez pour rejoindre !",
+        html: `<img style="width: 256px; height: 256px; display: block; margin: 0 auto;" src="${qrcode}" alt="QR Code d'accès" />`,
+        background: "url('/images/swal_bg.png')",
+        showConfirmButton: false,
+        color: "#FFF",
+    }
 </script>
 <script src="/scripts/clients/global.js"></script>
 <script src="/scripts/clients/dashboard.js"></script>

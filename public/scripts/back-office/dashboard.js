@@ -646,6 +646,10 @@ $(document).ready(() => {
             }
         });
     });
+
+    $(".btn-qr-code").click(() => {
+        Swal.fire(qrswal);
+    });
 });
 
 $(document).on("click", ".btn-info", ((event) => {
