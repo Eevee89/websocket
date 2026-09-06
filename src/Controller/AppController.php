@@ -154,7 +154,7 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/qr-code/join/{room}', name: 'app_qr_code_join')]
+    #[Route('/join/{room}', name: 'app_join_room_redirect')]
     public function generate(string $room, SessionInterface $session): Response
     {
         $session->set('roomId', $room);

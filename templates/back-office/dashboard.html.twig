@@ -177,7 +177,7 @@
         game_launch: '{{ path("room_launch", { id: room }) }}',
     };
 
-    const qrcode = '{{ qr_code_data_uri(url("app_qr_code_join", {room: room})) }}';;
+    const qrcode = '{{ qr_code_data_uri(url("app_join_room_redirect", {room: room})) }}';;
     const qrswal = {
         title: "Scannez pour rejoindre !",
         html: `<img style="width: 256px; height: 256px; display: block; margin: 0 auto;" src="${qrcode}" alt="QR Code d'accès" />`,
